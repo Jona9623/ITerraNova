@@ -24,6 +24,16 @@ var Reportes = (function () {
       $.get("SReportes",{
           ACCION: "Racademico"
       }).then(function(){
+         $("#content").html(arguments[0]);
+         $("#agregacomp").on('click',function(){
+             Reportes.agregaComportamiento();
+         })
+      });  
+    },
+    agregaComportamiento: function(){
+      $.get("SReportes",{
+          ACCION: "AgregaComportamiento"
+      }).then(function(){
          $("#content").html(arguments[0]); 
       });  
     },

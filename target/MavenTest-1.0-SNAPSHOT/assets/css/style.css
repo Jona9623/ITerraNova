@@ -6954,7 +6954,7 @@ th>.rt-radio.rt-radio-single {
     margin-right: 0
 }
 .customtab.nav-tabs .nav-link.active,  .customtab.nav-tabs .nav-link.active:focus {
-    border-bottom: 2px solid #36c6d3;
+    border-bottom: 2px solid #ffff99;
     color: #191d1d;
 }
 .customtab.nav-tabs .nav-link {

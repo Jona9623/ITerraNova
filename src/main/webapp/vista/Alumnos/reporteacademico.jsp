@@ -23,130 +23,203 @@
         <div class="card-head">
             <header>Formulario de reporte</header>
         </div>
-        <form>
-            <div class="card-body row">
-                <label> Semana fiscal número: 12</label>
-            </div>
-            <div class="card-body row">
-                <div class="col-lg-4 p-t-20">
-                    <label >Seleccione un maestro</label>
-                    <select class="custom-select">
-                        <option value="1">maestro</option>
-                        <option value="2">maestro</option>
-                        <option value="3">maestro</option>
-                        <option value="3">maestro</option>
-                    </select>
-                </div>
-                <div class="col-lg-4 p-t-20">
-                    <label >Seleccione materia</label>
-                    <select class="custom-select">
-                        <option value="1">materia</option>
-                        <option value="2">materia</option>
-                        <option value="3">materia</option>
-                        <option value="3">materia</option>
-                    </select>
-                </div>
-                <div class="col-lg-4 p-t-20">
-                    <label >Seleccione grado y grupo</label>
-                    <select class="custom-select">
-                        <option value="1">1er A</option>
-                        <option value="2">1er B</option>
-                        <option value="3">2do A</option>
-                        <option value="3">2do B</option>
-                        <option value="3">3er A</option>
-                        <option value="3">3er B</option>
-                        <option value="3">4to A</option>
-                        <option value="3">4to B</option>
-                        <option value="3">5to A</option>
-                        <option value="3">5to B</option>
-                        <option value="3">6to A</option>
-                        <option value="3">6to B</option>
-                    </select>
-                </div>
-            </div>
-            <div class="card-body row">
-                <div class="col-sm-12">
-                    <div class="card-head">
-                        <header>Cuadro de honor</header>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body row">
-                <div class="col-lg-4 p-t-20">
-                    <label >Seleccione grado y grupo</label>
-                    <select class="custom-select">
-                        <option value="1">1er A</option>
-                        <option value="2">1er B</option>
-                        <option value="3">2do A</option>
-                        <option value="3">2do B</option>
-                        <option value="3">3er A</option>
-                        <option value="3">3er B</option>
-                        <option value="3">4to A</option>
-                        <option value="3">4to B</option>
-                        <option value="3">5to A</option>
-                        <option value="3">5to B</option>
-                        <option value="3">6to A</option>
-                        <option value="3">6to B</option>
-                    </select>
-                </div>
-                <div class="col-lg-4 p-t-20">
-                    <label >Seleccione un alumno</label>
-                    <select class="custom-select">
-                        <option value="1">Nombre</option>
-                        <option value="2">Nombre</option>
-                        <option value="3">Nombre</option>
-                        <option value="3">Nombre</option>
-                    </select>
-                </div>
-            </div>
-            <div class="card-body row">
-                <div class="col-sm-12">
-                    <div class="card-head">
-                        <header>Cuadro de atencion</header>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body row">
-                <div class="col-lg-4 p-t-20">
-                    <label >Seleccione grado y grupo</label>
-                    <select class="custom-select">
-                        <option value="1">1er A</option>
-                        <option value="2">1er B</option>
-                        <option value="3">2do A</option>
-                        <option value="3">2do B</option>
-                        <option value="3">3er A</option>
-                        <option value="3">3er B</option>
-                        <option value="3">4to A</option>
-                        <option value="3">4to B</option>
-                        <option value="3">5to A</option>
-                        <option value="3">5to B</option>
-                        <option value="3">6to A</option>
-                        <option value="3">6to B</option>
-                    </select>
-                </div>
-                <div class="col-lg-4 p-t-20">
-                    <label >Seleccione un alumno</label>
-                    <select class="custom-select">
-                        <option value="1">Nombre</option>
-                        <option value="2">Nombre</option>
-                        <option value="3">Nombre</option>
-                        <option value="3">Nombre</option>
-                    </select>
-                </div>
-                <div class="col-lg-4 p-t-20">
-                    <label >Seleccione comportamiento</label>
-                    <select class="custom-select">
-                        <option value="1">comportamiento</option>
-                        <option value="2">comportamiento</option>
-                        <option value="3">comportamiento</option>
-                        <option value="3">comporetamiento</option>
-                    </select>
-                    <a id="agregacomp" class="clic">Si no encuentra un comportamieno puede agregar uno aqui</a>
-                </div>
-            </div>
-            <button type="button" class="btn btn-terra">Guardar</button>
-        </form>
     </div>
 </div>
-
-
+<div class="row">
+    <div class="p-rl-20">
+        <ul class="nav customtab nav-tabs" role="tablist">
+            <li class="nav-item"><a href="#tab1" class="nav-link active show" data-toggle="tab">Academico</a></li>
+            <li class="nav-item"><a href="#tab2" class="nav-link" data-toggle="tab">Semana de actividades</a></li>
+        </ul>
+    </div>
+</div>
+<div class="profile-content">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fontawesome-demo active show" id="tab1">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="card-body " id="bar-parent2">
+                                    <!-- text input -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="">
+                                                <label >Semana fiscal numero: 12</label>
+                                                <form>
+                                                    <div class="card-body row">
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <label >Seleccione maestro</label>
+                                                            <select class="custom-select">
+                                                                <option value="1">maestro</option>
+                                                                <option value="2">maestro</option>
+                                                                <option value="3">maestro</option>
+                                                                <option value="3">maestro</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <label >Seleccione grado y grupo</label>
+                                                            <select class="custom-select">
+                                                                <option value="1">1er A</option>
+                                                                <option value="2">1er B</option>
+                                                                <option value="3">2do A</option>
+                                                                <option value="3">2do B</option>
+                                                                <option value="3">3er A</option>
+                                                                <option value="3">3er B</option>
+                                                                <option value="3">4to A</option>
+                                                                <option value="3">4to B</option>
+                                                                <option value="3">5to A</option>
+                                                                <option value="3">5to B</option>
+                                                                <option value="3">6to A</option>
+                                                                <option value="3">6to B</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <label >Seleccione un materia</label>
+                                                            <select class="custom-select">
+                                                                <option value="1">materia</option>
+                                                                <option value="2">materia</option>
+                                                                <option value="3">materia</option>
+                                                                <option value="3">materia</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-head">
+                                                        <header>Cuadro de honor</header>
+                                                    </div>
+                                                    <div class="card-body row">
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <label >Seleccione grado y grupo</label>
+                                                            <select class="custom-select">
+                                                                <option value="1">1er A</option>
+                                                                <option value="2">1er B</option>
+                                                                <option value="3">2do A</option>
+                                                                <option value="3">2do B</option>
+                                                                <option value="3">3er A</option>
+                                                                <option value="3">3er B</option>
+                                                                <option value="3">4to A</option>
+                                                                <option value="3">4to B</option>
+                                                                <option value="3">5to A</option>
+                                                                <option value="3">5to B</option>
+                                                                <option value="3">6to A</option>
+                                                                <option value="3">6to B</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <label >Seleccione un alumno</label>
+                                                            <select class="custom-select">
+                                                                <option value="1">alumno</option>
+                                                                <option value="2">alumno</option>
+                                                                <option value="3">alumno</option>
+                                                                <option value="3">alumno</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-head">
+                                                        <header>Cuadro de atención</header>
+                                                    </div>
+                                                    <div class="card-body row">
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <label >Seleccione grado y grupo</label>
+                                                            <select class="custom-select">
+                                                                <option value="1">1er A</option>
+                                                                <option value="2">1er B</option>
+                                                                <option value="3">2do A</option>
+                                                                <option value="3">2do B</option>
+                                                                <option value="3">3er A</option>
+                                                                <option value="3">3er B</option>
+                                                                <option value="3">4to A</option>
+                                                                <option value="3">4to B</option>
+                                                                <option value="3">5to A</option>
+                                                                <option value="3">5to B</option>
+                                                                <option value="3">6to A</option>
+                                                                <option value="3">6to B</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <label >Seleccione un alumno</label>
+                                                            <select class="custom-select">
+                                                                <option value="1">alumno</option>
+                                                                <option value="2">alumno</option>
+                                                                <option value="3">alumno</option>
+                                                                <option value="3">alumno</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <label >Seleccione Tipo de comportamiento</label>
+                                                            <select class="custom-select">
+                                                                <option value="1">comportamiento</option>
+                                                                <option value="2">comportmaiento</option>
+                                                                <option value="3">comportamiento</option>
+                                                                <option value="3">comportamiento</option>
+                                                            </select>
+                                                            <a id="agregacomp" class="clic">Si no encuentra comportmaiento puede agregar uno aqui</a>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-terra">Guardar</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="card-head">
+                                    <header>Reporte de actividades</header>
+                                </div>
+                                <div class="card-body " id="bar-parent2">
+                                    <div class="row">
+                                        <label >Semana fiscal numero: 12</label>
+                                        <div class="col-md-12 col-sm-12">
+                                            <form>
+                                                <div class="card-body row">
+                                                    <div class="col-lg-4 p-t-20"> 
+                                                        <div class="form-group">
+                                                            <label>Lunes</label>
+                                                            <textarea class="form-control" rows="3" placeholder="lunes"></textarea>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col-lg-4 p-t-20"> 
+                                                        <div class="form-group">
+                                                            <label>Martes</label>
+                                                            <textarea class="form-control" rows="3" placeholder="martes"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 p-t-20"> 
+                                                        <div class="form-group">
+                                                            <label>Miércoles</label>
+                                                            <textarea class="form-control" rows="3" placeholder="miercoles"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 p-t-20"> 
+                                                        <div class="form-group">
+                                                            <label>Jueves</label>
+                                                            <textarea class="form-control" rows="3" placeholder="jueves"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 p-t-20"> 
+                                                        <div class="form-group">
+                                                            <label>Viernes</label>
+                                                            <textarea class="form-control" rows="3" placeholder="viernes"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-terra">Guardar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                      
+                </div>
+            </div>
+        </div>           
+    </div>
+</div>

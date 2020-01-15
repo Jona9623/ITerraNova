@@ -36,6 +36,7 @@ public class SReportes extends HttpServlet {
             case "Rdisciplinar": ReporteDisciplinar (request,response); break;
             case "AgregaFalta": AgregaFalta (request,response); break;
             case "Racademico": ReporteAcademico (request,response); break;
+            case "AgregaComportamiento": AgregaComportamiento (request, response); break;
             
         }
     }
@@ -100,6 +101,15 @@ public class SReportes extends HttpServlet {
     private void ReporteAcademico(HttpServletRequest request, HttpServletResponse response) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/reporteacademico.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void AgregaComportamiento(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/comportamientoreporteaca.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
