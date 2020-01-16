@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <welcome-file-list>
+        <welcome-file>Principal.jsp</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>SReportes</servlet-name>
         <servlet-class>Servlets.SReportes</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SAdminalumno</servlet-name>
+        <servlet-class>Servlets.SAdminalumno</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SReportes</servlet-name>
         <url-pattern>/SReportes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAdminalumno</servlet-name>
+        <url-pattern>/SAdminalumno</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

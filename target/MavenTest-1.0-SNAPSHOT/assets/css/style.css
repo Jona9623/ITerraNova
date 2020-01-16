@@ -5,50 +5,50 @@
  *
  *  Structure (with shortcodes):
  
- 		1. GLOBLE STYLE
-		2. BODY
-		3. HEADER	
-		4. SIDE MENU
-		5. SEARCH BAR 
-		6. NAVIGATION 
-		7. PANEL 
-		8. PAGE CONTENT 
-		9. FORM 
-		10. USER PANEL STYLE 
-		11. MODAL WINDOW 
-		12. CHAT PANEL 
-		13. CARD BOX STYLE 
-		14. PROFILE 
-		15. WIZARD 
-		16. TABLE 
-		17. BUTTON 
-		18. LABEL 
-		19. CALENDAR 
-		20. DROP DOWN STYLE 
-		21. CHECKBOX & RADIO 
-		22. ICON BUTTON 
-		23. VALIDATION ICONS 
-		24. NOTE 
-		25. PAGINATION 
-		26. ACCORDION 
-		27. TAB 
-		28. STATE OVERVIEW 
-		29. BORDER BOX 
-		30. RATING BUTTON 
-		31. TO DO LIST 
-		32. BADGE 
-		33. SCROLL TO TOP 
-		34. FOOTER 	
-		35. FEED
-		36. FAQ
-		37. WIDGET
-		38. CONTACT 
-		39. THEME STYLE
- */
+                1. GLOBLE STYLE
+                2. BODY
+                3. HEADER	
+                4. SIDE MENU
+                5. SEARCH BAR 
+                6. NAVIGATION 
+                7. PANEL 
+                8. PAGE CONTENT 
+                9. FORM 
+                10. USER PANEL STYLE 
+                11. MODAL WINDOW 
+                12. CHAT PANEL 
+                13. CARD BOX STYLE 
+                14. PROFILE 
+                15. WIZARD 
+                16. TABLE 
+                17. BUTTON 
+                18. LABEL 
+                19. CALENDAR 
+                20. DROP DOWN STYLE 
+                21. CHECKBOX & RADIO 
+                22. ICON BUTTON 
+                23. VALIDATION ICONS 
+                24. NOTE 
+                25. PAGINATION 
+                26. ACCORDION 
+                27. TAB 
+                28. STATE OVERVIEW 
+                29. BORDER BOX 
+                30. RATING BUTTON 
+                31. TO DO LIST 
+                32. BADGE 
+                33. SCROLL TO TOP 
+                34. FOOTER 	
+                35. FEED
+                36. FAQ
+                37. WIDGET
+                38. CONTACT 
+                39. THEME STYLE
+*/
 /***********************************************************************
 
-						[1. GLOBLE STYLE ]
-						
+                                                [1. GLOBLE STYLE ]
+                                                
 ***********************************************************************/
 
 h1,
@@ -240,7 +240,7 @@ code {
     display: none!important
 }
 .no-pad-left{
-	padding-left: 0 !important;
+    padding-left: 0 !important;
 }
 .no-margin {
     margin: 0
@@ -282,37 +282,37 @@ code {
     margin-bottom: 10px !important;
 }
 .p-t-10{
-	padding-top: 10px !important;
+    padding-top: 10px !important;
 }
 .p-t-20{
-	padding-top: 20px !important;
+    padding-top: 20px !important;
 }
 .p-r-20{
-	padding-right: 20px !important;
+    padding-right: 20px !important;
 }
 .p-b-20{
-	padding-bottom: 20px !important;
+    padding-bottom: 20px !important;
 }
 .p-l-20{
-	padding-left: 20px !important;
+    padding-left: 20px !important;
 }
 .p-r-100{
-	padding-right: 100px !important;
+    padding-right: 100px !important;
 }
 .m-r-20{
-	margin-right: 20px !important;
+    margin-right: 20px !important;
 }
 .m-b-20{
-	margin-bottom: 20px !important;
+    margin-bottom: 20px !important;
 }
 .m-t-20{
-	margin-top: 20px !important;
+    margin-top: 20px !important;
 }
 .m-l-20{
-	margin-left: 20px !important;
+    margin-left: 20px !important;
 }
 .m-r-100{
-	margin-right: 100px !important;
+    margin-right: 100px !important;
 }
 .margin-0 {
     margin: 0!important;
@@ -330,7 +330,7 @@ code {
     border-radius: 50px;
 }
 .text-center{
-	text-align: center;
+    text-align: center;
 }
 /******* Colors Codes********/
 
@@ -353,10 +353,10 @@ code {
     color: #f44336;
 }
 .headerBadgeColor1{
-	background-color: #C46210 ;
+    background-color: #C46210 ;
 }
 .headerBadgeColor2{
-	 background-color: #673ab7 ;
+    background-color: #673ab7 ;
 }
 .orange-bgcolor {
     background-color: #C46210 !important;
@@ -437,7 +437,7 @@ code {
     background: linear-gradient(45deg,#40ffed,#29b5af);
 }
 .bg-b-black{
-	background: linear-gradient(45deg, #708090, #7c8ea0);
+    background: linear-gradient(45deg, #708090, #7c8ea0);
 }
 .bg-b-yellow {
     background: linear-gradient(45deg,#FFB64D,#ffcb80);
@@ -446,7 +446,7 @@ code {
     background: linear-gradient(45deg,#FF5370,#ff869a);
 }
 .red {
-	color: #fff;
+    color: #fff;
     background-color: #F44336;
 }
 .pink {
@@ -458,7 +458,7 @@ code {
     color: #fff;
 }
 .green-color{
-	color: green;
+    color: green;
 }
 
 .state-overview {
@@ -588,7 +588,7 @@ li [class^=icon-].icon-large {
     width: 100%;
 }
 .hide{
-	display: none!important;
+    display: none!important;
 }
 .img-circle {
     border-radius: 50%;
@@ -598,8 +598,8 @@ li [class^=icon-].icon-large {
 }
 /******************************************************************************************
 
-						 		[ 2. BODY ]
-							
+                                                                [ 2. BODY ]
+                                                        
 *******************************************************************************************/
 
 body {
@@ -614,8 +614,8 @@ body {
 }
 /* ***********************************************************************
 
-							    [ 3. PAGE HEADER ]	 
-								
+                                                            [ 3. PAGE HEADER ]	 
+                                                                
 **************************************************************************/
 .navbar-fixed-top {
     position: fixed;
@@ -635,8 +635,8 @@ body {
     background: #222c3c;
 }
 .logo-icon{
-	font-size: 35px !important;
-	padding-right: 10px;
+    font-size: 35px !important;
+    padding-right: 10px;
     padding-top: 13px;
     float: left;
 }
@@ -986,12 +986,12 @@ body {
     width: 100%;
 }
 .navbar-nav .dropdown-menu{
-	position: absolute;
+    position: absolute;
 }
 .page-header.navbar.navbar-fixed-top,
 .page-header.navbar.navbar-static-top {
-     /* z-index: 9995; */
-	 z-index: 1039; /*jatin*/
+    /* z-index: 9995; */
+    z-index: 1039; /*jatin*/
 }
 .sidemenu-closed.sidemenu-closed-hidelogo .page-header.navbar .page-logo {
     padding: 0
@@ -1117,8 +1117,8 @@ form.search-form-opened .btn.submit {
     transition: all ease .3s
 }
 .menu-toggler i.icon-menu{
-	color: #808040;
-	font-size: 18px;
+    color: #808040;
+    font-size: 18px;
 }
 .page-header.navbar .menu-toggler>span:after,
 .page-header.navbar .menu-toggler>span:before {
@@ -1159,7 +1159,7 @@ form.search-form-opened .btn.submit {
     filter: alpha(opacity=100);
 }
 .page-header.navbar .menu-toggler:focuse{
-	background: none;
+    background: none;
 }
 /* .page-header.navbar .menu-toggler.sidebar-toggler {
     float: right;
@@ -1664,8 +1664,8 @@ form.search-form-opened .btn.submit {
 }
 /******************************************************************************************
 
-						 		[ 4. SIDE MENU ]
-							
+                                                                [ 4. SIDE MENU ]
+                                                        
 *******************************************************************************************/
 
 .sidemenu-container,
@@ -1814,7 +1814,7 @@ form.search-form-opened .btn.submit {
 }
 .sidemenu-container .sidemenu .sub-menu>li.open>a>i,
 .sidemenu-container .sidemenu .sub-menu>li:hover>a>i{
-	color: #6673fc;
+    color: #6673fc;
 }
 .sidemenu-container .sidemenu .sub-menu>li.active>a>.arrow.open:before,
 .sidemenu-container .sidemenu .sub-menu>li.active>a>.arrow:before,
@@ -1885,20 +1885,20 @@ form.search-form-opened .btn.submit {
     color: #4e5d6f;
 }
 .page-header .search-form-opened .input-group .form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #c0c0c0;
-  opacity: 1;
+    color: #c0c0c0;
+    opacity: 1;
 }
 .page-header .search-form-opened .input-group .form-control::-moz-placeholder { /* Firefox 19+ */
-  color: #c0c0c0;
-  opacity: 1;
+    color: #c0c0c0;
+    opacity: 1;
 }
 .page-header .search-form-opened .input-group .form-control:-ms-input-placeholder { /* IE 10+ */
-  color: #c0c0c0;
-  opacity: 1;
+    color: #c0c0c0;
+    opacity: 1;
 }
 .page-header .search-form-opened .input-group .form-control:-moz-placeholder { /* Firefox 18- */
-  color: #c0c0c0;
-  opacity: 1;
+    color: #c0c0c0;
+    opacity: 1;
 }
 .sidemenu-container .sidebar-search.sidebar-search-bordered .input-group,
 .sidemenu-closed.sidemenu-container-fixed .sidemenu-container:hover .sidebar-search.sidebar-search-bordered .input-group {
@@ -2326,7 +2326,7 @@ form.search-form-opened .btn.submit {
 }
 /*********************************************************************
 
-					[5. SEARCH BAR ]
+                                        [5. SEARCH BAR ]
 
 **********************************************************************/
 
@@ -2350,8 +2350,8 @@ form.search-form-opened .btn.submit {
 }
 /**************************************************************
 
-					[6. NAVIGATION ]
-						
+                                        [6. NAVIGATION ]
+                                                
 ***************************************************************/
 
 .nav-pills,
@@ -2588,8 +2588,8 @@ form.search-form-opened .btn.submit {
 }
 /****************************************************************
 
-					[7. PANEL ]
-						
+                                        [7. PANEL ]
+                                                
 *****************************************************************/
 
 .panel {
@@ -2641,8 +2641,8 @@ form.search-form-opened .btn.submit {
 }
 /********************************************************************
 
-						[8. PAGE CONTENT ]
-						
+                                                [8. PAGE CONTENT ]
+                                                
 *********************************************************************/
 
 .page-title {
@@ -2802,8 +2802,8 @@ form.search-form-opened .btn.submit {
 }
 /**************************************************************
 
-					[9. FORM ]
-					
+                                        [9. FORM ]
+                                        
 ***************************************************************/
 
 .form {
@@ -3036,7 +3036,7 @@ select.input-sm {
     line-height: 30px;
 }
 select.form-control.form-control-sm{
-	height: 30px !important;
+    height: 30px !important;
 }
 .input-sm {
     height: 30px;
@@ -3199,8 +3199,8 @@ textarea.form-control-textarea {
 
 /*****************************************************************
 
-					[10. USER PANEL STYLE ]
-						
+                                        [10. USER PANEL STYLE ]
+                                                
 ******************************************************************/
 
 .user-panel {
@@ -3240,8 +3240,8 @@ textarea.form-control-textarea {
 }
 /*************************************************************
 
-				[11. MODAL WINDOW ]
-							
+                                [11. MODAL WINDOW ]
+                                                        
 *************************************************************/
 
 .modal {
@@ -3325,8 +3325,8 @@ body[ng-controller] .modal {
 }
 /****************************************************************************
 
-						[12. CHAT PANEL ]
-								
+                                                [12. CHAT PANEL ]
+                                                                
 *****************************************************************************/
 
 .chat {
@@ -3847,7 +3847,7 @@ ul.chat.nice-chat {
     filter: alpha(opacity=100)
 }
 .chat-sidebar-container .chat-sidebar .chat-sidebar-chat .chat-sidebar-chat-users .media-list .media .media-body .media-heading {
-     margin: 5px 0px 3px 0px;
+    margin: 5px 0px 3px 0px;
     font-size: 14px;
     line-height: 10px;
 }
@@ -4131,17 +4131,17 @@ ul.chat.nice-chat {
     display: inline-block;
 }
 .chat-img{
-	width: 35px;
+    width: 35px;
     height: 35px;
     border-radius: 50px;
     margin-right: 10px;
 }
 .chat-page #inbox>li:hover{
-	background: #e3e1e2;
+    background: #e3e1e2;
     border-radius: 5px;
 }
 .chat-page #inbox>li{
-	margin-top:10px;
+    margin-top:10px;
 }
 ul.chat.chat-page {
     height: 740px;
@@ -4151,10 +4151,10 @@ ul.chat.chat-page {
     padding: 10px 10px 10px 10px;
 }
 .chat-box-submit form>.input-group>input{
-	height: 40px;
+    height: 40px;
 }
 .input-group-btn .mdl-button{
-	height: 38px;
+    height: 38px;
 }
 .chat-page li.in .message {
     color: #fff;
@@ -4172,8 +4172,8 @@ h4.media-heading {
 }
 /******************************************************************
 
-					[13. CARD BOX STYLE ]
-							
+                                        [13. CARD BOX STYLE ]
+                                                        
 *********************************************************************/
 
 .card {
@@ -4450,8 +4450,8 @@ h4.media-heading {
 }
 /*************************************************************************
 
-						[14. PROFILE ]
-							
+                                                [14. PROFILE ]
+                                                        
 **************************************************************************/
 
 .doctor-pic {
@@ -4617,10 +4617,10 @@ h4.media-heading {
     border: 1px solid #ddd;
 }
 .thumb-center{
-	text-align: center;
+    text-align: center;
 }
 .thumb-center img{
-	display: inline-block;
+    display: inline-block;
 }
 .border-gray {
     border: 1px solid #ddd;
@@ -4741,26 +4741,26 @@ ul.activity-list .activity-desk h5 a {
 }
 /**********************************************************
 
-						[15. WIZARD ]
-						
+                                                [15. WIZARD ]
+                                                
 ***********************************************************/
 
 .sw-toolbar-top,
 .sw-toolbar-bottom{
-	flex-direction: row-reverse;
-	padding-top: 15px;
+    flex-direction: row-reverse;
+    padding-top: 15px;
 }
 .sw-toolbar-top .navbar-btn .btn{
-	margin-left: 10px;
+    margin-left: 10px;
 }
 .sw-toolbar-bottom .navbar-btn .btn{
-	margin-left: 10px;
+    margin-left: 10px;
 }
 .wizard-form .navbar-btn .btn{
-	margin-left: 10px;
+    margin-left: 10px;
 }
 .wizard-form .form-group{
-	padding-right: 20px;
+    padding-right: 20px;
 }
 
 .checkbox-list>label {
@@ -4778,8 +4778,8 @@ ul.activity-list .activity-desk h5 a {
 }
 /****************************************************************
 
-					[16. TABLE ]
-						
+                                        [16. TABLE ]
+                                                
 *****************************************************************/
 
 .table-scrollable {
@@ -4985,7 +4985,7 @@ tr.group:hover {
 }
 /*********************************************************************
 
-					[17. BUTTON ]
+                                        [17. BUTTON ]
 
 **********************************************************************/
 
@@ -5015,18 +5015,23 @@ tr.group:hover {
 .open > .dropdown-toggle.btn-default.focus,
 .open > .dropdown-toggle.btn-default:focus,
 .open > .dropdown-toggle.btn-default:hover {
-  background-color: #e1e5ec !important;
-  border-color: #e1e5ec !important;
+    background-color: #e1e5ec !important;
+    border-color: #e1e5ec !important;
 }
 .btn-primary {
-  background-color: #188ae2 !important;
-  border: 1px solid #188ae2 !important;
-  color: #fff !important;
+    background-color: #188ae2 !important;
+    border: 1px solid #188ae2 !important;
+    color: #fff !important;
 }
 .btn-terra {
     background-color: #5f2f4d !important;
-  border: 1px solid #5f2f4d !important;
-  color: #fff !important;
+    border: 1px solid #5f2f4d !important;
+    color: #fff !important;
+}
+.btn-terra2 {
+    background-color: #ffff99 !important;
+    border: 1px solid #ffff99 !important;
+    color: #00 !important;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -5037,14 +5042,14 @@ tr.group:hover {
 .btn-primary:focus,
 .btn-primary:hover,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #167ccb !important;
-  border: 1px solid #167ccb !important;
-  color: #fff !important;
+    background-color: #167ccb !important;
+    border: 1px solid #167ccb !important;
+    color: #fff !important;
 }
 .btn-success {
-  background-color: #4bd396 !important;
-  border: 1px solid #4bd396 !important;
-  color: #fff !important;
+    background-color: #4bd396 !important;
+    border: 1px solid #4bd396 !important;
+    color: #fff !important;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -5055,14 +5060,14 @@ tr.group:hover {
 .btn-success:focus,
 .btn-success:hover,
 .open > .dropdown-toggle.btn-success {
-  background-color: #37ce8a !important;
-  border: 1px solid #37ce8a !important;
-  color: #fff !important;
+    background-color: #37ce8a !important;
+    border: 1px solid #37ce8a !important;
+    color: #fff !important;
 }
 .btn-info {
-  background-color: #3ac9d6 !important;
-  border: 1px solid #3ac9d6 !important;
-  color: #fff !important;
+    background-color: #3ac9d6 !important;
+    border: 1px solid #3ac9d6 !important;
+    color: #fff !important;
 }
 .btn-info:hover,
 .btn-info:focus,
@@ -5073,14 +5078,14 @@ tr.group:hover {
 .btn-info:focus,
 .btn-info:hover,
 .open > .dropdown-toggle.btn-info {
-  background-color: #2abfcc !important;
-  border: 1px solid #2abfcc !important;
-  color: #fff !important;
+    background-color: #2abfcc !important;
+    border: 1px solid #2abfcc !important;
+    color: #fff !important;
 }
 .btn-warning {
-  background-color: #f9c851 !important;
-  border: 1px solid #f9c851 !important;
-  color: #fff !important;
+    background-color: #f9c851 !important;
+    border: 1px solid #f9c851 !important;
+    color: #fff !important;
 }
 .btn-warning:hover,
 .btn-warning:focus,
@@ -5091,14 +5096,14 @@ tr.group:hover {
 .btn-warning:focus,
 .btn-warning:hover,
 .open > .dropdown-toggle.btn-warning {
-  background-color: #f8c038 !important;
-  border: 1px solid #f8c038 !important;
-  color: #fff !important;
+    background-color: #f8c038 !important;
+    border: 1px solid #f8c038 !important;
+    color: #fff !important;
 }
 .btn-danger {
-  background-color: #f5707a !important;
-  border: 1px solid #f5707a !important;
-  color: #fff !important;
+    background-color: #f5707a !important;
+    border: 1px solid #f5707a !important;
+    color: #fff !important;
 }
 .btn-danger:active,
 .btn-danger:focus,
@@ -5109,15 +5114,15 @@ tr.group:hover {
 .btn-danger:focus,
 .btn-danger:hover,
 .open > .dropdown-toggle.btn-danger {
-  background-color: #f35864 !important;
-  border: 1px solid #f35864 !important;
-  color: #fff !important;
+    background-color: #f35864 !important;
+    border: 1px solid #f35864 !important;
+    color: #fff !important;
 }
 
 .btn-pink {
-  background-color: #ff4081 !important;
-  border: 1px solid #ff4081 !important;
-  color: #fff !important;
+    background-color: #ff4081 !important;
+    border: 1px solid #ff4081 !important;
+    color: #fff !important;
 }
 .btn-pink:active,
 .btn-pink:focus,
@@ -5128,9 +5133,9 @@ tr.group:hover {
 .btn-pink:focus,
 .btn-pink:hover,
 .open > .dropdown-toggle.btn-pink {
-  background-color: #ff4081 !important;
-  border: 1px solid #ff4081 !important;
-  color: #fff !important;
+    background-color: #ff4081 !important;
+    border: 1px solid #ff4081 !important;
+    color: #fff !important;
 }
 
 
@@ -5852,7 +5857,7 @@ fieldset[disabled] .btn.purple:not(.btn-outline):hover {
     margin-right: 0;
 }
 .btn-group-vertical .btn {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 .btn-group>.dropdown-menu,
 .dropdown-menu {
@@ -5968,64 +5973,64 @@ fieldset[disabled] .btn.purple:not(.btn-outline):hover {
     background-color: #32c5d3
 }
 .btn.no-margin{
-	margin: 0;
+    margin: 0;
 }
 .btn-facebook {
-  color: #ffffff !important;
-  background-color: #3b5998 !important;
+    color: #ffffff !important;
+    background-color: #3b5998 !important;
 }
 .btn-twitter {
-  color: #ffffff !important;
-  background-color: #00aced !important;
+    color: #ffffff !important;
+    background-color: #00aced !important;
 }
 .btn-linkedin {
-  color: #ffffff !important;
-  background-color: #007bb6 !important;
+    color: #ffffff !important;
+    background-color: #007bb6 !important;
 }
 .btn-dribbble {
-  color: #ffffff !important;
-  background-color: #ea4c89 !important;
+    color: #ffffff !important;
+    background-color: #ea4c89 !important;
 }
 .btn-googleplus {
-  color: #ffffff !important;
-  background-color: #dd4b39 !important;
+    color: #ffffff !important;
+    background-color: #dd4b39 !important;
 }
 .btn-instagram {
-  color: #ffffff !important;
-  background-color: #517fa4 !important;
+    color: #ffffff !important;
+    background-color: #517fa4 !important;
 }
 .btn-pinterest {
-  color: #ffffff !important;
-  background-color: #cb2027 !important;
+    color: #ffffff !important;
+    background-color: #cb2027 !important;
 }
 .btn-dropbox {
-  color: #ffffff !important;
-  background-color: #007ee5 !important;
+    color: #ffffff !important;
+    background-color: #007ee5 !important;
 }
 .btn-flickr {
-  color: #ffffff !important;
-  background-color: #ff0084 !important;
+    color: #ffffff !important;
+    background-color: #ff0084 !important;
 }
 .btn-tumblr {
-  color: #ffffff !important;
-  background-color: #32506d !important;
+    color: #ffffff !important;
+    background-color: #32506d !important;
 }
 .btn-skype {
-  color: #ffffff !important;
-  background-color: #00aff0 !important;
+    color: #ffffff !important;
+    background-color: #00aff0 !important;
 }
 .btn-youtube {
-  color: #ffffff !important;
-  background-color: #bb0000 !important;
+    color: #ffffff !important;
+    background-color: #bb0000 !important;
 }
 .btn-github {
-  color: #ffffff !important;
-  background-color: #171515 !important;
+    color: #ffffff !important;
+    background-color: #171515 !important;
 }
 /************************************************************
 
-					[18. LABEL ]
-						
+                                        [18. LABEL ]
+                                                
 *************************************************************/
 
 label {
@@ -6090,7 +6095,7 @@ h6 .label {
     background-color: #c29d0b !important
 }
 .label-danger {
-   background: linear-gradient(45deg,#FF5370,#ff869a) !important;
+    background: linear-gradient(45deg,#FF5370,#ff869a) !important;
 }
 .label-danger[href]:focus,
 .label-danger[href]:hover {
@@ -6119,8 +6124,8 @@ h6 .label {
     float: right;
 }
 .sidemenu-closed .label-menu {
-	margin-right: -5px;
-	margin-top: -5px;
+    margin-right: -5px;
+    margin-top: -5px;
 }
 .label.label-sm {
     font-size: 10px;
@@ -6153,7 +6158,7 @@ h6 .label {
 }
 /***************************************************************
 
-					[19. CALENDAR ] 
+                                        [19. CALENDAR ] 
 
 ****************************************************************/
 
@@ -6249,7 +6254,7 @@ h6 .label {
 }
 /***************************************************************
 
-					[20. DROP DOWN STYLE ]
+                                        [20. DROP DOWN STYLE ]
 
 ****************************************************************/
 
@@ -6276,7 +6281,7 @@ h6 .label {
     -o-border-radius: 2px
 }
 .navbar-nav .dropdown-menu {
-	position: absolute;
+    position: absolute;
 }
 .dropdown-menu li.divider {
     background: #f1f3f6
@@ -6479,8 +6484,8 @@ h6 .label {
 }
 /***************************************************************
 
-					[21. CHECKBOX & RADIO ]
-						
+                                        [21. CHECKBOX & RADIO ]
+                                                
 ****************************************************************/
 
 .rt-chkbox,
@@ -6650,8 +6655,8 @@ th>.rt-radio.rt-radio-single {
 }
 /**********************************************************
 
-					[22. ICON BUTTON ]
-					
+                                        [22. ICON BUTTON ]
+                                        
 ***********************************************************/
 
 .icon-btn {
@@ -6730,8 +6735,8 @@ th>.rt-radio.rt-radio-single {
 }
 /************************************************************
 
-			[23. VALIDATION ICONS ]
-						
+                        [23. VALIDATION ICONS ]
+                                                
 *************************************************************/
 
 .input-icon {
@@ -6800,8 +6805,8 @@ th>.rt-radio.rt-radio-single {
 }
 /****************************************************************
 
-				[24. NOTE ]
-						
+                                [24. NOTE ]
+                                                
 *****************************************************************/
 
 .note {
@@ -6909,8 +6914,8 @@ th>.rt-radio.rt-radio-single {
 }
 /****************************************************************
 
-				[25. PAGINATION ]
-						
+                                [25. PAGINATION ]
+                                                
 *****************************************************************/
 
 .pagination {
@@ -6924,8 +6929,8 @@ th>.rt-radio.rt-radio-single {
 }
 /****************************************************************
 
-				[26. ACCORDION ]
-						
+                                [26. ACCORDION ]
+                                                
 *****************************************************************/
 
 .accordion .card-header:after {
@@ -6939,8 +6944,8 @@ th>.rt-radio.rt-radio-single {
 }
 /****************************************************************
 
-					[27. TAB ]	
-						
+                                        [27. TAB ]	
+                                                
 *****************************************************************/
 
 .tab-pane>p:last-child {
@@ -6964,7 +6969,7 @@ th>.rt-radio.rt-radio-single {
     color: #999;
 }
 .btmBorder{
-	border-bottom: 0px !important;
+    border-bottom: 0px !important;
 }
 .customtab {
     border-bottom: 2px solid #f7fafc;
@@ -7000,8 +7005,8 @@ nav-tabs>li {
 }
 /****************************************************************
 
-					[28. STATE OVERVIEW ]
-						
+                                        [28. STATE OVERVIEW ]
+                                                
 *****************************************************************/
 
 .state-overview h1.sbold,
@@ -7084,7 +7089,7 @@ nav-tabs>li {
     background-color: #389af0;
 }
 .info-box {
-	border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     min-height: 100px;
     width: 100%;
@@ -7143,8 +7148,8 @@ nav-tabs>li {
 }
 /********************************************************************
 
-					[29. BORDER BOX ]
-							
+                                        [29. BORDER BOX ]
+                                                        
 *********************************************************************/
 
 .borderBox.light.bordered {
@@ -7243,7 +7248,7 @@ nav-tabs>li {
 }
 /***************************************************************
 
-				[30. RATING BUTTON ]
+                                [30. RATING BUTTON ]
 
 ****************************************************************/
 
@@ -7292,8 +7297,8 @@ nav-tabs>li {
 }
 /*********************************************************************
 
-					[31. TO DO LIST ]
-							
+                                        [31. TO DO LIST ]
+                                                        
 **********************************************************************/
 
 .todo-title {
@@ -7440,8 +7445,8 @@ nav-tabs>li {
 }
 /***********************************************************************
 
-						[32. BADGE ]
-						
+                                                [32. BADGE ]
+                                                
 ***********************************************************************/
 
 .badge {
@@ -7509,8 +7514,8 @@ nav-tabs>li {
 }
 /****************************************************************************
 
-						[33. SCROLL TO TOP ]
-								
+                                                [33. SCROLL TO TOP ]
+                                                                
 *****************************************************************************/
 
 .scroll-to-top {
@@ -7540,7 +7545,7 @@ nav-tabs>li {
 }
 /*********************************************************************
 
-					[34. FOOTER ]
+                                        [34. FOOTER ]
 
 **********************************************************************/
 
@@ -7584,7 +7589,7 @@ nav-tabs>li {
 
 /*********************************************************************
 
-					[35. FEED ]
+                                        [35. FEED ]
 
 **********************************************************************/
 
@@ -7645,24 +7650,24 @@ nav-tabs>li {
 
 /*********************************************************************
 
-					[36. FAQ ]
+                                        [36. FAQ ]
 
 **********************************************************************/
 .faq-heading{
-	padding: 1px 15px !important;
-	background: #f5f5f5 !important;
+    padding: 1px 15px !important;
+    background: #f5f5f5 !important;
 }
 .faq {
-	margin-bottom: 4px !important;
+    margin-bottom: 4px !important;
 }
 
 /*********************************************************************
 
-					[37. WIDGET ]
+                                        [37. WIDGET ]
 
 **********************************************************************/
 ul.docListWindow {
-	list-style-type: none;
+    list-style-type: none;
     padding: 0 10px;
     height: 430px;
     overflow: hidden;
@@ -7792,9 +7797,9 @@ a.single-mail.text-center.view-all {
     margin-bottom: 20px;
 }
 .analysis-box{
-	padding: 2px 20px 10px 20px;
-	margin-bottom: 20px;
-	border-radius: 20px;
+    padding: 2px 20px 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
 }
 .clsAvailable {
     color: #0cc745;
@@ -7863,16 +7868,16 @@ span.notificationtime {
     background-color: #36c6d3;
 }
 .progress-bar-green{
-	background: linear-gradient(45deg, #9ce89d, #cdfa7e) !important;
+    background: linear-gradient(45deg, #9ce89d, #cdfa7e) !important;
 }
 .progress-bar-orange{
-	background: linear-gradient(45deg, #fda582, #f7cf68) !important;
+    background: linear-gradient(45deg, #fda582, #f7cf68) !important;
 }
 .progress-bar-purple{
-	background: linear-gradient(45deg, #a890d3, #edbae7) !important;
+    background: linear-gradient(45deg, #a890d3, #edbae7) !important;
 }
 .progress-bar-cyan{
-	background: linear-gradient(45deg, #72c2ff, #86f0ff) !important;
+    background: linear-gradient(45deg, #72c2ff, #86f0ff) !important;
 }
 .progress-bar-warning {
     background-color: #f0ad4e;
@@ -7899,7 +7904,7 @@ span.notificationtime {
     margin-right: 20px;
 }
 .course-picture{
-	float: left;
+    float: left;
     width: 100%;
     text-align: center;
 }
@@ -7908,7 +7913,7 @@ span.notificationtime {
 }
 /*********************************************************************
 
-					[38. CONTACT ]
+                                        [38. CONTACT ]
 
 **********************************************************************/
 .contact-detail {
@@ -7938,14 +7943,14 @@ span.notificationtime {
     text-align: center;
 }
 .alert-dismissible .close{
-	text-indent: 0;
+    text-indent: 0;
 }
 .alert.alert-dismissible {
     color: #fff;
 }
 /*********************************************************************
 
-					[39. THEME STYLE ]
+                                        [39. THEME STYLE ]
 
 **********************************************************************/
 .control-sidebar-btn.btn {
@@ -7968,7 +7973,7 @@ span.notificationtime {
     left: 15px;
 }
 .display-none{
-	display: none;
+    display: none;
 }
 /* Theme color CSS */
 .control-sidebar-btn.btn {
@@ -8081,47 +8086,47 @@ span.notificationtime {
 .theme-color a[data-theme="logo-indigo"] .head:after,
 .theme-color a[data-theme="header-indigo"] .head:before,
 .theme-color a[data-theme="header-indigo"] .head:after{
-	background: #6673FC;
+    background: #6673FC;
 }
 .theme-color a[data-theme="cyan"] .cont:after,
 .theme-color a[data-theme="cyan"] .head:after,
 .theme-color a[data-theme="logo-cyan"] .head:after,
 .theme-color a[data-theme="header-cyan"] .head:before,
 .theme-color a[data-theme="header-cyan"] .head:after{
-	background: #4ABAD2;
+    background: #4ABAD2;
 }
 .theme-color a[data-theme="green"] .cont:after,
 .theme-color a[data-theme="green"] .head:after,
 .theme-color a[data-theme="logo-green"] .head:after,
 .theme-color a[data-theme="header-green"] .head:before,
 .theme-color a[data-theme="header-green"] .head:after{
-	background: #49D075;
+    background: #49D075;
 }
 .theme-color a[data-theme="red"] .cont:after,
 .theme-color a[data-theme="red"] .head:after,
 .theme-color a[data-theme="logo-red"] .head:after,
 .theme-color a[data-theme="header-red"] .head:before,
 .theme-color a[data-theme="header-red"] .head:after{
-	background: #E44F56;
+    background: #E44F56;
 }
 .theme-color a[data-theme="dark"] .head:after,
 .theme-color a[data-theme="logo-dark"] .head:after{
     background: #303548;
 }
 .layout-theme a[data-theme="dark"] .cont{
-	background: #464545;
+    background: #464545;
 }
 .layout-theme a[data-theme="dark"] .head:before{
-	background: #242b3a;
+    background: #242b3a;
 }
 .layout-theme a[data-theme="light"] .cont{
-	background: #ffffff;
+    background: #ffffff;
 }
 .layout-theme a[data-theme="light"] .head:before{
-	background: #ffffff;
+    background: #ffffff;
 }
 .layout-theme a[data-theme="light"] .head:after{
-	background: #6673FC;
+    background: #6673FC;
 }
 
 .theme-color a .head {
@@ -8153,6 +8158,6 @@ span.notificationtime {
     left: 0;
 }
 .selector-title{
-	margin-top: 0px !important; 
-	color: #000000;
+    margin-top: 0px !important; 
+    color: #000000;
 }
