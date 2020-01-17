@@ -53,8 +53,8 @@ and open the template in the editor.
         <div class="page-wrapper">
             <div class="">
                 <img src="assets/img/TerraNovaLogo.jpg" class="img-fluid img-responsive" style="width:100%" alt="Responsive image">
-                <a href="indexpre.jsp" class="btn btn-terra2">Secundaria</a>
-                <a href="indexpre.jsp" class="btn btn-terra2">Preparatoria</a>
+                <a id="secundaria" href="indexpre.jsp" class="btn btn-terra2">Secundaria</a>
+                <a id="preparatoria" href="indexpre.jsp" class="btn btn-terra2">Preparatoria</a>
             </div>
         </div>
 

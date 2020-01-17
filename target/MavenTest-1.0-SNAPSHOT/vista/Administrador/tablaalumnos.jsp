@@ -22,7 +22,7 @@
     <div class="row p-b-20">
                     <div class="col-md-6 col-sm-6 col-6">
                         <div class="btn-group">
-                            <button id="btnagregaA"type="button" class="btn btn-terra">Agregar</button> <br>
+                            <button id="btnagregaA"type="button" class="btn btn-terra">Agregar Alumno</button> <br>
                         </div>
                     </div>
                 </div>

@@ -224,8 +224,11 @@
         <script src="assets/plugins/summernote/summernote.min.js" ></script>
         <script src="assets/js/pages/summernote/summernote-data.js" ></script>
         <script src="assets/js/index.js" ></script>
+        <!-- others scripts-->
         <script type="text/javascript" src="assets/js/pages/Alumnos/Reportes.js" ></script>
-        <script type="text/javascript" src="assets/js/pages/AdminAlumnos/Alumnos.js"></script>
+        <script type="text/javascript" src="assets/js/pages/Administrador/Alumnos.js"></script>
+        <script type="text/javascript" src="assets/js/pages/Administrador/Personal.js"></script>
+        <script type="text/javascript" src="assets/js/pages/Principal/index.js"></script>
         <!-- data tables -->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js" ></script>
