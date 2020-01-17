@@ -96,7 +96,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="button" class="btn btn-terra">Guardar</button>
+                                                    <button id="guardatutor" type="button" class="btn btn-terra">Guardar</button>
                                                 </form>
                                             </div>
                                         </div>

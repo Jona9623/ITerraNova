@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Modelos.TbTutor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author complx
  */
 public class SAdminalumno extends HttpServlet {
-
+    public TbTutor tutor;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,6 +36,7 @@ public class SAdminalumno extends HttpServlet {
         switch(accion){
             case "MuestraAgregaAlumno": MuestraAgregaalumno (request,response); break;
             case "AgregaAlumno": Agregaalumno (request,response); break;
+            case "GuardaTutor": GuardaTutor(request,response); break;
         }
     }
 
@@ -93,6 +95,10 @@ public class SAdminalumno extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    private void GuardaTutor(HttpServletRequest request, HttpServletResponse response) {
+        
     }
 
 }
