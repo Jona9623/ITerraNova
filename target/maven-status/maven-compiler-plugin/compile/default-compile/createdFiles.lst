@@ -17,6 +17,7 @@ Servlets\SPrincipal.class
 Modelos\TbReporteAcademico.class
 Modelos\CtSemanaFiscal.class
 Modelos\CtTipoCalificaicon.class
+Controlador\AdministradorController.class
 Modelos\CtCptalumno.class
 Modelos\CtAtencion.class
 Modelos\CtIncidente.class
