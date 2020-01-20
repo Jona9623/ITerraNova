@@ -227,7 +227,7 @@
                                                         <div class="form-group">
                                                             <label >Seleccione el grado</label>
                                                             <select id="grado" class="custom-select">
-                                                                <c:forEach items="${requestScope.listrado}" var="listgrado">
+                                                                <c:forEach items="${requestScope.listgrado}" var="listgrado">
                                                                     <option value="${listgrado.idtbgrado}">${listgrado.nombre}</option>
                                                                 </c:forEach>
                                                             </select>

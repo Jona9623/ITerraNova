@@ -30,7 +30,7 @@ import java.util.List;
  * @author complx
  */
 public class SAdminalumno extends HttpServlet {
-    AdministradorController adminC = new AdministradorController();
+    AdministradorController adminC;
     public TbTutor tutor;
     public String objectJson;
     public ObjectMapper mapper;
@@ -104,20 +104,14 @@ public class SAdminalumno extends HttpServlet {
     }
 
     private void Agregaalumno(HttpServletRequest request, HttpServletResponse response) {
-        List <CtGrado> listgrado = new ArrayList<CtGrado>();
-        List <CtGrupo> listgrupo = new ArrayList<>();
-        List <CtAreaalumno> listarea = new ArrayList<>();
-        List <CtCptalumno> listcpt = new ArrayList<>();
+        adminC = new AdministradorController();
+        List <CtGrado> listgrado = new ArrayList<>();
+        List <CtGrupo> listgrupo = new ArrayList<CtGrupo>();
+        List <CtAreaalumno> listarea = new ArrayList<CtAreaalumno>();
+        List <CtCptalumno> listcpt = new ArrayList<CtCptalumno>();
         try {
             listgrado = adminC.getGrado();
             request.setAttribute("listgrado", listgrado);
-            listgrupo = adminC.getGrupo();
-            request.setAttribute("listgrupo", listgrupo);
-            listarea = adminC.getArea();
-            request.setAttribute("listarea", listarea);
-            listcpt = adminC.getCpt();
-            request.setAttribute("listcpt", listcpt);
-            
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formalumno.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -127,6 +121,7 @@ public class SAdminalumno extends HttpServlet {
 
     private void GuardaTutor(HttpServletRequest request, HttpServletResponse response) {
         TbTutor tutor = new TbTutor();
+        adminC = new AdministradorController();
         objectJson = request.getParameter("TUTOR");
         mapper = new ObjectMapper();
         try {
@@ -139,6 +134,7 @@ public class SAdminalumno extends HttpServlet {
 
     private void GuardaAlumno(HttpServletRequest request, HttpServletResponse response) {
         TbAlumnos alumno = new TbAlumnos();
+        adminC = new AdministradorController();
         objectJson = request.getParameter("ALUMNO");
         mapper = new ObjectMapper();
         try {
