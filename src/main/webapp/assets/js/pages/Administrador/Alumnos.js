@@ -20,15 +20,25 @@ var Adminalumno = (function () {
                 $('#guardatutor').on('click', function () {
                     Adminalumno.guardaTutor(Adminalumno.datosTutor(), 'GuardaTutor');
                 })
+                $('#guardaalumno').on('click', function () {
+                    Adminalumno.guardaAlumno(Adminalumno.datosAlumno(), 'GuardaAlumno');
+                })
             });
         },
-        guardaTutor: function (objeto, accion){
-          $.get("SAdminalumno",{
-              ACCION: accion,
-              TUTOR: JSON.stringify(objeto)
-          }).then(function(){
-              swal("Hecho!", "Datos guardados correctamente", "success");
-          })  
+        guardaTutor: function (objeto, accion) {
+            $.get("SAdminalumno", {
+                ACCION: accion,
+                TUTOR: JSON.stringify(objeto)
+            }).then(function () {
+            })
+        },
+        guardaAlumno: function(objeto,accion){
+            $.get("SAdminalumno",{
+                ACCION: accion,
+                ALUMNO: JSON.stringify(objeto)
+            }).then(function(){
+                swal("Hecho!", "Datos guardados correctamente", "success");
+            })
         },
         datosTutor: function () {
             var tutor = {
@@ -49,6 +59,40 @@ var Adminalumno = (function () {
             }
             return tutor;
         },
+        datosAlumno: function () {
+            var alumno = {
+                "matricula": $("#matricula").val(),
+                "nombre": $("#nombrea").val(),
+                "apellidop": $("#apellidopa").val(),
+                "apellidom": $("#apellidoma").val(),
+                "fechanacimiento": $("#fechanaa").val(),
+                "curp": $("#curpa").val(),
+                "municipiona": $("#municipionaca").val(),
+                "estadona": $("#estadonaca").val(),
+                "nacionalidad": $("#nacionalidada").val(),
+                "sexo": $("input[name = 'sexo']:checked").val(),
+                "calledom": $("#calledoma").val(),
+                "numerodom": $("#numerodoma").val(),
+                "coloniadom": $("#coloniadoa").val(),
+                "codigopostal": $("#codigopostala").val(),
+                "telefonocasa": $("#telcasaa").val(),
+                "celular": $("#celulara").val(),
+                "correo": $("#correoa").val(),
+                "nivelcursa": $("#nivela").val(),
+                "rgrado": $("#grado").val(),
+                "rgrupo": $("#grupo").val(),
+                "rarea": $("#area").val(),
+                "rcpt": $("#cpt").val(),
+                "plantelproce": $("#plantelproce").val(),
+                "nivelanterior": $("#nivelanterior").val(),
+                "gradoanterior": $("#gradoanterior").val(),
+                "turnoanterior": $("#turnoanterior").val(),
+                "municipioante": $("#plantelanterior").val(),
+                "status": 1,
+                "tipoescuela": 1
+            }
+            return alumno;
+        }
     }
 }
 ());

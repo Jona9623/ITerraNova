@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
@@ -167,7 +168,7 @@
                                                         <label>Sexo</label>
                                                         <div class="form-group">
                                                             <div class="radio p-0">
-                                                                <input checked="true" type="radio" name="optionsRadios1" id="sexoah" value="true">
+                                                                <input checked="true" type="radio" name="sexo" id="sexoah" value="true">
                                                                 <label for="sexoah">
                                                                     Hombre
                                                                 </label>
@@ -175,7 +176,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="radio p-0">
-                                                                <input checked="true" type="radio" name="optionsRadios1" id="sexoam" value="false">
+                                                                <input checked="true" type="radio" name="sexo" id="sexoam" value="false">
                                                                 <label for="sexoam">
                                                                     Mujer
                                                                 </label>
@@ -191,7 +192,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Colonia del domicilio</label>
-                                                            <input id="numerodoma" type="text" class="form-control" placeholder="colonia del domicilio">
+                                                            <input id="coloniadoa" type="text" class="form-control" placeholder="colonia del domicilio">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Código postal</label>
@@ -225,16 +226,15 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione el grado</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="3">4</option>
+                                                            <select id="grado" class="custom-select">
+                                                                <c:forEach items="${requestScope.listrado}" var="listgrado">
+                                                                    <option value="${listgrado.idtbgrado}">${listgrado.nombre}</option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione el grupo</label>
-                                                            <select class="custom-select">
+                                                            <select id="grupo" class="custom-select">
                                                                 <option value="1">A</option>
                                                                 <option value="2">B</option>
                                                                 <option value="3">C</option>
@@ -243,7 +243,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione el area</label>
-                                                            <select class="custom-select">
+                                                            <select id="area" class="custom-select">
                                                                 <option value="1">No aun</option>
                                                                 <option value="2">B</option>
                                                                 <option value="3">C</option>
@@ -252,7 +252,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione capacitacion para el trabajo</label>
-                                                            <select class="custom-select">
+                                                            <select id="cpt" class="custom-select">
                                                                 <option value="1">No aun</option>
                                                                 <option value="2">B</option>
                                                                 <option value="3">C</option>

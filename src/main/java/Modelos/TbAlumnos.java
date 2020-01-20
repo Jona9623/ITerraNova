@@ -18,7 +18,7 @@ public class TbAlumnos {
     private String nombre;
     private String apellidop;
     private String apellidom;
-    private Date fechanacimiento;
+    private String fechanacimiento;
     private String curp;
     private String municipiona;
     private String estadona;
@@ -85,11 +85,11 @@ public class TbAlumnos {
         this.apellidom = apellidom;
     }
 
-    public Date getFechanacimiento() {
+    public String getFechanacimiento() {
         return fechanacimiento;
     }
 
-    public void setFechanacimiento(Date fechanacimiento) {
+    public void setFechanacimiento(String fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
     }
 

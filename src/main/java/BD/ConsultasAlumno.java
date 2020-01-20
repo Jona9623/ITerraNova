@@ -4,19 +4,15 @@
  * and open the template in the editor.
  */
 package BD;
+import Modelos.TbTutor;
 import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 /**
  *
  * @author complx
  */
 public class ConsultasAlumno {
-    public static void main (String [] args) throws  SQLException{
-        Conexion con = new Conexion();
-        if(con.conexion()!= null){
-            System.out.println("Conexion exitosa");
-        }
-        else {
-            System.out.println("Conexion fallida");
-        }
-    }
+   
 }

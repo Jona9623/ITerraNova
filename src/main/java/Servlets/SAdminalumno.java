@@ -13,13 +13,27 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Controlador.AdministradorController;
+import Modelos.CtAreaalumno;
+import Modelos.CtCptalumno;
+import Modelos.CtGrado;
+import Modelos.CtGrupo;
+import Modelos.TbAlumnos;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author complx
  */
 public class SAdminalumno extends HttpServlet {
+    AdministradorController adminC = new AdministradorController();
     public TbTutor tutor;
+    public String objectJson;
+    public ObjectMapper mapper;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,6 +51,7 @@ public class SAdminalumno extends HttpServlet {
             case "MuestraAgregaAlumno": MuestraAgregaalumno (request,response); break;
             case "AgregaAlumno": Agregaalumno (request,response); break;
             case "GuardaTutor": GuardaTutor(request,response); break;
+            case "GuardaAlumno": GuardaAlumno(request,response); break;
         }
     }
 
@@ -89,7 +104,20 @@ public class SAdminalumno extends HttpServlet {
     }
 
     private void Agregaalumno(HttpServletRequest request, HttpServletResponse response) {
+        List <CtGrado> listgrado = new ArrayList<CtGrado>();
+        List <CtGrupo> listgrupo = new ArrayList<>();
+        List <CtAreaalumno> listarea = new ArrayList<>();
+        List <CtCptalumno> listcpt = new ArrayList<>();
         try {
+            listgrado = adminC.getGrado();
+            request.setAttribute("listgrado", listgrado);
+            listgrupo = adminC.getGrupo();
+            request.setAttribute("listgrupo", listgrupo);
+            listarea = adminC.getArea();
+            request.setAttribute("listarea", listarea);
+            listcpt = adminC.getCpt();
+            request.setAttribute("listcpt", listcpt);
+            
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formalumno.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -98,7 +126,27 @@ public class SAdminalumno extends HttpServlet {
     }
 
     private void GuardaTutor(HttpServletRequest request, HttpServletResponse response) {
-        
+        TbTutor tutor = new TbTutor();
+        objectJson = request.getParameter("TUTOR");
+        mapper = new ObjectMapper();
+        try {
+            tutor = mapper.readValue(objectJson, TbTutor.class);
+            adminC.guardaTutor(tutor);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void GuardaAlumno(HttpServletRequest request, HttpServletResponse response) {
+        TbAlumnos alumno = new TbAlumnos();
+        objectJson = request.getParameter("ALUMNO");
+        mapper = new ObjectMapper();
+        try {
+            alumno = mapper.readValue(objectJson, TbAlumnos.class);
+            adminC.guardaAlumno(alumno);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }

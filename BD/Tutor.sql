@@ -7,3 +7,4 @@ coloniadomicilio,codigopostal,telefonocasa,celular,correo,status) values ('Dolor
 'Av Xalapa',564,'Veracruz',94760,'11340232','2299345262','monica.paz@gmail.com',1),('Jorge Esteban','Carrillo','Zamora','Ingeniero','Hermano',
 'Venustiano Carranza',12,'Caranza',98960,'01823612','2298152681','jorge.carrillo@gmail.com',1);
 select * from tb_tutor;
+SELECT idTb_Tutor FROM tb_tutor ORDER BY idTb_Tutor DESC LIMIT 1;
