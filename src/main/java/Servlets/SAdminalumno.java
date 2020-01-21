@@ -31,7 +31,6 @@ import java.util.List;
  */
 public class SAdminalumno extends HttpServlet {
     AdministradorController adminC;
-    public TbTutor tutor;
     public String objectJson;
     public ObjectMapper mapper;
     /**
@@ -95,7 +94,11 @@ public class SAdminalumno extends HttpServlet {
     }// </editor-fold>
 
     private void MuestraAgregaalumno(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        List <TbAlumnos> listalumnos = new ArrayList<>();
         try {
+            listalumnos = adminC.getAlumnos();
+            request.setAttribute("listalumnos", listalumnos);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablaalumnos.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -106,12 +109,18 @@ public class SAdminalumno extends HttpServlet {
     private void Agregaalumno(HttpServletRequest request, HttpServletResponse response) {
         adminC = new AdministradorController();
         List <CtGrado> listgrado = new ArrayList<>();
-        List <CtGrupo> listgrupo = new ArrayList<CtGrupo>();
-        List <CtAreaalumno> listarea = new ArrayList<CtAreaalumno>();
-        List <CtCptalumno> listcpt = new ArrayList<CtCptalumno>();
+        List <CtGrupo> listgrupo = new ArrayList<>();
+        List <CtAreaalumno> listarea = new ArrayList<>();
+        List <CtCptalumno> listcpt = new ArrayList<>();
         try {
             listgrado = adminC.getGrado();
             request.setAttribute("listgrado", listgrado);
+            listgrupo = adminC.getGrupo();
+            request.setAttribute("listgrupo", listgrupo);
+            listarea = adminC.getArea();
+            request.setAttribute("listarea", listarea);
+            listcpt = adminC.getCpt();
+            request.setAttribute("listcpt", listcpt);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formalumno.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

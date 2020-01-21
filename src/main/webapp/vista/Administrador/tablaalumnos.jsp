@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
@@ -20,116 +21,66 @@
 </div>
 <div class="row">
     <div class="row p-b-20">
-                    <div class="col-md-6 col-sm-6 col-6">
-                        <div class="btn-group">
-                            <button id="btnagregaA"type="button" class="btn btn-terra">Agregar Alumno</button> <br>
-                        </div>
-                    </div>
-                </div>
-        
+        <div class="col-md-6 col-sm-6 col-6">
+            <div class="btn-group">
+                <button id="btnagregaA"type="button" class="btn btn-terra">Agregar Alumno</button> <br>
+            </div>
+        </div>
+    </div>
+
     <table id="tablaalumnos" class="table table-bordered">
-        <thead>
+        <thead class="thead-light">
             <tr>
-                <th>Nombre</th>
-                <th>A. Paterno</th>
-                <th>A. Materno</th>
-                <th>Matricula</th>
-                <th>Grado</th>
-                <th>Grupo</th>
-                <th>Acciones</th>
+                <th style="display: none"></th>
+                <th class="center">Nombre</th>
+                <th class="center">A. Paterno</th>
+                <th class="center">A. Materno</th>
+                <th class="center">Matricula</th>
+                <th class="center">Grado y Grupo</th>
+                <th class="center">Tutor</th>
+                <th class="center">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>zS15001384</td>
-                <td>6</td>
-                <td>A</td>
-                <td>Botones de acciones</td>
-            </tr>
+            <c:forEach items="${requestScope.listalumnos}" var="listalumnos">
+                <tr>
+                    <th class="center" style="display: none"> ${listalumnos.idtbalumnos}</th>
+                    <th class="center">${listalumnos.nombre}</th>
+                    <td class="center">${listalumnos.apellidop}</td>
+                    <td class="center">${listalumnos.apellidom}</td>
+                    <td class="center">${listalumnos.matricula}</td>
+                    <td class="center">${listalumnos.rgrado}  ${listalumnos.grupo}</td>
+                    <td class="center">${listalumnos.tutor}</td>
+                    <td class="center">
+                        <div class="btn-group">
+                            <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-left" role="menu">
+                                <li>
+                                    <a href="javascript:Adminpersonal.tablaPersonal();">
+                                        <i class="icon-docs"></i> New Post </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-tag"></i> New Comment </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-user"></i> New User </a>
+                                </li>
+                                <li class="divider"> </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-flag"></i> Comments
+                                        <span class="badge badge-success">4</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
 </div>

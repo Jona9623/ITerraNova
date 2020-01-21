@@ -23,7 +23,7 @@ public class TbAlumnos {
     private String municipiona;
     private String estadona;
     private String nacionalidad;
-    private int sexo;
+    private boolean sexo;
     private String calledom;
     private int numerodom;
     private String coloniadom;
@@ -34,14 +34,50 @@ public class TbAlumnos {
     private String nivelcursa;
     private int rgrado;
     private int rgrupo;
+    private String grupo;
     private int rarea;
+    private String area;
     private int rcpt;
+    private String cpt;
     private String plantelproce;
     private int nivelanterior;
     private int gradoanterior;
     private int turnoanterior;
     private String municipioante;
     private int rtutor;
+    private String tutor;
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCpt() {
+        return cpt;
+    }
+
+    public void setCpt(String cpt) {
+        this.cpt = cpt;
+    }
+
+    public String getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(String tutor) {
+        this.tutor = tutor;
+    }
     private int status;
     private int tipoescuela;
 
@@ -125,11 +161,11 @@ public class TbAlumnos {
         this.nacionalidad = nacionalidad;
     }
 
-    public int getSexo() {
+    public boolean getSexo() {
         return sexo;
     }
 
-    public void setSexo(int sexo) {
+    public void setSexo(boolean sexo) {
         this.sexo = sexo;
     }
 

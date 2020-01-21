@@ -13,7 +13,7 @@
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="indexpre.jsp">Inicio</a>&nbsp;<i class="fa fa-angle-right"></i>
-                &nbsp;<a class="parent-item" href="javascript:reporteDisciplinar()">Reporte Disciplinar</a>&nbsp;<i class="fa fa-angle-right"></i>
+                &nbsp;<a class="parent-item" href="javascript:Reportes.reporteDisciplinar();">Reporte Disciplinar</a>&nbsp;<i class="fa fa-angle-right"></i>
             </li>
             <li class="active">Agregar Fatla</li>
         </ol>

@@ -11,7 +11,9 @@ import Modelos.CtAreaalumno;
 import Modelos.CtCptalumno;
 import Modelos.CtGrado;
 import Modelos.CtGrupo;
+import Modelos.CtPuesto;
 import Modelos.TbAlumnos;
+import Modelos.TbPersonal;
 import Modelos.TbTutor;
 import java.util.List;
 
@@ -21,6 +23,15 @@ import java.util.List;
  */
 public class AdministradorController {
     
+    public List<TbAlumnos> getAlumnos() {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getAlumnos();
+    }
+    
+    public List<TbPersonal> getPersonal() {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getPersonal();
+    }
     public void guardaTutor(TbTutor tutor){
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.guardaTutor(tutor);
@@ -29,6 +40,11 @@ public class AdministradorController {
     public void guardaAlumno(TbAlumnos alumno) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.guardaAlumno(alumno);
+    }
+    
+    public void guardaPersonal(TbPersonal personal) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaPersonal(personal);
     }
 
     public List<CtGrado> getGrado() {
@@ -50,4 +66,11 @@ public class AdministradorController {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getCpt();
     }
+
+    public List<CtPuesto> getPuesto() {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getPuesto();
+    }
+
+
 }

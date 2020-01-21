@@ -5,8 +5,14 @@
  */
 package Servlets;
 
+import Controlador.AdministradorController;
+import Modelos.CtPuesto;
+import Modelos.TbPersonal;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +24,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author complx
  */
 public class SAdminpersonal extends HttpServlet {
+
+    AdministradorController adminC;
+    public String objectJson;
+    public ObjectMapper mapper;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +42,10 @@ public class SAdminpersonal extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String accion = request.getParameter("ACCION");
-        switch(accion){
-            case "MuestraAgregaPersonal": MuestraAgregaPersonal (request,response); break;
-            case "AgregaPersonal": AgregaPersonal (request,response); break;
+        switch (accion) {
+            case "MuestraAgregaPersonal": MuestraAgregaPersonal(request, response); break;
+            case "AgregaPersonal": AgregaPersonal(request, response); break;
+            case "GuardaPersonal":GuardaPersonal(request, response); break;
         }
     }
 
@@ -78,7 +89,11 @@ public class SAdminpersonal extends HttpServlet {
     }// </editor-fold>
 
     private void MuestraAgregaPersonal(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        List <TbPersonal> listpersonal = new ArrayList<>();
         try {
+            listpersonal = adminC.getPersonal();
+            request.setAttribute("listpersonal", listpersonal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablapersonal.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -87,11 +102,29 @@ public class SAdminpersonal extends HttpServlet {
     }
 
     private void AgregaPersonal(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        List<CtPuesto> listpuesto = new ArrayList<>();
         try {
+            listpuesto = adminC.getPuesto();
+            request.setAttribute("listpuesto", listpuesto);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formpersonal.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
+            System.out.println(e);
         }
+    }
+
+    private void GuardaPersonal(HttpServletRequest request, HttpServletResponse response) {
+        objectJson = request.getParameter("PERSONAL");
+        mapper = new ObjectMapper();
+        TbPersonal personal = new TbPersonal();
+        try {
+            personal = mapper.readValue(objectJson, TbPersonal.class);
+            adminC.guardaPersonal(personal);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
 }

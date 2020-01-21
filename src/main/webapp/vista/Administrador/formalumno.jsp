@@ -235,28 +235,27 @@
                                                         <div class="form-group">
                                                             <label >Seleccione el grupo</label>
                                                             <select id="grupo" class="custom-select">
-                                                                <option value="1">A</option>
-                                                                <option value="2">B</option>
-                                                                <option value="3">C</option>
-                                                                <option value="3">D</option>
+                                                                <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
+                                                                    <option value="${listgrupo.idtbgrupo}">${listgrupo.nombre}</option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione el area</label>
                                                             <select id="area" class="custom-select">
-                                                                <option value="1">No aun</option>
-                                                                <option value="2">B</option>
-                                                                <option value="3">C</option>
-                                                                <option value="3">D</option>
+                                                                <option value="0">No aún</option>
+                                                                <c:forEach items="${requestScope.listarea}" var="listarea">
+                                                                    <option value="${listarea.idtbarea}">${listarea.nombre}</option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione capacitacion para el trabajo</label>
                                                             <select id="cpt" class="custom-select">
-                                                                <option value="1">No aun</option>
-                                                                <option value="2">B</option>
-                                                                <option value="3">C</option>
-                                                                <option value="3">D</option>
+                                                                <option value="0">No aún</option>
+                                                                <c:forEach items="${requestScope.listcpt}" var="listcpt">
+                                                                    <option value="${listcpt.idtbcpt}">${listcpt.nombre}</option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -271,11 +270,14 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Grado cursado anteriormente</label>
-                                                            <input id="gradoanterior" type="text" class="form-control" placeholder="grado anterior">
+                                                            <input id="gradoanterior" type="number" class="form-control" placeholder="grado anterior">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Turno cursado anteriormente</label>
-                                                            <input id="turnoanterior" type="text" class="form-control" placeholder="turno anterior">
+                                                            <label >Turno cursado anteriormente</label>
+                                                            <select id="turnoanterior" class="custom-select">
+                                                                    <option value="1">Matutino</option>
+                                                                    <option value="2">Vespertino</option>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Municipio del plantel anterior</label>
@@ -283,7 +285,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-terra">Guardar</button>
+                                                <button id="guardaalumno" type="button" class="btn btn-terra">Guardar</button>
                                             </form>
                                         </div>
                                     </div>

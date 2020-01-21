@@ -16,12 +16,12 @@ public class TbPersonal {
     private String nombre;
     private String apellidop;
     private String apellidom;
-    private Date fechanacimiento;
+    private String fechanacimiento;
     private String curp;
     private String municipionac;
     private String estadonac;
     private String nacionalidad;
-    private int sexo;
+    private boolean sexo;
     private String calledom;
     private int numerodom;
     private String coloniadom;
@@ -36,6 +36,7 @@ public class TbPersonal {
     private String maestria;
     private String doctorado;
     private int rpuesto;
+    private String puesto;
     private int status;
     private int tipoescuela;
 
@@ -71,11 +72,11 @@ public class TbPersonal {
         this.apellidom = apellidom;
     }
 
-    public Date getFechanacimiento() {
+    public String getFechanacimiento() {
         return fechanacimiento;
     }
 
-    public void setFechanacimiento(Date fechanacimiento) {
+    public void setFechanacimiento(String fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
     }
 
@@ -111,11 +112,11 @@ public class TbPersonal {
         this.nacionalidad = nacionalidad;
     }
 
-    public int getSexo() {
+    public boolean getSexo() {
         return sexo;
     }
 
-    public void setSexo(int sexo) {
+    public void setSexo(boolean sexo) {
         this.sexo = sexo;
     }
 
@@ -229,6 +230,14 @@ public class TbPersonal {
 
     public void setRpuesto(int rpuesto) {
         this.rpuesto = rpuesto;
+    }
+    
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
     }
 
     public int getStatus() {

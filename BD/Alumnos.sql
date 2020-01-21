@@ -11,4 +11,8 @@ r_grado,r_grupo,r_area,r_cpt,plantelprocedencia,nivelanterior,gradoanterior,turn
 6,2,'Queretaro',1,1),('zS13563434','Melissa Guadalupe','Perez','Cabrera','1994-12-12','MPCG961212HVZRPN02','Veracruz','Veracruz','Mexicano',2,
 'Av jamapa oriente',3,'Jamapa',94260,'018001234','2292354612','melissa.perez@hotmail.es','Alto',1,1,2,1,'Conalep',2,
 6,1,'Veracruz',3,1);
-select * from tb_alumnos;
+select * from tb_personal;
+
+select tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from
+(((tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado) inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo) inner join
+tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor) where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = 1;

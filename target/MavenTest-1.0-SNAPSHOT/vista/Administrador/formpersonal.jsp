@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
@@ -60,6 +61,10 @@
                                                                 <input id="curpp" type="text" class="form-control" placeholder="curp">
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Fecha de nacimiento</label>
+                                                                <input id="fechanap" type="date" class="form-control" placeholder="fecha nacimiento">
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label>Municipio de nacimiento</label>
                                                                 <input id="municipionacp" type="text" class="form-control" placeholder="municipio ncimiento">
                                                             </div>
@@ -70,7 +75,7 @@
                                                             <label>Sexo</label>
                                                             <div class="form-group">
                                                                 <div class="radio p-0">
-                                                                    <input checked="true" type="radio" name="optionsRadios1" id="sexoah" value="true">
+                                                                    <input checked="true" type="radio" name="sexop" id="sexoah" value="true">
                                                                     <label for="sexoah">
                                                                         Hombre
                                                                     </label>
@@ -78,7 +83,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="radio p-0">
-                                                                    <input checked="true" type="radio" name="optionsRadios1" id="sexoam" value="false">
+                                                                    <input checked="true" type="radio" name="sexop" id="sexoam" value="false">
                                                                     <label for="sexoam">
                                                                         Mujer
                                                                     </label>
@@ -122,7 +127,7 @@
                                                                 <label>Número de seguro social</label>
                                                                 <input id="nss" type="text" class="form-control" placeholder="seuro social">
                                                             </div>
-                                                            
+
                                                             <div class="form-group">
                                                                 <label>RFC</label>
                                                                 <input id="rfc" type="text" class="form-control" placeholder="rfc">
@@ -156,7 +161,7 @@
                                                             <input  id="licenciatura" type="text" class="form-control" placeholder="licenciatura">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Maestris (si aplica)</label>
+                                                            <label>Maestria (si aplica)</label>
                                                             <input id="maestria" type="text" class="form-control" placeholder="maestria">
                                                         </div>
                                                         <div class="form-group">
@@ -165,16 +170,15 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione un puesto</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="3">4</option>
+                                                            <select id="puesto" class="custom-select">
+                                                                <c:forEach items="${requestScope.listpuesto}" var="listpuesto">
+                                                                    <option value="${listpuesto.idtbpuesto}">${listpuesto.nombre}</option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-terra">Guardar</button>
+                                                <button id="guardapersonal" type="button" class="btn btn-terra">Guardar</button>
                                             </form>
                                         </div>
                                     </div>

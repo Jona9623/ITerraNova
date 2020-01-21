@@ -30,15 +30,17 @@ var Adminalumno = (function () {
                 ACCION: accion,
                 TUTOR: JSON.stringify(objeto)
             }).then(function () {
-            })
+                alert('Tutor guardado');
+            });
         },
         guardaAlumno: function(objeto,accion){
             $.get("SAdminalumno",{
                 ACCION: accion,
                 ALUMNO: JSON.stringify(objeto)
             }).then(function(){
-                swal("Hecho!", "Datos guardados correctamente", "success");
-            })
+                alert('Alumno guardado');
+                Adminalumno.tablaAlumnos();
+            });
         },
         datosTutor: function () {
             var tutor = {

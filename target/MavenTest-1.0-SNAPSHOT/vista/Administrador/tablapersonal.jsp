@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
@@ -20,106 +21,37 @@
 </div>
 <div class="row">
     <div class="row p-b-20">
-        <div class="col-md-6 col-sm-6 col-6">
-            <div class="btn-group">
-                <button id="btnagregaP"type="button" class="btn btn-terra">Agregar Personal</button> <br>
-            </div>
-        </div>
-    </div>
-
+                    <div class="col-md-6 col-sm-6 col-6">
+                        <div class="btn-group">
+                            <button id="btnaregarP"type="button" class="btn btn-terra">Agregar Personal</button> <br>
+                        </div>
+                    </div>
+                </div>
+        
     <table id="tablapersonal" class="table table-bordered">
-        <thead>
+        <thead class="thead-light">
             <tr>
-                <th>Nombre</th>
-                <th>A. Paterno</th>
-                <th>A. Materno</th>
-                <th>Puesto</th>
-                <th>Correo</th>
-                <th>Acciones</th>
+                <th style="display: none"></th>
+                <th class="center">Nombre</th>
+                <th class="center">A. Paterno</th>
+                <th class="center">A. Materno</th>
+                <th class="center">Correo</th>
+                <th class="center">Puesto</th>
+                <th class="center">Acciones</th>
             </tr>
         </thead>
         <tbody>
+            <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
             <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
+                <th class="center" style="display: none"> ${listpersonal.idtbpersonal}</th>
+                <th class="center">${listpersonal.nombre}</th>
+                <td class="center">${listpersonal.apellidop}</td>
+                <td class="center">${listpersonal.apellidom}</td>
+                <td class="center">${listpersonal.correo}</td>
+                <td class="center">${listpersonal.puesto}</td>
+                <td class="center">Botones de acciones</td>
             </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
-                
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
-            </tr>
-            <tr>
-                <th>Jonathan</th>
-                <td>Trujillo</td>
-                <td>Capetillo</td>
-                <td>Maestro</td>
-                <td>correo@correo.com</td>
-                <td>Botones de acciones</td>
-            </tr>
+            </c:forEach>
         </tbody>
     </table>
 </div>
