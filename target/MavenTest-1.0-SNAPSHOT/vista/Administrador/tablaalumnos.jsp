@@ -32,6 +32,7 @@
         <thead class="thead-light">
             <tr>
                 <th style="display: none"></th>
+                <th style="display: none"></th>
                 <th class="center">Nombre</th>
                 <th class="center">A. Paterno</th>
                 <th class="center">A. Materno</th>
@@ -44,8 +45,9 @@
         <tbody>
             <c:forEach items="${requestScope.listalumnos}" var="listalumnos">
                 <tr>
-                    <th class="center" style="display: none"> ${listalumnos.idtbalumnos}</th>
-                    <th class="center">${listalumnos.nombre}</th>
+                    <td class="center" style="display: none">${listalumnos.idtbalumnos}</td>
+                    <td class="center" style="display: none">${listalumnos.rtutor}</td>
+                    <td class="center">${listalumnos.nombre}</td>
                     <td class="center">${listalumnos.apellidop}</td>
                     <td class="center">${listalumnos.apellidom}</td>
                     <td class="center">${listalumnos.matricula}</td>
@@ -58,23 +60,21 @@
                             </button>
                             <ul class="dropdown-menu pull-left" role="menu">
                                 <li>
-                                    <a href="javascript:Adminpersonal.tablaPersonal();">
-                                        <i class="icon-docs"></i> New Post </a>
+                                    <a href="javascript:;" class="editar">
+                                        <i id="editar" class="material-icons">create</i> Editar </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;">
-                                        <i class="icon-tag"></i> New Comment </a>
+                                        <i class="icon-tag"></i> Eliminar </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;">
-                                        <i class="icon-user"></i> New User </a>
+                                        <i class="icon-user"></i> otra opcion</a>
                                 </li>
                                 <li class="divider"> </li>
                                 <li>
                                     <a href="javascript:;">
-                                        <i class="icon-flag"></i> Comments
-                                        <span class="badge badge-success">4</span>
-                                    </a>
+                                        <i class="icon-flag"></i> otra opcion </a>
                                 </li>
                             </ul>
                         </div>

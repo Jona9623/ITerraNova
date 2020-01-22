@@ -10,7 +10,7 @@
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
         <div class=" pull-left">
-            <div class="page-title">Tabla Alumnos</div>
+            <div class="page-title">Tabla Personal</div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="indexpre.jsp">Inicio</a>&nbsp;<i class="fa fa-angle-right"></i>

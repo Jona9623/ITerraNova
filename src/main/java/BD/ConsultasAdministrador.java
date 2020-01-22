@@ -36,7 +36,7 @@ public class ConsultasAdministrador {
         List<TbAlumnos> listalumnos = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from\n"
+            String consulta = "select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from\n"
                     + "(((tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado) inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo) inner join\n"
                     + "tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor) where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = 1";
             pst = con.prepareStatement(consulta);
@@ -50,6 +50,7 @@ public class ConsultasAdministrador {
                 alumno.setMatricula(rs.getString("tb_alumnos.matricula"));
                 alumno.setRgrado(rs.getInt("ct_grado.nombre"));
                 alumno.setGrupo(rs.getString("ct_grupo.nombre"));
+                alumno.setRtutor(rs.getInt("tb_alumnos.r_tutor"));
                 alumno.setTutor(rs.getString("tb_tutor.nombre"));
                 listalumnos.add(alumno);
             }
@@ -228,6 +229,107 @@ public class ConsultasAdministrador {
                 System.out.println(e);
             }
         }
+    }
+    
+    public TbAlumnos datosAlumno(int id) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        TbAlumnos alumno = new TbAlumnos();
+        try {
+            String consulta = "select * from tb_alumnos where idTb_Alumnos = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                alumno.setIdtbalumnos(rs.getInt("idTb_Alumnos"));
+                alumno.setMatricula(rs.getString("matricula"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellidop(rs.getString("apellidopaterno"));
+                alumno.setApellidom(rs.getString("apellidomaterno"));
+                alumno.setFechanacimiento(rs.getString("fechanacimiento"));
+                alumno.setCurp(rs.getString("curp"));
+                alumno.setMunicipiona(rs.getString("municipionacimiento"));
+                alumno.setEstadona(rs.getString("estadonacimiento"));
+                alumno.setNacionalidad(rs.getString("nacionalidad"));
+                alumno.setSexo(rs.getBoolean("sexo"));
+                alumno.setCalledom(rs.getString("calledomicilio"));
+                alumno.setNumerodom(rs.getInt("numerodomicilio"));
+                alumno.setColoniadom(rs.getString("coloniadomicilio"));
+                alumno.setCodigopostal(rs.getInt("codigopostal"));
+                alumno.setTelefonocasa(rs.getString("telefonocasa"));
+                alumno.setCelular(rs.getString("celularalumno"));
+                alumno.setCorreo(rs.getString("correoalumno"));
+                alumno.setNivelcursa(rs.getString("nivelcursa"));
+                alumno.setPlantelproce(rs.getString("plantelprocedencia"));
+                alumno.setNivelanterior(rs.getInt("nivelanterior"));
+                alumno.setGradoanterior(rs.getInt("gradoanterior"));
+                alumno.setTurnoanterior(rs.getInt("turnoanterior"));
+                alumno.setMunicipioante(rs.getString("municipioanterior"));
+            }
+        } catch (Exception e) {
+            System.out.print("Error" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return alumno;
+    }
+    public TbTutor datosTutor(int id) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        TbTutor tutor = new TbTutor();
+        try {
+            String consulta = "select * from tb_tutor where idTb_Tutor = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                tutor.setIdtbtutor(rs.getInt("idTb_Tutor"));
+                tutor.setNombre(rs.getString("nombre"));
+                tutor.setApellidop(rs.getString("apellidopaterno"));
+                tutor.setApellidom(rs.getString("apellidomaterno"));
+                tutor.setApellidom(rs.getString("apellidomaterno"));
+                tutor.setOcupacion(rs.getString("ocupacion"));
+                tutor.setParentesco(rs.getString("parentesco"));
+                tutor.setCalledom(rs.getString("calledomicilio"));
+                tutor.setNumerodom(rs.getInt("numerodomicilio"));
+                tutor.setColoniadom(rs.getString("coloniadomicilio"));
+                tutor.setCodigopostal(rs.getInt("codigopostal"));
+                tutor.setTelefonocasa(rs.getString("telefonocasa"));
+                tutor.setCelular(rs.getString("celular"));
+                tutor.setCorreo(rs.getString("correo"));
+            }
+        } catch (Exception e) {
+            System.out.print("Error" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return tutor;
     }
 
     public void guardaPersonal(TbPersonal personal) {
@@ -480,6 +582,10 @@ public class ConsultasAdministrador {
             }
         }
         return listpuesto;
+    }
+
+    public void actualizaAlumno(TbAlumnos alumno) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

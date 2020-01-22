@@ -9,20 +9,43 @@ var Adminalumno = (function () {
                 $("#tablaalumnos").DataTable();
                 $('#btnagregaA').on('click', function () {
                     Adminalumno.agregaAlumno();
+                }),
+                $('.editar').on('click', function () {
+                    idalumno = $(this).parents("tr").find("td").eq(0).html();
+                    idtutor = $(this).parents("tr").find("td").eq(1).html();
+                    Adminalumno.editarAlumno(idalumno,idtutor);
                 });
+            });
+        },
+        formularios: function (argumento){
+            $('#content').html(argumento);
+                $('#guardatutor').on('click', function () {
+                    Adminalumno.guardaTutor(Adminalumno.datosTutor(), 'GuardaTutor');
+                });
+                $('#guardaalumno').on('click', function () {
+                    Adminalumno.guardaAlumno(Adminalumno.datosAlumno(), 'GuardaAlumno');
+                });
+        },
+        editarAlumno: function(idalumno, idtutor){
+            console.log(idalumno);
+            console.log(idtutor);
+            idalumno.trim();
+            idtutor.trim();
+            console.log(idalumno);
+            console.log(idtutor);
+            $.get("SAdminalumno",{
+                ACCION: "editarAlumno",
+                IDALUMNO: idalumno,
+                IDTUTOR: idtutor
+            }).then(function(){
+               Adminalumno.formularios(arguments[0]); 
             });
         },
         agregaAlumno: function () {
             $.get("SAdminalumno", {
                 ACCION: "AgregaAlumno"
             }).then(function () {
-                $('#content').html(arguments[0]);
-                $('#guardatutor').on('click', function () {
-                    Adminalumno.guardaTutor(Adminalumno.datosTutor(), 'GuardaTutor');
-                })
-                $('#guardaalumno').on('click', function () {
-                    Adminalumno.guardaAlumno(Adminalumno.datosAlumno(), 'GuardaAlumno');
-                })
+                Adminalumno.formularios(arguments[0]);
             });
         },
         guardaTutor: function (objeto, accion) {
@@ -33,17 +56,18 @@ var Adminalumno = (function () {
                 alert('Tutor guardado');
             });
         },
-        guardaAlumno: function(objeto,accion){
-            $.get("SAdminalumno",{
+        guardaAlumno: function (objeto, accion) {
+            $.get("SAdminalumno", {
                 ACCION: accion,
                 ALUMNO: JSON.stringify(objeto)
-            }).then(function(){
+            }).then(function () {
                 alert('Alumno guardado');
                 Adminalumno.tablaAlumnos();
             });
         },
         datosTutor: function () {
             var tutor = {
+                "idtbtutor": $("#idtutor").val(),
                 "nombre": $("#nombret").val(),
                 "apellidop": $("#apellidomt").val(),
                 "apellidom": $("#apellidopt").val(),
@@ -63,6 +87,7 @@ var Adminalumno = (function () {
         },
         datosAlumno: function () {
             var alumno = {
+                "idtbalumnos": $("#idalumno").val(),
                 "matricula": $("#matricula").val(),
                 "nombre": $("#nombrea").val(),
                 "apellidop": $("#apellidopa").val(),
