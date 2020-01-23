@@ -169,20 +169,36 @@
                                                         </div>
                                                         <label>Sexo</label>
                                                         <div class="form-group">
-                                                            <div class="radio p-0">
-                                                                <input checked="true" type="radio" name="sexo" id="sexoah" value="true">
-                                                                <label for="sexoah">
-                                                                    Hombre
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="radio p-0">
-                                                                <input checked="true" type="radio" name="sexo" id="sexoam" value="false">
-                                                                <label for="sexoam">
-                                                                    Mujer
-                                                                </label>
-                                                            </div>
+                                                            <c:choose>
+                                                                <c:when test="${requestScope.alumno.sexo}">
+                                                                    <div class="radio p-0">
+                                                                        <input checked="true" type="radio" name="sexo" id="sexoah" value="true">
+                                                                        <label for="sexoah">
+                                                                            Hombre
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="radio p-0">
+                                                                        <input   type="radio" name="sexo" id="sexoam" value="false">
+                                                                        <label for="sexoam">
+                                                                            Mujer
+                                                                        </label>
+                                                                    </div>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <div class="radio p-0">
+                                                                        <input  type="radio" name="sexo" id="sexoah" value="true">
+                                                                        <label for="sexoah">
+                                                                            Hombre
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="radio p-0">
+                                                                        <input checked="true"  type="radio" name="sexo" id="sexoam" value="false">
+                                                                        <label for="sexoam">
+                                                                            Mujer
+                                                                        </label>
+                                                                    </div>
+                                                                </c:otherwise>
+                                                            </c:choose>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Calle del domicilio</label>
@@ -213,9 +229,6 @@
                     <div class="tab-pane" id="tab3">
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
-                                <div class="card-head">
-                                    <header>Reporte de actividades</header>
-                                </div>
                                 <div class="card-body " id="bar-parent2">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
@@ -230,7 +243,7 @@
                                                             <label >Seleccione el grado</label>
                                                             <select id="grado" class="custom-select">
                                                                 <c:forEach items="${requestScope.listgrado}" var="listgrado">
-                                                                    <option value="${listprograma.idtbgrado}" 
+                                                                    <option value="${listgrado.idtbgrado}" 
                                                                             <c:if test="${listgrado.idtbgrado == requestScope.alumno.rgrado}">
                                                                                 selected=""
                                                                             </c:if>
@@ -238,9 +251,9 @@
 
                                                                 </c:forEach>
                                                             </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label >Seleccione el grupo</label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label >Seleccione el grupo</label>
                                                             <select id="grupo" class="custom-select">
                                                                 <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
                                                                     <option value="${listgrupo.idtbgrupo}" 
@@ -251,62 +264,70 @@
 
                                                                 </c:forEach>
                                                             </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label >Seleccione el area</label>
-                                                                <select id="area" class="custom-select">
-                                                                    <option value="0">No aún</option>
-                                                                    <c:forEach items="${requestScope.listarea}" var="listarea">
-                                                                        <option value="${listarea.idtbarea}">${listarea.nombre}</option>
-                                                                    </c:forEach>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label >Seleccione capacitacion para el trabajo</label>
-                                                                <select id="cpt" class="custom-select">
-                                                                    <option value="0">No aún</option>
-                                                                    <c:forEach items="${requestScope.listcpt}" var="listcpt">
-                                                                        <option value="${listcpt.idtbcpt}">${listcpt.nombre}</option>
-                                                                    </c:forEach>
-                                                                </select>
-                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6 col-sm-6">
-                                                            <div class="form-group">
-                                                                <label>Plantel de procedencia</label>
-                                                                <input id="plantelproce" value="${requestScope.alumno.plantelproce}" type="text" class="form-control" placeholder="plantel procedencia">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Nivel cursado anteriormente</label>
-                                                                <input id="nivelanterior" value="${requestScope.alumno.nivelanterior}" type="number" class="form-control" placeholder="nivel anterior">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Grado cursado anteriormente</label>
-                                                                <input id="gradoanterior" value="${requestScope.alumno.gradoanterior}" type="number" class="form-control" placeholder="grado anterior">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label >Turno cursado anteriormente</label>
-                                                                <select id="turnoanterior" class="custom-select">
-                                                                    <option value="1" <c:if test="${requestScope.alumno.turnoanterior == 1}"> selected=""</c:if>>Matutino</option>
-                                                                    <option value="2" <c:if test="${requestScope.alumno.turnoanterior == 2}"> selected=""</c:if>>Vespertino</option>
+                                                        <div class="form-group">
+                                                            <label >Seleccione el area</label>
+                                                            <select id="area" class="custom-select">
+                                                                <option value="0">No aún</option>
+                                                                <c:forEach items="${requestScope.listarea}" var="listarea">
+                                                                    <option value="${listarea.idtbarea}" 
+                                                                            <c:if test="${listarea.idtbarea == requestScope.alumno.rarea}">
+                                                                                selected=""
+                                                                            </c:if>
+                                                                            >${listarea.nombre} </option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label >Seleccione capacitacion para el trabajo</label>
+                                                            <select id="cpt" class="custom-select">
+                                                                <option value="0">No aún</option>
+                                                                <c:forEach items="${requestScope.listcpt}" var="listcpt">
+                                                                   <option value="${listcpt.idtbcpt}" 
+                                                                            <c:if test="${listcpt.idtbcpt == requestScope.alumno.rcpt}">
+                                                                                selected=""
+                                                                            </c:if>
+                                                                            >${listcpt.nombre} </option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Plantel de procedencia</label>
+                                                            <input id="plantelproce" value="${requestScope.alumno.plantelproce}" type="text" class="form-control" placeholder="plantel procedencia">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Nivel cursado anteriormente</label>
+                                                            <input id="nivelanterior" value="${requestScope.alumno.nivelanterior}" type="number" class="form-control" placeholder="nivel anterior">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Grado cursado anteriormente</label>
+                                                            <input id="gradoanterior" value="${requestScope.alumno.gradoanterior}" type="number" class="form-control" placeholder="grado anterior">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label >Turno cursado anteriormente</label>
+                                                            <select id="turnoanterior" class="custom-select">
+                                                                <option value="1" <c:if test="${requestScope.alumno.turnoanterior == 1}"> selected=""</c:if>>Matutino</option>
+                                                                <option value="2" <c:if test="${requestScope.alumno.turnoanterior == 2}"> selected=""</c:if>>Vespertino</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Municipio del plantel anterior</label>
                                                                 <input id="plantelanterior" value="${requestScope.alumno.municipioante}" type="text" class="form-control" placeholder="plantel anterior">
-                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <button id="guardaalumno" type="button" class="btn btn-terra">Guardar</button>
-                                                </form>
-                                            </div>
+                                                </div>
+                                                <button id="guardaalumno" type="button" class="btn btn-terra">Guardar</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div> 
-                    </div>
+                        </div>
+                    </div> 
                 </div>
-            </div>           
-        </div>
+            </div>
+        </div>           
     </div>
+</div>

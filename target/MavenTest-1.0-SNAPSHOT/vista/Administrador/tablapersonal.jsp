@@ -21,13 +21,13 @@
 </div>
 <div class="row">
     <div class="row p-b-20">
-                    <div class="col-md-6 col-sm-6 col-6">
-                        <div class="btn-group">
-                            <button id="btnaregarP"type="button" class="btn btn-terra">Agregar Personal</button> <br>
-                        </div>
-                    </div>
-                </div>
-        
+        <div class="col-md-6 col-sm-6 col-6">
+            <div class="btn-group">
+                <button id="btnaregarP"type="button" class="btn btn-terra">Agregar Personal</button> <br>
+            </div>
+        </div>
+    </div>
+
     <table id="tablapersonal" class="table table-bordered">
         <thead class="thead-light">
             <tr>
@@ -42,15 +42,40 @@
         </thead>
         <tbody>
             <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
-            <tr>
-                <th class="center" style="display: none"> ${listpersonal.idtbpersonal}</th>
-                <th class="center">${listpersonal.nombre}</th>
-                <td class="center">${listpersonal.apellidop}</td>
-                <td class="center">${listpersonal.apellidom}</td>
-                <td class="center">${listpersonal.correo}</td>
-                <td class="center">${listpersonal.puesto}</td>
-                <td class="center">Botones de acciones</td>
-            </tr>
+                <tr>
+                    <td class="center" style="display: none">${listpersonal.idtbpersonal}</td>
+                    <td class="center">${listpersonal.nombre}</td>
+                    <td class="center">${listpersonal.apellidop}</td>
+                    <td class="center">${listpersonal.apellidom}</td>
+                    <td class="center">${listpersonal.correo}</td>
+                    <td class="center">${listpersonal.puesto}</td>
+                    <td class="center">
+                        <div class="btn-group">
+                            <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-left" role="menu">
+                                <li>
+                                    <a href="javascript:;" class="editarpe">
+                                        <i id="editarpe" class="material-icons">create</i> Editar </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" class="aliminarpe">
+                                        <i id="aliminarpe" class="material-icons">delete</i> Eliminar </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-user"></i> otra opcion</a>
+                                </li>
+                                <li class="divider"> </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-flag"></i> otra opcion </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
             </c:forEach>
         </tbody>
     </table>

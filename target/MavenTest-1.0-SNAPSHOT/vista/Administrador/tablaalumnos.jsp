@@ -60,12 +60,12 @@
                             </button>
                             <ul class="dropdown-menu pull-left" role="menu">
                                 <li>
-                                    <a href="javascript:;" class="editar">
-                                        <i id="editar" class="material-icons">create</i> Editar </a>
+                                    <a href="javascript:;" class="editaralu">
+                                        <i id="editaralu" class="material-icons">create</i> Editar </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">
-                                        <i class="icon-tag"></i> Eliminar </a>
+                                    <a href="javascript:;" class="aliminaralu">
+                                        <i id="eliminaralu" class="material-icons">delete</i> Eliminar </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;">

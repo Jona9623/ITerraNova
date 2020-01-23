@@ -34,6 +34,9 @@
         <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/theme-color.css" rel="stylesheet" type="text/css" />
 
+        <!-- Sweet alert-->
+        <link rel="stylesheet" href="assets/plugins/sweet-alert/sweetalert.min.css">
+
         <!-- Data Tables -->
         <link href="assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
 
@@ -170,7 +173,27 @@
                 <div class="page-content-wrapper">
                     <div class="page-content">
                         <div id="content">
-                            <img src="assets/img/Iterra-1.jpg" class="img-fluid img-responsive" style="width:100%" alt="Responsive image">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100" src="..." alt="First slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="..." alt="Second slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="..." alt="Third slide">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
                         </div>
                     </div></div>
                 <!-- end page content -->
@@ -196,6 +219,10 @@
         <script src="assets/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js" ></script>
         <script src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"  charset="UTF-8"></script>
         <script src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker-init.js"  charset="UTF-8"></script>
+
+        <!--Alerts-->
+        <script src="assets/plugins/sweet-alert/sweetalert.min.js" ></script>
+        <script src="assets/js/pages/sweet-alert/sweet-alert-data.js" ></script>
 
         <script src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"  charset="UTF-8"></script>
         <script src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker-init.js"  charset="UTF-8"></script>

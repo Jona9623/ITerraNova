@@ -11,8 +11,14 @@ r_grado,r_grupo,r_area,r_cpt,plantelprocedencia,nivelanterior,gradoanterior,turn
 6,2,'Queretaro',1,1),('zS13563434','Melissa Guadalupe','Perez','Cabrera','1994-12-12','MPCG961212HVZRPN02','Veracruz','Veracruz','Mexicano',2,
 'Av jamapa oriente',3,'Jamapa',94260,'018001234','2292354612','melissa.perez@hotmail.es','Alto',1,1,2,1,'Conalep',2,
 6,1,'Veracruz',3,1);
-select * from tb_personal;
+select * from tb_alumnos where idTb_Alumnos = 10;
 
-select tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from
+select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from
 (((tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado) inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo) inner join
 tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor) where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = 1;
+
+UPDATE `terranova`.`tb_alumnos` SET `matricula` = 'e', `nombre` = 'e', `apellidopaterno` = 'e', `apellidomaterno` = 'e', `fechanacimiento` = '1996-12-24', `curp` = 'e', 
+`municipionacimiento` = 'e', `estadonacimiento` = 'e', `nacionalidad` = 'e', `sexo` = '1', `calledomicilio` = 'ere', `numerodomicilio` = '2', `coloniadomicilio` = 'rgr',
+ `codigopostal` = '5645', `telefonocasa` = '54645', `celularalumno` = '4546', `correoalumno` = 'grtgr@refg.rge', `nivelcursa` = 'regrg', `r_grado` = '2', `r_grupo` = '3',
+ `r_area` = '1', `r_cpt` = '1', `plantelprocedencia` = 'jtyujty', `nivelanterior` = '5', `gradoanterior` = '2', `turnoanterior` = '1', `municipioanterior` = 'sfs', `r_tutor` = '1' 
+ WHERE (`idTb_Alumnos` = '10');

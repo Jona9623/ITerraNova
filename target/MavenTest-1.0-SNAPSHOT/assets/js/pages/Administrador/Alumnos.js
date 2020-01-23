@@ -10,10 +10,26 @@ var Adminalumno = (function () {
                 $('#btnagregaA').on('click', function () {
                     Adminalumno.agregaAlumno();
                 }),
-                $('.editar').on('click', function () {
+                $('.editaralu').on('click', function () {
                     idalumno = $(this).parents("tr").find("td").eq(0).html();
                     idtutor = $(this).parents("tr").find("td").eq(1).html();
                     Adminalumno.editarAlumno(idalumno,idtutor);
+                }),
+                $(".aliminaralu").on('click',function(){
+                    idalumno = $(this).parents("tr").find("td").eq(0).html();
+                    swal({
+                        title: "Estas seguro?",
+                        text: "Se eliminara el registro",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Confirmar",
+                        closeOnConfirm: false
+                    }, function () {
+                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");                      
+                        Adminalumno.eliminarAlumno(idalumno);
+                    });
+                    
                 });
             });
         },
@@ -27,12 +43,6 @@ var Adminalumno = (function () {
                 });
         },
         editarAlumno: function(idalumno, idtutor){
-            console.log(idalumno);
-            console.log(idtutor);
-            idalumno.trim();
-            idtutor.trim();
-            console.log(idalumno);
-            console.log(idtutor);
             $.get("SAdminalumno",{
                 ACCION: "editarAlumno",
                 IDALUMNO: idalumno,
@@ -40,6 +50,14 @@ var Adminalumno = (function () {
             }).then(function(){
                Adminalumno.formularios(arguments[0]); 
             });
+        },
+        eliminarAlumno: function(idalumno){
+          $.get("SAdminalumno",{
+              ACCION: "eliminarAlumno",
+              IDALUMNO: idalumno
+          }).then(function (){
+              Adminalumno.tablaAlumnos();
+          })  
         },
         agregaAlumno: function () {
             $.get("SAdminalumno", {
@@ -53,7 +71,7 @@ var Adminalumno = (function () {
                 ACCION: accion,
                 TUTOR: JSON.stringify(objeto)
             }).then(function () {
-                alert('Tutor guardado');
+                swal("Hecho!", "Datos guardados correctamente", "success");
             });
         },
         guardaAlumno: function (objeto, accion) {
@@ -61,7 +79,7 @@ var Adminalumno = (function () {
                 ACCION: accion,
                 ALUMNO: JSON.stringify(objeto)
             }).then(function () {
-                alert('Alumno guardado');
+                swal("Hecho!", "Datos guardados correctamente", "success");
                 Adminalumno.tablaAlumnos();
             });
         },

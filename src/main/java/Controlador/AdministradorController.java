@@ -46,14 +46,40 @@ public class AdministradorController {
         ConsultasAdministrador consulta = new  ConsultasAdministrador();
         return consulta.datosAlumno(idalumno);
     }
+    
+    public void actualizaTutor(TbTutor tutor) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.actualizaTutor(tutor);
+    }
+    
     public void actualizaAlumno(TbAlumnos alumno) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.actualizaAlumno(alumno);
     }
     
+    public void eliminaAlumno(int id) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.eliminaAlumno(id);
+    }
+    
     public TbTutor datosTutor(int idtutor) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.datosTutor(idtutor);
+    }
+    
+    public TbPersonal datosPeronal(int idpersonal) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.datosPersonal(idpersonal);
+    }
+    
+    public void actualizaPersonal(TbPersonal personal) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.actualizaPersonal(personal);
+    }
+    
+    public void eliminaPersonal(int id) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.eliminaPersonal(id);
     }
     
     public void guardaPersonal(TbPersonal personal) {
@@ -86,8 +112,5 @@ public class AdministradorController {
         return consulta.getPuesto();
     }
 
-    public void actualizaTutor(TbTutor tutor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

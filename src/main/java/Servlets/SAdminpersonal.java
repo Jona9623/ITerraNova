@@ -43,9 +43,19 @@ public class SAdminpersonal extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String accion = request.getParameter("ACCION");
         switch (accion) {
-            case "MuestraAgregaPersonal": MuestraAgregaPersonal(request, response); break;
-            case "AgregaPersonal": AgregaPersonal(request, response); break;
-            case "GuardaPersonal":GuardaPersonal(request, response); break;
+            case "MuestraAgregaPersonal":
+                MuestraAgregaPersonal(request, response);
+                break;
+            case "AgregaPersonal":
+                AgregaPersonal(request, response);
+                break;
+            case "GuardaPersonal":
+                GuardaPersonal(request, response);
+                break;
+            case "editarPersonal":
+                editarPersonal(request, response);
+                break;
+            case "eliminarPersonal": eliminarPersonal (request, response); break;    
         }
     }
 
@@ -90,12 +100,37 @@ public class SAdminpersonal extends HttpServlet {
 
     private void MuestraAgregaPersonal(HttpServletRequest request, HttpServletResponse response) {
         adminC = new AdministradorController();
-        List <TbPersonal> listpersonal = new ArrayList<>();
+        List<TbPersonal> listpersonal = new ArrayList<>();
         try {
             listpersonal = adminC.getPersonal();
             request.setAttribute("listpersonal", listpersonal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablapersonal.jsp");
             rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void editarPersonal(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        TbPersonal personal = new TbPersonal();
+        List<CtPuesto> listpuesto = new ArrayList<>();
+        try {
+            listpuesto = adminC.getPuesto();
+            request.setAttribute("listpuesto", listpuesto);
+            personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("IDPERSONAL")));
+            request.setAttribute("personal", personal);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formpersonal.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    private void eliminarPersonal(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        try {
+           adminC.eliminaPersonal(Integer.parseInt(request.getParameter("IDPERSONAL"))); 
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -120,7 +155,12 @@ public class SAdminpersonal extends HttpServlet {
         TbPersonal personal = new TbPersonal();
         try {
             personal = mapper.readValue(objectJson, TbPersonal.class);
-            adminC.guardaPersonal(personal);
+            if (personal.getIdtbpersonal() > 0) {
+                adminC.actualizaPersonal(personal);
+            } else {
+                adminC.guardaPersonal(personal);
+            }
+
         } catch (Exception e) {
             System.out.println(e);
         }

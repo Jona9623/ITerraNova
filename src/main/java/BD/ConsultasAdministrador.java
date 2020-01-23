@@ -230,7 +230,7 @@ public class ConsultasAdministrador {
             }
         }
     }
-    
+
     public TbAlumnos datosAlumno(int id) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -261,6 +261,10 @@ public class ConsultasAdministrador {
                 alumno.setCelular(rs.getString("celularalumno"));
                 alumno.setCorreo(rs.getString("correoalumno"));
                 alumno.setNivelcursa(rs.getString("nivelcursa"));
+                alumno.setRgrado(rs.getInt("r_grado"));
+                alumno.setRgrupo(rs.getInt("r_grupo"));
+                alumno.setRarea(rs.getInt("r_area"));
+                alumno.setRcpt(rs.getInt("r_cpt"));
                 alumno.setPlantelproce(rs.getString("plantelprocedencia"));
                 alumno.setNivelanterior(rs.getInt("nivelanterior"));
                 alumno.setGradoanterior(rs.getInt("gradoanterior"));
@@ -286,6 +290,7 @@ public class ConsultasAdministrador {
         }
         return alumno;
     }
+
     public TbTutor datosTutor(int id) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -300,7 +305,6 @@ public class ConsultasAdministrador {
                 tutor.setIdtbtutor(rs.getInt("idTb_Tutor"));
                 tutor.setNombre(rs.getString("nombre"));
                 tutor.setApellidop(rs.getString("apellidopaterno"));
-                tutor.setApellidom(rs.getString("apellidomaterno"));
                 tutor.setApellidom(rs.getString("apellidomaterno"));
                 tutor.setOcupacion(rs.getString("ocupacion"));
                 tutor.setParentesco(rs.getString("parentesco"));
@@ -330,6 +334,269 @@ public class ConsultasAdministrador {
             }
         }
         return tutor;
+    }
+
+    public TbPersonal datosPersonal(int idpersonal) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        TbPersonal personal = new TbPersonal();
+        try {
+            String consulta = "select * from tb_personal where idTb_Personal = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idpersonal);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                personal.setIdtbpersonal(rs.getInt("idTb_Personal"));
+                personal.setNombre(rs.getString("nombre"));
+                personal.setApellidop(rs.getString("apellidopaterno"));
+                personal.setApellidom(rs.getString("apellidomaterno"));
+                personal.setFechanacimiento(rs.getString("fechanacimiento"));
+                personal.setCurp(rs.getString("curp"));
+                personal.setMunicipionac(rs.getString("municipionacimiento"));
+                personal.setEstadonac(rs.getString("estadonacimiento"));
+                personal.setNacionalidad(rs.getString("nacionalidad"));
+                personal.setSexo(rs.getBoolean("sexo"));
+                personal.setCalledom(rs.getString("calledomicilio"));
+                personal.setNumerodom(rs.getInt("numerodomicilio"));
+                personal.setColoniadom(rs.getString("coloniadomicilio"));
+                personal.setCodigopostal(rs.getInt("codigopostal"));
+                personal.setTelefonocasa(rs.getString("telefonocasa"));
+                personal.setCelular(rs.getString("celular"));
+                personal.setCorreo(rs.getString("correo"));
+                personal.setNss(rs.getString("nss"));
+                personal.setRfc(rs.getString("rfc"));
+                personal.setNivelestudios(rs.getString("nivelmaxestudios"));
+                personal.setLicenciatura(rs.getString("licenciatura"));
+                personal.setMaestria(rs.getString("maestria"));
+                personal.setDoctorado(rs.getString("doctorado"));
+                personal.setRpuesto(rs.getInt("r_puesto"));
+            }
+        } catch (Exception e) {
+            System.out.print("Error" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return personal;
+    }
+
+    public void actualizaAlumno(TbAlumnos alumno) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            String consulta = "UPDATE `terranova`.`tb_alumnos` SET `matricula` = ?, `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `fechanacimiento` = ?, `curp` = ?, \n"
+                    + "`municipionacimiento` = ?, `estadonacimiento` = ?, `nacionalidad` = ?, `sexo` = ?, `calledomicilio` = ?, `numerodomicilio` = ?, `coloniadomicilio` = ?,\n"
+                    + " `codigopostal` = ?, `telefonocasa` = ?, `celularalumno` = ?, `correoalumno` = ?, `nivelcursa` = ?, `r_grado` = ?, `r_grupo` = ?,\n"
+                    + " `r_area` = ?, `r_cpt` = ?, `plantelprocedencia` = ?, `nivelanterior` = ?, `gradoanterior` = ?, `turnoanterior` = ?, `municipioanterior` = ? \n"
+                    + " WHERE (`idTb_Alumnos` = ?)";
+            pst = con.prepareStatement(consulta);
+            pst.setString(1, alumno.getMatricula());
+            pst.setString(2, alumno.getNombre());
+            pst.setString(3, alumno.getApellidop());
+            pst.setString(4, alumno.getApellidom());
+            pst.setString(5, alumno.getFechanacimiento());
+            pst.setString(6, alumno.getCurp());
+            pst.setString(7, alumno.getMunicipiona());
+            pst.setString(8, alumno.getEstadona());
+            pst.setString(9, alumno.getNacionalidad());
+            pst.setBoolean(10, alumno.getSexo());
+            pst.setString(11, alumno.getCalledom());
+            pst.setInt(12, alumno.getNumerodom());
+            pst.setString(13, alumno.getColoniadom());
+            pst.setInt(14, alumno.getCodigopostal());
+            pst.setString(15, alumno.getTelefonocasa());
+            pst.setString(16, alumno.getCelular());
+            pst.setString(17, alumno.getCorreo());
+            pst.setString(18, alumno.getNivelcursa());
+            pst.setInt(19, alumno.getRgrado());
+            pst.setInt(20, alumno.getRgrupo());
+            pst.setInt(21, alumno.getRarea());
+            pst.setInt(22, alumno.getRcpt());
+            pst.setString(23, alumno.getPlantelproce());
+            pst.setInt(24, alumno.getNivelanterior());
+            pst.setInt(25, alumno.getGradoanterior());
+            pst.setInt(26, alumno.getTurnoanterior());
+            pst.setString(27, alumno.getMunicipioante());
+            pst.setInt(28, alumno.getIdtbalumnos());
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            }
+        } catch (Exception e) {
+            System.out.print("Error" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.print("Error" + e);
+            }
+        }
+    }
+
+    public void actualizaTutor(TbTutor tutor) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            String consulta = "UPDATE `terranova`.`tb_tutor` SET `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `ocupacion` = ?, `parentesco` = ?,"
+                    + " `calledomicilio` = ?, `numerodomicilio` = ?,\n"
+                    + " `coloniadomicilio` = ?, `codigopostal` = ?, `telefonocasa` = ?, `celular` = ?, `correo` = ? WHERE (`idTb_Tutor` = ?)";
+            pst = con.prepareStatement(consulta);
+            pst.setString(1, tutor.getNombre());
+            pst.setString(2, tutor.getApellidop());
+            pst.setString(3, tutor.getApellidom());
+            pst.setString(4, tutor.getOcupacion());
+            pst.setString(5, tutor.getParentesco());
+            pst.setString(6, tutor.getCalledom());
+            pst.setInt(7, tutor.getNumerodom());
+            pst.setString(8, tutor.getColoniadom());
+            pst.setInt(9, tutor.getCodigopostal());
+            pst.setString(10, tutor.getTelefonocasa());
+            pst.setString(11, tutor.getCelular());
+            pst.setString(12, tutor.getCorreo());
+            pst.setInt(13, tutor.getIdtbtutor());
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            }
+        } catch (Exception e) {
+            System.out.print("Error" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.print("Error" + e);
+            }
+        }
+    }
+
+    public void actualizaPersonal(TbPersonal personal) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            String consulta = "UPDATE `terranova`.`tb_personal` SET `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `fechanacimiento` = ?, `curp` = ?, `municipionacimiento` = ?,\n"
+                    + " `estadonacimiento` = ?, `nacionalidad` = ?, `sexo` = ?, `calledomicilio` = ?, `numerodomicilio` = ?, `coloniadomicilio` = ?, `codigopostal` = ?, `telefonocasa` = ?, \n"
+                    + " `celular` = ?, `correo` = ?, `nss` = ?, `rfc` = ?, `nivelmaxestudios` = ?, `licenciatura` = ?, `maestria` = ?, `doctorado` = ?, `r_puesto` = ? \n"
+                    + " WHERE (`idTb_Personal` = ?)";
+            pst = con.prepareStatement(consulta);
+            pst.setString(1, personal.getNombre());
+            pst.setString(2, personal.getApellidop());
+            pst.setString(3, personal.getApellidom());
+            pst.setString(4, personal.getFechanacimiento());
+            pst.setString(5, personal.getCurp());
+            pst.setString(6, personal.getMunicipionac());
+            pst.setString(7, personal.getEstadonac());
+            pst.setString(8, personal.getNacionalidad());
+            pst.setBoolean(9, personal.getSexo());
+            pst.setString(10, personal.getCalledom());
+            pst.setInt(11, personal.getNumerodom());
+            pst.setString(12, personal.getColoniadom());
+            pst.setInt(13, personal.getCodigopostal());
+            pst.setString(14, personal.getTelefonocasa());
+            pst.setString(15, personal.getCelular());
+            pst.setString(16, personal.getCorreo());
+            pst.setString(17, personal.getNss());
+            pst.setString(18, personal.getRfc());
+            pst.setString(19, personal.getNivelestudios());
+            pst.setString(20, personal.getLicenciatura());
+            pst.setString(21, personal.getMaestria());
+            pst.setString(22, personal.getDoctorado());
+            pst.setInt(23, personal.getRpuesto());
+            pst.setInt(24, personal.getIdtbpersonal());
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            }
+        } catch (Exception e) {
+            System.out.print("Error" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.print("Error" + e);
+            }
+        }
+    }
+
+    public void eliminaAlumno(int id) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "update `terranova`.`tb_alumnos` set `status` = 2 where `idTb_Alumnos` = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, id);
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al eliminar");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+    
+    public void eliminaPersonal(int id) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "update `terranova`.`tb_personal` set `status` = 2 where `idTb_Personal` = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, id);
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al eliminar");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
     public void guardaPersonal(TbPersonal personal) {
@@ -582,10 +849,6 @@ public class ConsultasAdministrador {
             }
         }
         return listpuesto;
-    }
-
-    public void actualizaAlumno(TbAlumnos alumno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

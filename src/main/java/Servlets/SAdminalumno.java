@@ -64,6 +64,9 @@ public class SAdminalumno extends HttpServlet {
             case "GuardaAlumno":
                 GuardaAlumno(request, response);
                 break;
+            case "eliminarAlumno":
+                eliminarAlumno(request, response);
+                break;
         }
     }
 
@@ -142,6 +145,15 @@ public class SAdminalumno extends HttpServlet {
             request.setAttribute("listcpt", listcpt);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formalumno.jsp");
             rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    private void eliminarAlumno(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        try {
+           adminC.eliminaAlumno(Integer.parseInt(request.getParameter("IDALUMNO"))); 
         } catch (Exception e) {
             System.out.println(e);
         }

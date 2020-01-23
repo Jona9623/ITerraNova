@@ -8,3 +8,6 @@ coloniadomicilio,codigopostal,telefonocasa,celular,correo,status) values ('Dolor
 'Venustiano Carranza',12,'Caranza',98960,'01823612','2298152681','jorge.carrillo@gmail.com',1);
 select * from tb_tutor;
 SELECT idTb_Tutor FROM tb_tutor ORDER BY idTb_Tutor DESC LIMIT 1;
+
+UPDATE `terranova`.`tb_tutor` SET `nombre` = 'fg', `apellidopaterno` = 'g', `apellidomaterno` = 'g', `ocupacion` = 'g', `parentesco` = 'g', `calledomicilio` = 'g', `numerodomicilio` = '0',
+ `coloniadomicilio` = 'g', `codigopostal` = '1', `telefonocasa` = '1', `celular` = '1', `correo` = 'fsdf.dds' WHERE (`idTb_Tutor` = '26');

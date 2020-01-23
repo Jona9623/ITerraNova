@@ -43,94 +43,111 @@
                                             <div class="">
                                                 <form>
                                                     <div class="card-body row">
-                                                        <div class="col-md-6 col-sm-6">
+                                                        <div class="col-md-6 col-sm-6" idDatos="${requestScope.TbPersonal.idtbpersonal}">
+                                                            <input id="idpersonal" type="hidden" value="${requestScope.personal.idtbpersonal}">
                                                             <div class="form-group">
                                                                 <label>Nombre(s)</label>
-                                                                <input id="nombrep" type="text" class="form-control" placeholder="nombre">
+                                                                <input value="${requestScope.personal.nombre}" id="nombrep" type="text" class="form-control" placeholder="nombre">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Apellido Paterno</label>
-                                                                <input  id="apellidopp" type="text" class="form-control" placeholder="apellido paterno">
+                                                                <input value="${requestScope.personal.apellidop}"  id="apellidopp" type="text" class="form-control" placeholder="apellido paterno">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Apellido Materno</label>
-                                                                <input id="apellidomp" type="text" class="form-control" placeholder="apellido materno">
+                                                                <input value="${requestScope.personal.apellidom}" id="apellidomp" type="text" class="form-control" placeholder="apellido materno">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>CURP</label>
-                                                                <input id="curpp" type="text" class="form-control" placeholder="curp">
+                                                                <input value="${requestScope.personal.curp}" id="curpp" type="text" class="form-control" placeholder="curp">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Fecha de nacimiento</label>
-                                                                <input id="fechanap" type="date" class="form-control" placeholder="fecha nacimiento">
+                                                                <input value="${requestScope.personal.fechanacimiento}" id="fechanap" type="date" class="form-control" placeholder="fecha nacimiento">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Municipio de nacimiento</label>
-                                                                <input id="municipionacp" type="text" class="form-control" placeholder="municipio ncimiento">
+                                                                <input value="${requestScope.personal.municipionac}" id="municipionacp" type="text" class="form-control" placeholder="municipio ncimiento">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Estado de nacimiento</label>
-                                                                <input id="estadonacp" type="text" class="form-control" placeholder="estado nacimiento ">
+                                                                <input value="${requestScope.personal.estadonac}" id="estadonacp" type="text" class="form-control" placeholder="estado nacimiento ">
                                                             </div>
                                                             <label>Sexo</label>
                                                             <div class="form-group">
-                                                                <div class="radio p-0">
-                                                                    <input checked="true" type="radio" name="sexop" id="sexoah" value="true">
-                                                                    <label for="sexoah">
-                                                                        Hombre
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="radio p-0">
-                                                                    <input checked="true" type="radio" name="sexop" id="sexoam" value="false">
-                                                                    <label for="sexoam">
-                                                                        Mujer
-                                                                    </label>
-                                                                </div>
+                                                                <c:choose>
+                                                                    <c:when test="${requestScope.personal.sexo}">
+                                                                        <div class="radio p-0">
+                                                                            <input checked="true" type="radio" name="sexop" id="sexoah" value="true">
+                                                                            <label for="sexoah">
+                                                                                Hombre
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="radio p-0">
+                                                                            <input   type="radio" name="sexop" id="sexoam" value="false">
+                                                                            <label for="sexoam">
+                                                                                Mujer
+                                                                            </label>
+                                                                        </div>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <div class="radio p-0">
+                                                                            <input  type="radio" name="sexop" id="sexoah" value="true">
+                                                                            <label for="sexoah">
+                                                                                Hombre
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="radio p-0">
+                                                                            <input checked="true"  type="radio" name="sexop" id="sexoam" value="false">
+                                                                            <label for="sexoam">
+                                                                                Mujer
+                                                                            </label>
+                                                                        </div>
+                                                                    </c:otherwise>
+                                                                </c:choose>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Correo</label>
-                                                                <input id="correop" type="email" class="form-control" placeholder="codigo postal">
+                                                                <input value="${requestScope.personal.correo}" id="correop" type="email" class="form-control" placeholder="codigo postal">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group">
                                                                 <label>Teleono de casa</label>
-                                                                <input id="telcasatp" type="number" class="form-control" placeholder="telefono casa">
+                                                                <input value="${requestScope.personal.telefonocasa}" id="telcasatp" type="number" class="form-control" placeholder="telefono casa">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Celular</label>
-                                                                <input id="celularp" type="number" class="form-control" placeholder="celular">
+                                                                <input value="${requestScope.personal.celular}" id="celularp" type="number" class="form-control" placeholder="celular">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Nacionalidad</label>
-                                                                <input id="nacionalidadp" maxlength="10" type="text" class="form-control" placeholder="nacionalidad">
+                                                                <input value="${requestScope.personal.nacionalidad}" id="nacionalidadp" maxlength="10" type="text" class="form-control" placeholder="nacionalidad">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Calle del domicilio</label>
-                                                                <input id="calledomp" type="text" class="form-control" placeholder="calle">
+                                                                <input value="${requestScope.personal.calledom}" id="calledomp" type="text" class="form-control" placeholder="calle">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Número del domicilio</label>
-                                                                <input id="numerodomp" type="number" class="form-control" placeholder="numero">
+                                                                <input value="${requestScope.personal.numerodom}" id="numerodomp" type="number" class="form-control" placeholder="numero">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Colonia del domicilio</label>
-                                                                <input id="coloniadomp" type="text" class="form-control" placeholder="colonia">
+                                                                <input value="${requestScope.personal.coloniadom}" id="coloniadomp" type="text" class="form-control" placeholder="colonia">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Código postal</label>
-                                                                <input id="codigopostalp" type="number" class="form-control" placeholder="codigo postal">
+                                                                <input value="${requestScope.personal.codigopostal}" id="codigopostalp" type="number" class="form-control" placeholder="codigo postal">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Número de seguro social</label>
-                                                                <input id="nss" type="text" class="form-control" placeholder="seuro social">
+                                                                <input value="${requestScope.personal.nss}" id="nss" type="text" class="form-control" placeholder="seuro social">
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label>RFC</label>
-                                                                <input id="rfc" type="text" class="form-control" placeholder="rfc">
+                                                                <input value="${requestScope.personal.rfc}" id="rfc" type="text" class="form-control" placeholder="rfc">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -154,25 +171,29 @@
                                                     <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
                                                             <label>Nivel máximo de estudios</label>
-                                                            <input id="nivelmax" type="text" class="form-control" placeholder="nivel de estudios">
+                                                            <input value="${requestScope.personal.nivelestudios}" id="nivelmax" type="text" class="form-control" placeholder="nivel de estudios">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Licenciatura (si aplica)</label>
-                                                            <input  id="licenciatura" type="text" class="form-control" placeholder="licenciatura">
+                                                            <input value="${requestScope.personal.licenciatura}"  id="licenciatura" type="text" class="form-control" placeholder="licenciatura">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Maestria (si aplica)</label>
-                                                            <input id="maestria" type="text" class="form-control" placeholder="maestria">
+                                                            <input value="${requestScope.personal.maestria}" id="maestria" type="text" class="form-control" placeholder="maestria">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Doctorado (si aplica)</label>
-                                                            <input id="doctorado" type="text" class="form-control" placeholder="doctorado">
+                                                            <input value="${requestScope.personal.doctorado}" id="doctorado" type="text" class="form-control" placeholder="doctorado">
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione un puesto</label>
                                                             <select id="puesto" class="custom-select">
                                                                 <c:forEach items="${requestScope.listpuesto}" var="listpuesto">
-                                                                    <option value="${listpuesto.idtbpuesto}">${listpuesto.nombre}</option>
+                                                                    <option value="${listpuesto.idtbpuesto}" 
+                                                                            <c:if test="${listpuesto.idtbpuesto == requestScope.personal.rpuesto}">
+                                                                                selected=""
+                                                                            </c:if>
+                                                                            >${listpuesto.nombre} </option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
