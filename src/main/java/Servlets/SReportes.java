@@ -5,8 +5,20 @@
  */
 package Servlets;
 
+import Controlador.AdministradorController;
+import Controlador.AlumnosController;
+import Modelos.CtGrado;
+import Modelos.CtGrupo;
+import Modelos.CtIncidente;
+import Modelos.CtPeriodoEscolar;
+import Modelos.TbAlumnos;
+import Modelos.Alumno;
+import Modelos.TbMateria;
+import Modelos.TbPersonal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +30,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author complx
  */
 public class SReportes extends HttpServlet {
-
+    AlumnosController alumnoC;
+    AdministradorController adminC;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,9 +47,8 @@ public class SReportes extends HttpServlet {
         String accion = request.getParameter("ACCION");
         switch(accion){
             case "Rdisciplinar": ReporteDisciplinar (request,response); break;
-            case "AgregaFalta": AgregaFalta (request,response); break;
             case "Racademico": ReporteAcademico (request,response); break;
-            case "AgregaComportamiento": AgregaComportamiento (request, response); break;
+            case "alumnoGradoGrupo": alumnoGradoGrupo (request,response); break;
             
         }
     }
@@ -81,35 +93,72 @@ public class SReportes extends HttpServlet {
     }// </editor-fold>
 
     private void ReporteDisciplinar(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        adminC = new AdministradorController();
+        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List <CtGrado> listgrado = new ArrayList<>();
+        List <CtGrupo> listgrupo = new ArrayList<>();
+        List <Alumno> listalumno = new ArrayList<>();
+        List <TbPersonal> listpersonal = new ArrayList<>();
+        List <TbMateria> listmateria = new ArrayList<>();
+        List <CtIncidente> listincidente = new ArrayList<>();
         try {
+            listperiodo = alumnoC.getPeriodos();
+            request.setAttribute("listperiodo", listperiodo);
+            listgrado = adminC.getGrado();
+            request.setAttribute("listgrado", listgrado);
+            listgrupo = adminC.getGrupo();
+            request.setAttribute("listgrupo", listgrupo);
+            listpersonal = adminC.getPersonal();
+            request.setAttribute("listpersonal", listpersonal);
+            /*listalumno = adminC.getAlumnos();
+            request.setAttribute("listalumno", listalumno);*/
+            listmateria = alumnoC.getMaterias();
+            request.setAttribute("listmateria", listmateria);
+            listincidente = alumnoC.getIncidentes();
+            request.setAttribute("listincidente", listincidente);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/reportedisciplinar.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             System.out.print(e);
         }
     }
-
-    private void AgregaFalta(HttpServletRequest request, HttpServletResponse response) {
+    
+    private void alumnoGradoGrupo(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        adminC = new AdministradorController();
+        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List <CtGrado> listgrado = new ArrayList<>();
+        List <CtGrupo> listgrupo = new ArrayList<>();
+        List <Alumno> listalumno = new ArrayList<>();
+        List <TbPersonal> listpersonal = new ArrayList<>();
+        List <TbMateria> listmateria = new ArrayList<>();
+        List <CtIncidente> listincidente = new ArrayList<>();
         try {
-            RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/faltareportedisc.jsp");
+            listperiodo = alumnoC.getPeriodos();
+            request.setAttribute("listperiodo", listperiodo);
+            listgrado = adminC.getGrado();
+            request.setAttribute("listgrado", listgrado);
+            listgrupo = adminC.getGrupo();
+            request.setAttribute("listgrupo", listgrupo);
+            listpersonal = adminC.getPersonal();
+            request.setAttribute("listpersonal", listpersonal);
+            listalumno = alumnoC.getAlumnos(Integer.parseInt(request.getParameter("GRADO")),Integer.parseInt(request.getParameter("GRUPO")));
+            request.setAttribute("listalumno", listalumno);
+            listmateria = alumnoC.getMaterias();
+            request.setAttribute("listmateria", listmateria);
+            listincidente = alumnoC.getIncidentes();
+            request.setAttribute("listincidente", listincidente);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/alumnosgradogrupo.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.print(e);
         }
     }
 
     private void ReporteAcademico(HttpServletRequest request, HttpServletResponse response) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/reporteacademico.jsp");
-            rd.forward(request, response);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    private void AgregaComportamiento(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/comportamientoreporteaca.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             System.out.println(e);

@@ -155,7 +155,46 @@
                                                                 <option value="3">comportamiento</option>
                                                                 <option value="3">comportamiento</option>
                                                             </select>
-                                                            <a id="agregacomp" class="clic">Si no encuentra comportmaiento puede agregar uno aqui</a>
+                                                            <br> 
+                                                            <a class="clic" data-toggle="modal" data-target="#exampleModalCenter">Si no encuentra comportmaiento puede agregar uno aqui</a>
+                                                            
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                                                                                            <header>Formulario de comportamientos</header>
+                                                                                        </div></h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="">
+                                                                                        <form class="">
+                                                                                            <div class="card-body row">
+                                                                                                <div class="col-lg-10 p-t-20"> 
+                                                                                                    <div class="form-group">
+                                                                                                        <label>Comportamiento</label>
+                                                                                                        <input type="text" class="form-control" placeholder="Nombre del comportamiento">
+                                                                                                    </div>
+                                                                                                </div><br>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                            <button type="button" class="btn btn-terra">Guardar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <button type="button" class="btn btn-terra">Guardar</button>
