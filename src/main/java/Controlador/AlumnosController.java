@@ -11,6 +11,7 @@ import Modelos.CtPeriodoEscolar;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
 import Modelos.Alumno;
+import Modelos.TbReporteDisciplinar;
 import java.util.List;
 
 /**
@@ -37,6 +38,16 @@ public class AlumnosController {
     public List<Alumno> getAlumnos(int grado, int grupo) {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getAlumnos(grado, grupo);
+    }
+
+    public void guardaIncidente(CtIncidente incidente) {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.guardaIincidente(incidente);
+    }
+
+    public void guardaReporteD(TbReporteDisciplinar reporteD) {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.guardaReporteD(reporteD);
     }
 
     

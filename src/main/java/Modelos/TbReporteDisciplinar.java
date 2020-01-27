@@ -15,11 +15,12 @@ import java.util.Date;
  */
 public class TbReporteDisciplinar {
     private int idtbreporte;
+    private int rperiodo;
     private int ralumno;
     private int rpersonal;
-    private Time hora;
-    private Date fecha;
-    private Date fechareporte;
+    private String hora;
+    private String fecha;
+    private String fechareporte;
     private int rpersonalsolicita;
     private int rpersonalllena;
     private int rmateria;
@@ -27,7 +28,7 @@ public class TbReporteDisciplinar {
     private int rtipoincidente;
     private int nivel;
     private String descripcion;
-    private File foto;
+    private String foto;
     private int status;
     private int tipoescuela;
 
@@ -38,7 +39,15 @@ public class TbReporteDisciplinar {
     public void setIdtbreporte(int idtbreporte) {
         this.idtbreporte = idtbreporte;
     }
+    
+    public int getRperiodo() {
+        return rperiodo;
+    }
 
+    public void setRperiodo(int rperiodo) {
+        this.rperiodo = rperiodo;
+    }
+    
     public int getRalumno() {
         return ralumno;
     }
@@ -55,27 +64,27 @@ public class TbReporteDisciplinar {
         this.rpersonal = rpersonal;
     }
 
-    public Time getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public Date getFechareporte() {
+    public String getFechareporte() {
         return fechareporte;
     }
 
-    public void setFechareporte(Date fechareporte) {
+    public void setFechareporte(String fechareporte) {
         this.fechareporte = fechareporte;
     }
 
@@ -135,11 +144,11 @@ public class TbReporteDisciplinar {
         this.descripcion = descripcion;
     }
 
-    public File getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(File foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

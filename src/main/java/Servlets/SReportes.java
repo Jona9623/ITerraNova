@@ -15,6 +15,7 @@ import Modelos.TbAlumnos;
 import Modelos.Alumno;
 import Modelos.TbMateria;
 import Modelos.TbPersonal;
+import Modelos.TbReporteDisciplinar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
@@ -32,6 +35,8 @@ import javax.servlet.http.HttpServletResponse;
 public class SReportes extends HttpServlet {
     AlumnosController alumnoC;
     AdministradorController adminC;
+    ObjectMapper mapper;
+    String objectJson;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,7 +54,8 @@ public class SReportes extends HttpServlet {
             case "Rdisciplinar": ReporteDisciplinar (request,response); break;
             case "Racademico": ReporteAcademico (request,response); break;
             case "alumnoGradoGrupo": alumnoGradoGrupo (request,response); break;
-            
+            case "guardaIncidente": guardaIncidente (request,response); break;
+            case "guardaReporteD": guardaReporteD(request,response); break;
         }
     }
 
@@ -160,6 +166,32 @@ public class SReportes extends HttpServlet {
         try {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/reporteacademico.jsp");
             rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaIncidente(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        CtIncidente incidente = new CtIncidente();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            incidente = mapper.readValue(objectJson, CtIncidente.class);
+            alumnoC.guardaIncidente(incidente);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaReporteD(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
+        objectJson = request.getParameter("REPORTE");
+        mapper = new ObjectMapper();
+        try {
+            reporteD = mapper.readValue(objectJson, TbReporteDisciplinar.class);
+            alumnoC.guardaReporteD(reporteD);
         } catch (Exception e) {
             System.out.println(e);
         }

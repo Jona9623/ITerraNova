@@ -11,7 +11,7 @@ r_grado,r_grupo,r_area,r_cpt,plantelprocedencia,nivelanterior,gradoanterior,turn
 6,2,'Queretaro',1,1,1),('zS13563434','Melissa Guadalupe','Perez','Cabrera','1994-12-12','MPCG961212HVZRPN02','Veracruz','Veracruz','Mexicano',2,
 'Av jamapa oriente',3,'Jamapa',94260,'018001234','2292354612','melissa.perez@hotmail.es','Alto',1,1,2,1,'Conalep',2,
 6,1,'Veracruz',3,1,1);
-select * from tb_alumnos where tipoescuela = 1;
+select * from tb_alumnos;
 
 update `terranova`.`tb_alumnos` set `status` = 2 where `idTb_Alumnos` = 10;
 
