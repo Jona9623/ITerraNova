@@ -25,7 +25,10 @@ var Reportes = (function () {
                 });
                 $("#guardareporteD").on('click', function () {
                     Reportes.guardaReporteD(Reportes.datosReporteD(), "guardaReporteD");
-                })
+                });
+                $("#mostrarreportes").on('click',function(){
+                   Reportes.mostrarReportes(); 
+                });
             });
         },
         datosIncidente: function () {
@@ -93,8 +96,15 @@ var Reportes = (function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Reportes.reporteDisciplinar();
             });
-        }
-        ,
+        },
+        mostrarReportes: function(){
+          $.get("SReportes",{
+              ACCION: "mostrarReportes"
+          }).then(function(){
+             $("#content").html(arguments[0]);
+             $("#tablareporteD").DataTable();
+          });  
+        },
         reporteAcademico: function () {
             $.get("SReportes", {
                 ACCION: "Racademico"

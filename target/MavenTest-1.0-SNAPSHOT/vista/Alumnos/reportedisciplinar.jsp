@@ -23,7 +23,7 @@
     <div class="col-sm-12">
         <form>
             <div style="text-align: right">
-                        <a id="guardareporteD" type="button" class="btn btn-terra float-rt">Guardar</a>
+                        <a id="mostrarreportes" type="button" class="btn btn-terra float-rt">Mostrar reportes</a>
                     </div>
             <div class="">
                 <div class="card-head">

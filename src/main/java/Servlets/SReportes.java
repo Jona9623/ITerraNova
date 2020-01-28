@@ -33,10 +33,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author complx
  */
 public class SReportes extends HttpServlet {
+
     AlumnosController alumnoC;
     AdministradorController adminC;
     ObjectMapper mapper;
     String objectJson;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,12 +52,25 @@ public class SReportes extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String accion = request.getParameter("ACCION");
-        switch(accion){
-            case "Rdisciplinar": ReporteDisciplinar (request,response); break;
-            case "Racademico": ReporteAcademico (request,response); break;
-            case "alumnoGradoGrupo": alumnoGradoGrupo (request,response); break;
-            case "guardaIncidente": guardaIncidente (request,response); break;
-            case "guardaReporteD": guardaReporteD(request,response); break;
+        switch (accion) {
+            case "Rdisciplinar":
+                ReporteDisciplinar(request, response);
+                break;
+            case "Racademico":
+                ReporteAcademico(request, response);
+                break;
+            case "alumnoGradoGrupo":
+                alumnoGradoGrupo(request, response);
+                break;
+            case "guardaIncidente":
+                guardaIncidente(request, response);
+                break;
+            case "guardaReporteD":
+                guardaReporteD(request, response);
+                break;
+            case "mostrarReportes":
+                mostrarReportes(request, response);
+                break;
         }
     }
 
@@ -101,13 +116,13 @@ public class SReportes extends HttpServlet {
     private void ReporteDisciplinar(HttpServletRequest request, HttpServletResponse response) {
         alumnoC = new AlumnosController();
         adminC = new AdministradorController();
-        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
-        List <CtGrado> listgrado = new ArrayList<>();
-        List <CtGrupo> listgrupo = new ArrayList<>();
-        List <Alumno> listalumno = new ArrayList<>();
-        List <TbPersonal> listpersonal = new ArrayList<>();
-        List <TbMateria> listmateria = new ArrayList<>();
-        List <CtIncidente> listincidente = new ArrayList<>();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List<CtGrado> listgrado = new ArrayList<>();
+        List<CtGrupo> listgrupo = new ArrayList<>();
+        List<Alumno> listalumno = new ArrayList<>();
+        List<TbPersonal> listpersonal = new ArrayList<>();
+        List<TbMateria> listmateria = new ArrayList<>();
+        List<CtIncidente> listincidente = new ArrayList<>();
         try {
             listperiodo = alumnoC.getPeriodos();
             request.setAttribute("listperiodo", listperiodo);
@@ -129,17 +144,17 @@ public class SReportes extends HttpServlet {
             System.out.print(e);
         }
     }
-    
+
     private void alumnoGradoGrupo(HttpServletRequest request, HttpServletResponse response) {
         alumnoC = new AlumnosController();
         adminC = new AdministradorController();
-        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
-        List <CtGrado> listgrado = new ArrayList<>();
-        List <CtGrupo> listgrupo = new ArrayList<>();
-        List <Alumno> listalumno = new ArrayList<>();
-        List <TbPersonal> listpersonal = new ArrayList<>();
-        List <TbMateria> listmateria = new ArrayList<>();
-        List <CtIncidente> listincidente = new ArrayList<>();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List<CtGrado> listgrado = new ArrayList<>();
+        List<CtGrupo> listgrupo = new ArrayList<>();
+        List<Alumno> listalumno = new ArrayList<>();
+        List<TbPersonal> listpersonal = new ArrayList<>();
+        List<TbMateria> listmateria = new ArrayList<>();
+        List<CtIncidente> listincidente = new ArrayList<>();
         try {
             listperiodo = alumnoC.getPeriodos();
             request.setAttribute("listperiodo", listperiodo);
@@ -149,7 +164,7 @@ public class SReportes extends HttpServlet {
             request.setAttribute("listgrupo", listgrupo);
             listpersonal = adminC.getPersonal();
             request.setAttribute("listpersonal", listpersonal);
-            listalumno = alumnoC.getAlumnos(Integer.parseInt(request.getParameter("GRADO")),Integer.parseInt(request.getParameter("GRUPO")));
+            listalumno = alumnoC.getAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")));
             request.setAttribute("listalumno", listalumno);
             listmateria = alumnoC.getMaterias();
             request.setAttribute("listmateria", listmateria);
@@ -192,6 +207,15 @@ public class SReportes extends HttpServlet {
         try {
             reporteD = mapper.readValue(objectJson, TbReporteDisciplinar.class);
             alumnoC.guardaReporteD(reporteD);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void mostrarReportes(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablareportes.jsp");
+            rd.forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
         }
