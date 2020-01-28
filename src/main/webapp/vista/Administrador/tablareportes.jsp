@@ -23,82 +23,83 @@
 <div class="card-body row">
     <h3> Criterios de búsqueda</h3>
 </div>
-<div class="card-body row">
-    <div class="col-lg-4 p-t-10"> 
-        <div class="form-group">
-            <label>Buscar por alumno</label>
-            <select id="nivel" class="custom-select">
-                <option value="1">No tan grave</option>
-                <option value="2">Grave</option>
-                <option value="3">Muy grave</option>
-            </select>
+<div id="consultareporteD">
+    <div class="card-body row">
+        <div class="col-lg-4 p-t-10"> 
+            <div class="form-group">
+                <label>Buscar por alumno</label>
+                <select id="sealumno" class="custom-select">
+                    <option value="1">No tan grave</option>
+                    <option value="2">Grave</option>
+                    <option value="3">Muy grave</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 p-t-10"> 
+            <div class="form-group">
+                <label>Buscar por grado</label>
+                <select id="nivel" class="custom-select">
+                    <option value="1">No tan grave</option>
+                    <option value="2">Grave</option>
+                    <option value="3">Muy grave</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 p-t-10"> 
+            <div class="form-group">
+                <label>Buscar por grupo</label>
+                <select id="nivel" class="custom-select">
+                    <option value="1">No tan grave adsdsdddsfsd</option>
+                    <option value="2">Grave qweeeeeeeeeeds</option>
+                    <option value="3">Muy grave qwewefewdfsffs</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 p-t-10"> 
+            <div class="form-group">
+                <label>Buscar por tipo de incidente</label>
+                <select id="nivel" class="custom-select">
+                    <option value="1">No tan grave</option>
+                    <option value="2">Grave</option>
+                    <option value="3">Muy grave</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 p-t-10"> 
+            <div class="form-group">
+                <label>Buscar por personal que llena reporte</label>
+                <select id="nivel" class="custom-select">
+                    <option value="1">No tan grave</option>
+                    <option value="2">Grave</option>
+                    <option value="3">Muy grave</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 p-t-10"> 
+            <div class="form-group">
+                <label>Buscar por personal que solicita</label>
+                <select id="nivel" class="custom-select">
+                    <option value="1">No tan grave</option>
+                    <option value="2">Grave</option>
+                    <option value="3">Muy grave</option>
+                </select>
+            </div>
         </div>
     </div>
-    <div class="col-lg-4 p-t-10"> 
-        <div class="form-group">
-            <label>Buscar por grado</label>
-            <select id="nivel" class="custom-select">
-                <option value="1">No tan grave</option>
-                <option value="2">Grave</option>
-                <option value="3">Muy grave</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-lg-4 p-t-10"> 
-        <div class="form-group">
-            <label>Buscar por grupo</label>
-            <select id="nivel" class="custom-select">
-                <option value="1">No tan grave adsdsdddsfsd</option>
-                <option value="2">Grave qweeeeeeeeeeds</option>
-                <option value="3">Muy grave qwewefewdfsffs</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-lg-4 p-t-10"> 
-        <div class="form-group">
-            <label>Buscar por tipo de incidente</label>
-            <select id="nivel" class="custom-select">
-                <option value="1">No tan grave</option>
-                <option value="2">Grave</option>
-                <option value="3">Muy grave</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-lg-4 p-t-10"> 
-        <div class="form-group">
-            <label>Buscar por personal que llena reporte</label>
-            <select id="nivel" class="custom-select">
-                <option value="1">No tan grave</option>
-                <option value="2">Grave</option>
-                <option value="3">Muy grave</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-lg-4 p-t-10"> 
-        <div class="form-group">
-            <label>Buscar por personal que solicita</label>
-            <select id="nivel" class="custom-select">
-                <option value="1">No tan grave</option>
-                <option value="2">Grave</option>
-                <option value="3">Muy grave</option>
-            </select>
-        </div>
-    </div>
-</div>
-<div class="card-body row">
-    <table id="tablareporteD" class="table table-bordered">
-        <thead class="thead-light">
-            <tr>
-                <th class="center">Nombre</th>
-                <th class="center">A. Paterno</th>
-                <th class="center">A. Materno</th>
-                <th class="center">Matricula</th>
-                <th class="center">Grado y Grupo</th>
-                <th class="center">Tutor</th>
-                <th class="center">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="card-body row" name="alumno-${alumnoreporte.id}">
+        <table id="tablareporteD" class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th class="center">Nombre</th>
+                    <th class="center">A. Paterno</th>
+                    <th class="center">A. Materno</th>
+                    <th class="center">Matricula</th>
+                    <th class="center">Grado y Grupo</th>
+                    <th class="center">Tutor</th>
+                    <th class="center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
                 <tr>
                     <td class="center">sdfsdfsd</td>
                     <td class="center">sdfsdfsd</td>
@@ -133,7 +134,8 @@
                         </div>
                     </td>
                 </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
 

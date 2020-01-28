@@ -26,8 +26,8 @@ var Reportes = (function () {
                 $("#guardareporteD").on('click', function () {
                     Reportes.guardaReporteD(Reportes.datosReporteD(), "guardaReporteD");
                 });
-                $("#mostrarreportes").on('click',function(){
-                   Reportes.mostrarReportes(); 
+                $("#mostrarreportes").on('click', function () {
+                    Reportes.mostrarReportes();
                 });
             });
         },
@@ -58,14 +58,14 @@ var Reportes = (function () {
             }
             return reporteD;
         },
-        guardaReporteD: function(objeto,accion){
-            $.get("SReportes",{
+        guardaReporteD: function (objeto, accion) {
+            $.get("SReportes", {
                 ACCION: accion,
                 REPORTE: JSON.stringify(objeto)
-            }).then(function(){
+            }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Reportes.reporteDisciplinar();
-                
+
             });
         },
         getAlumno: function (grado, grupo) {
@@ -97,13 +97,22 @@ var Reportes = (function () {
                 Reportes.reporteDisciplinar();
             });
         },
-        mostrarReportes: function(){
-          $.get("SReportes",{
-              ACCION: "mostrarReportes"
-          }).then(function(){
-             $("#content").html(arguments[0]);
-             $("#tablareporteD").DataTable();
-          });  
+        mostrarReportes: function () {
+            $.get("SReportes", {
+                ACCION: "mostrarReportes"
+            }).then(function () {
+                $("#content").html(arguments[0]);
+                $("#tablareporteD").DataTable();
+                $('#tablareporteD').find('#sealumno').change(function () {
+                    var id = $('#consultareporteD').find('#sealumno').val();
+                    $('#tablareporteD').find('div[name^="alumno-"]').hide();
+                    $('#tablareporteD').find('div[name="alumno-' + id + '"]').show();
+                    $('#tablareporteD').find('#sealumno').change(function () {
+                        $('#tablareporteD').find('div[name^="alumno-"]').hide();
+                        $('#tablareporteD').find('div[name="alumno-' + $(this).val() + '"]').show();
+                    });
+                });
+            });
         },
         reporteAcademico: function () {
             $.get("SReportes", {

@@ -198,8 +198,16 @@ public class ConsultasAdministrador {
             pst.setString(18, alumno.getNivelcursa());
             pst.setInt(19, alumno.getRgrado());
             pst.setInt(20, alumno.getRgrupo());
-            pst.setInt(21, alumno.getRarea());
-            pst.setInt(22, alumno.getRcpt());
+            if (alumno.getRarea() != 0) {
+                pst.setInt(21, alumno.getRarea());
+            } else {
+                pst.setString(21, null);
+            }
+            if (alumno.getRcpt() != 0) {
+                pst.setInt(22, alumno.getRcpt());
+            } else {
+                pst.setString(22, null);
+            }
             pst.setString(23, alumno.getPlantelproce());
             pst.setInt(24, alumno.getNivelanterior());
             pst.setInt(25, alumno.getGradoanterior());
@@ -569,7 +577,7 @@ public class ConsultasAdministrador {
             }
         }
     }
-    
+
     public void eliminaPersonal(int id) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;

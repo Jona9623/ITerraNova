@@ -268,7 +268,7 @@
                                                         <div class="form-group">
                                                             <label >Seleccione el area</label>
                                                             <select id="area" class="custom-select">
-                                                                <option value="0">No aún</option>
+                                                                <option value="">No aún</option>
                                                                 <c:forEach items="${requestScope.listarea}" var="listarea">
                                                                     <option value="${listarea.idtbarea}" 
                                                                             <c:if test="${listarea.idtbarea == requestScope.alumno.rarea}">
@@ -281,7 +281,7 @@
                                                         <div class="form-group">
                                                             <label >Seleccione capacitacion para el trabajo</label>
                                                             <select id="cpt" class="custom-select">
-                                                                <option value="0">No aún</option>
+                                                                <option value="">No aún</option>
                                                                 <c:forEach items="${requestScope.listcpt}" var="listcpt">
                                                                    <option value="${listcpt.idtbcpt}" 
                                                                             <c:if test="${listcpt.idtbcpt == requestScope.alumno.rcpt}">
