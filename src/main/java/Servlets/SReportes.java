@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -71,6 +72,7 @@ public class SReportes extends HttpServlet {
             case "mostrarReportes":
                 mostrarReportes(request, response);
                 break;
+            case "infoReporteD": infoReporteD (request,response); break;
         }
     }
 
@@ -132,8 +134,6 @@ public class SReportes extends HttpServlet {
             request.setAttribute("listgrupo", listgrupo);
             listpersonal = adminC.getPersonal();
             request.setAttribute("listpersonal", listpersonal);
-            /*listalumno = adminC.getAlumnos();
-            request.setAttribute("listalumno", listalumno);*/
             listmateria = alumnoC.getMaterias();
             request.setAttribute("listmateria", listmateria);
             listincidente = alumnoC.getIncidentes();
@@ -213,8 +213,24 @@ public class SReportes extends HttpServlet {
     }
 
     private void mostrarReportes(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List <TbReporteDisciplinar> alumnosdisciplinar = new ArrayList<>();
         try {
+            listperiodo = alumnoC.getPeriodos();
+            request.setAttribute("listperiodo", listperiodo);
+            alumnosdisciplinar = alumnoC.getAlumnosReporteD();
+            request.setAttribute("alumnosdisciplinar", alumnosdisciplinar);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablareportes.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void infoReporteD(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/datosreported.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             System.out.println(e);

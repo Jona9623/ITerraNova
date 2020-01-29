@@ -103,16 +103,26 @@ var Reportes = (function () {
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#tablareporteD").DataTable();
-                $('#tablareporteD').find('#sealumno').change(function () {
-                    var id = $('#consultareporteD').find('#sealumno').val();
-                    $('#tablareporteD').find('div[name^="alumno-"]').hide();
-                    $('#tablareporteD').find('div[name="alumno-' + id + '"]').show();
-                    $('#tablareporteD').find('#sealumno').change(function () {
-                        $('#tablareporteD').find('div[name^="alumno-"]').hide();
-                        $('#tablareporteD').find('div[name="alumno-' + $(this).val() + '"]').show();
+                    var id = $('#consultareporteD').find('#periodotablaD').val();
+                    $('#consultareporteD').find('tr[name^="alumno-"]').hide();
+                    $('#consultareporteD').find('tr[name="alumno-' + id + '"]').show();
+                    $('#consultareporteD').find('#periodotablaD').change(function () {
+                        $('#consultareporteD').find('tr[name^="alumno-"]').hide();
+                        $('#consultareporteD').find('tr[name="alumno-' + $(this).val() + '"]').show();
                     });
-                });
+                    $(".inforeporteD").on('click',function(){
+                       alumnoreporte = $(this).parents("tr").find("td").eq(0).html();
+                       alert(alumnoreporte);
+                       Reportes.inforReporteD();
+                    });
             });
+        },
+        infoReporteD: function(){
+          $.get("SReportes",{
+              ACCION: "infoReporteD"
+          }).then(function(){
+             $("#datosreporteD").html(arguments[0]); 
+          });  
         },
         reporteAcademico: function () {
             $.get("SReportes", {

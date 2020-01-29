@@ -50,5 +50,10 @@ public class AlumnosController {
         consulta.guardaReporteD(reporteD);
     }
 
+    public List<TbReporteDisciplinar> getAlumnosReporteD() {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getAlumnosReporteD();
+    }
+
     
 }

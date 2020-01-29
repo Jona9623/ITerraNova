@@ -27,115 +27,68 @@
     <div class="card-body row">
         <div class="col-lg-4 p-t-10"> 
             <div class="form-group">
-                <label>Buscar por alumno</label>
-                <select id="sealumno" class="custom-select">
-                    <option value="1">No tan grave</option>
-                    <option value="2">Grave</option>
-                    <option value="3">Muy grave</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-4 p-t-10"> 
-            <div class="form-group">
-                <label>Buscar por grado</label>
-                <select id="nivel" class="custom-select">
-                    <option value="1">No tan grave</option>
-                    <option value="2">Grave</option>
-                    <option value="3">Muy grave</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-4 p-t-10"> 
-            <div class="form-group">
-                <label>Buscar por grupo</label>
-                <select id="nivel" class="custom-select">
-                    <option value="1">No tan grave adsdsdddsfsd</option>
-                    <option value="2">Grave qweeeeeeeeeeds</option>
-                    <option value="3">Muy grave qwewefewdfsffs</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-4 p-t-10"> 
-            <div class="form-group">
-                <label>Buscar por tipo de incidente</label>
-                <select id="nivel" class="custom-select">
-                    <option value="1">No tan grave</option>
-                    <option value="2">Grave</option>
-                    <option value="3">Muy grave</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-4 p-t-10"> 
-            <div class="form-group">
-                <label>Buscar por personal que llena reporte</label>
-                <select id="nivel" class="custom-select">
-                    <option value="1">No tan grave</option>
-                    <option value="2">Grave</option>
-                    <option value="3">Muy grave</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-4 p-t-10"> 
-            <div class="form-group">
-                <label>Buscar por personal que solicita</label>
-                <select id="nivel" class="custom-select">
-                    <option value="1">No tan grave</option>
-                    <option value="2">Grave</option>
-                    <option value="3">Muy grave</option>
+                <label >Seleccione periodo escolar</label>
+                <select id="periodotablaD" class="custom-select">
+                    <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
+                        <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
     </div>
-    <div class="card-body row" name="alumno-${alumnoreporte.id}">
+    <div class="card-body row">
         <table id="tablareporteD" class="table table-bordered">
             <thead class="thead-light">
                 <tr>
-                    <th class="center">Nombre</th>
-                    <th class="center">A. Paterno</th>
-                    <th class="center">A. Materno</th>
-                    <th class="center">Matricula</th>
+                    <th style="display: none"></th>
+                    <th class="center">Alumno</th>
                     <th class="center">Grado y Grupo</th>
-                    <th class="center">Tutor</th>
+                    <th class="center">Tipo de incidente</th>
+                    <th class="center">Fecha del incidente</th>
+                    <th class="center">Personal que llena</th>
                     <th class="center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="center">sdfsdfsd</td>
-                    <td class="center">sdfsdfsd</td>
-                    <td class="center">dsfsdfsd</td>
-                    <td class="center">sdfsdfsd</td>
-                    <td class="center">sfdfsg</td>
-                    <td class="center">ersdfdf</td>
-                    <td class="center">
-                        <div class="btn-group">
-                            <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                <i class="fa fa-angle-down"></i>
-                            </button>
-                            <ul class="dropdown-menu pull-left" role="menu">
-                                <li>
-                                    <a href="javascript:;" class="">
-                                        <i id="editaralu" class="material-icons">create</i> Editar </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" class="">
-                                        <i id="eliminaralu" class="material-icons">delete</i> Eliminar </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <i class="icon-user"></i> otra opcion</a>
-                                </li>
-                                <li class="divider"> </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <i class="icon-flag"></i> otra opcion </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
+                <c:forEach items="${requestScope.alumnosdisciplinar}" var="alumnosdisciplinar">
+                    <tr name="alumno-${alumnosdisciplinar.rperiodo}">
+                        <td class="center" style="display: none">${alumnosdisciplinar.ralumno}</td>
+                        <td class="center">${alumnosdisciplinar.alumno} ${alumnosdisciplinar.alumnoapep}</td>
+                        <td class="center">${alumnosdisciplinar.grado} ${alumnosdisciplinar.grupo}</td>
+                        <td class="center">${alumnosdisciplinar.tipoincidente}</td>
+                        <td type="date" class="center">${alumnosdisciplinar.fecha}</td>
+                        <td class="center">${alumnosdisciplinar.personalllena}</td>
+                        <td class="center">
+                            <div class="btn-group">
+                                <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                    <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-left" role="menu">
+                                    <li>
+                                        <a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:;" class="inforeporteD">
+                                            <i id="inforeporteD" class="material-icons">create</i> Toda la información </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <i class="icon-user"></i> otra opcion</a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <i class="icon-flag"></i> otra opcion </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
+        <div id="datosreporteD">
+            <jsp:include page='datosreported.jsp'>
+                <jsp:param name="article1" value=""/>
+            </jsp:include>
+        </div>
     </div>
 </div>
 

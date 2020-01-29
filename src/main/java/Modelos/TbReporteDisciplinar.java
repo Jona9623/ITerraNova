@@ -16,22 +16,123 @@ import java.util.Date;
 public class TbReporteDisciplinar {
     private int idtbreporte;
     private int rperiodo;
+    private String periodo;
     private int ralumno;
+    private String alumno;
+    private String alumnoapep;
+    private String alumnoapem;
+    private String grado;
+    private String grupo;
     private int rpersonal;
+    private String personal;
     private String hora;
     private String fecha;
     private String fechareporte;
     private int rpersonalsolicita;
+    private String personalsolicita;
     private int rpersonalllena;
+    private String personalllena;
     private int rmateria;
+    private String materia;
     private String lugar;
     private int rtipoincidente;
+    private String tipoincidente;
     private int nivel;
     private String descripcion;
     private String foto;
     private int status;
     private int tipoescuela;
 
+    public String getGrado() {
+        return grado;
+    }
+
+    public void setGrado(String grado) {
+        this.grado = grado;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+
+    
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    public String getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(String alumno) {
+        this.alumno = alumno;
+    }
+
+    public String getAlumnoapep() {
+        return alumnoapep;
+    }
+
+    public void setAlumnoapep(String alumnoapep) {
+        this.alumnoapep = alumnoapep;
+    }
+
+    public String getAlumnoapem() {
+        return alumnoapem;
+    }
+
+    public void setAlumnoapem(String alumnoapem) {
+        this.alumnoapem = alumnoapem;
+    }
+
+    public String getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(String personal) {
+        this.personal = personal;
+    }
+
+    public String getPersonalsolicita() {
+        return personalsolicita;
+    }
+
+    public void setPersonalsolicita(String personalsolicita) {
+        this.personalsolicita = personalsolicita;
+    }
+
+    public String getPersonalllena() {
+        return personalllena;
+    }
+
+    public void setPersonalllena(String personalllena) {
+        this.personalllena = personalllena;
+    }
+
+    public String getMateria() {
+        return materia;
+    }
+
+    public void setMateria(String materia) {
+        this.materia = materia;
+    }
+
+    public String getTipoincidente() {
+        return tipoincidente;
+    }
+
+    public void setTipoincidente(String tipoincidente) {
+        this.tipoincidente = tipoincidente;
+    }
+
+    
     public int getIdtbreporte() {
         return idtbreporte;
     }

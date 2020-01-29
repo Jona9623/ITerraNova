@@ -75,16 +75,16 @@ public class ConsultasAlumno {
         List<TbMateria> listmateria = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from tb_materia where status = 1 and tipoescuela = 1";
+            String consulta = "select * from (tb_materia inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria) where tb_materia.status = 1 and tb_materia.tipoescuela = 1";
             pst = con.prepareStatement(consulta);
             rs = pst.executeQuery();
             while (rs.next()) {
                 TbMateria materia = new TbMateria();
-                materia.setIdtbmateria(rs.getInt("idTb_Materia"));
-                materia.setNombrelargo(rs.getString("nombrelargo"));
-                materia.setNombrecorto(rs.getString("nombrecorto"));
-                materia.setStatus(rs.getInt("status"));
-                materia.setTipoescuela(rs.getInt("tipoescuela"));
+                materia.setIdtbmateria(rs.getInt("tb_materia.idTb_Materia"));
+                materia.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+                materia.setNombrecorto(rs.getString("ct_datosmateria.nombrecorto"));
+                materia.setStatus(rs.getInt("tb_materia.status"));
+                materia.setTipoescuela(rs.getInt("tb_materia.tipoescuela"));
                 listmateria.add(materia);
             }
 
@@ -264,6 +264,66 @@ public class ConsultasAlumno {
                 System.out.println(e);
             }
         }
+    }
+
+    public List<TbReporteDisciplinar> getAlumnosReporteD() {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbReporteDisciplinar> alumnosdisciplinar = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select * from ((((((((((tb_reportedisciplinar inner join tb_alumnos on tb_reportedisciplinar.r_alumno = tb_alumnos.idTb_Alumnos)inner join tb_personal on tb_reportedisciplinar.r_personal = tb_personal.idTb_Personal)\n"
+                    + "inner join tb_materia on tb_reportedisciplinar.r_materia = tb_materia.idTb_Materia)inner join ct_incidente on tb_reportedisciplinar.r_tipoincidente = ct_incidente.idCt_incidente)\n"
+                    + "inner join ct_periodoescolar on tb_reportedisciplinar.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar)inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria)\n"
+                    + "inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado)inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo)inner join tb_personal as tb1 on tb_reportedisciplinar.r_personalllena = tb1.idTb_Personal)\n"
+                    + "inner join tb_personal as tb2 on tb_reportedisciplinar.r_personalsolicita = tb2.idTb_Personal)\n"
+                    + " where tb_reportedisciplinar.status = 1 and tb_reportedisciplinar.tipoescuela = 1";
+            pst = con.prepareStatement(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
+                reporteD.setIdtbreporte(rs.getInt("idTb_ReporteDisciplinar"));
+                reporteD.setRalumno(rs.getInt("tb_reportedisciplinar.r_alumno"));
+                reporteD.setAlumno(rs.getString("tb_alumnos.nombre"));
+                reporteD.setAlumnoapep(rs.getString("tb_alumnos.apellidopaterno"));
+                reporteD.setAlumnoapem(rs.getString("tb_alumnos.apellidomaterno"));
+                reporteD.setGrado(rs.getString("ct_grado.nombre"));
+                reporteD.setGrupo(rs.getString("ct_grupo.nombre"));
+                reporteD.setPersonal(rs.getString("tb_personal.nombre"));
+                reporteD.setPersonalllena(rs.getString("tb1.nombre"));
+                reporteD.setPersonalsolicita(rs.getString("tb2.nombre"));
+                reporteD.setHora(rs.getString("tb_reportedisciplinar.hora"));
+                reporteD.setFecha(rs.getString("tb_reportedisciplinar.fecha"));
+                reporteD.setFechareporte(rs.getString("tb_reportedisciplinar.fechareporte"));
+                reporteD.setMateria(rs.getString("ct_datosmateria.nombrecorto"));
+                reporteD.setLugar(rs.getString("tb_reportedisciplinar.lugar"));
+                reporteD.setTipoincidente(rs.getString("ct_incidente.nombre"));
+                reporteD.setPeriodo(rs.getString("ct_periodoescolar.nombre"));
+                reporteD.setRperiodo(rs.getInt("tb_reportedisciplinar.r_periodo"));
+                reporteD.setNivel(rs.getInt("tb_reportedisciplinar.nivel"));
+                reporteD.setDescripcion(rs.getString("tb_reportedisciplinar.descripcion"));
+                reporteD.setFoto(rs.getString("tb_reportedisciplinar.foto"));
+                alumnosdisciplinar.add(reporteD);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return alumnosdisciplinar;
     }
 
 }
