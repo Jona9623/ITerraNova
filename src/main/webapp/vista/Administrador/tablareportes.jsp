@@ -41,6 +41,8 @@
             <thead class="thead-light">
                 <tr>
                     <th style="display: none"></th>
+                    <th style="display: none"></th>
+                    <th style="display: none"></th>
                     <th class="center">Alumno</th>
                     <th class="center">Grado y Grupo</th>
                     <th class="center">Tipo de incidente</th>
@@ -53,6 +55,8 @@
                 <c:forEach items="${requestScope.alumnosdisciplinar}" var="alumnosdisciplinar">
                     <tr name="alumno-${alumnosdisciplinar.rperiodo}">
                         <td class="center" style="display: none">${alumnosdisciplinar.ralumno}</td>
+                        <td class="center" style="display: none">${alumnosdisciplinar.fecha}</td>
+                        <td class="center" style="display: none">${alumnosdisciplinar.rperiodo}</td>
                         <td class="center">${alumnosdisciplinar.alumno} ${alumnosdisciplinar.alumnoapep}</td>
                         <td class="center">${alumnosdisciplinar.grado} ${alumnosdisciplinar.grupo}</td>
                         <td class="center">${alumnosdisciplinar.tipoincidente}</td>
@@ -60,22 +64,13 @@
                         <td class="center">${alumnosdisciplinar.personalllena}</td>
                         <td class="center">
                             <div class="btn-group">
-                                <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                <button class="btn btn-xs btn-terra dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Acciones
                                     <i class="fa fa-angle-down"></i>
                                 </button>
                                 <ul class="dropdown-menu pull-left" role="menu">
                                     <li>
-                                        <a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:;" class="inforeporteD">
-                                            <i id="inforeporteD" class="material-icons">create</i> Toda la información </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="icon-user"></i> otra opcion</a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="icon-flag"></i> otra opcion </a>
+                                        <a  href="javascript:;" class="inforeporteD">
+                                            <i id="inforeporteD" class="icon-arrow-right"></i> Toda la información </a>
                                     </li>
                                 </ul>
                             </div>
@@ -84,11 +79,6 @@
                 </c:forEach>
             </tbody>
         </table>
-        <div id="datosreporteD">
-            <jsp:include page='datosreported.jsp'>
-                <jsp:param name="article1" value=""/>
-            </jsp:include>
-        </div>
     </div>
 </div>
 

@@ -9,13 +9,9 @@ var Reportes = (function () {
                 ACCION: "Rdisciplinar"
             }).then(function () {
                 $("#content").html(arguments[0]);
-                $("#gradodisciplinar").change(function () {
-                    grado = $("#gradodisciplinar").val()
-                }),
-                        $("#grupodisciplinar").change(function () {
-                    grupo = $("#grupodisciplinar").val()
-                    Reportes.getAlumno(grado, grupo);
-                });
+                grado = $("#gradodisciplinar").val();
+                grupo = $("#grupodisciplinar").val();
+                Reportes.getAlumno(grado, grupo);
 
                 $("#agregafalta").on('click', function () {
                     Reportes.agregaFalta();
@@ -77,9 +73,10 @@ var Reportes = (function () {
                 $("#alumnogradoD").html(arguments[0]);
                 $("#gradodisciplinar").change(function () {
                     grado = $("#gradodisciplinar").val()
+                    Reportes.getAlumno(grado, grupo)
                 }),
                         $("#grupodisciplinar").change(function () {
-                    grupo = $("#grupodisciplinar").val()
+                    grupo = $("#grupodisciplinar").val();
                     Reportes.getAlumno(grado, grupo);
                 });
                 $("#agregafalta").on('click', function () {
@@ -103,26 +100,30 @@ var Reportes = (function () {
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#tablareporteD").DataTable();
-                    var id = $('#consultareporteD').find('#periodotablaD').val();
+                var id = $('#consultareporteD').find('#periodotablaD').val();
+                $('#consultareporteD').find('tr[name^="alumno-"]').hide();
+                $('#consultareporteD').find('tr[name="alumno-' + id + '"]').show();
+                $('#consultareporteD').find('#periodotablaD').change(function () {
                     $('#consultareporteD').find('tr[name^="alumno-"]').hide();
-                    $('#consultareporteD').find('tr[name="alumno-' + id + '"]').show();
-                    $('#consultareporteD').find('#periodotablaD').change(function () {
-                        $('#consultareporteD').find('tr[name^="alumno-"]').hide();
-                        $('#consultareporteD').find('tr[name="alumno-' + $(this).val() + '"]').show();
-                    });
-                    $(".inforeporteD").on('click',function(){
-                       alumnoreporte = $(this).parents("tr").find("td").eq(0).html();
-                       alert(alumnoreporte);
-                       Reportes.inforReporteD();
-                    });
+                    $('#consultareporteD').find('tr[name="alumno-' + $(this).val() + '"]').show();
+                });
+                $(".inforeporteD").on('click', function () {
+                    alumnoreporte = $(this).parents("tr").find("td").eq(0).html();
+                    reportefecha = $(this).parents("tr").find("td").eq(1).html();
+                    reporteperiodo = $(this).parents("tr").find("td").eq(2).html();
+                    Reportes.infoReporteD(alumnoreporte, reportefecha, reporteperiodo);
+                });
             });
         },
-        infoReporteD: function(){
-          $.get("SReportes",{
-              ACCION: "infoReporteD"
-          }).then(function(){
-             $("#datosreporteD").html(arguments[0]); 
-          });  
+        infoReporteD: function (alumnoreporte, reportefecha, reporteperiodo) {
+            $.get("SReportes", {
+                ACCION: "infoReporteD",
+                ID: alumnoreporte,
+                FECHA: reportefecha,
+                PERIODO: reporteperiodo
+            }).then(function () {
+                $("#content").html(arguments[0]);
+            });
         },
         reporteAcademico: function () {
             $.get("SReportes", {

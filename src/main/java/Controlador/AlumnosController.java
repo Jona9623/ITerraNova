@@ -55,5 +55,10 @@ public class AlumnosController {
         return consulta.getAlumnosReporteD();
     }
 
+    public TbReporteDisciplinar datosReporteD(int id, String fecha, int periodo) {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return (consulta.datosReporteD(id,fecha,periodo));
+    }
+
     
 }

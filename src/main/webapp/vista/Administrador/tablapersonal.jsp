@@ -51,17 +51,17 @@
                     <td class="center">${listpersonal.puesto}</td>
                     <td class="center">
                         <div class="btn-group">
-                            <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                            <button class="btn btn-xs btn-terra dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Acciones
                                 <i class="fa fa-angle-down"></i>
                             </button>
                             <ul class="dropdown-menu pull-left" role="menu">
                                 <li>
                                     <a href="javascript:;" class="editarpe">
-                                        <i id="editarpe" class="material-icons">create</i> Editar </a>
+                                        <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;" class="aliminarpe">
-                                        <i id="aliminarpe" class="material-icons">delete</i> Eliminar </a>
+                                        <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;">

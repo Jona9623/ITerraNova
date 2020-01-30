@@ -157,6 +157,7 @@
                     <div class="col-lg-4 p-t-20">
                         <label >Materia durante el incidente (si aplica)</label>
                         <select id="materiaD" class="custom-select">
+                            <option value="">No aplica</option>
                             <c:forEach items="${requestScope.listmateria}" var="listmateria">
                                 <option value="${listmateria.idtbmateria}">${listmateria.nombrecorto} </option>
                             </c:forEach>
@@ -165,6 +166,7 @@
                     <div class="col-lg-4 p-t-20">
                         <label >Maestro de materia (si aplica)</label>
                         <select id="personalmateria" class="custom-select">
+                            <option value="">No aplica</option>
                             <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
                                 <option value="${listpersonal.idtbpersonal}">${listpersonal.nombre} </option>
                             </c:forEach>

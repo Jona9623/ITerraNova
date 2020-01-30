@@ -229,8 +229,12 @@ public class SReportes extends HttpServlet {
     }
 
     private void infoReporteD(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
         try {
-            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/datosreported.jsp");
+            reporteD = alumnoC.datosReporteD(Integer.parseInt(request.getParameter("ID")),request.getParameter("FECHA"),Integer.parseInt(request.getParameter("PERIODO")));
+            request.setAttribute("reporteD", reporteD);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/datosreportedi.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             System.out.println(e);

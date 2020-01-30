@@ -22,33 +22,74 @@
                         <div class="row">
                             <div class="col-md-6 col-6 b-r">
                                 <strong> Titulo</strong> <br>
-                                <p>descripcion</p>
+                                <p>${requestScope.reporteD.alumno}</p>
                             </div>
                             <div class="col-md-6 col-6 b-r">
                                 <strong> Titulo</strong> <br>
-                                <p>descripcion</p>
+                                <p>${requestScope.reporteD.alumnoapep}</p>
                             </div>
                             <div class="col-md-6 col-6 b-r">
                                 <strong> Titulo</strong> <br>
-                                <p>descripcion</p>
+                                <p>${requestScope.reporteD.alumnoapem}</p>
                             </div>
                             <div class="col-md-6 col-6 b-r">
                                 <strong> Titulo</strong> <br>
-                                <p>descripcion</p>
+                                <p>${requestScope.reporteD.grado}</p>
                             </div>
                             <div class="col-md-6 col-6 b-r">
                                 <strong> Titulo</strong> <br>
-                                <p>descripcion</p>
+                                <p>${requestScope.reporteD.grupo}</p>
                             </div>
                             <div class="col-md-6 col-6 b-r">
                                 <strong> Titulo</strong> <br>
-                                <p>descripcion</p>
+                                <p>${requestScope.reporteD.personalsolicita}</p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p>${requestScope.reporteD.personalllena}</p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p>${requestScope.reporteD.personal}</p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p>${requestScope.reporteD.materia}</p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p>${requestScope.reporteD.fecha}</p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p>${requestScope.reporteD.fechareporte}</p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p>${requestScope.reporteD.hora}</p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p>${requestScope.reporteD.lugar}</p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p>${requestScope.reporteD.tipoincidente}</p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p> <c:if test="${requestScope.reporteD.nivel == 1}">No tan grave</c:if></p>
+                                <p> <c:if test="${requestScope.reporteD.nivel == 21}">Grave</c:if></p>
+                                <p> <c:if test="${requestScope.reporteD.nivel == 3}">Muy grave</c:if></p>
+                            </div>
+                            <div class="col-md-6 col-6 b-r">
+                                <strong> Titulo</strong> <br>
+                                <p>${requestScope.reporteD.descripcion}</p>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button id="guardaincidente" type="button" data-dismiss="modal" class="btn btn-terra">Guardar</button>
+                        <button type="button" class="btn btn-secondary center" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
