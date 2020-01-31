@@ -14,12 +14,20 @@ import Modelos.Alumno;
 import Modelos.TbReporteDisciplinar;
 import java.util.List;
 import java.util.Properties;
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,10 +66,10 @@ public class AlumnosController {
         consulta.guardaReporteD(reporteD);
         TbReporteDisciplinar reporte = new TbReporteDisciplinar();
         reporte = consulta.datosReporteD(reporteD.getRalumno(), reporteD.getFecha(), reporteD.getRperiodo());
-        String destino = "jonathan9623@hotmail.es";
-        String asunto = "Reporte Disciplinar";
-        String cuerpo = "Problema del reporte mas otras cosas";
-        enviarCorreo(destino, asunto, cuerpo);
+        /*String destino =  "jonathan9623@hotmail.es";
+         String asunto = "Reporte Disciplinar";
+         String cuerpo ="Problema del reporte mas otras cosas";*/
+        enviarCorreo();
     }
 
     public List<TbReporteDisciplinar> getAlumnosReporteD() {
@@ -74,33 +82,32 @@ public class AlumnosController {
         return (consulta.datosReporteD(id, fecha, periodo));
     }
 
-    private static void enviarCorreo(String destinatario, String asunto, String cuerpo) {
-        String remitente = "pruebas.iterranova@gmail.com";
-        String contrasena = "excelencia";
-        Properties props = System.getProperties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.user", remitente);
-        props.put("mail.smtp.clave", contrasena);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.port", "587");
+    private static void enviarCorreo() {
+        final String usuario = "pruebas.iterranova@gmail.com";
+        final String contrasena = "excelencia";
 
         try {
-            Session sesion = Session.getDefaultInstance(props);
-            MimeMessage mensaje = new MimeMessage(sesion);
-            mensaje.setFrom(new InternetAddress(remitente));
-            mensaje.addRecipients(Message.RecipientType.TO, destinatario);
-            mensaje.setSubject(asunto);
-            mensaje.setText(cuerpo);
+            Properties pro = System.getProperties();
+            pro.put("mail.smtp.host", "smtp.gmail.com");
+            pro.put("mail.smtp.port", "587");
+            pro.put("mail.smtp.auth", "true");
+            pro.put("mail.smtp.starttls.enable", "true");
+
+            Session sesion = Session.getInstance(pro, new javax.mail.Authenticator() {
+                protected PasswordAuthentication getpPasswordAuthentication() {
+                    return new PasswordAuthentication(usuario, contrasena);
+                }
+            });
             
+            Message mensaje = new MimeMessage(sesion);
+            mensaje.setFrom(new InternetAddress("jonathan9623@hotmail.es"));
+            mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse("pruebas.iterranova@gmail.com, jonathan9623@hotmail.es"));
+            mensaje.setSubject("TEXTO UNO");
+            mensaje.setText("TEXTO 2");
             Transport.send(mensaje);
-           /* Transport transport = sesion.getTransport("smtp");
-            transport.connect(remitente, contrasena);
-            transport.sendMessage(mensaje, mensaje.getAllRecipients());
-            transport.close();*/
-            JOptionPane.showMessageDialog(null, "Correo enviado");
+
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }
