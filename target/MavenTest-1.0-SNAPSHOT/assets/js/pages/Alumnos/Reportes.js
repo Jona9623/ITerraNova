@@ -48,7 +48,6 @@ var Reportes = (function () {
                 "rtipoincidente": $("#incidente").val(),
                 "nivel": $("#nivel").val(),
                 "descripcion": $("#descripcion").val(),
-                "foto": $("#foto").val(),
                 "status": 1,
                 "tipoescuela": 1
             }

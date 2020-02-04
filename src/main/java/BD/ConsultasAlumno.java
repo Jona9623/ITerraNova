@@ -349,6 +349,7 @@ public class ConsultasAlumno {
             String consulta = " select * from tb_reportedisciplinar left join tb_personal on tb_reportedisciplinar.r_personal = tb_personal.idTb_Personal \n"
                     + " left join tb_materia on tb_reportedisciplinar.r_materia = tb_materia.idTb_Materia\n"
                     + " join tb_alumnos on tb_reportedisciplinar.r_alumno = tb_alumnos.idTb_Alumnos\n"
+                    + " join tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor\n"
                     + " join ct_incidente on tb_reportedisciplinar.r_tipoincidente = ct_incidente.idCt_incidente\n"
                     + " join ct_periodoescolar on tb_reportedisciplinar.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar\n"
                     + " left join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
@@ -369,6 +370,7 @@ public class ConsultasAlumno {
                 datosreporteD.setAlumno(rs.getString("tb_alumnos.nombre"));
                 datosreporteD.setAlumnoapep(rs.getString("tb_alumnos.apellidopaterno"));
                 datosreporteD.setAlumnoapem(rs.getString("tb_alumnos.apellidomaterno"));
+                datosreporteD.setCorreotutor(rs.getString("tb_tutor.correo"));
                 datosreporteD.setGrado(rs.getString("ct_grado.nombre"));
                 datosreporteD.setGrupo(rs.getString("ct_grupo.nombre"));
                 datosreporteD.setPersonal(rs.getString("tb_personal.nombre"));

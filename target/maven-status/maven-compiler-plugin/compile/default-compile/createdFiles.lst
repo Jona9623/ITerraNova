@@ -4,7 +4,6 @@ Modelos\TbAlumnos.class
 Servlets\SAdminpersonal.class
 BD\ConsultasAlumno.class
 Servlets\SAdminalumno.class
-Controlador\AlumnosController$1.class
 Modelos\Alumno.class
 Modelos\TbReporteDisciplinar.class
 Controlador\AlumnosController.class

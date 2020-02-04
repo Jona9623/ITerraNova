@@ -21,6 +21,7 @@ public class TbReporteDisciplinar {
     private String alumno;
     private String alumnoapep;
     private String alumnoapem;
+    private String correotutor;
     private String grado;
     private String grupo;
     private int rpersonal;
@@ -42,6 +43,15 @@ public class TbReporteDisciplinar {
     private String foto;
     private int status;
     private int tipoescuela;
+
+    public String getCorreotutor() {
+        return correotutor;
+    }
+
+    public void setCorreotutor(String correotutor) {
+        this.correotutor = correotutor;
+    }
+    
 
     public String getGrado() {
         return grado;

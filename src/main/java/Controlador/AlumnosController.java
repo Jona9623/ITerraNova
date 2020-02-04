@@ -12,14 +12,13 @@ import Modelos.TbAlumnos;
 import Modelos.TbMateria;
 import Modelos.Alumno;
 import Modelos.TbReporteDisciplinar;
+import com.sun.mail.smtp.SMTPTransport;
 import java.util.List;
 import java.util.Properties;
+import java.awt.Font;
 import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
-import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -66,10 +65,18 @@ public class AlumnosController {
         consulta.guardaReporteD(reporteD);
         TbReporteDisciplinar reporte = new TbReporteDisciplinar();
         reporte = consulta.datosReporteD(reporteD.getRalumno(), reporteD.getFecha(), reporteD.getRperiodo());
-        /*String destino =  "jonathan9623@hotmail.es";
-         String asunto = "Reporte Disciplinar";
-         String cuerpo ="Problema del reporte mas otras cosas";*/
-        enviarCorreo();
+        String correotutor = reporte.getCorreotutor();
+        String asunto = "Notificacion de Reporte Disciplinar";
+        String cuerpo ="Estimado tutor, este correo funciona para notificar que el alumno " 
+                + reporte.getAlumno()+reporte.getAlumnoapep()+ reporte.getAlumnoapem() + " "
+                + "de grado y grupo "+ reporte.getGrado()+""+ reporte.getGrupo()+"\n"
+                + "Se encontró realizando una falta  la cual solicita su presentación "
+                + "cuanto antes a la institucion para llegar a una solución\n"
+                + "La falta cometida fue "+ reporte.getTipoincidente()+ "\n"
+                + "Registrada a la hora : " +reporte.getHora()+" el dia "+ reporte.getFecha() +"\n"
+                + "Agradecemos su atención y esperamos su precensia en la institución\n"
+                + "NOTA: Si el correo no corresponde con su tutorado favor de reportar a la institución" ;
+        enviarCorreo(correotutor,asunto,cuerpo);
     }
 
     public List<TbReporteDisciplinar> getAlumnosReporteD() {
@@ -82,29 +89,35 @@ public class AlumnosController {
         return (consulta.datosReporteD(id, fecha, periodo));
     }
 
-    private static void enviarCorreo() {
-        final String usuario = "pruebas.iterranova@gmail.com";
-        final String contrasena = "excelencia";
+    private static void enviarCorreo(String correotutor, String asunto, String cuerpo) {
+        String usuario = "pruebas.iterranova@gmail.com";
+        String contrasena = "excelencia";
 
         try {
             Properties pro = System.getProperties();
+            /* Session sesion = Session.getDefaultInstance(pro);
+            MimeMessage mensaje = new MimeMessage(sesion);
+            mensaje.setFrom(new InternetAddress(usuario));
+            mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(para));
+            mensaje.setSubject("ESTE ES EL ASUNTO");
+            mensaje.setText("ESTE ES EL CUERPO DEL MENSAJE");
+            Transport.send(mensaje);*/
             pro.put("mail.smtp.host", "smtp.gmail.com");
             pro.put("mail.smtp.port", "587");
             pro.put("mail.smtp.auth", "true");
             pro.put("mail.smtp.starttls.enable", "true");
 
-            Session sesion = Session.getInstance(pro, new javax.mail.Authenticator() {
-                protected PasswordAuthentication getpPasswordAuthentication() {
-                    return new PasswordAuthentication(usuario, contrasena);
-                }
-            });
-            
+            Session sesion = Session.getDefaultInstance(pro);
+
             Message mensaje = new MimeMessage(sesion);
-            mensaje.setFrom(new InternetAddress("jonathan9623@hotmail.es"));
-            mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse("pruebas.iterranova@gmail.com, jonathan9623@hotmail.es"));
-            mensaje.setSubject("TEXTO UNO");
-            mensaje.setText("TEXTO 2");
-            Transport.send(mensaje);
+            mensaje.setFrom(new InternetAddress(usuario));
+            mensaje.setRecipient(Message.RecipientType.TO, new InternetAddress(correotutor));
+            mensaje.setSubject(asunto);
+            mensaje.setText(cuerpo);
+            Transport t = sesion.getTransport("smtp");
+            t.connect(usuario,contrasena);
+            t.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
+            t.close();
 
         } catch (Exception e) {
             e.printStackTrace();
