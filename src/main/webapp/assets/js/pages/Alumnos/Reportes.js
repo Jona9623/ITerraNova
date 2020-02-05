@@ -12,20 +12,25 @@ var Reportes = (function () {
                 grado = $("#gradodisciplinar").val();
                 grupo = $("#grupodisciplinar").val();
                 Reportes.getAlumno(grado, grupo);
-
                 $("#agregafalta").on('click', function () {
                     Reportes.agregaFalta();
                 });
                 $("#guardaincidente").on('click', function () {
                     Reportes.guardaIncidente(Reportes.datosIncidente(), "guardaIncidente");
                 });
-                $("#guardareporteD").on('click', function () {
-                    Reportes.guardaReporteD(Reportes.datosReporteD(), "guardaReporteD");
-                });
+                Reportes.guardarD();
+                  //$("#guardareporteD").on('click', function () {
+                  //    Reportes.guardaReporteD(Reportes.datosReporteD(), "guardaReporteD");
+                //  });
                 $("#mostrarreportes").on('click', function () {
                     Reportes.mostrarReportes();
                 });
             });
+        },
+        guararD: function(){
+          $('form[name="fileinfo"]').ajaxForm(function(){
+              Reportes.reporteDisciplinar();
+          });  
         },
         datosIncidente: function () {
             var incidente = {
@@ -55,13 +60,30 @@ var Reportes = (function () {
             return reporteD;
         },
         guardaReporteD: function (objeto, accion) {
+            var form = $("#fileinfo")[0];
+            var data = new FormData(form);
+            $.ajax({
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                url: "SReportes/guardaReporteD",
+                data: data,
+                processData: false,
+                contentType: false,
+                cahce: false,
+                dataType: 'json',
+                success: function (e) {
+                    alert("succes");
+                },
+                error: function (e) {
+                    alert("error");
+                }
+            })
             $.get("SReportes", {
                 ACCION: accion,
                 REPORTE: JSON.stringify(objeto)
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Reportes.reporteDisciplinar();
-
             });
         },
         getAlumno: function (grado, grupo) {

@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <label >Seleccione un alumno</label>
-    <select id="alumnodisciplinar" class="custom-select">
+    <select id="alumnodisciplinar" name="Alumnodisciplinar" class="custom-select">
         <c:forEach items="${requestScope.listalumno}" var="listalumno">
             <option value="${listalumno.id}">${listalumno.nombre} </option>
         </c:forEach>
