@@ -43,6 +43,7 @@ and open the template in the editor.
 
         <link href="assets/css/plugins.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/inicio.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/pages/formlayout.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/theme-color.css" rel="stylesheet" type="text/css" />
@@ -50,11 +51,19 @@ and open the template in the editor.
         <link rel="shortcut icon" href="assets/img/LogoIT.png" />
     </head>
     <body>
-        <div class="page-wrapper">
-            <div class="">
-                <img src="assets/img/TerraNovaLogo.jpg" class="img-fluid img-responsive" style="width:100%" alt="Responsive image">
-                <a id="secundaria" href="indexpre.jsp" class="btn btn-terra2">Secundaria</a>
-                <a id="preparatoria" href="indexpre.jsp" class="btn btn-terra2">Preparatoria</a>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 margen containerMargin" id="inicio">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4"></div>
+                    <div class=" col-lg-2 col-md-4 col-sm-4">
+                        <a id="secundaria" href="indexpre.jsp" style="margin-top: 12.9px;" class="btn btn-terra2">Secundaria</a>
+                    </div> <br>
+                    <div class="col-lg-2 col-md-4 col-sm-4">
+                        <a id="preparatoria" href="indexpre.jsp" style="margin-top:12.9px; " class="btn btn-terra2">Preparatoria</a> 
+                    </div>
+
+                    <div class="col-lg-4 col-md-4"></div>
+                </div>
             </div>
         </div>
 

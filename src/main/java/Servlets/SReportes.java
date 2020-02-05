@@ -16,8 +16,14 @@ import Modelos.Alumno;
 import Modelos.TbMateria;
 import Modelos.TbPersonal;
 import Modelos.TbReporteDisciplinar;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -27,7 +33,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
 import java.text.SimpleDateFormat;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -204,8 +214,20 @@ public class SReportes extends HttpServlet {
         TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
         objectJson = request.getParameter("REPORTE");
         mapper = new ObjectMapper();
+        String url = "C:\\Users\\Jonat\\Desktop";
+        String urlcompleta = "C:\\Users\\Jonat\\Desktop"+reporteD.getFoto();
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setSizeThreshold(1024);
+        factory.setRepository(new File(url));
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        
         try {
-            reporteD = mapper.readValue(objectJson, TbReporteDisciplinar.class);
+            List <FileItem> parts = upload.parseRequest(request);
+            for(FileItem items: parts){
+                File file = new File(url,items.getName());
+                items.write(file);
+            }
+            
             alumnoC.guardaReporteD(reporteD);
         } catch (Exception e) {
             System.out.println(e);

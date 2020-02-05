@@ -1,0 +1,15 @@
+
+
+#inicio{
+    background: url("background.jpg") center center/cover no-repeat;
+    height: 100%;
+}
+.margen{
+     padding-left: 21px ;
+    padding-right: 21px ;
+}
+.containerMargin{
+     padding-top: 500px;
+    padding-bottom:500px;
+}
+
