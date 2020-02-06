@@ -41,20 +41,21 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="">
+                                                <strong type="text" >Los campos con signo * son obligatorios</strong>
                                                 <form>
                                                     <div class="card-body row">
                                                         <div class="col-md-6 col-sm-6" idDatos="${requestScope.TbPersonal.idtbpersonal}">
                                                             <input id="idpersonal" type="hidden" value="${requestScope.personal.idtbpersonal}">
                                                             <div class="form-group">
-                                                                <label>Nombre(s)</label>
+                                                                <label>Nombre(s)*</label>
                                                                 <input value="${requestScope.personal.nombre}" id="nombrep" type="text" class="form-control" placeholder="nombre">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Apellido Paterno</label>
+                                                                <label>Apellido Paterno*</label>
                                                                 <input value="${requestScope.personal.apellidop}"  id="apellidopp" type="text" class="form-control" placeholder="apellido paterno">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Apellido Materno</label>
+                                                                <label>Apellido Materno*</label>
                                                                 <input value="${requestScope.personal.apellidom}" id="apellidomp" type="text" class="form-control" placeholder="apellido materno">
                                                             </div>
                                                             <div class="form-group">
@@ -62,7 +63,7 @@
                                                                 <input value="${requestScope.personal.curp}" id="curpp" type="text" class="form-control" placeholder="curp">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Fecha de nacimiento</label>
+                                                                <label>Fecha de nacimiento*</label>
                                                                 <input value="${requestScope.personal.fechanacimiento}" id="fechanap" type="date" class="form-control" placeholder="fecha nacimiento">
                                                             </div>
                                                             <div class="form-group">
@@ -107,7 +108,7 @@
                                                                 </c:choose>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Correo</label>
+                                                                <label>Correo*</label>
                                                                 <input value="${requestScope.personal.correo}" id="correop" type="email" class="form-control" placeholder="codigo postal">
                                                             </div>
                                                         </div>
@@ -117,7 +118,7 @@
                                                                 <input value="${requestScope.personal.telefonocasa}" id="telcasatp" type="number" class="form-control" placeholder="telefono casa">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Celular</label>
+                                                                <label>Celular*</label>
                                                                 <input value="${requestScope.personal.celular}" id="celularp" type="number" class="form-control" placeholder="celular">
                                                             </div>
                                                             <div class="form-group">
@@ -166,11 +167,12 @@
                                 <div class="card-body " id="bar-parent2">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
+                                            <strong type="text" >Los campos con signo * son obligatorios</strong>
                                             <form>
                                                 <div class="card-body row">
                                                     <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
-                                                            <label>Nivel máximo de estudios</label>
+                                                            <label>Nivel máximo de estudios*</label>
                                                             <input value="${requestScope.personal.nivelestudios}" id="nivelmax" type="text" class="form-control" placeholder="nivel de estudios">
                                                         </div>
                                                         <div class="form-group">

@@ -220,7 +220,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public void guardaReporteD(TbReporteDisciplinar reporteD) {
+    public void guardaReporteD(TbReporteDisciplinar reporteD, String ruta) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -249,7 +249,7 @@ public class ConsultasAlumno {
             pst.setInt(11, reporteD.getRperiodo());
             pst.setInt(12, reporteD.getNivel());
             pst.setString(13, reporteD.getDescripcion());
-            pst.setString(14, reporteD.getFoto());
+            pst.setString(14, ruta);
             pst.setInt(15, 1);
             pst.setInt(16, 1);
 

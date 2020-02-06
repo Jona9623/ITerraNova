@@ -246,6 +246,8 @@
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js" ></script>
         <script src="assets/js/pages/table/table_data.js" ></script>
+        
+        <script type="text/javascript" src="assets/js/jquery-form.js"></script>
 
         <!-- summernote -->
         <script src="assets/plugins/summernote/summernote.min.js" ></script>

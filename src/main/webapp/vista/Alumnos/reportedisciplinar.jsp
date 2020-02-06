@@ -28,8 +28,9 @@
             <div class="card-head">
                 <header>Formulario de reporte</header>
 
-            </div>
-            <form   enctype="multipart/form-data" method="POST" action="SReportes" name="fileinfo">
+            </div> <br>
+            <strong type="text" >Los campos con signo * son obligatorios</strong>
+            <form   enctype="multipart/form-data" method="POST" action="SReportes" name="formreporteD">
                 <input type="text" name="ACCION" id="ACCION" value="GUARDAR" hidden="true">
                 <div class="col-lg-4 p-t-20">
                     <label >Seleccione periodo escolar</label>
@@ -84,19 +85,19 @@
                     </div>
                     <div class="col-lg-4 p-t-20"> 
                         <div class="form-group">
-                            <label>Hora del incidente</label>
+                            <label>Hora del incidente *</label>
                             <input id="horaincidente" name="Horaincidente" type="time" class="form-control" placeholder="Enter ...">
                         </div>
                     </div>
                     <div class="col-lg-4 p-t-20">
                         <div class="form-group">
-                            <label>Fcha del incidente</label>
+                            <label>Fcha del incidente *</label>
                             <input id="fechaincidente" name="Fechaincidente" type="date" class="form-control" placeholder="Enter ...">
                         </div>
                     </div>
                     <div class="col-lg-4 p-t-20">
                         <div class="form-group">
-                            <label>Fcha del reporte</label>
+                            <label>Fcha del reporte *</label>
                             <input id="fechareporte" name="Fechareporte" type="date" class="form-control" placeholder="Enter ...">
                         </div>
                     </div>
@@ -119,7 +120,7 @@
                     <div class="col-lg-4 p-t-20">
                         <label >Materia durante el incidente (si aplica)</label>
                         <select id="materiaD" name="MateriaD" class="custom-select">
-                            <option value="">No aplica</option>
+                            <option value="0">No aplica</option>
                             <c:forEach items="${requestScope.listmateria}" var="listmateria">
                                 <option value="${listmateria.idtbmateria}">${listmateria.nombrecorto} </option>
                             </c:forEach>
@@ -128,7 +129,7 @@
                     <div class="col-lg-4 p-t-20">
                         <label >Maestro de materia (si aplica)</label>
                         <select id="personalmateria" name="Personal" class="custom-select">
-                            <option value="">No aplica</option>
+                            <option value="0">No aplica</option>
                             <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
                                 <option value="${listpersonal.idtbpersonal}">${listpersonal.nombre} </option>
                             </c:forEach>
@@ -136,13 +137,13 @@
                     </div>
                     <div class="col-lg-4 p-t-20"> 
                         <div class="form-group">
-                            <label>Lugar del incidente</label>
+                            <label>Lugar del incidente *</label>
                             <input id="lugarincidente" name="Lugarincidente" type="text" class="form-control" placeholder="Enter ...">
                         </div>
                     </div>
                     <div class="col-lg-4 p-t-20">
                         <div class="form-group">
-                            <label>Descripciopn de la falta</label>
+                            <label>Descripciopn de la falta *</label>
                             <textarea id="descripcion" name="Descripcion" class="form-control" rows="5" placeholder="Enter ..."></textarea>
                         </div>
                     </div>
@@ -154,7 +155,22 @@
                         <input id="foto" type="file" name="Archivo">
                     </div>
                 </div>
-                <button id="guardareporteD" value="GuardarreporteD" type="submit" class="btn btn-terra">Guardar</button>
+                <button id="guardareporteD" type="submit" class="btn btn-terra">Guardar</button> &nbsp; &nbsp; &nbsp;
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="1" name="correotutor" id="correotutor">
+                    Activar envío de correo a tutor
+                </label>
+                <input name="tutorcorreo" id="tutorcorreo" value="0" hidden="true">
+                <script>
+                    $(document).on('change', 'input[type="checkbox"]', function (e) {
+                        if (this.id == "correotutor") {
+                            if (this.checked)
+                                $('#tutorcorreo').val(this.value);
+                            else
+                                $('#tutorcorreo').val(0);
+                        }
+                    });
+                </script>
             </form>
         </div>
     </div>

@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <table id="tablapersonal" class="table table-bordered">
+    <table id="tablapersonal" class="table table-bordered" style="width:100%">
         <thead class="thead-light">
             <tr>
                 <th style="display: none"></th>

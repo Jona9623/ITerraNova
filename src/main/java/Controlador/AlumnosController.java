@@ -60,23 +60,21 @@ public class AlumnosController {
         consulta.guardaIincidente(incidente);
     }
 
-    public void guardaReporteD(TbReporteDisciplinar reporteD) {
+    public void guardaReporteD(TbReporteDisciplinar reporteD, String ruta, int status) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        consulta.guardaReporteD(reporteD);
-        TbReporteDisciplinar reporte = new TbReporteDisciplinar();
-        reporte = consulta.datosReporteD(reporteD.getRalumno(), reporteD.getFecha(), reporteD.getRperiodo());
-        String correotutor = reporte.getCorreotutor();
-        String asunto = "Notificacion de Reporte Disciplinar";
-        String cuerpo ="Estimado tutor, este correo funciona para notificar que el alumno " 
-                + reporte.getAlumno()+reporte.getAlumnoapep()+ reporte.getAlumnoapem() + " "
-                + "de grado y grupo "+ reporte.getGrado()+""+ reporte.getGrupo()+"\n"
-                + "Se encontró realizando una falta  la cual solicita su presentación "
-                + "cuanto antes a la institucion para llegar a una solución\n"
-                + "La falta cometida fue "+ reporte.getTipoincidente()+ "\n"
-                + "Registrada a la hora : " +reporte.getHora()+" el dia "+ reporte.getFecha() +"\n"
-                + "Agradecemos su atención y esperamos su precensia en la institución\n"
-                + "NOTA: Si el correo no corresponde con su tutorado favor de reportar a la institución" ;
-        enviarCorreo(correotutor,asunto,cuerpo);
+        consulta.guardaReporteD(reporteD, ruta);
+        if (status == 1) {
+            TbReporteDisciplinar reporte = new TbReporteDisciplinar();
+            reporte = consulta.datosReporteD(reporteD.getRalumno(), reporteD.getFecha(), reporteD.getRperiodo());
+            String correotutor = reporte.getCorreotutor();
+            String asunto = "Notificacion de Reporte Disciplinar";
+            String cuerpo = "Estimado padre de familia, le informo que el dia " + reporte.getHora() + " su hijo " + reporte.getAlumno() + "" + reporte.getAlumnoapep() + "" + reporte.getAlumnoapem() + " "
+                    + "le fue levantado un reporte de tipo " + reporte.getNivel() + " del estilo " + reporte.getTipoincidente() + "\n"
+                    + "Le pedimos que platique con su hij@, y cualquier duda con mucho gusto contactar a la institución para poder platicar mas adelante\n"
+                    + "\nNOTA: En caso de que la información se encuentre equivocada, favor de comunicarse a la institucuión ";
+            enviarCorreo(correotutor, asunto, cuerpo);
+        }else
+            System.out.println("No entro");
     }
 
     public List<TbReporteDisciplinar> getAlumnosReporteD() {
@@ -115,7 +113,7 @@ public class AlumnosController {
             mensaje.setSubject(asunto);
             mensaje.setText(cuerpo);
             Transport t = sesion.getTransport("smtp");
-            t.connect(usuario,contrasena);
+            t.connect(usuario, contrasena);
             t.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
             t.close();
 

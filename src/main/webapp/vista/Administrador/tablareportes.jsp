@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="card-body row">
-        <table id="tablareporteD" class="table table-bordered">
+        <table id="tablareporteD" class="table table-bordered" style="width:100%">
             <thead class="thead-light">
                 <tr>
                     <th style="display: none"></th>

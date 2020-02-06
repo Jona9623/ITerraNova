@@ -19,13 +19,6 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-12">
-        <div class="card-head">
-            <header>Formulario de reporte</header>
-        </div>
-    </div>
-</div>
-<div class="row">
     <div class="p-rl-20">
         <ul class="nav customtab nav-tabs" role="tablist">
             <li class="nav-item"><a href="#tab1" class="nav-link active show" data-toggle="tab">Academico</a></li>

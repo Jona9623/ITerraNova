@@ -42,17 +42,18 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="">
+                                                <strong type="text" >Los campos con signo * son obligatorios</strong>
                                                 <form>
                                                     <div class="card-body row">
                                                         <div class="col-md-6 col-sm-6" idDatos="${requestScope.TbAlumnos.idtbalumnos}">
                                                             <input id="idalumno" type="hidden" value="${requestScope.alumno.idtbalumnos}">
                                                             <input id="idtutor" type="hidden" value="${requestScope.tutor.idtbtutor}">
                                                             <div class="form-group">
-                                                                <label>Nombre(s)</label>
+                                                                <label>Nombre(s)*</label>
                                                                 <input id="nombret" value="${requestScope.tutor.nombre}" type="text" class="form-control" placeholder="nombre">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Apellido Paterno</label>
+                                                                <label>Apellido Paterno*</label>
                                                                 <input  id="apellidopt" value="${requestScope.tutor.apellidop}" type="text" class="form-control" placeholder="apellido paterno">
                                                             </div>
                                                             <div class="form-group">
@@ -64,7 +65,7 @@
                                                                 <input id="ocupacion" value="${requestScope.tutor.ocupacion}" type="text" class="form-control" placeholder="ocupacion">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Parentesco</label>
+                                                                <label>Parentesco*</label>
                                                                 <input id="parentesco" value="${requestScope.tutor.parentesco}" type="text" class="form-control" placeholder="parentesco">
                                                             </div>
                                                             <div class="form-group">
@@ -74,7 +75,7 @@
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group">
-                                                                <label>Celular</label>
+                                                                <label>Celular*</label>
                                                                 <input id="celulart" value="${requestScope.tutor.celular}" maxlength="10" type="number" class="form-control" placeholder="celular">
                                                             </div>
                                                             <div class="form-group">
@@ -114,6 +115,7 @@
                                 <div class="card-body " id="bar-parent2">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
+                                            <strong type="text" >Los campos con signo * son obligatorios</strong>
                                             <form>
                                                 <div class="card-body row">
                                                     <div class="col-md-6 col-sm-6">
@@ -122,11 +124,11 @@
                                                             <input id="matricula" value="${requestScope.alumno.matricula}" type="text" class="form-control" placeholder="matricula">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Nombre(s)</label>
+                                                            <label>Nombre(s)*</label>
                                                             <input  id="nombrea" value="${requestScope.alumno.nombre}" type="text" class="form-control" placeholder="nombre(s)">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Apellido paterno</label>
+                                                            <label>Apellido paterno*</label>
                                                             <input id="apellidopa" value="${requestScope.alumno.apellidop}" type="text" class="form-control" placeholder="apellido paterno">
                                                         </div>
                                                         <div class="form-group">
@@ -232,15 +234,16 @@
                                 <div class="card-body " id="bar-parent2">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
+                                            <strong type="text" >Los campos con signo * son obligatorios</strong>
                                             <form>
                                                 <div class="card-body row">
                                                     <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
-                                                            <label>Nivel que cursa</label>
+                                                            <label>Nivel que cursa*</label>
                                                             <input id="nivela" value="${requestScope.alumno.nivelcursa}" type="text" class="form-control" placeholder="nivel">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label >Seleccione el grado</label>
+                                                            <label >Seleccione el grado*</label>
                                                             <select id="grado" class="custom-select">
                                                                 <c:forEach items="${requestScope.listgrado}" var="listgrado">
                                                                     <option value="${listgrado.idtbgrado}" 
@@ -283,7 +286,7 @@
                                                             <select id="cpt" class="custom-select">
                                                                 <option value="">No aún</option>
                                                                 <c:forEach items="${requestScope.listcpt}" var="listcpt">
-                                                                   <option value="${listcpt.idtbcpt}" 
+                                                                    <option value="${listcpt.idtbcpt}" 
                                                                             <c:if test="${listcpt.idtbcpt == requestScope.alumno.rcpt}">
                                                                                 selected=""
                                                                             </c:if>

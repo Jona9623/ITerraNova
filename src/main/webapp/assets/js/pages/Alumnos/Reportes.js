@@ -19,18 +19,19 @@ var Reportes = (function () {
                     Reportes.guardaIncidente(Reportes.datosIncidente(), "guardaIncidente");
                 });
                 Reportes.guardarD();
-                  //$("#guardareporteD").on('click', function () {
-                  //    Reportes.guardaReporteD(Reportes.datosReporteD(), "guardaReporteD");
+                //$("#guardareporteD").on('click', function () {
+                //    Reportes.guardaReporteD(Reportes.datosReporteD(), "guardaReporteD");
                 //  });
                 $("#mostrarreportes").on('click', function () {
                     Reportes.mostrarReportes();
                 });
             });
         },
-        guararD: function(){
-          $('form[name="fileinfo"]').ajaxForm(function(){
-              Reportes.reporteDisciplinar();
-          });  
+        guardarD: function () {
+            $('form[name="formreporteD"]').ajaxForm(function () {
+                swal("Hecho!", "Datos guardados correctamente", "success");
+                Reportes.reporteDisciplinar();
+            });
         },
         datosIncidente: function () {
             var incidente = {
@@ -121,7 +122,9 @@ var Reportes = (function () {
                 ACCION: "mostrarReportes"
             }).then(function () {
                 $("#content").html(arguments[0]);
-                $("#tablareporteD").DataTable();
+                $("#tablareporteD").DataTable({
+                    "scrollX": true
+                });
                 var id = $('#consultareporteD').find('#periodotablaD').val();
                 $('#consultareporteD').find('tr[name^="alumno-"]').hide();
                 $('#consultareporteD').find('tr[name="alumno-' + id + '"]').show();

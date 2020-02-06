@@ -6,16 +6,18 @@ var Adminalumno = (function () {
                 ACCION: "MuestraAgregaAlumno"
             }).then(function () {
                 $('#content').html(arguments[0]);
-                $("#tablaalumnos").DataTable();
+                $("#tablaalumnos").DataTable({
+                    "scrollX": true
+                });
                 $('#btnagregaA').on('click', function () {
                     Adminalumno.agregaAlumno();
                 }),
-                $('.editaralu').on('click', function () {
+                        $('.editaralu').on('click', function () {
                     idalumno = $(this).parents("tr").find("td").eq(0).html();
                     idtutor = $(this).parents("tr").find("td").eq(1).html();
-                    Adminalumno.editarAlumno(idalumno,idtutor);
+                    Adminalumno.editarAlumno(idalumno, idtutor);
                 }),
-                $(".aliminaralu").on('click',function(){
+                        $(".aliminaralu").on('click', function () {
                     idalumno = $(this).parents("tr").find("td").eq(0).html();
                     swal({
                         title: "Estas seguro?",
@@ -26,38 +28,42 @@ var Adminalumno = (function () {
                         confirmButtonText: "Confirmar",
                         closeOnConfirm: false
                     }, function () {
-                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");                      
+                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
                         Adminalumno.eliminarAlumno(idalumno);
                     });
-                    
+
                 });
             });
         },
-        formularios: function (argumento){
+        formularios: function (argumento) {
             $('#content').html(argumento);
-                $('#guardatutor').on('click', function () {
+            $('#guardatutor').on('click', function () {
+                if (validacionTutor()) {
                     Adminalumno.guardaTutor(Adminalumno.datosTutor(), 'GuardaTutor');
-                });
-                $('#guardaalumno').on('click', function () {
+                }
+            });
+            $('#guardaalumno').on('click', function () {
+                if (validacionAlumno()) {
                     Adminalumno.guardaAlumno(Adminalumno.datosAlumno(), 'GuardaAlumno');
-                });
+                }
+            });
         },
-        editarAlumno: function(idalumno, idtutor){
-            $.get("SAdminalumno",{
+        editarAlumno: function (idalumno, idtutor) {
+            $.get("SAdminalumno", {
                 ACCION: "editarAlumno",
                 IDALUMNO: idalumno,
                 IDTUTOR: idtutor
-            }).then(function(){
-               Adminalumno.formularios(arguments[0]); 
+            }).then(function () {
+                Adminalumno.formularios(arguments[0]);
             });
         },
-        eliminarAlumno: function(idalumno){
-          $.get("SAdminalumno",{
-              ACCION: "eliminarAlumno",
-              IDALUMNO: idalumno
-          }).then(function (){
-              Adminalumno.tablaAlumnos();
-          })  
+        eliminarAlumno: function (idalumno) {
+            $.get("SAdminalumno", {
+                ACCION: "eliminarAlumno",
+                IDALUMNO: idalumno
+            }).then(function () {
+                Adminalumno.tablaAlumnos();
+            })
         },
         agregaAlumno: function () {
             $.get("SAdminalumno", {
@@ -139,7 +145,48 @@ var Adminalumno = (function () {
             return alumno;
         }
     }
+}());
+function validacionAlumno() {
+    var text = "";
+    if ($.trim($("#nombrea").val()).length === 0) {
+        text = text + "Nombre(s) del alumno\n";
+    }
+    if ($.trim($("#apellidopa").val()).length === 0) {
+        text = text + "Apellido paterno del alumno\n";
+    }
+    if ($.trim($("#nivela").val()).length === 0) {
+        text = text + "Nivel que cursa\n";
+    }
+    if (text.length > 0) {
+        showWithTitleMessage('Existen campos vacios', text);
+        return false;
+    } else {
+        return true;
+    }
 }
-());
+function validacionTutor() {
+    alert("entra");
+    var text = "";
+    if ($.trim($("#nombret").val()).length === 0) {
+        text = text + "Nombre(s) del tutor\n";
+    }
+    if ($.trim($("#apelliopt").val()).length === 0) {
+        text = text + "Apellido paterno del tutor\n";
+    }
+     if ($.trim($("#parentesco").val()).length === 0) {
+     text = text + "Parentesco\n";
+     }
+     if ($.trim($("#celulart").val()).length === 0) {
+     text = text + "Celular del tutor\n";
+     }
+    if (text.length > 0) {
+        showWithTitleMessage('Existen campos vacios', text);
+        alert("Entra faltan campos");
+        return false;
+    } else {
+        alert("Entra todo correcto");
+        return true;
+    }
+}
 
 

@@ -223,9 +223,10 @@ public class SReportes extends HttpServlet {
 
     private void guardaReporteD(HttpServletRequest request, HttpServletResponse response) {
         TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
+        String ruta = null;
         try {
-            reporteD.setFoto(String.valueOf(request.getParameter("Archivo")));
-            if (reporteD.getFoto() != null) {
+            String foto =(String.valueOf(request.getParameter("Archivo")));
+            if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
                 String uploadPath = "C:\\Users\\Complx\\Desktop"; //applicationPath + File.separator + "archivos";
                 File fileUploadDirectory = new File(uploadPath);
@@ -234,25 +235,25 @@ public class SReportes extends HttpServlet {
                 }
                 Part part = request.getPart("Archivo");
                 String nombrearchivo = extractFileName(part);
-                String ruta = uploadPath + File.separator + nombrearchivo;
+                ruta = uploadPath + File.separator + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
-
-            reporteD.setRperiodo(Integer.valueOf(request.getParameter("PeriodoD")));
-            reporteD.setRalumno(Integer.valueOf(request.getParameter("Alumnodisciplinar")));
-            reporteD.setRtipoincidente(Integer.valueOf(request.getParameter("Incidente")));
-            reporteD.setNivel(Integer.valueOf(request.getParameter("Nivel")));
+            int status = Integer.parseInt(request.getParameter("tutorcorreo"));
+            reporteD.setRperiodo(Integer.parseInt(request.getParameter("PeriodoD")));
+            reporteD.setRalumno(Integer.parseInt(request.getParameter("Alumnodisciplinar")));
+            reporteD.setRtipoincidente(Integer.parseInt(request.getParameter("Incidente")));
+            reporteD.setNivel(Integer.parseInt(request.getParameter("Nivel")));
             reporteD.setHora(String.valueOf(request.getParameter("Horaincidente")));
             reporteD.setFecha(String.valueOf(request.getParameter("Fechaincidente")));
             reporteD.setFechareporte(String.valueOf(request.getParameter("Fechareporte")));
-            reporteD.setRpersonalsolicita(Integer.valueOf(request.getParameter("Personalsolicita")));
-            reporteD.setRpersonalllena(Integer.valueOf(request.getParameter("Personalllena")));
-            reporteD.setRmateria(Integer.valueOf(request.getParameter("MateriaD")));
-            reporteD.setRpersonal(Integer.valueOf(request.getParameter("Personal")));
+            reporteD.setRpersonalsolicita(Integer.parseInt(request.getParameter("Personalsolicita")));
+            reporteD.setRpersonalllena(Integer.parseInt(request.getParameter("Personalllena")));
+            reporteD.setRmateria(Integer.parseInt(request.getParameter("MateriaD")));
+            reporteD.setRpersonal(Integer.parseInt(request.getParameter("Personal")));
             reporteD.setLugar(String.valueOf(request.getParameter("Lugarincidente")));
             reporteD.setDescripcion(String.valueOf(request.getParameter("Descripcion")));
-            alumnoC.guardaReporteD(reporteD);
+            alumnoC.guardaReporteD(reporteD,ruta,status);
 
         } catch (Exception e) {
             System.out.println(e);
