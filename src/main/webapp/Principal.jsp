@@ -5,6 +5,20 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%  
+    int x=0;
+    int id_sesion;
+    HttpSession objsesion= request.getSession(false);
+    String usuario = (String) objsesion.getAttribute("user");
+    if(usuario==null){
+       response.sendRedirect("Login.jsp");
+    }else{
+     x = (int)objsesion.getAttribute("tipo");       
+     id_sesion = (int) objsesion.getAttribute("id");
+    }   
+%>
+
 <html>
     <head>
         <title>Instituto Terra Nova</title>

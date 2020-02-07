@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%  
+    int x=0;
+    int id_sesion;
+    HttpSession objsesion= request.getSession(false);
+    String usuario = (String) objsesion.getAttribute("user");
+    if(usuario==null){
+       response.sendRedirect("Login.jsp");
+    }else{
+     x = (int)objsesion.getAttribute("tipo");       
+     id_sesion = (int) objsesion.getAttribute("id");
+    }   
+%><!DOCTYPE html>
 <html lang="en">
     <!-- BEGIN HEAD -->
     <head>
@@ -81,7 +94,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default animated jello">                                    
                                     <li>
-                                        <a href="login.html">
+                                        <a href="Logout">
                                             <i class="icon-logout"></i> Salir </a>
                                     </li>
                                 </ul>
@@ -124,7 +137,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a id="reporteaca" class="nav-link ">
-                                                <span class="title">Reporte académico</span>
+                                                <span class="title">Reporte acadÃ©mico</span>
                                             </a>
                                         </li>
                                     </ul>
