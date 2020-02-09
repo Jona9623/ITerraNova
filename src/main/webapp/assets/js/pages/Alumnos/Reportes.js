@@ -19,9 +19,6 @@ var Reportes = (function () {
                     Reportes.guardaIncidente(Reportes.datosIncidente(), "guardaIncidente");
                 });
                 Reportes.guardarD();
-                //$("#guardareporteD").on('click', function () {
-                //    Reportes.guardaReporteD(Reportes.datosReporteD(), "guardaReporteD");
-                //  });
                 $("#mostrarreportes").on('click', function () {
                     Reportes.mostrarReportes();
                 });

@@ -30,7 +30,7 @@
 
             </div> <br>
             <strong type="text" >Los campos con signo * son obligatorios</strong>
-            <form   enctype="multipart/form-data" method="POST" action="SReportes" name="formreporteD">
+            <form  id="formReporteD" enctype="multipart/form-data" method="POST" action="SReportes" name="formreporteD">
                 <input type="text" name="ACCION" id="ACCION" value="GUARDAR" hidden="true">
                 <div class="col-lg-4 p-t-20">
                     <label >Seleccione periodo escolar</label>
@@ -84,19 +84,19 @@
                         </div>
                     </div>
                     <div class="col-lg-4 p-t-20"> 
-                        <div class="form-group">
+                        <div class="form-group" id="div-horaincidente">
                             <label>Hora del incidente *</label>
                             <input id="horaincidente" name="Horaincidente" type="time" class="form-control" placeholder="Enter ...">
                         </div>
                     </div>
                     <div class="col-lg-4 p-t-20">
-                        <div class="form-group">
+                        <div class="form-group" id="div-fechaincidente">
                             <label>Fcha del incidente *</label>
                             <input id="fechaincidente" name="Fechaincidente" type="date" class="form-control" placeholder="Enter ...">
                         </div>
                     </div>
                     <div class="col-lg-4 p-t-20">
-                        <div class="form-group">
+                        <div class="form-group" id="div-fechareporte">
                             <label>Fcha del reporte *</label>
                             <input id="fechareporte" name="Fechareporte" type="date" class="form-control" placeholder="Enter ...">
                         </div>
@@ -136,13 +136,13 @@
                         </select>
                     </div>
                     <div class="col-lg-4 p-t-20"> 
-                        <div class="form-group">
+                        <div class="form-group" id="div-lugarincidente">
                             <label>Lugar del incidente *</label>
                             <input id="lugarincidente" name="Lugarincidente" type="text" class="form-control" placeholder="Enter ...">
                         </div>
                     </div>
                     <div class="col-lg-4 p-t-20">
-                        <div class="form-group">
+                        <div class="form-group" id="div-descripcion">
                             <label>Descripciopn de la falta *</label>
                             <textarea id="descripcion" name="Descripcion" class="form-control" rows="5" placeholder="Enter ..."></textarea>
                         </div>
@@ -170,6 +170,39 @@
                                 $('#tutorcorreo').val(0);
                         }
                     });
+                    var form = document.getElementById("formReporteD");
+                    form.onsubmit = function (e) {
+                        var valido = true;
+                        if ($("#horaincidente").val().trim() == "") {
+                            $("#div-horaincidente").addClass("has-error");
+                            valido = false;
+                        }
+                        if ($("#fechaincidente").val().trim() == "") {
+                            $("#div-fechaincidente").addClass("has-error");
+                            valido = false;
+                        }
+                        if ($("#fechareporte").val().trim() == "") {
+                            $("#div-fechareporte").addClass("has-error");
+                            valido = false;
+                        }
+                        if ($("#lugarincidente").val().trim() == "") {
+                            $("#div-lugarincidente").addClass("has-error");
+                            valido = false;
+                        }
+                        if ($("#horaincidente").val().trim() == "") {
+                            $("#div-horaincidente").addClass("has-error");
+                            valido = false;
+                        }
+                        if ($("#descripcion").val().trim() == "") {
+                            $("#div-descripcion").addClass("has-error");
+                            valido = false;
+                        }
+                        if (valido == false) {
+                            alert("entro al if");
+                            swal("Faltan campos requeridos", "", "warning");
+                            e.preventDefault();
+                        }
+                    }
                 </script>
             </form>
         </div>

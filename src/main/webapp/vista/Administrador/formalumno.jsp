@@ -48,11 +48,11 @@
                                                         <div class="col-md-6 col-sm-6" idDatos="${requestScope.TbAlumnos.idtbalumnos}">
                                                             <input id="idalumno" type="hidden" value="${requestScope.alumno.idtbalumnos}">
                                                             <input id="idtutor" type="hidden" value="${requestScope.tutor.idtbtutor}">
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-nombret">
                                                                 <label>Nombre(s)*</label>
                                                                 <input id="nombret" value="${requestScope.tutor.nombre}" type="text" class="form-control" placeholder="nombre">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-apellidopt">
                                                                 <label>Apellido Paterno*</label>
                                                                 <input  id="apellidopt" value="${requestScope.tutor.apellidop}" type="text" class="form-control" placeholder="apellido paterno">
                                                             </div>
@@ -64,7 +64,7 @@
                                                                 <label>Ocupacion</label>
                                                                 <input id="ocupacion" value="${requestScope.tutor.ocupacion}" type="text" class="form-control" placeholder="ocupacion">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-parentesco">
                                                                 <label>Parentesco*</label>
                                                                 <input id="parentesco" value="${requestScope.tutor.parentesco}" type="text" class="form-control" placeholder="parentesco">
                                                             </div>
@@ -74,7 +74,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-celular">
                                                                 <label>Celular*</label>
                                                                 <input id="celulart" value="${requestScope.tutor.celular}" maxlength="10" type="number" class="form-control" placeholder="celular">
                                                             </div>
@@ -123,11 +123,11 @@
                                                             <label>Matricula</label>
                                                             <input id="matricula" value="${requestScope.alumno.matricula}" type="text" class="form-control" placeholder="matricula">
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="div-nombrea">
                                                             <label>Nombre(s)*</label>
                                                             <input  id="nombrea" value="${requestScope.alumno.nombre}" type="text" class="form-control" placeholder="nombre(s)">
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="div-apellidopa">
                                                             <label>Apellido paterno*</label>
                                                             <input id="apellidopa" value="${requestScope.alumno.apellidop}" type="text" class="form-control" placeholder="apellido paterno">
                                                         </div>
@@ -147,8 +147,8 @@
                                                             <label>Teléfono de casa</label>
                                                             <input id="telcasaa" value="${requestScope.alumno.telefonocasa}" type="number" class="form-control" placeholder="telefono casa">
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label>Celular</label>
+                                                        <div class="form-group" id="div-celulara">
+                                                            <label>Celular*</label>
                                                             <input id="celulara" value="${requestScope.alumno.celular}" type="number" class="form-control" placeholder="celular">
                                                         </div>
                                                         <div class="form-group">
@@ -238,11 +238,11 @@
                                             <form>
                                                 <div class="card-body row">
                                                     <div class="col-md-6 col-sm-6">
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="div-nivela">
                                                             <label>Nivel que cursa*</label>
                                                             <input id="nivela" value="${requestScope.alumno.nivelcursa}" type="text" class="form-control" placeholder="nivel">
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="div-grado">
                                                             <label >Seleccione el grado*</label>
                                                             <select id="grado" class="custom-select">
                                                                 <c:forEach items="${requestScope.listgrado}" var="listgrado">

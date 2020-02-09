@@ -38,7 +38,8 @@ var Adminpersonal = (function () {
             $('#guardapersonal').on('click', function () {
                 if (validacionPersonal()) {
                     Adminpersonal.guardaPersonal(Adminpersonal.datosPersonal(), 'GuardaPersonal');
-                }
+                }else
+                    swal("Faltan campos requeridos","","warning");
             });
         },
         editarPersonal: function (idpersonal) {
@@ -107,34 +108,32 @@ var Adminpersonal = (function () {
     }
 }());
 function validacionPersonal() {
-    var text = "";
-    if ($.trim($("#nombrep").val()).length === 0) {
-        text = text + "Nombre(s)\n";
+    var valido = true;
+    if ($("#nombrep").val().trim() == "") {
+        $("#div-nombrep").addClass("has-error");
+        valido = false;
     }
-    if ($.trim($("#apelliopp").val()).length === 0) {
-        text = text + "Apellido Paterno\n";
+    if ($("#apellidopp").val().trim() == "") {
+        $("#div-apellidopp").addClass("has-error");
+        valido = false;
     }
-    if ($.trim($("#apellidomp").val()).length === 0) {
-        text = text + "Apellido Materno\n"
+    if ($("#apellidomp").val().trim() == "") {
+        $("#div-apellidomp").addClass("has-error");
+        valido = false;
     }
-    if ($.trim($("#fechanap").val()).length === 0) {
-        text = text + "Fecha de nacimiento\n";
+    if ($("#fechanap").val().trim() == "") {
+        $("#div-fechanacimientop").addClass("has-error");
+        valido = false;
     }
-    if ($.trim($("#correop").val()).length === 0) {
-        text = text + "Correo\n";
+    if ($("#correop").val().trim() == "") {
+        $("#div-correop").addClass("has-error");
+        valido = false;
     }
-    if ($.trim($("#nivelmax").val()).length === 0) {
-        text = text + "Nivel máximo de estudios\n";
+    if ($("#nivelmax").val().trim() == "") {
+        $("#div-nivelmax").addClass("has-error");
+        valido = false;
     }
-    if ($.trim($("#nivela").val()).length === 0) {
-        text = text + "Nivel que cursa\n";
-    }
-    if (text.length > 0) {
-        showWithTitleMessage('Existen campos vacios', text);
-        return false;
-    } else {
-        return true;
-    }
+    return valido;
 }
 
 

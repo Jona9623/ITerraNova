@@ -46,15 +46,15 @@
                                                     <div class="card-body row">
                                                         <div class="col-md-6 col-sm-6" idDatos="${requestScope.TbPersonal.idtbpersonal}">
                                                             <input id="idpersonal" type="hidden" value="${requestScope.personal.idtbpersonal}">
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-nombrep">
                                                                 <label>Nombre(s)*</label>
                                                                 <input value="${requestScope.personal.nombre}" id="nombrep" type="text" class="form-control" placeholder="nombre">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-apellidopp">
                                                                 <label>Apellido Paterno*</label>
                                                                 <input value="${requestScope.personal.apellidop}"  id="apellidopp" type="text" class="form-control" placeholder="apellido paterno">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-apellidomp">
                                                                 <label>Apellido Materno*</label>
                                                                 <input value="${requestScope.personal.apellidom}" id="apellidomp" type="text" class="form-control" placeholder="apellido materno">
                                                             </div>
@@ -62,7 +62,7 @@
                                                                 <label>CURP</label>
                                                                 <input value="${requestScope.personal.curp}" id="curpp" type="text" class="form-control" placeholder="curp">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-fechanacimientop">
                                                                 <label>Fecha de nacimiento*</label>
                                                                 <input value="${requestScope.personal.fechanacimiento}" id="fechanap" type="date" class="form-control" placeholder="fecha nacimiento">
                                                             </div>
@@ -107,7 +107,7 @@
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-correop">
                                                                 <label>Correo*</label>
                                                                 <input value="${requestScope.personal.correo}" id="correop" type="email" class="form-control" placeholder="codigo postal">
                                                             </div>
@@ -117,7 +117,7 @@
                                                                 <label>Teleono de casa</label>
                                                                 <input value="${requestScope.personal.telefonocasa}" id="telcasatp" type="number" class="form-control" placeholder="telefono casa">
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" id="div-celularp">
                                                                 <label>Celular*</label>
                                                                 <input value="${requestScope.personal.celular}" id="celularp" type="number" class="form-control" placeholder="celular">
                                                             </div>
@@ -171,7 +171,7 @@
                                             <form>
                                                 <div class="card-body row">
                                                     <div class="col-md-6 col-sm-6">
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="div-nivelmax">
                                                             <label>Nivel máximo de estudios*</label>
                                                             <input value="${requestScope.personal.nivelestudios}" id="nivelmax" type="text" class="form-control" placeholder="nivel de estudios">
                                                         </div>
