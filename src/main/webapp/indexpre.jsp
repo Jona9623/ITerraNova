@@ -123,6 +123,7 @@
                                         </div>
                                     </div>
                                 </li>
+                                <% if(x == 1 || x == 2 || x == 3 || x == 5){ %>
                                 <li class="nav-item start">
                                     <a href="#" class="nav-link nav-toggle">
                                         <i class="material-icons">label</i>
@@ -142,6 +143,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <% } %>
                                 <li class="nav-item start ">
                                     <a href="#" class="nav-link nav-toggle">
                                         <i class="material-icons">label</i>
@@ -157,10 +159,11 @@
                                     </ul>
 
                                 </li>
+                                <% if (x == 3 || x == 4 || x == 5){ %>
                                 <li class="nav-item start">
                                     <a href="#" class="nav-link nav-toggle">
                                         <i class="material-icons">label</i>
-                                        <span id="Administrador" class="title">Administrador</span>
+                                        <span id="Administrador" class="title">Control Escolar</span>
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
@@ -176,6 +179,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <% } %>
                             </ul>
                         </div>
                     </div>
@@ -189,13 +193,13 @@
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img class="d-block w-100" src="assets/img/LogoT.jpg" alt="First slide">
+                                        <img class="d-block w-100 img-responsive" src="assets/img/LogoT.jpg" style="width: 100%" alt="First slide">
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100" src="assets/img/LOGO_T.jpg" alt="Second slide">
+                                        <img class="d-block w-100 img-responsive" src="assets/img/LOGO_T.jpg" style="width: 100%" alt="Second slide">
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100" src="assets/img/Banner.jpg" alt="Third slide">
+                                        <img class="d-block w-100 img-responsive" src="assets/img/Banner.jpg" style="width: 100%" alt="Third slide">
                                     </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -212,13 +216,6 @@
                 <!-- end page content -->
             </div>
             <!-- end page container -->
-            <!-- start footer -->
-            <div class="page-footer">
-                <div class="scroll-to-top">
-                    <i class="icon-arrow-up"></i>
-                </div>
-            </div>
-            <!-- end footer -->
         </div>
         <!-- start js include path -->
         <script src="assets/plugins/jquery/jquery.min.js" ></script>

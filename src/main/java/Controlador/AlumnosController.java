@@ -65,7 +65,7 @@ public class AlumnosController {
         consulta.guardaReporteD(reporteD, ruta);
         if (status == 1) {
             TbReporteDisciplinar reporte = new TbReporteDisciplinar();
-            reporte = consulta.datosReporteD(reporteD.getRalumno(), reporteD.getFecha(), reporteD.getRperiodo());
+            reporte = consulta.datosReporteD(reporteD.getRalumno(), reporteD.getFecha(), reporteD.getHora());
             String correotutor = reporte.getCorreotutor();
             String asunto = "Notificacion de Reporte Disciplinar";
             String cuerpo = "Estimado padre de familia, le informo que el dia " + reporte.getHora() + " su hijo " + reporte.getAlumno() + "" + reporte.getAlumnoapep() + "" + reporte.getAlumnoapem() + " "
@@ -82,9 +82,14 @@ public class AlumnosController {
         return consulta.getAlumnosReporteD();
     }
 
-    public TbReporteDisciplinar datosReporteD(int id, String fecha, int periodo) {
+    public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return (consulta.datosReporteD(id, fecha, periodo));
+        return (consulta.datosReporteD(id, fecha, hora));
+    }
+    
+    public TbReporteDisciplinar editarReporteD(int id, String fecha, String hora) {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.editarReporteD(id,fecha,hora);
     }
 
     private static void enviarCorreo(String correotutor, String asunto, String cuerpo) {
@@ -121,6 +126,11 @@ public class AlumnosController {
             e.printStackTrace();
         }
 
+    }
+
+    public void guardareditarReporteD(TbReporteDisciplinar reporteD) {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.guardareditarReporteD(reporteD);
     }
 
 }

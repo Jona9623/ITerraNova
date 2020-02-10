@@ -6,6 +6,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%  
+    int x=0;
+    int id_sesion;
+    HttpSession objsesion= request.getSession(false);
+    String usuario = (String) objsesion.getAttribute("user");
+     x = (int)objsesion.getAttribute("tipo");       
+     id_sesion = (int) objsesion.getAttribute("id");
+       
+%>
 <!DOCTYPE html>
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
@@ -43,6 +52,7 @@
                     <th style="display: none"></th>
                     <th style="display: none"></th>
                     <th style="display: none"></th>
+                    <th style="display: none"></th>
                     <th class="center">Alumno</th>
                     <th class="center">Grado y Grupo</th>
                     <th class="center">Tipo de incidente</th>
@@ -57,6 +67,7 @@
                         <td class="center" style="display: none">${alumnosdisciplinar.ralumno}</td>
                         <td class="center" style="display: none">${alumnosdisciplinar.fecha}</td>
                         <td class="center" style="display: none">${alumnosdisciplinar.rperiodo}</td>
+                        <td class="center" style="display: none">${alumnosdisciplinar.hora}</td>
                         <td class="center">${alumnosdisciplinar.alumno} ${alumnosdisciplinar.alumnoapep}</td>
                         <td class="center">${alumnosdisciplinar.grado} ${alumnosdisciplinar.grupo}</td>
                         <td class="center">${alumnosdisciplinar.tipoincidente}</td>
@@ -68,9 +79,15 @@
                                     <i class="fa fa-angle-down"></i>
                                 </button>
                                 <ul class="dropdown-menu pull-left" role="menu">
-                                    <li>
+                                    <li> 
+                                        <% if (x == 1 || x == 3 || x == 5) { %>
                                         <a  href="javascript:;" class="inforeporteD">
                                             <i id="inforeporteD" class="icon-arrow-right"></i> Toda la información </a>
+                                        <% } %>
+                                        <% if (x == 3 || x == 5) { %>
+                                        <a  href="javascript:;" class="editarreporteD">
+                                            <i id="editarreporteD" class="icon-pencil"></i>Editar reporte</a>
+                                        <% } %>   
                                     </li>
                                 </ul>
                             </div>

@@ -38,6 +38,7 @@ var Reportes = (function () {
         },
         datosReporteD: function () {
             var reporteD = {
+                "idtbreporte": $("#idtbreporteD").val(),
                 "rperiodo": $("#periodoD").val(),
                 "ralumno": $("#alumnodisciplinar").val(),
                 "rpersonal": $("#personalmateria").val(),
@@ -57,7 +58,7 @@ var Reportes = (function () {
             }
             return reporteD;
         },
-        guardaReporteD: function (objeto, accion) {
+ /*       guardaReporteD: function (objeto, accion) {
             var form = $("#fileinfo")[0];
             var data = new FormData(form);
             $.ajax({
@@ -83,7 +84,7 @@ var Reportes = (function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Reportes.reporteDisciplinar();
             });
-        },
+        },*/
         getAlumno: function (grado, grupo) {
             $.get("SReportes", {
                 ACCION: "alumnoGradoGrupo",
@@ -132,20 +133,50 @@ var Reportes = (function () {
                 $(".inforeporteD").on('click', function () {
                     alumnoreporte = $(this).parents("tr").find("td").eq(0).html();
                     reportefecha = $(this).parents("tr").find("td").eq(1).html();
-                    reporteperiodo = $(this).parents("tr").find("td").eq(2).html();
-                    Reportes.infoReporteD(alumnoreporte, reportefecha, reporteperiodo);
+                    hora = $(this).parents("tr").find("td").eq(3).html();
+                    Reportes.infoReporteD(alumnoreporte, reportefecha, hora);
+                });
+                $(".editarreporteD").on('click',function(){
+                    editaralumnoreporte = $(this).parents("tr").find("td").eq(0).html();
+                    editarreportefecha = $(this).parents("tr").find("td").eq(1).html();
+                    editarhora = $(this).parents("tr").find("td").eq(3).html();
+                    Reportes.editarReporteD(editaralumnoreporte, editarreportefecha, editarhora);
                 });
             });
         },
-        infoReporteD: function (alumnoreporte, reportefecha, reporteperiodo) {
+        infoReporteD: function (alumnoreporte, reportefecha, hora) {
             $.get("SReportes", {
                 ACCION: "infoReporteD",
                 ID: alumnoreporte,
                 FECHA: reportefecha,
-                PERIODO: reporteperiodo
+                HORA: hora
             }).then(function () {
                 $("#content").html(arguments[0]);
             });
+        },
+        editarReporteD: function (id,fecha,hora){
+            $.get("SReportes",{
+                ACCION: "editarReporteD",
+                ID: id,
+                FECHA: fecha,
+                HORA: hora
+            }).then(function(){
+                $("#content").html(arguments[0]);
+                $("#editarreporteD").on('click',function(){
+                    alert("entra");
+                   Reportes.guardaeditarReporteD(Reportes.datosReporteD(),"guardaeditarReporteD") 
+                });
+            })
+        },
+        guardaeditarReporteD: function(objeto,accion){
+            $.get("SReportes",{
+                ACCION: accion,
+                OBJETO: JSON.stringify(objeto)
+            }).then(function (){
+                swal("Hecho!", "Datos actualizados correctamente", "success");
+                Reportes.mostrarReportes();
+            });
+            
         },
         reporteAcademico: function () {
             $.get("SReportes", {

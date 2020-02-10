@@ -36,7 +36,7 @@
 </head>
 <body>
     <div class="form-title">
-        <h1>Instituto Terra Nova</h1>
+        <img class="img-responsive center" src="assets/img/LogoTerraNova.png" style="width: 30%;">
     </div>
     <!-- Login Form-->
     <div class="login-form text-center">

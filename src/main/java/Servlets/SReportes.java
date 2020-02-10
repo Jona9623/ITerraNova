@@ -95,6 +95,9 @@ public class SReportes extends HttpServlet {
             case "infoReporteD":
                 infoReporteD(request, response);
                 break;
+            case "editarReporteD": editarReporteD (request,response); break;
+            
+            case "guardaeditarReporteD": guardaeditarReporteD(request,response);
         }
     }
 
@@ -280,7 +283,7 @@ public class SReportes extends HttpServlet {
         alumnoC = new AlumnosController();
         TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
         try {
-            reporteD = alumnoC.datosReporteD(Integer.parseInt(request.getParameter("ID")), request.getParameter("FECHA"), Integer.parseInt(request.getParameter("PERIODO")));
+            reporteD = alumnoC.datosReporteD(Integer.parseInt(request.getParameter("ID")), request.getParameter("FECHA"),request.getParameter("HORA"));
             request.setAttribute("reporteD", reporteD);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/datosreportedi.jsp");
             rd.forward(request, response);
@@ -299,6 +302,46 @@ public class SReportes extends HttpServlet {
             }
         }
         return fileName;
+    }
+
+    private void editarReporteD(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
+        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List<TbPersonal> listpersonal = new ArrayList<>();
+        List<TbMateria> listmateria = new ArrayList<>();
+        List<CtIncidente> listincidente = new ArrayList<>();
+        try {
+            reporteD = alumnoC.editarReporteD (Integer.parseInt(request.getParameter("ID")), request.getParameter("FECHA"),request.getParameter("HORA"));
+            request.setAttribute("reporteD", reporteD);
+            listperiodo = alumnoC.getPeriodos();
+            request.setAttribute("listperiodo", listperiodo);
+            listpersonal = adminC.getPersonal();
+            request.setAttribute("listpersonal", listpersonal);
+            listmateria = alumnoC.getMaterias();
+            request.setAttribute("listmateria", listmateria);
+            listincidente = alumnoC.getIncidentes();
+            request.setAttribute("listincidente", listincidente);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/reportedisciplinareditar.jsp");
+            rd.forward(request, response);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+    }
+
+    private void guardaeditarReporteD(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
+        mapper = new ObjectMapper();
+        objectJson = request.getParameter("OBJETO");
+        try {
+            reporteD = mapper.readValue(objectJson, TbReporteDisciplinar.class);
+            alumnoC.guardareditarReporteD(reporteD);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }
