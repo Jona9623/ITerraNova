@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
@@ -40,42 +41,38 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="">
-                                                <label >Semana fiscal numero: 12</label>
+                                                <div class="col-lg-4 p-t-20">
+                                                    <label >Seleccione Semana fiscal</label>
+                                                    <select id="semanafiscal" name="semanafiscal" class="custom-select">
+                                                        <c:forEach items="${requestScope.listsemana}" var="listsemana">
+                                                            <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
                                                 <form>
                                                     <div class="card-body row">
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione maestro</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">maestro</option>
-                                                                <option value="2">maestro</option>
-                                                                <option value="3">maestro</option>
-                                                                <option value="3">maestro</option>
+                                                            <label >Seleccione periodo escolar</label>
+                                                            <select id="periodoA" class="custom-select" name="PeriodoD">
+                                                                <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
+                                                                    <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione grado y grupo</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">1er A</option>
-                                                                <option value="2">1er B</option>
-                                                                <option value="3">2do A</option>
-                                                                <option value="3">2do B</option>
-                                                                <option value="3">3er A</option>
-                                                                <option value="3">3er B</option>
-                                                                <option value="3">4to A</option>
-                                                                <option value="3">4to B</option>
-                                                                <option value="3">5to A</option>
-                                                                <option value="3">5to B</option>
-                                                                <option value="3">6to A</option>
-                                                                <option value="3">6to B</option>
+                                                            <label >Maestro de materia</label>
+                                                            <select id="personalreporteA" name="Personal" class="custom-select">
+                                                                <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
+                                                                    <option value="${listpersonal.idtbpersonal}">${listpersonal.nombre} </option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione un materia</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">materia</option>
-                                                                <option value="2">materia</option>
-                                                                <option value="3">materia</option>
-                                                                <option value="3">materia</option>
+                                                            <label >Materia</label>
+                                                            <select id="materiaA" name="MateriaD" class="custom-select">
+                                                                <c:forEach items="${requestScope.listmateria}" var="listmateria">
+                                                                    <option value="${listmateria.idtbmateria}">${listmateria.nombrecorto} </option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -84,30 +81,27 @@
                                                     </div>
                                                     <div class="card-body row">
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione grado y grupo</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">1er A</option>
-                                                                <option value="2">1er B</option>
-                                                                <option value="3">2do A</option>
-                                                                <option value="3">2do B</option>
-                                                                <option value="3">3er A</option>
-                                                                <option value="3">3er B</option>
-                                                                <option value="3">4to A</option>
-                                                                <option value="3">4to B</option>
-                                                                <option value="3">5to A</option>
-                                                                <option value="3">5to B</option>
-                                                                <option value="3">6to A</option>
-                                                                <option value="3">6to B</option>
+                                                            <label >Seleccione grado</label>
+                                                            <select id="gradohonor" class="custom-select" name="gradohonor">
+                                                                <c:forEach items="${requestScope.listgrado}" var="listgrado">
+                                                                    <option value="${listgrado.idtbgrado}">${listgrado.nombre} </option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione un alumno</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">alumno</option>
-                                                                <option value="2">alumno</option>
-                                                                <option value="3">alumno</option>
-                                                                <option value="3">alumno</option>
+                                                            <label >Seleccione grupo</label>
+                                                            <select id="grupohonor" name="grupohonor" class="custom-select">
+                                                                <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
+                                                                    <option value="${listgrupo.idtbgrupo}">${listgrupo.nombre} </option>
+                                                                </c:forEach>
                                                             </select>
+                                                        </div>
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <div id="alumnogradoAA">
+                                                                <jsp:include page='alumnosgradogrupo.jsp'>
+                                                                    <jsp:param name="article1" value=""/>
+                                                                </jsp:include>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-head">
@@ -115,83 +109,80 @@
                                                     </div>
                                                     <div class="card-body row">
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione grado y grupo</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">1er A</option>
-                                                                <option value="2">1er B</option>
-                                                                <option value="3">2do A</option>
-                                                                <option value="3">2do B</option>
-                                                                <option value="3">3er A</option>
-                                                                <option value="3">3er B</option>
-                                                                <option value="3">4to A</option>
-                                                                <option value="3">4to B</option>
-                                                                <option value="3">5to A</option>
-                                                                <option value="3">5to B</option>
-                                                                <option value="3">6to A</option>
-                                                                <option value="3">6to B</option>
+                                                            <label >Seleccione grado</label>
+                                                            <select id="gradoatencion" class="custom-select" name="gradoatencion">
+                                                                <c:forEach items="${requestScope.listgrado}" var="listgrado">
+                                                                    <option value="${listgrado.idtbgrado}">${listgrado.nombre} </option>
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione un alumno</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">alumno</option>
-                                                                <option value="2">alumno</option>
-                                                                <option value="3">alumno</option>
-                                                                <option value="3">alumno</option>
+                                                            <label >Seleccione grupo</label>
+                                                            <select id="grupoatencion" name="grupoatencion" class="custom-select">
+                                                                <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
+                                                                    <option value="${listgrupo.idtbgrupo}">${listgrupo.nombre} </option>
+                                                                </c:forEach>
                                                             </select>
+                                                        </div>
+                                                        <div class="col-lg-4 p-t-20">
+                                                            <div id="alumnogradoA">
+                                                                <jsp:include page='alumnosgradogrupo.jsp'>
+                                                                    <jsp:param name="article1" value=""/>
+                                                                </jsp:include>
+                                                            </div>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
                                                             <label >Seleccione Tipo de comportamiento</label>
-                                                            <select class="custom-select">
-                                                                <option value="1">comportamiento</option>
-                                                                <option value="2">comportmaiento</option>
-                                                                <option value="3">comportamiento</option>
-                                                                <option value="3">comportamiento</option>
+                                                            <select id="comportamiento" class="custom-select">
+                                                                <c:forEach items="${requestScope.listatencion}" var="listatencion">
+                                                                    <option value="${listatencion.idtbatencion}">${listatencion.nombre} </option>
+                                                                </c:forEach>
                                                             </select>
                                                             <br> 
                                                             <a class="clic" data-toggle="modal" data-target="#exampleModalCenter">Si no encuentra comportmaiento puede agregar uno aqui</a>
-                                                            
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
-                                                                                            <header>Formulario de comportamientos</header>
-                                                                                        </div></h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-12">
-                                                                                    <div class="">
-                                                                                        <form class="">
-                                                                                            <div class="card-body row">
-                                                                                                <div class="col-lg-10 p-t-20"> 
-                                                                                                    <div class="form-group">
-                                                                                                        <label>Comportamiento</label>
-                                                                                                        <input type="text" class="form-control" placeholder="Nombre del comportamiento">
-                                                                                                    </div>
-                                                                                                </div><br>
-                                                                                            </div>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                            <button type="button" class="btn btn-terra">Guardar</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+
+
                                                         </div>
                                                     </div>
                                                     <button type="button" class="btn btn-terra">Guardar</button>
                                                 </form>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                                                                        <header>Formulario de comportamientos</header>
+                                                                    </div></h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="">
+                                                                            <form class="">
+                                                                                <div class="card-body row">
+                                                                                    <div class="col-lg-10 p-t-20"> 
+                                                                                        <div class="form-group">
+                                                                                            <label>Comportamiento</label>
+                                                                                            <input type="text" class="form-control" placeholder="Nombre del comportamiento">
+                                                                                        </div>
+                                                                                    </div><br>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                <button type="button" class="btn btn-terra">Guardar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

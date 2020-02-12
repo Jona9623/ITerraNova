@@ -6,9 +6,11 @@
 package BD;
 
 import Modelos.Alumno;
+import Modelos.CtAtencion;
 import Modelos.CtIncidente;
 import Modelos.CtPeriodoEscolar;
 import Modelos.CtPuesto;
+import Modelos.CtSemanaFiscal;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
 import Modelos.TbReporteDisciplinar;
@@ -528,6 +530,84 @@ public class ConsultasAlumno {
                 System.out.print("Error" + e);
             }
         }
+    }
+
+    public List<CtSemanaFiscal> getSemanaFiscal() {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<CtSemanaFiscal> listsemana = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select * from ct_semanafiscal where status = 1 and tipoescuela = 1";
+            pst = con.prepareStatement(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                CtSemanaFiscal semana = new CtSemanaFiscal();
+                semana.setIdtbsemana(rs.getInt("idCt_SemanaFiscal"));
+                semana.setNombre(rs.getString("nombre"));
+                semana.setStatus(rs.getInt("status"));
+                semana.setTipoescuela(rs.getInt("tipoescuela"));
+                listsemana.add(semana);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listsemana;
+    }
+
+    public List<CtAtencion> getAtencion() {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<CtAtencion> listatencion = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select * from ct_atencion where status = 1 and tipoescuela = 1";
+            pst = con.prepareStatement(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                CtAtencion atencion = new CtAtencion();
+                atencion.setIdtbatencion(rs.getInt("idCt_atencion"));
+                atencion.setNombre(rs.getString("nombre"));
+                atencion.setStatus(rs.getInt("status"));
+                atencion.setTipoescuela(rs.getInt("tipoescuela"));
+                listatencion.add(atencion);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listatencion;
     }
 
 }

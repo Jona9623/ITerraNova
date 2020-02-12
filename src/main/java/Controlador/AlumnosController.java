@@ -11,6 +11,8 @@ import Modelos.CtPeriodoEscolar;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
 import Modelos.Alumno;
+import Modelos.CtAtencion;
+import Modelos.CtSemanaFiscal;
 import Modelos.TbReporteDisciplinar;
 import com.sun.mail.smtp.SMTPTransport;
 import java.util.List;
@@ -131,6 +133,16 @@ public class AlumnosController {
     public void guardareditarReporteD(TbReporteDisciplinar reporteD) {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardareditarReporteD(reporteD);
+    }
+
+    public List<CtSemanaFiscal> getSemanaiscal() {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getSemanaFiscal();
+    }
+
+    public List<CtAtencion> getAtencion() {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getAtencion();
     }
 
 }

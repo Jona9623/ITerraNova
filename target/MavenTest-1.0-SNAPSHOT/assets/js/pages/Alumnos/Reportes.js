@@ -104,8 +104,39 @@ var Reportes = (function () {
                     Reportes.agregaFalta();
                 });
             });
-        }
-        ,
+        },
+        getAlumnoAca: function (gradohonor, grupohonor, gradoatencion, grupoatencion) {
+            
+            $.get("SReportes", {
+                ACCION: "alumnoGradoGrupoAca",
+                GRADOHONOR: gradohonor,
+                GRUPOHONOR: grupohonor,
+                GRADOATENCION: gradoatencion,
+                GRUPOATENCION: grupoatencion
+            }).then(function () {
+                $("#alumnogradoA").html(arguments[0]);
+                $("#alumnogradoAA").html(arguments[0]);
+                $("#gradohonor").change(function () {
+                    gradohonor = $("#gradohonor").val();
+                    Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
+                }),
+                $("#grupohonor").change(function () {
+                    grupohonor = $("#grupohonor").val();
+                    Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
+                }),
+                 $("#gradoatencion").change(function () {
+                    gradoatencion = $("#gradoatencion").val();
+                    Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
+                }),
+                $("#grupoatencion").change(function () {
+                    grupoatencion = $("#grupoatencion").val();
+                    Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
+                });
+                $("#agregacomp").on('click', function () {
+                    Reportes.agregaComportamiento();
+                });
+            });
+        },
         guardaIncidente: function (objeto, accion) {
             $.get("SReportes", {
                 ACCION: accion,
@@ -183,6 +214,11 @@ var Reportes = (function () {
                 ACCION: "Racademico"
             }).then(function () {
                 $("#content").html(arguments[0]);
+                gradohonor = $("#gradohonor").val();
+                grupohonor = $("#grupohonor").val();
+                gradoatencion = $("#gradoatencion").val();
+                grupoatencion = $("#grupoatencion").val();
+                Reportes.getAlumnoAca(gradohonor, grupohonor,gradoatencion,grupoatencion);
                 $("#agregacomp").on('click', function () {
                     Reportes.agregaComportamiento();
                 })
