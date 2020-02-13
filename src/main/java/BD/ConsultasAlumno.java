@@ -14,6 +14,7 @@ import Modelos.CtSemanaFiscal;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
 import Modelos.TbReporteDisciplinar;
+import Modelos.TbTareaSemanal;
 import Modelos.TbTutor;
 import java.sql.*;
 import java.sql.PreparedStatement;
@@ -608,6 +609,41 @@ public class ConsultasAlumno {
             }
         }
         return listatencion;
+    }
+
+    public void guardaActividadSemanal(TbTareaSemanal tarea) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "insert into tb_tareasemanal (r_semanafiscal,tarea,r_dia,r_personal,status,tipoescuela) values(?,?,?,?,?,?)";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, tarea.getRsemana());
+            pst.setString(2, tarea.getTarea());
+            pst.setInt(3, tarea.getRdia());
+            pst.setInt(4, tarea.getRpersonal());
+            pst.setInt(5,1);
+            pst.setInt(6,1);
+
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al guardar");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
 }

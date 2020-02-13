@@ -280,6 +280,12 @@
         <!--select2-->
         <script src="assets/plugins/select2/js/select2.js" ></script>
         <script src="assets/js/pages/select2/select2-init.js" ></script>
+        <!--Canvas script-->
+        <script type="text/javascript" src="assets/js/canvas/canvasjs.min.js"></script>
+        <script type="text/javascript" src="assets/js/canvas/canvasjs.react.js"></script>
+        <script type="text/javascript" src="assets/js/canvas/jquery.canvasjs.min.js"></script>
+        <script type="text/javascript" src="assets/js/canvas/html2canvas.js"></script>
+        <script type="text/javascript" src="assets/js/canvas/FileSaver.js"></script>
 
         <!-- end js include path -->
     </body>

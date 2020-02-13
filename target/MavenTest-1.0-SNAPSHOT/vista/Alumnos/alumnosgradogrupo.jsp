@@ -24,12 +24,4 @@
         </c:forEach>
     </select>
     </c:if>
-    <c:if test="${requestScope.listalumnoA != null}">
-    <label >Seleccione un alumno</label>
-    <select id="alumnodisciplinar" name="Alumnodisciplinar" class="custom-select">
-        <c:forEach items="${requestScope.listalumnoA}" var="listalumnoA">
-            <option value="${listalumnoA.id}">${listalumnoA.nombre} </option>
-        </c:forEach>
-    </select>
-    </c:if>
 </html>

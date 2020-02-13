@@ -48,7 +48,7 @@
                                                             <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
                                                         </c:forEach>
                                                     </select>
-                                                </div>
+                                                </div><a class="clic" data-toggle="modal" data-target="#exampleModalCenter1">Clic aqui para agregar una nueva semana fiscal</a>
                                                 <form>
                                                     <div class="card-body row">
                                                         <div class="col-lg-4 p-t-20">
@@ -125,11 +125,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
-                                                            <div id="alumnogradoA">
-                                                                <jsp:include page='alumnosgradogrupo.jsp'>
-                                                                    <jsp:param name="article1" value=""/>
-                                                                </jsp:include>
-                                                            </div>
+
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
                                                             <label >Seleccione Tipo de comportamiento</label>
@@ -146,43 +142,6 @@
                                                     </div>
                                                     <button type="button" class="btn btn-terra">Guardar</button>
                                                 </form>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
-                                                                        <header>Formulario de comportamientos</header>
-                                                                    </div></h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-sm-12">
-                                                                        <div class="">
-                                                                            <form class="">
-                                                                                <div class="card-body row">
-                                                                                    <div class="col-lg-10 p-t-20"> 
-                                                                                        <div class="form-group">
-                                                                                            <label>Comportamiento</label>
-                                                                                            <input type="text" class="form-control" placeholder="Nombre del comportamiento">
-                                                                                        </div>
-                                                                                    </div><br>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button type="button" class="btn btn-terra">Guardar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -190,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="tab2">
+                    <div class="tab-pane captura" id="tab2">
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="card-head">
@@ -198,49 +157,122 @@
                                 </div>
                                 <div class="card-body " id="bar-parent2">
                                     <div class="row">
-                                        <label >Semana fiscal numero: 12</label>
+                                        <div class="col-lg-4 p-t-20">
+                                            <label >Seleccione Semana fiscal</label>
+                                            <select id="semanafiscalactividad" name="semanafiscal" class="custom-select">
+                                                <c:forEach items="${requestScope.listsemana}" var="listsemana">
+                                                    <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
+                                                </c:forEach>
+                                            </select> <a class="clic" data-toggle="modal" data-target="#exampleModalCenter1">Clic aqui para agregar una nueva semana fiscal</a>
+                                        </div>
                                         <div class="col-md-12 col-sm-12">
                                             <form>
                                                 <div class="card-body row">
                                                     <div class="col-lg-4 p-t-20"> 
                                                         <div class="form-group">
-                                                            <label>Lunes</label>
-                                                            <textarea class="form-control" rows="3" placeholder="lunes"></textarea>
+                                                            <label >Seleccione el dia</label>
+                                                            <select id="diaactividad" name="semanafiscal" class="custom-select">
+                                                                <option value="1"> Lunes </option>
+                                                                <option value="2"> Martes </option>
+                                                                <option value="3"> Miercoles </option>
+                                                                <option value="4"> Jueves </option>
+                                                                <option value="5"> Viernes </option>
+                                                            </select>
                                                         </div>
-                                                    </div>  
-                                                    <div class="col-lg-4 p-t-20"> 
-                                                        <div class="form-group">
-                                                            <label>Martes</label>
-                                                            <textarea class="form-control" rows="3" placeholder="martes"></textarea>
-                                                        </div>
+                                                        <textarea id="actividad" class="form-control" rows="5" placeholder="Describa la actividad..."></textarea>
                                                     </div>
-                                                    <div class="col-lg-4 p-t-20"> 
-                                                        <div class="form-group">
-                                                            <label>Miércoles</label>
-                                                            <textarea class="form-control" rows="3" placeholder="miercoles"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 p-t-20"> 
-                                                        <div class="form-group">
-                                                            <label>Jueves</label>
-                                                            <textarea class="form-control" rows="3" placeholder="jueves"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 p-t-20"> 
-                                                        <div class="form-group">
-                                                            <label>Viernes</label>
-                                                            <textarea class="form-control" rows="3" placeholder="viernes"></textarea>
-                                                        </div>
+                                                    <div class="col-lg-4 p-t-20">
+                                                        <label >Maestro que asigna actividad</label>
+                                                        <select id="personalactividad" name="Personal" class="custom-select">
+                                                            <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
+                                                                <option value="${listpersonal.idtbpersonal}">${listpersonal.nombre} </option>
+                                                            </c:forEach>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-terra">Guardar</button>
+                                                <button type="button" id="actividadsemanal" class="btn btn-terra">Guardar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <a href="" id="blank"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                      
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                                        <header>Formulario de comportamientos</header>
+                                    </div></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="">
+                                            <form class="">
+                                                <div class="card-body row">
+                                                    <div class="col-lg-10 p-t-20"> 
+                                                        <div class="form-group">
+                                                            <label>Comportamiento</label>
+                                                            <input type="text" class="form-control" placeholder="Nombre del comportamiento">
+                                                        </div>
+                                                    </div><br>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-terra">Guardar</button>
+                            </div>
                         </div>
-                    </div>                      
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                                        <header>Formulario de comportamientos</header>
+                                    </div></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="">
+                                            <form class="">
+                                                <div class="card-body row">
+                                                    <div class="col-lg-10 p-t-20"> 
+                                                        <div class="form-group">
+                                                            <label>Semana fiscal</label>
+                                                            <input type="text" class="form-control" placeholder="Ej: lunes 15 sep- viernes 25 sep">
+                                                        </div>
+                                                    </div><br>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-terra">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>           

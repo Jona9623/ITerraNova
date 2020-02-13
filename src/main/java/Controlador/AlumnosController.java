@@ -14,6 +14,7 @@ import Modelos.Alumno;
 import Modelos.CtAtencion;
 import Modelos.CtSemanaFiscal;
 import Modelos.TbReporteDisciplinar;
+import Modelos.TbTareaSemanal;
 import com.sun.mail.smtp.SMTPTransport;
 import java.util.List;
 import java.util.Properties;
@@ -143,6 +144,11 @@ public class AlumnosController {
     public List<CtAtencion> getAtencion() {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getAtencion();
+    }
+
+    public void guardaActividadSemanal(TbTareaSemanal tarea) {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.guardaActividadSemanal(tarea);
     }
 
 }

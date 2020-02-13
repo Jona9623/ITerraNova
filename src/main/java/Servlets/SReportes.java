@@ -18,6 +18,7 @@ import Modelos.CtSemanaFiscal;
 import Modelos.TbMateria;
 import Modelos.TbPersonal;
 import Modelos.TbReporteDisciplinar;
+import Modelos.TbTareaSemanal;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -104,6 +105,8 @@ public class SReportes extends HttpServlet {
             case "guardaeditarReporteD":
                 guardaeditarReporteD(request, response); break;
             case "alumnoGradoGrupoAca": alumnoGradoGrupoAca(request,response); break;
+            case "alumnoGradoGrupoAcaAtencion": alumnoGradoGrupoAcaAtencion (request, response); break;
+            case "guardaActividadSemanal": guardaActividadSemanal (request, response); break;
         }
     }
 
@@ -268,13 +271,49 @@ public class SReportes extends HttpServlet {
             request.setAttribute("listatencion", listatencion);
             listalumnoH = alumnoC.getAlumnos(Integer.parseInt(request.getParameter("GRADOHONOR")), Integer.parseInt(request.getParameter("GRUPOHONOR")));
             request.setAttribute("listalumnoH", listalumnoH);
-            listalumnoA = alumnoC.getAlumnos(Integer.parseInt(request.getParameter("GRADOATENCION")), Integer.parseInt(request.getParameter("GRUPOATENCION")));
-            request.setAttribute("listalumnoA", listalumnoA);
+           /* listalumnoA = alumnoC.getAlumnos(Integer.parseInt(request.getParameter("GRADOATENCION")), Integer.parseInt(request.getParameter("GRUPOATENCION")));
+            request.setAttribute("listalumnoA", listalumnoA);*/
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/alumnosgradogrupo.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    
+    private void alumnoGradoGrupoAcaAtencion(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        adminC = new AdministradorController();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List<CtSemanaFiscal> listsemana = new ArrayList<>();
+        List<TbPersonal> listpersonal = new ArrayList<>();
+        List<TbMateria> listmateria = new ArrayList<>();
+        List<CtGrado> listgrado = new ArrayList<>();
+        List<CtGrupo> listgrupo = new ArrayList<>();
+        List <CtAtencion> listatencion = new ArrayList<>();
+        List <Alumno> listalumnoA = new ArrayList<>();
+        List <Alumno> listalumnoH = new ArrayList<>();
+        try {
+            listperiodo = alumnoC.getPeriodos();
+            request.setAttribute("listperiodo", listperiodo);
+            listsemana = alumnoC.getSemanaiscal();
+            request.setAttribute("listsemana", listsemana);
+            listpersonal = adminC.getPersonal();
+            request.setAttribute("listpersonal", listpersonal);
+            listmateria = alumnoC.getMaterias();
+            request.setAttribute("listmateria", listmateria);
+            listgrado = adminC.getGrado();
+            request.setAttribute("listgrado", listgrado);
+            listgrupo = adminC.getGrupo();
+            request.setAttribute("listgrupo", listgrupo);
+            listatencion = alumnoC.getAtencion();
+            request.setAttribute("listatencion", listatencion);
+            listalumnoA = alumnoC.getAlumnos(Integer.parseInt(request.getParameter("GRADOATENCION")), Integer.parseInt(request.getParameter("GRUPOATENCION")));
+            request.setAttribute("listalumnoA", listalumnoA);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/alumnosgradogrupoatencion.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
     }
 
     private void guardaIncidente(HttpServletRequest request, HttpServletResponse response) {
@@ -405,6 +444,19 @@ public class SReportes extends HttpServlet {
         try {
             reporteD = mapper.readValue(objectJson, TbReporteDisciplinar.class);
             alumnoC.guardareditarReporteD(reporteD);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaActividadSemanal(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        TbTareaSemanal tarea = new TbTareaSemanal();
+        mapper = new ObjectMapper();
+        objectJson = request.getParameter("OBJETO");
+        try {
+            tarea = mapper.readValue(objectJson, TbTareaSemanal.class);
+            alumnoC.guardaActividadSemanal(tarea);
         } catch (Exception e) {
             System.out.println(e);
         }
