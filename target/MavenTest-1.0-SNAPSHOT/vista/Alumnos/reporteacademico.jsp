@@ -140,7 +140,7 @@
 
                                                         </div>
                                                     </div>
-                                                    <button type="button" class="btn btn-terra">Guardar</button>
+                                                    <button type="button" id="guardareporteA" class="btn btn-terra">Guardar</button>
                                                 </form>
                                             </div>
                                         </div>

@@ -13,6 +13,7 @@ import Modelos.TbMateria;
 import Modelos.Alumno;
 import Modelos.CtAtencion;
 import Modelos.CtSemanaFiscal;
+import Modelos.TbReporteAcademico;
 import Modelos.TbReporteDisciplinar;
 import Modelos.TbTareaSemanal;
 import com.sun.mail.smtp.SMTPTransport;
@@ -149,6 +150,11 @@ public class AlumnosController {
     public void guardaActividadSemanal(TbTareaSemanal tarea) {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardaActividadSemanal(tarea);
+    }
+
+    public void guardaReporteAcademico(TbReporteAcademico reporteA) {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.guardaReporteAcademico(reporteA);
     }
 
 }

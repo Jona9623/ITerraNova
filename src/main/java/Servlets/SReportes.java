@@ -17,6 +17,7 @@ import Modelos.CtAtencion;
 import Modelos.CtSemanaFiscal;
 import Modelos.TbMateria;
 import Modelos.TbPersonal;
+import Modelos.TbReporteAcademico;
 import Modelos.TbReporteDisciplinar;
 import Modelos.TbTareaSemanal;
 import java.io.DataInputStream;
@@ -106,7 +107,9 @@ public class SReportes extends HttpServlet {
                 guardaeditarReporteD(request, response); break;
             case "alumnoGradoGrupoAca": alumnoGradoGrupoAca(request,response); break;
             case "alumnoGradoGrupoAcaAtencion": alumnoGradoGrupoAcaAtencion (request, response); break;
+            case "guardaReporteAcademico": guardaReporteAcademico (request,response); break;
             case "guardaActividadSemanal": guardaActividadSemanal (request, response); break;
+            case "imagenReporteAca": imagenReporteAca (request,response); break;
         }
     }
 
@@ -336,7 +339,7 @@ public class SReportes extends HttpServlet {
             String foto = (String.valueOf(request.getParameter("Archivo")));
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
-                String uploadPath = "C:\\Users\\Complx\\Desktop"; //applicationPath + File.separator + "archivos";
+                String uploadPath = "C:\\Users\\Complx\\perro"; //applicationPath + File.separator + "archivos";
                 File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();
@@ -457,6 +460,29 @@ public class SReportes extends HttpServlet {
         try {
             tarea = mapper.readValue(objectJson, TbTareaSemanal.class);
             alumnoC.guardaActividadSemanal(tarea);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaReporteAcademico(HttpServletRequest request, HttpServletResponse response) {
+        TbReporteAcademico reporteA = new TbReporteAcademico();
+        alumnoC = new AlumnosController();
+        mapper = new ObjectMapper();
+        objectJson = request.getParameter("OBJETO");
+        try {
+            reporteA = mapper.readValue(objectJson, TbReporteAcademico.class);
+            alumnoC.guardaReporteAcademico(reporteA);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void imagenReporteAca(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/imagenreporteaca.jsp");
+            rd.forward(request, response);
+            
         } catch (Exception e) {
             System.out.println(e);
         }

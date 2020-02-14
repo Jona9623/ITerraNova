@@ -232,18 +232,31 @@ var Reportes = (function () {
                 gradoatencion = $("#gradoatencion").val();
                 grupoatencion = $("#grupoatencion").val();
                 Reportes.getAlumnoAca(gradohonor, grupohonor);
+                $("#guardareporteA").on('click', function () {
+                    Reportes.guardarA();
+                });
                 $("#actividadsemanal").on('click', function () {
                     Reportes.guardaActividadSemanal();
-                    html2canvas($(".captura"),{
-                        dpi: 192,
-                        onrendered: function(canvas){
-                            $("#blank").attr('href',canvas.toDataURL("image/png"));
-                            $("#blank").attr('download',"Image.png")
-                            $("#blank")[0].click();
-                        }
-                    })
                 });
                 //  Reportes.getAlumnoAcaAtencion(gradoatencion,grupoatencion);
+            });
+        },
+        guardarA: function () {
+            var reporteA = {
+                "rpersonal": $("#personalreporteA").val(),
+                "rmateria": $("#materiaA").val(),
+                "rsemana": $("#semanafiscal").val(),
+                "ralumnohonor": $("#alumnohonor").val(),
+                //"ralumnoatencion": $("#alumnoatencion").val(),
+                "ratencion": $("#comportamiento").val(),
+                "rperiodo": $("#periodoA").val()
+            }
+            $.get("SReportes", {
+                ACCION: "guardaReporteAcademico",
+                OBJETO: JSON.stringify(reporteA)
+            }).then(function () {
+                swal("Hecho!", "Datos guardados correctamente", "success");
+                Reportes.imagenReporteAca();
             });
         },
         guardaActividadSemanal: function () {
@@ -261,6 +274,24 @@ var Reportes = (function () {
                 Reportes.reporteDisciplinar();
             });
         },
+        imagenReporteAca: function (){
+            $.get("SReportes",{
+                ACCION: "imagenReporteAca"
+            }).then (function(){
+               $("#content").html(arguments[0]);
+               $("#guardarimagen").on('click',function(){
+                   html2canvas($(".imagen"), {
+                        dpi: 192,
+                        onrendered: function (canvas) {
+                            $("#blanko").attr('href', canvas.toDataURL("image/png"));
+                            $("#blanko").attr('download', "Image.png")
+                            $("#blanko")[0].click();
+                        }
+                    })
+               })
+               
+            });
+        }
     }
     ;
 }());

@@ -17,8 +17,18 @@ public class TbReporteAcademico {
     private int ralumnohonor;
     private int ralumnoatencion;
     private int ratencion;
+    private int rperiodo;
     private int status;
     private int tipoescuela;
+
+    public int getRperiodo() {
+        return rperiodo;
+    }
+
+    public void setRperiodo(int rperiodo) {
+        this.rperiodo = rperiodo;
+    }
+    
 
     public int getIdtbreporte() {
         return idtbreporte;

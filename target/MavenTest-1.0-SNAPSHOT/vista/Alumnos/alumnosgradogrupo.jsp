@@ -18,7 +18,7 @@
     </c:if>
     <c:if test="${requestScope.listalumnoH != null}">
     <label >Seleccione un alumno</label>
-    <select id="alumnodisciplinar" name="Alumnodisciplinar" class="custom-select">
+    <select id="alumnohonor" name="Alumnodisciplinar" class="custom-select">
         <c:forEach items="${requestScope.listalumnoH}" var="listalumnoH">
             <option value="${listalumnoH.id}">${listalumnoH.nombre} </option>
         </c:forEach>

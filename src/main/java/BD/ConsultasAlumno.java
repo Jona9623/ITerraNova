@@ -13,6 +13,7 @@ import Modelos.CtPuesto;
 import Modelos.CtSemanaFiscal;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
+import Modelos.TbReporteAcademico;
 import Modelos.TbReporteDisciplinar;
 import Modelos.TbTareaSemanal;
 import Modelos.TbTutor;
@@ -624,6 +625,45 @@ public class ConsultasAlumno {
             pst.setInt(4, tarea.getRpersonal());
             pst.setInt(5,1);
             pst.setInt(6,1);
+
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al guardar");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void guardaReporteAcademico(TbReporteAcademico reporteA) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "insert into tb_reporteacademico (r_personal,r_materia,r_semanafiscal,r_alumnohonor,r_atencion,r_periodo,status,tipoescuela)"
+                    + " values (?,?,?,?,?,?,?,?)";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, reporteA.getRpersonal());
+            pst.setInt(2, reporteA.getRmateria());
+            pst.setInt(3, reporteA.getRsemana());
+            pst.setInt(4, reporteA.getRalumnohonor());
+            //pst.setInt(5, reporteA.getRalumnoatencion());
+            pst.setInt(5, reporteA.getRatencion());
+            pst.setInt(6, reporteA.getRperiodo());
+            pst.setInt(7,1);
+            pst.setInt(8,1);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
