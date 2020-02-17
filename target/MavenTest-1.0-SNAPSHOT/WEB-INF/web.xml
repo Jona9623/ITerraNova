@@ -31,6 +31,10 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>Servlets.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SAdministrador</servlet-name>
+        <servlet-class>Servlets.SAdministrador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SReportes</servlet-name>
         <url-pattern>/SReportes</url-pattern>
@@ -58,6 +62,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAdministrador</servlet-name>
+        <url-pattern>/SAdministrador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

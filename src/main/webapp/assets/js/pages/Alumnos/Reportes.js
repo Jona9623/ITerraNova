@@ -13,6 +13,7 @@ var Reportes = (function () {
                 grupo = $("#grupodisciplinar").val();
                 Reportes.getAlumno(grado, grupo);
                 $("#agregafalta").on('click', function () {
+                    
                     Reportes.agregaFalta();
                 });
                 $("#guardaincidente").on('click', function () {
@@ -157,7 +158,6 @@ var Reportes = (function () {
                 OBJETO: JSON.stringify(objeto)
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
-                Reportes.reporteDisciplinar();
             });
         },
         mostrarReportes: function () {
@@ -232,6 +232,17 @@ var Reportes = (function () {
                 gradoatencion = $("#gradoatencion").val();
                 grupoatencion = $("#grupoatencion").val();
                 Reportes.getAlumnoAca(gradohonor, grupohonor);
+                $("#guardacomportammiento").on('click', function () {
+                    alert("Entra");
+                    Reportes.guardaComportamiento();
+                });
+                $("#guardasemana").on('click', function () {
+                     alert("Entra");
+                    Reportes.guardaSemana();
+                });
+                $("#guardasemana2").on('click', function () {
+                    Reportes.guardaSemana2();
+                });
                 $("#guardareporteA").on('click', function () {
                     Reportes.guardarA();
                 });
@@ -271,16 +282,44 @@ var Reportes = (function () {
                 OBJETO: JSON.stringify(actividad)
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
+            });
+        },
+        guardaComportamiento: function () {
+            var comportamiento = {"nombre": $("#comport").val()}
+            $.get("SReportes", {
+                ACCION: "guardaComportamiento",
+                OBJETO: JSON.stringify(comportamiento)
+            }).then(function () {
+                swal("Hecho!", "Datos guardados correctamente", "success");
                 Reportes.reporteDisciplinar();
             });
         },
-        imagenReporteAca: function (){
-            $.get("SReportes",{
+        guardaSemana: function () {
+            alert("Entra2");
+            var semana = {"nombre": $("#semana").val()}
+            $.get("SReportes", {
+                ACCION: "guardaSemana",
+                OBJETO: JSON.stringify(semana)
+            }).then(function () {
+                swal("Hecho!", "Datos guardados correctamente", "success");
+            });
+        },
+        guardaSemana2: function () {
+            var semana = {"nombre": $("#semana2").val()}
+            $.get("SReportes", {
+                ACCION: "guardaSemana",
+                OBJETO: JSON.stringify(semana)
+            }).then(function () {
+                swal("Hecho!", "Datos guardados correctamente", "success");
+            });
+        },
+        imagenReporteAca: function () {
+            $.get("SReportes", {
                 ACCION: "imagenReporteAca"
-            }).then (function(){
-               $("#content").html(arguments[0]);
-               $("#guardarimagen").on('click',function(){
-                   html2canvas($(".imagen"), {
+            }).then(function () {
+                $("#content").html(arguments[0]);
+                $("#guardarimagen").on('click', function () {
+                    html2canvas($(".imagen"), {
                         dpi: 192,
                         onrendered: function (canvas) {
                             $("#blanko").attr('href', canvas.toDataURL("image/png"));
@@ -288,8 +327,8 @@ var Reportes = (function () {
                             $("#blanko")[0].click();
                         }
                     })
-               })
-               
+                })
+
             });
         }
     }

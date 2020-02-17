@@ -35,4 +35,5 @@ Modelos\CtAtencion.class
 Modelos\CtIncidente.class
 BD\Conexion.class
 Modelos\TbTareaSemanal.class
+Servlets\SAdministrador.class
 Modelos\CtAreaalumno.class

@@ -686,4 +686,68 @@ public class ConsultasAlumno {
         }
     }
 
+    public void guardaComportamiento(CtAtencion atencion) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "insert into ct_atencion (nombre,status,tipoescuela) values(?,?,?)";
+            pst = con.prepareStatement(consulta);
+            pst.setString(1, atencion.getNombre());
+            pst.setInt(2, 1);
+            pst.setInt(3, 1);
+
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al guardar");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void guardaSemana(CtSemanaFiscal semana) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "insert into ct_semanafiscal (nombre,status,tipoescuela) values(?,?,?)";
+            pst = con.prepareStatement(consulta);
+            pst.setString(1, semana.getNombre());
+            pst.setInt(2, 1);
+            pst.setInt(3, 1);
+
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al guardar");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
 }

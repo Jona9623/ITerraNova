@@ -157,4 +157,14 @@ public class AlumnosController {
         consulta.guardaReporteAcademico(reporteA);
     }
 
+    public void guardaComportamiento(CtAtencion atencion) {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.guardaComportamiento(atencion);
+    }
+
+    public void guardaSemana(CtSemanaFiscal semana) {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.guardaSemana(semana);
+    }
+
 }

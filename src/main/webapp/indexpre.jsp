@@ -177,6 +177,51 @@
                                                 <span class="title">Mostrar/Agregar Personal</span>
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a id="ampuesto" class="nav-link ">
+                                                <span class="title">Mostrar/Agregar Puesto</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="amperiodo" class="nav-link ">
+                                                <span class="title">Mostrar/Agregar Periodo escolar</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="amarea" class="nav-link ">
+                                                <span class="title">Mostrar/Agregar Área de alumno</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="amcpt" class="nav-link ">
+                                                <span class="title">Mostrar/Agregar Capacitacion para el Trabajo alumno</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="amgrado" class="nav-link ">
+                                                <span class="title">Mostrar/Agregar Grado</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="amgrupo" class="nav-link ">
+                                                <span class="title">Mostrar/Agregar Grupo</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="amtipocalificacion" class="nav-link ">
+                                                <span class="title">Mostrar/Agregar Tipo calificacion</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="amnombrematerias" class="nav-link ">
+                                                <span class="title">Mostrar/Agregar Nombres de materias</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="amasignacionmaterias" class="nav-link ">
+                                                <span class="title">Mostrar/Agregar/Asignacion Materias</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <% } %>
@@ -267,6 +312,7 @@
         <script type="text/javascript" src="assets/js/pages/Alumnos/Reportes.js" ></script>
         <script type="text/javascript" src="assets/js/pages/Administrador/Alumnos.js"></script>
         <script type="text/javascript" src="assets/js/pages/Administrador/Personal.js"></script>
+        <script type="text/javascript" src="assets/js/pages/Administrador/Administrador.js"></script>
         <script type="text/javascript" src="assets/js/pages/Principal/index.js"></script>
         <!-- data tables -->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>

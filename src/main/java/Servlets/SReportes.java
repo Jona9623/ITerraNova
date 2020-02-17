@@ -110,6 +110,8 @@ public class SReportes extends HttpServlet {
             case "guardaReporteAcademico": guardaReporteAcademico (request,response); break;
             case "guardaActividadSemanal": guardaActividadSemanal (request, response); break;
             case "imagenReporteAca": imagenReporteAca (request,response); break;
+            case "guardaComportamiento": guardaComportamiento(request,response); break;
+            case "guardaSemana": guardaSemana( request,response);break;
         }
     }
 
@@ -483,6 +485,32 @@ public class SReportes extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/imagenreporteaca.jsp");
             rd.forward(request, response);
             
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaComportamiento(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        CtAtencion atencion = new CtAtencion();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            atencion = mapper.readValue(objectJson, CtAtencion.class);
+            alumnoC.guardaComportamiento(atencion);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaSemana(HttpServletRequest request, HttpServletResponse response) {
+        alumnoC = new AlumnosController();
+        CtSemanaFiscal semana = new CtSemanaFiscal();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            semana = mapper.readValue(objectJson, CtSemanaFiscal.class);
+            alumnoC.guardaSemana(semana);
         } catch (Exception e) {
             System.out.println(e);
         }
