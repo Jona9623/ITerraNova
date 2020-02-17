@@ -10,6 +10,7 @@ import Modelos.CtCptalumno;
 import Modelos.CtGrado;
 import Modelos.CtGrupo;
 import Modelos.CtPuesto;
+import Modelos.CtTipoCalificaicon;
 import Modelos.TbAlumnos;
 import Modelos.TbPersonal;
 import Modelos.TbTutor;
@@ -857,6 +858,45 @@ public class ConsultasAdministrador {
             }
         }
         return listpuesto;
+    }
+
+    public List<CtTipoCalificaicon> getTipoCali() {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<CtTipoCalificaicon> listtipocali = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select * from ct_tipocalificacion where status = 1 and tipoescuela = 1";
+            pst = con.prepareStatement(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                CtTipoCalificaicon tipocali = new CtTipoCalificaicon();
+                tipocali.setIdtbtipocali(rs.getInt("idCt_TipoCalificacion"));
+                tipocali.setNombre(rs.getString("nombre"));
+                tipocali.setStatus(rs.getInt("status"));
+                tipocali.setTipoescuela(rs.getInt("tipoescuela"));
+                listtipocali.add(tipocali);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listtipocali;
     }
 
 }

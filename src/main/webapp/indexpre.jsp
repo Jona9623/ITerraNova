@@ -1,16 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%  
-    int x=0;
+<%
+    int x = 0;
     int id_sesion;
-    HttpSession objsesion= request.getSession(false);
+    HttpSession objsesion = request.getSession(false);
     String usuario = (String) objsesion.getAttribute("user");
-    if(usuario==null){
-       response.sendRedirect("Login.jsp");
-    }else{
-     x = (int)objsesion.getAttribute("tipo");       
-     id_sesion = (int) objsesion.getAttribute("id");
-    }   
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+    } else {
+        x = (int) objsesion.getAttribute("tipo");
+        id_sesion = (int) objsesion.getAttribute("id");
+    }
 %><!DOCTYPE html>
 <html lang="en">
     <!-- BEGIN HEAD -->
@@ -123,7 +123,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <% if(x == 1 || x == 2 || x == 3 || x == 5){ %>
+                                <% if (x == 1 || x == 2 || x == 3 || x == 5) { %>
                                 <li class="nav-item start">
                                     <a href="#" class="nav-link nav-toggle">
                                         <i class="material-icons">label</i>
@@ -159,7 +159,7 @@
                                     </ul>
 
                                 </li>
-                                <% if (x == 3 || x == 4 || x == 5){ %>
+                                <% if (x == 3 || x == 4 || x == 5) { %>
                                 <li class="nav-item start">
                                     <a href="#" class="nav-link nav-toggle">
                                         <i class="material-icons">label</i>
@@ -198,13 +198,13 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a id="amgrado" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Grado</span>
+                                            <a id="amgrado" class="nav-link " data-toggle="modal" data-target="#modalGrado">
+                                                <span class="title">Agregar Grado</span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a id="amgrupo" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Grupo</span>
+                                            <a id="amgrupo" class="nav-link " data-toggle="modal" data-target="#modalGrupo">
+                                                <span class="title">Agregar Grupo</span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -213,8 +213,8 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a id="amnombrematerias" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Nombres de materias</span>
+                                            <a id="amnombrematerias" class="nav-link " data-toggle="modal" data-target="#modalNombreMateria">
+                                                <span class="title">Agregar Nombres de materias</span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -224,7 +224,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <% } %>
+                                <% }%>
                             </ul>
                         </div>
                     </div>
@@ -261,6 +261,114 @@
                 <!-- end page content -->
             </div>
             <!-- end page container -->
+        </div>
+        <div class="modal fade" id="modalGrado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                                <header>Formulario Grado</header>
+                            </div></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="">
+                                    <form class="">
+                                        <div class="card-body row">
+                                            <div class="col-lg-10 p-t-20"> 
+                                                <div class="form-group">
+                                                    <label>Grado</label>
+                                                    <input type="number" id="gradoAdmin" class="form-control" placeholder="nombre...">
+                                                </div>
+                                            </div><br>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="guardagrado" class="btn btn-terra">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                                <header>Formulario Grupo</header>
+                            </div></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="">
+                                    <form class="">
+                                        <div class="card-body row">
+                                            <div class="col-lg-10 p-t-20"> 
+                                                <div class="form-group">
+                                                    <label>Grupo</label>
+                                                    <input type="text" id="grupoAdmin" class="form-control" placeholder="nombre...">
+                                                </div>
+                                            </div><br>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="guardagrupo" class="btn btn-terra">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalNombreMateria" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                                <header>Formulario Materia</header>
+                            </div></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="">
+                                    <form class="">
+                                        <div class="card-body row">
+                                            <div class="col-lg-10 p-t-20"> 
+                                                <div class="form-group">
+                                                    <label>Materia</label>
+                                                    <input type="text" id="nombremateriaAdmin" class="form-control" placeholder="nombre...">
+                                                </div>
+                                            </div><br>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="guardanombremateria" class="btn btn-terra">Guardar</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- start js include path -->
         <script src="assets/plugins/jquery/jquery.min.js" ></script>
@@ -301,7 +409,7 @@
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js" ></script>
         <script src="assets/js/pages/table/table_data.js" ></script>
-        
+
         <script type="text/javascript" src="assets/js/jquery-form.js"></script>
 
         <!-- summernote -->

@@ -12,6 +12,7 @@ import Modelos.CtCptalumno;
 import Modelos.CtGrado;
 import Modelos.CtGrupo;
 import Modelos.CtPuesto;
+import Modelos.CtTipoCalificaicon;
 import Modelos.TbAlumnos;
 import Modelos.TbPersonal;
 import Modelos.TbTutor;
@@ -110,6 +111,11 @@ public class AdministradorController {
     public List<CtPuesto> getPuesto() {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getPuesto();
+    }
+
+    public List<CtTipoCalificaicon> getTipoCali() {
+       ConsultasAdministrador consulta = new ConsultasAdministrador();
+       return consulta.getTipoCali();
     }
 
 

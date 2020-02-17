@@ -5,8 +5,19 @@
  */
 package Servlets;
 
+import Controlador.AdministradorController;
+import Controlador.AlumnosController;
+import Modelos.CtAreaalumno;
+import Modelos.CtCptalumno;
+import Modelos.CtPeriodoEscolar;
+import Modelos.CtPuesto;
+import Modelos.CtTipoCalificaicon;
+import Modelos.TbMateria;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +29,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author Complx
  */
 public class SAdministrador extends HttpServlet {
-
+    AdministradorController adminC;
+    AlumnosController alumC;
+    public String objectJson;
+    public ObjectMapper mapper;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -84,7 +98,11 @@ public class SAdministrador extends HttpServlet {
     }// </editor-fold>
 
     private void tablaPuesto(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        List <CtPuesto> listpuesto = new ArrayList<>();
         try {
+            listpuesto = adminC.getPuesto();
+            request.setAttribute("listpuesto", listpuesto);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/Puesto/tablapuesto.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -93,7 +111,11 @@ public class SAdministrador extends HttpServlet {
     }
 
     private void tablaPeriodo(HttpServletRequest request, HttpServletResponse response) {
+        alumC = new AlumnosController();
+        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
         try {
+            listperiodo = alumC.getPeriodos();
+            request.setAttribute("listperiodo", listperiodo);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/PeriodoEscolar/tablaperiodo.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -102,7 +124,11 @@ public class SAdministrador extends HttpServlet {
     }
 
     private void tablaArea(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        List <CtAreaalumno> listarea = new ArrayList<>();
         try {
+            listarea = adminC.getArea();
+            request.setAttribute("listarea", listarea);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/AreaAlumno/tablaareaalumno.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -111,7 +137,11 @@ public class SAdministrador extends HttpServlet {
     }
 
     private void tablaCpt(HttpServletRequest request, HttpServletResponse response) {
-        try {
+        adminC = new AdministradorController();
+        List <CtCptalumno> listcpt = new ArrayList<>();
+         try {
+             listcpt = adminC.getCpt();
+             request.setAttribute("listcpt", listcpt);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/Cptalumno/tablacptalumno.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -128,7 +158,11 @@ public class SAdministrador extends HttpServlet {
     }
 
     private void tablaTipoCalificacion(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        List <CtTipoCalificaicon> listtipocali = new ArrayList<>();
         try {
+            listtipocali = adminC.getTipoCali();
+            request.setAttribute("listtipocali", listtipocali);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/TipoCalificacion/tablatipocalificacion.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -137,7 +171,11 @@ public class SAdministrador extends HttpServlet {
     }
 
     private void tablaMateria(HttpServletRequest request, HttpServletResponse response) {
+        alumC = new AlumnosController();
+        List <TbMateria> listmateria = new ArrayList<>();
         try {
+            listmateria = alumC.getMaterias();
+            request.setAttribute("listmateria", listmateria);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/Materia/tablamaterias.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

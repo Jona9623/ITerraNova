@@ -10,6 +10,9 @@ var Admin = (function(){
                 ACCION: "tablaPuesto"
             }).then(function (){
                $("#content").html(arguments[0]); 
+               $("#tablapuesto").DataTable({
+                   "scrollX": true
+               });
             });
         },
         tablaPeriodo: function(){
@@ -17,6 +20,9 @@ var Admin = (function(){
                 ACCION: "tablaPeriodo"
             }).then(function (){
                $("#content").html(arguments[0]); 
+               $("#tablaperiodo").DataTable({
+                   "scrollX": true
+               });
             });
         },
         tablaArea: function(){
@@ -24,6 +30,9 @@ var Admin = (function(){
                 ACCION: "tablaArea"
             }).then(function (){
                $("#content").html(arguments[0]); 
+               $("#tablaarea").DataTable({
+                   "sccrollX": true
+               });
             });
         },
         tablaCpt: function(){
@@ -31,6 +40,9 @@ var Admin = (function(){
                 ACCION: "tablaCpt"
             }).then(function (){
                $("#content").html(arguments[0]); 
+               $("#tablacpt").DataTable({
+                   "scrollX": true
+               });
             });
         },
         tablaGrado: function(){
@@ -52,6 +64,9 @@ var Admin = (function(){
                 ACCION: "tablaTipoCalificacion"
             }).then(function (){
                $("#content").html(arguments[0]); 
+               $("#tablatipocali").DataTable({
+                   "scrollX": true
+               });
             });
         },
         tablaMateria: function(){
@@ -59,6 +74,9 @@ var Admin = (function(){
                 ACCION: "tablaMateria"
             }).then(function (){
                $("#content").html(arguments[0]); 
+               $("#tablamateria").DataTable({
+                   "scrollX": true
+               });
             });
         },
     }

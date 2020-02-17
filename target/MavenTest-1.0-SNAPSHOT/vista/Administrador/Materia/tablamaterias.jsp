@@ -27,20 +27,29 @@
         </div>
     </div>
 
-    <table id="tablapersonal" class="table table-bordered" style="width:100%">
+    <table id="tablamateria" class="table table-bordered" style="width:100%">
         <thead class="thead-light">
             <tr>
                 <th style="display: none"></th>
                 <th class="center">Estatus</th>
-                <th class="center">Nombre</th>
+                <th class="center">Nombre Largo</th>
+                <th class="center">Nombre Corto</th>
+                <th class="center">Grado y Grupo a que pertenece</th>
+                <th class="center">Area a que pertenece</th>
+                <th class="center">Cpt a que pertenece</th>
                 <th class="center">Acciones</th>
             </tr>
         </thead>
         <tbody>
+            <c:forEach items="${requestScope.listmateria}" var="listmateria">
                 <tr>
                     <td class="center" style="display: none"></td>
-                    <td class="center"></td>
-                    <td class="center"></td>
+                    <td class="center"><c:if test="${listmateria.status == 1}">Activo</c:if></td>
+                    <td class="center">${listmateria.nombrelargo}</td>
+                    <td class="center">${listmateria.nombrecorto}</td>
+                    <td class="center">${listmateria.nombrecorto}</td>
+                    <td class="center">${listmateria.nombrecorto}</td>
+                    <td class="center">${listmateria.nombrecorto}</td>
                     <td class="center">
                         <div class="btn-group">
                             <button class="btn btn-xs btn-terra dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Acciones
@@ -68,6 +77,7 @@
                         </div>
                     </td>
                 </tr>
+            </c:forEach>
         </tbody>
     </table>
 </div>

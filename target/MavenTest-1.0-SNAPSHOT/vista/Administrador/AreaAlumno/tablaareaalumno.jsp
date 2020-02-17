@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <table id="tablapersonal" class="table table-bordered" style="width:100%">
+    <table id="tablaarea" class="table table-bordered" style="width:100%">
         <thead class="thead-light">
             <tr>
                 <th style="display: none"></th>
@@ -37,10 +37,11 @@
             </tr>
         </thead>
         <tbody>
+            <c:forEach items="${requestScope.listarea}" var="listarea">
                 <tr>
                     <td class="center" style="display: none"></td>
-                    <td class="center"></td>
-                    <td class="center"></td>
+                    <td class="center"><c:if test="${listarea.status == 1}">Activo</c:if></td>
+                    <td class="center">${listarea.nombre}</td>
                     <td class="center">
                         <div class="btn-group">
                             <button class="btn btn-xs btn-terra dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Acciones
@@ -68,6 +69,7 @@
                         </div>
                     </td>
                 </tr>
+            </c:forEach>
         </tbody>
     </table>
 </div>
