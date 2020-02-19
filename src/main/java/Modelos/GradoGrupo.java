@@ -10,16 +10,53 @@ package Modelos;
  * @author complx
  */
 public class GradoGrupo {
-    private int id;
+    private int idgrado;
+    private int idgrupo;
     private int ngrado;
     private int ngrupo;
+    private String grado;
+    private String grupo;
+    private int status;
 
-    public int getId() {
-        return id;
+    public int getStatus() {
+        return status;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getGrado() {
+        return grado;
+    }
+
+    public void setGrado(String grado) {
+        this.grado = grado;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+    
+
+    public int getIdgrado() {
+        return idgrado;
+    }
+
+    public void setIdgrado(int idgrado) {
+        this.idgrado = idgrado;
+    }
+
+    public int getIdgrupo() {
+        return idgrupo;
+    }
+
+    public void setIdgrupo(int idgrupo) {
+        this.idgrupo = idgrupo;
     }
 
     public int getNgrado() {

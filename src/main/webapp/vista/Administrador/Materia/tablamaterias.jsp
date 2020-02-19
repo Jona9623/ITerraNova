@@ -22,7 +22,7 @@
     <div class="row p-b-20">
         <div class="col-md-6 col-sm-6 col-6">
             <div class="btn-group">
-                <a data-toggle="modal" data-target="#modalMateria" class="btn btn-terra">Agregar Materia</a> <br>
+                <a data-toggle="modal" data-target="#modalMateria" class="btn btn-terra">Asignar Materia</a> <br>
             </div>
         </div>
     </div>
@@ -34,9 +34,6 @@
                 <th class="center">Estatus</th>
                 <th class="center">Nombre Largo</th>
                 <th class="center">Nombre Corto</th>
-                <th class="center">Grado y Grupo a que pertenece</th>
-                <th class="center">Area a que pertenece</th>
-                <th class="center">Cpt a que pertenece</th>
                 <th class="center">Acciones</th>
             </tr>
         </thead>
@@ -46,9 +43,6 @@
                     <td class="center" style="display: none"></td>
                     <td class="center"><c:if test="${listmateria.status == 1}">Activo</c:if></td>
                     <td class="center">${listmateria.nombrelargo}</td>
-                    <td class="center">${listmateria.nombrecorto}</td>
-                    <td class="center">${listmateria.nombrecorto}</td>
-                    <td class="center">${listmateria.nombrecorto}</td>
                     <td class="center">${listmateria.nombrecorto}</td>
                     <td class="center">
                         <div class="btn-group">
@@ -98,29 +92,48 @@
                         <div class="">
                             <form class="">
                                 <div class="card-body row">
-                                    <div class="col-lg-10 p-t-20"> 
+                                    <div class="col-lg-10 p-t-20">
                                         <div class="form-group">
-                                            <label>Materia</label>
-                                            <input type="text" id="materiaAdmin" class="form-control" placeholder="nombre...">
+                                            <label >Seleccione una materia</label>
+                                            <select id="materiaAdmin" class="custom-select">
+                                                <c:forEach items="${requestScope.listmateriafaltante}" var="listmateriafaltante">
+                                                    <option value="${listmateriafaltante.idtbdatosmateria}">${listmateriafaltante.nombrelargo} </option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>grado</label>
-                                            <input type="text" id="materiaAdmin" class="form-control" placeholder="nombre...">
+                                            <label >Seleccione una grado</label>
+                                            <select id="materiaAdmin" class="custom-select">
+                                                <c:forEach items="${requestScope.listgrado}" var="listgrado">
+                                                    <option value="${listgrado.idtbgrado}">${listgrado.nombre} </option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>grupo</label>
-                                            <input type="text" id="materiaAdmin" class="form-control" placeholder="nombre...">
+                                            <label >Seleccione una grupo</label>
+                                            <select id="materiaAdmin" class="custom-select">
+                                                <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
+                                                    <option value="${listgrupo.idtbgrupo}">${listgrupo.nombre} </option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>area</label>
-                                            <input type="text" id="materiaAdmin" class="form-control" placeholder="nombre...">
+                                            <label >Seleccione una área</label>
+                                            <select id="materiaAdmin" class="custom-select">
+                                                <c:forEach items="${requestScope.listarea}" var="listarea">
+                                                    <option value="${listarea.idtbarea}">${listarea.nombre} </option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>cpt</label>
-                                            <input type="text" id="materiaAdmin" class="form-control" placeholder="nombre...">
+                                            <label >Seleccione capaciatación para el trabajo</label>
+                                            <select id="materiaAdmin" class="custom-select">
+                                                <c:forEach items="${requestScope.listcpt}" var="listcpt">
+                                                    <option value="${listcpt.idtbcpt}">${listcpt.nombre} </option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
-                                    </div><br>
-                                </div>
+                                    </div>
                             </form>
                         </div>
                     </div>

@@ -22,7 +22,7 @@
 <div class="row">
     <div class="p-rl-20">
         <ul class="nav customtab nav-tabs" role="tablist">
-            <li class="nav-item"><a href="#tab1" class="nav-link active show" data-toggle="tab">Tutor(es)</a></li>
+            <li class="nav-item"><a href="#tab1" class="nav-link active show" data-toggle="tab">Tutor</a></li>
             <li class="nav-item"><a href="#tab2" class="nav-link" data-toggle="tab">Datos Personales</a></li>
             <li class="nav-item"><a href="#tab3" class="nav-link" data-toggle="tab">Datos Escolridad</a></li>
         </ul>
@@ -174,13 +174,13 @@
                                                             <c:choose>
                                                                 <c:when test="${requestScope.alumno.sexo}">
                                                                     <div class="radio p-0">
-                                                                        <input checked="true" type="radio" name="sexo" id="sexoah" value="true">
+                                                                        <input checked="true" type="radio" name="sexoah" id="sexoah" value="true">
                                                                         <label for="sexoah">
                                                                             Hombre
                                                                         </label>
                                                                     </div>
                                                                     <div class="radio p-0">
-                                                                        <input   type="radio" name="sexo" id="sexoam" value="false">
+                                                                        <input   type="radio" name="sexoam" id="sexoam" value="false">
                                                                         <label for="sexoam">
                                                                             Mujer
                                                                         </label>
@@ -188,19 +188,24 @@
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <div class="radio p-0">
-                                                                        <input  type="radio" name="sexo" id="sexoah" value="true">
+                                                                        <input  type="radio" name="sexoah" id="sexoah" value="true">
                                                                         <label for="sexoah">
                                                                             Hombre
                                                                         </label>
                                                                     </div>
                                                                     <div class="radio p-0">
-                                                                        <input checked="true"  type="radio" name="sexo" id="sexoam" value="false">
+                                                                        <input checked="true"  type="radio" name="sexoam" id="sexoam" value="false">
                                                                         <label for="sexoam">
                                                                             Mujer
                                                                         </label>
                                                                     </div>
                                                                 </c:otherwise>
                                                             </c:choose>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <a class="material-icons f-left">camera_enhance</a>
+                                                            <a> Agregar fotografía</a> <br>
+                                                            <input id="fotoalumno" type="file" name="fotoalumno">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Calle del domicilio</label>

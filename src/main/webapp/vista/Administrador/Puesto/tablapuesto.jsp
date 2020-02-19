@@ -39,7 +39,7 @@
         <tbody>
             <c:forEach items="${requestScope.listpuesto}" var="listpuesto">
                 <tr>
-                    <td class="center" style="display: none"></td>
+                    <td class="center" style="display: none">${listpuesto.idtbpuesto}</td>
                     <td class="center"><c:if test="${listpuesto.status == 1}">Activo</c:if></td>
                     <td class="center">${listpuesto.nombre}</td>
                     <td class="center">
@@ -49,11 +49,11 @@
                             </button>
                             <ul class="dropdown-menu pull-left" role="menu">
                                 <li>
-                                    <a href="javascript:;" class="editarpe">
+                                    <a href="javascript:;" class="editarpuesto" data-toggle="modal" data-target="#modalPuestoEditar">
                                         <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="aliminarpe">
+                                    <a href="javascript:;" class="eliminarpuesto">
                                         <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
                                 </li>
                                 <li>
@@ -93,7 +93,8 @@
                                     <div class="col-lg-10 p-t-20"> 
                                         <div class="form-group">
                                             <label>Puesto</label>
-                                            <input type="text" id="puestoAdmin" class="form-control" placeholder="nombre...">
+                                            <input id="idpuesto" type="hidden" value="${requestScope.puesto.idtbpuesto}">
+                                            <input type="text" id="puestoAdmin" class="form-control" value="" placeholder="nombre...">
                                         </div>
                                     </div><br>
                                 </div>
@@ -104,8 +105,45 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="guardaincidente" class="btn btn-terra">Guardar</button>
+                <button type="button" id="guardapuesto" class="btn btn-terra">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="modalPuestoEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                        <header>Formulario Puesto</header>
+                    </div></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="">
+                            <form class="">
+                                <div class="card-body row">
+                                    <div class="col-lg-10 p-t-20"> 
+                                        <div class="form-group">
+                                            <label>Puesto</label>
+                                            <input id="idpuesto" type="hidden" value="${requestScope.puesto.idtbpuesto}">
+                                            <input type="text" id="puestoAdmin" class="form-control" value="${requestScope.puesto.nombre}" placeholder="nombre...">
+                                        </div>
+                                    </div><br>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="guardapuesto" class="btn btn-terra">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>                                            

@@ -6,6 +6,7 @@ BD\ConsultasAlumno.class
 Modelos\Usuario.class
 Servlets\SAdminalumno.class
 Modelos\Alumno.class
+Modelos\CtDatosMateria.class
 Servlets\Logout.class
 Modelos\TbReporteDisciplinar.class
 BD\ConsultasLogin.class

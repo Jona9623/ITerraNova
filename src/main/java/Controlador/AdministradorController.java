@@ -9,11 +9,15 @@ import BD.ConsultasAdministrador;
 import BD.ConsultasAlumno;
 import Modelos.CtAreaalumno;
 import Modelos.CtCptalumno;
+import Modelos.CtDatosMateria;
 import Modelos.CtGrado;
 import Modelos.CtGrupo;
+import Modelos.CtPeriodoEscolar;
 import Modelos.CtPuesto;
 import Modelos.CtTipoCalificaicon;
+import Modelos.GradoGrupo;
 import Modelos.TbAlumnos;
+import Modelos.TbMateria;
 import Modelos.TbPersonal;
 import Modelos.TbTutor;
 import java.util.List;
@@ -112,11 +116,105 @@ public class AdministradorController {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getPuesto();
     }
+    
+    public List<GradoGrupo> getGradoGrupo() {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getGradoGrupo();
+    }
 
     public List<CtTipoCalificaicon> getTipoCali() {
        ConsultasAdministrador consulta = new ConsultasAdministrador();
        return consulta.getTipoCali();
     }
 
+    public void guardaPuesto(CtPuesto puesto) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaPuesto(puesto);
+    }
+
+    public void actualizaPuesto(CtPuesto puesto) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.actualizaPuesto(puesto);
+    }
+
+    public void eliminaPuesto(int id) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.eliminaPuesto(id);
+    }
+
+    public void guardaPeriodo(CtPeriodoEscolar periodo) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaPeriodo(periodo);
+    }
+
+    public void actualizaPeriodo(CtPeriodoEscolar periodo) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.actualizaPeriodo(periodo);
+    }
+    
+    public void eliminaPeriodo(int id) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.eliminaPeriodo(id);
+    }
+
+    public void guardaArea(CtAreaalumno area) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaArea(area);
+    }
+
+    public void actualizaArea(CtAreaalumno area) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.actualizaArea(area);
+    }
+
+    public void eliminaArea(int id) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.eliminaArea(id);
+    }
+
+    public void guardaCpt(CtCptalumno cpt) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaCpt(cpt);
+    }
+
+    public void actualizaCpt(CtCptalumno cpt) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.actualizaCpt(cpt);
+    }
+
+    public void eliminaCpt(int id) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.eliminaCpt(id);
+    }
+
+    public void guardaGrado(CtGrado grado) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaGrado(grado);
+    }
+
+    public void guardaGrupo(CtGrupo grupo) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaGrupo(grupo);
+    }
+
+    public void guardaTipoCali(CtTipoCalificaicon tipocali) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaTipoCali(tipocali);
+    }
+
+    public void actualizaTipoCali(CtTipoCalificaicon tipocali) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.actualizaTipoCali(tipocali);
+    }
+
+    public void eliminaTipoCali(int id) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.eliminaTipoCali(id);
+    }
+
+    public List<CtDatosMateria> getMateriasFaltantes() {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getMateriasFaltantes();
+    }
 
 }

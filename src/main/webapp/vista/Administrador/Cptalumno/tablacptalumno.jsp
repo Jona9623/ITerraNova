@@ -39,7 +39,7 @@
         <tbody>
             <c:forEach items="${requestScope.listcpt}" var="listcpt">
                 <tr>
-                    <td class="center" style="display: none"></td>
+                    <td class="center" style="display: none">${listcpt.idtbcpt}</td>
                     <td class="center"><c:if test="${listcpt.status == 1}">Activo</c:if></td>
                     <td class="center">${listcpt.nombre}</td>
                     <td class="center">
@@ -53,7 +53,7 @@
                                         <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="aliminarpe">
+                                    <a href="javascript:;" class="eliminarcpt">
                                         <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
                                 </li>
                                 <li>

@@ -12,8 +12,26 @@ package Modelos;
 public class CtPeriodoEscolar {
     private int idtbperiodo;
     private String nombre;
+    private String fechainicio;
+    private String fechafin;
     private int status;
     private int tipoescuela;
+
+    public String getFechainicio() {
+        return fechainicio;
+    }
+
+    public void setFechainicio(String fechainicio) {
+        this.fechainicio = fechainicio;
+    }
+
+    public String getFechafin() {
+        return fechafin;
+    }
+
+    public void setFechafin(String fechafin) {
+        this.fechafin = fechafin;
+    }
 
     public int getIdtbperiodo() {
         return idtbperiodo;

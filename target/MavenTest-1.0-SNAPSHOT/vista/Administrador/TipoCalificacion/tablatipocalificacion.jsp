@@ -39,7 +39,7 @@
         <tbody>
             <c:forEach items="${requestScope.listtipocali}" var="listtipocali">
                 <tr>
-                    <td class="center" style="display: none"></td>
+                    <td class="center" style="display: none">${listtipocali.idtbtipocali}</td>
                     <td class="center"><c:if test="${listtipocali.status == 1}">Activo</c:if></td>
                     <td class="center">${listtipocali.nombre}</td>
                     <td class="center">
@@ -53,7 +53,7 @@
                                         <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="aliminarpe">
+                                    <a href="javascript:;" class="eliminatipocali">
                                         <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
                                 </li>
                                 <li>

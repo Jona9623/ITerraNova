@@ -39,7 +39,7 @@
         <tbody>
             <c:forEach items="${requestScope.listarea}" var="listarea">
                 <tr>
-                    <td class="center" style="display: none"></td>
+                    <td class="center" style="display: none">${listarea.idtbarea}</td>
                     <td class="center"><c:if test="${listarea.status == 1}">Activo</c:if></td>
                     <td class="center">${listarea.nombre}</td>
                     <td class="center">
@@ -53,7 +53,7 @@
                                         <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="aliminarpe">
+                                    <a href="javascript:;" class="eliminararea">
                                         <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
                                 </li>
                                 <li>

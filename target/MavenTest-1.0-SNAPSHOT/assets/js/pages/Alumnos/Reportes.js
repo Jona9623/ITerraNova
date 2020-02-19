@@ -17,6 +17,7 @@ var Reportes = (function () {
                     Reportes.agregaFalta();
                 });
                 $("#guardaincidente").on('click', function () {
+                    alert("sadas");
                     Reportes.guardaIncidente(Reportes.datosIncidente(), "guardaIncidente");
                 });
                 Reportes.guardarD();
@@ -157,7 +158,7 @@ var Reportes = (function () {
                 ACCION: accion,
                 OBJETO: JSON.stringify(objeto)
             }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
+                
             });
         },
         mostrarReportes: function () {

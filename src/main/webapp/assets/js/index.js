@@ -29,12 +29,31 @@ $(document).ready(function () {
     $('#amcpt').on('click',function(){
        Admin.tablaCpt();
     });
-    $('#amgrado').on('click',function(){
-       Admin.tablaGrado();
+    $("#guardagrado").on('click',function(){
+        var grado = {
+            "nombre": $("#gradoAdmin").val()
+        }
+        $.get("SAdministrador",{
+            ACCION: "guardaGrado",
+            OBJETO: JSON.stringify(grado)
+        }).then(function(){
+            swal("Hecho!", "Datos guardados correctamente", "success");
+        })
     });
-    $('#amgrupo').on('click',function(){
-       Admin.tablaGrupo();
+    $("#guardagrupo").on('click',function(){
+        var grupo = {
+            "nombre": $("#grupoAdmin").val()
+        }
+        $.get("SAdministrador",{
+            ACCION: "guardaGrupo",
+            OBJETO: JSON.stringify(grupo)
+        }).then(function(){
+            swal("Hecho!", "Datos guardados correctamente", "success");
+        })
     });
+    /*$('#amgradogrupo').on('click',function(){
+       Admin.tablaGradoGrupo();
+    });*/
     $('#amtipocalificacion').on('click',function(){
        Admin.tablaTipoCalificacion();
     });

@@ -9,9 +9,13 @@ import Controlador.AdministradorController;
 import Controlador.AlumnosController;
 import Modelos.CtAreaalumno;
 import Modelos.CtCptalumno;
+import Modelos.CtDatosMateria;
+import Modelos.CtGrado;
+import Modelos.CtGrupo;
 import Modelos.CtPeriodoEscolar;
 import Modelos.CtPuesto;
 import Modelos.CtTipoCalificaicon;
+import Modelos.GradoGrupo;
 import Modelos.TbMateria;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -48,13 +52,24 @@ public class SAdministrador extends HttpServlet {
         String accion = request.getParameter("ACCION");
         switch (accion){
             case "tablaPuesto": tablaPuesto (request,response); break;
+            case "guardaPuesto": guardaPuesto(request,response);break;
+            case "eliminaPuesto": eliminaPuesto(request,response);break;
             case "tablaPeriodo": tablaPeriodo(request,response);break;
+            case "guardaPeriodo": guardaPeriodo(request,response);break;
+            case "eliminaPeriodo": eliminaPeriodo (request,response);break;
             case "tablaArea": tablaArea (request,response);break;
+            case "guardaArea": guardaArea(request,response);break;
+            case "eliminaArea": eliminaArea(request,response);break;
             case "tablaCpt": tablaCpt(request,response);break;
-            case "tablaGrado": tablaGrado(request,response); break;
-            case "tablaGrupo": tablaGrupo(request,response);break;
+            case "guardaCpt": guardaCpt( request,response);break;
+            case "eliminaCpt": eliminaCpt(request,response); break;
+            case "tablaGradoGrupo": tablaGradoGrupo(request,response); break;
             case "tablaTipoCalificacion": tablaTipoCalificacion(request,response);break;
             case "tablaMateria": tablaMateria(request,response);break;
+            case "guardaGrado": guardaGrado(request,response);break;
+            case "guardaGrupo": guardaGrupo(request,response); break;
+            case"guardaTipoCali": guardaTipoCali(request,response);break;
+            case "eliminaTipoCali": eliminaTipoCali(request,response);break;
         }
     }
 
@@ -109,6 +124,31 @@ public class SAdministrador extends HttpServlet {
             System.out.println(e);
         }
     }
+    
+    private void guardaPuesto(HttpServletRequest request, HttpServletResponse response) {
+        CtPuesto puesto = new CtPuesto();
+        adminC = new AdministradorController();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            puesto = mapper.readValue(objectJson, CtPuesto.class);
+            if(puesto.getIdtbpuesto() > 0)
+                adminC.actualizaPuesto(puesto);
+            else
+                adminC.guardaPuesto(puesto);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    private void eliminaPuesto(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        try {
+            adminC.eliminaPuesto(Integer.parseInt(request.getParameter("ID")));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     private void tablaPeriodo(HttpServletRequest request, HttpServletResponse response) {
         alumC = new AlumnosController();
@@ -118,6 +158,31 @@ public class SAdministrador extends HttpServlet {
             request.setAttribute("listperiodo", listperiodo);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/PeriodoEscolar/tablaperiodo.jsp");
             rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    private void guardaPeriodo(HttpServletRequest request, HttpServletResponse response) {
+        CtPeriodoEscolar periodo = new CtPeriodoEscolar();
+        adminC = new AdministradorController();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            periodo = mapper.readValue(objectJson, CtPeriodoEscolar.class);
+            if(periodo.getIdtbperiodo() > 0)
+                adminC.actualizaPeriodo(periodo);
+            else
+                adminC.guardaPeriodo(periodo);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    private void eliminaPeriodo(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        try {
+            adminC.eliminaPeriodo(Integer.parseInt(request.getParameter("ID")));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -135,6 +200,31 @@ public class SAdministrador extends HttpServlet {
             System.out.println(e);
         }
     }
+    
+    private void guardaArea(HttpServletRequest request, HttpServletResponse response) {
+        CtAreaalumno area = new CtAreaalumno();
+        adminC = new AdministradorController();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            area = mapper.readValue(objectJson, CtAreaalumno.class);
+            if(area.getIdtbarea() > 0)
+                adminC.actualizaArea(area);
+            else
+                adminC.guardaArea(area);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void eliminaArea(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        try {
+            adminC.eliminaArea(Integer.parseInt(request.getParameter("ID")));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     private void tablaCpt(HttpServletRequest request, HttpServletResponse response) {
         adminC = new AdministradorController();
@@ -148,13 +238,42 @@ public class SAdministrador extends HttpServlet {
             System.out.println(e);
         }
     }
-
-    private void tablaGrado(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void guardaCpt(HttpServletRequest request, HttpServletResponse response) {
+        CtCptalumno cpt = new CtCptalumno();
+        adminC = new AdministradorController();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            cpt = mapper.readValue(objectJson, CtCptalumno.class);
+            if(cpt.getIdtbcpt() > 0)
+                adminC.actualizaCpt(cpt);
+            else
+                adminC.guardaCpt(cpt);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
-    private void tablaGrupo(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void eliminaCpt(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        try {
+            adminC.eliminaCpt(Integer.parseInt(request.getParameter("ID")));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    private void tablaGradoGrupo(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        List <GradoGrupo> listgradogrupo = new ArrayList<>();
+        try {
+            listgradogrupo = adminC.getGradoGrupo();
+            request.setAttribute("listgradogrupo", listgradogrupo);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/TipoCalificacion/tablagradogrupo.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     private void tablaTipoCalificacion(HttpServletRequest request, HttpServletResponse response) {
@@ -169,15 +288,81 @@ public class SAdministrador extends HttpServlet {
             System.out.println(e);
         }
     }
+    
+    private void guardaTipoCali(HttpServletRequest request, HttpServletResponse response) {
+        CtTipoCalificaicon tipocali = new CtTipoCalificaicon();
+        adminC = new AdministradorController();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            tipocali = mapper.readValue(objectJson, CtTipoCalificaicon.class);
+            if(tipocali.getIdtbtipocali() > 0)
+                adminC.actualizaTipoCali(tipocali);
+            else
+                adminC.guardaTipoCali(tipocali);
+        } catch (Exception e) {
+        }
+    }
+
+    private void eliminaTipoCali(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        try {
+            adminC.eliminaTipoCali(Integer.parseInt(request.getParameter("ID")));
+        } catch (Exception e) {
+        }
+    }
 
     private void tablaMateria(HttpServletRequest request, HttpServletResponse response) {
         alumC = new AlumnosController();
+        adminC = new AdministradorController();
         List <TbMateria> listmateria = new ArrayList<>();
+        List <CtDatosMateria> listmateriafaltante = new ArrayList<>();
+        List <CtAreaalumno> listarea = new ArrayList<>();
+        List <CtCptalumno> listcpt = new ArrayList<>();
+        List <CtGrado> listgrado = new ArrayList<>();
+        List <CtGrupo> listgrupo = new ArrayList<>();
+        
         try {
             listmateria = alumC.getMaterias();
             request.setAttribute("listmateria", listmateria);
+            listmateriafaltante = adminC.getMateriasFaltantes();
+            request.setAttribute("listmateriafaltante", listmateriafaltante);
+            listarea = adminC.getArea();
+            request.setAttribute("listarea", listarea);
+            listcpt = adminC.getCpt();
+            request.setAttribute("listcpt", listcpt);
+            listgrado = adminC.getGrado();
+            request.setAttribute("listgrado", listgrado);
+            listgrupo = adminC.getGrupo();
+            request.setAttribute("listgrupo", listgrupo);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/Materia/tablamaterias.jsp");
             rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaGrado(HttpServletRequest request, HttpServletResponse response) {
+        CtGrado grado = new CtGrado();
+        adminC = new AdministradorController();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            grado = mapper.readValue(objectJson, CtGrado.class);
+            adminC.guardaGrado(grado);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaGrupo(HttpServletRequest request, HttpServletResponse response) {
+        CtGrupo grupo = new CtGrupo();
+        adminC = new AdministradorController();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            grupo = mapper.readValue(objectJson, CtGrupo.class);
+            adminC.guardaGrupo(grupo);
         } catch (Exception e) {
             System.out.println(e);
         }
