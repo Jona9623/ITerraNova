@@ -127,9 +127,9 @@ public class AdministradorController {
        return consulta.getTipoCali();
     }
 
-    public void guardaPuesto(CtPuesto puesto) {
+    public void guardaPuesto(CtPuesto puesto, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaPuesto(puesto);
+        consulta.guardaPuesto(puesto,tipoescuela);
     }
 
     public void actualizaPuesto(CtPuesto puesto) {
@@ -215,6 +215,21 @@ public class AdministradorController {
     public List<CtDatosMateria> getMateriasFaltantes() {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getMateriasFaltantes();
+    }
+
+    public void guardaNombreMateria(CtDatosMateria nombremateria, int tipoescuela) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaNombreMateria(nombremateria,tipoescuela);
+    }
+
+    public void guardaMateria(TbMateria materia) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaMateria(materia);
+    }
+
+    public void eliminaMateria(int id) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.eliminaMateria(id);
     }
 
 }

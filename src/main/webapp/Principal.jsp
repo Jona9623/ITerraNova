@@ -81,6 +81,13 @@ and open the template in the editor.
             </div>
         </div>
 
+        <!-- others scripts-->
+        <script type="text/javascript" src="assets/js/pages/Principal/index.js"></script>
+        <script type="text/javascript" src="assets/js/pages/Alumnos/Reportes.js" ></script>
+        <script type="text/javascript" src="assets/js/pages/Administrador/Alumnos.js"></script>
+        <script type="text/javascript" src="assets/js/pages/Administrador/Personal.js"></script>
+        <script type="text/javascript" src="assets/js/pages/Administrador/Administrador.js"></script>
+        
         <script src="assets/plugins/jquery/jquery.min.js" ></script>
         <script src="assets/plugins/popper/popper.min.js" ></script>
         <script src="assets/plugins/jquery-blockui/jquery.blockui.min.js" ></script>

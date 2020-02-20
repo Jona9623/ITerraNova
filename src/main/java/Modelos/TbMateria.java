@@ -11,6 +11,7 @@ package Modelos;
  */
 public class TbMateria {
     private int idtbmateria;
+    private int rdatosmateria;
     private String nombrelargo;
     private String nombrecorto;
     private int rgrado;
@@ -20,6 +21,15 @@ public class TbMateria {
     private int rcpt;
     private int status;
     private int tipoescuela;
+
+    public int getRdatosmateria() {
+        return rdatosmateria;
+    }
+
+    public void setRdatosmateria(int rdatosmateria) {
+        this.rdatosmateria = rdatosmateria;
+    }
+    
 
     public int getIdtbmateria() {
         return idtbmateria;

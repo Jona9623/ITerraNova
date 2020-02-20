@@ -1,10 +1,12 @@
-$(document).ready(function () {
-    $('#secundaria').on('click',function(){
-       Principal.Secundaria(); 
+var tipoescuela = 0;
+$('#secundaria').on('click',function(){
+      sessionStorage.setItem("tipoescuela","2");
     }),
     $('#preparatoria').on('click',function(){
-       Principal.Preparatoria(); 
-    }),
+        sessionStorage.setItem("tipoescuela","1");
+    })   
+$(document).ready(function () {
+    var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela")); 
     $("#reportedis").on('click', function () {
         Reportes.reporteDisciplinar();
     }),
@@ -50,6 +52,20 @@ $(document).ready(function () {
         }).then(function(){
             swal("Hecho!", "Datos guardados correctamente", "success");
         })
+    });
+    $("#guardanombremateria").on('click',function(){
+        alert(tipoescuela);
+       var materia = {
+           "nombrelargo": $("#nombrelargoAdmin").val(),
+           "nombrecorto": $("#nombrecortoAdmin").val()
+       }
+       $.get("SAdministrador",{
+           ACCION: "guardaNombreMateria",
+           OBJETO: JSON.stringify(materia),
+           TIPOESCUELA: tipoescuela
+       }).then(function(){
+           swal("Hecho!", "Datos guardados correctamente", "success");
+       });
     });
     /*$('#amgradogrupo').on('click',function(){
        Admin.tablaGradoGrupo();

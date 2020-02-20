@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 var Admin = (function () {
+    var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     return {
         tablaPuesto: function () {
             $.get("SAdministrador", {
@@ -43,7 +44,8 @@ var Admin = (function () {
             }
             $.get("SAdministrador", {
                 ACCION: "guardaPuesto",
-                OBJETO: JSON.stringify(puesto)
+                OBJETO: JSON.stringify(puesto),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
@@ -265,11 +267,52 @@ var Admin = (function () {
                 ACCION: "tablaMateria"
             }).then(function () {
                 $("#content").html(arguments[0]);
+                $("#guardamateria").on('click',function(){
+                   Admin.guardaMateria(); 
+                });
+                $(".eliminamateria").on('click',function(){
+                   idmateria = $(this).parents("tr").find("td").eq(0).html();
+                    swal({
+                        title: "Estas seguro?",
+                        text: "Se eliminara el registro",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Confirmar",
+                        closeOnConfirm: false
+                    }, function () {
+                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                        Admin.eliminaMateria(idmateria);
+                    });
+                });
                 $("#tablamateria").DataTable({
                     "scrollX": true
                 });
             });
         },
+        guardaMateria: function(){
+            var materia = {
+                "rdatosmateria": $("#materiaAdmin").val(),
+                "rgrado": $("#gradoselect").val(),
+                "rgrupo": $("#gruposelect").val(),
+                "rarea": $("#areaselect").val(),
+                "rcpt": $("#cptselect").val()
+            }
+            $.get("SAdministrador",{
+                ACCION: "guardaMateria",
+                OBJETO: JSON.stringify(materia)
+            }).then(function(){
+                swal("Hecho!", "Datos guardados correctamente", "success");
+            });
+        },
+        eliminaMateria: function(idmateria){
+            $.get("SAdministrador",{
+                ACCION: "eliminaMateria",
+                ID: idmateria
+            }).then(function(){
+               Admin.tablaMateria(); 
+            });
+        }
     }
 }());
 

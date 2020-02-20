@@ -65,11 +65,14 @@ public class SAdministrador extends HttpServlet {
             case "eliminaCpt": eliminaCpt(request,response); break;
             case "tablaGradoGrupo": tablaGradoGrupo(request,response); break;
             case "tablaTipoCalificacion": tablaTipoCalificacion(request,response);break;
+            case"guardaTipoCali": guardaTipoCali(request,response);break;
+            case "eliminaTipoCali": eliminaTipoCali(request,response);break;
             case "tablaMateria": tablaMateria(request,response);break;
             case "guardaGrado": guardaGrado(request,response);break;
             case "guardaGrupo": guardaGrupo(request,response); break;
-            case"guardaTipoCali": guardaTipoCali(request,response);break;
-            case "eliminaTipoCali": eliminaTipoCali(request,response);break;
+            case "guardaNombreMateria": guardaNombreMateria(request,response);break;
+            case "guardaMateria": guardaMateria(request,response);break;
+            case "eliminaMateria": eliminaMateria(request,response);break;
         }
     }
 
@@ -135,7 +138,7 @@ public class SAdministrador extends HttpServlet {
             if(puesto.getIdtbpuesto() > 0)
                 adminC.actualizaPuesto(puesto);
             else
-                adminC.guardaPuesto(puesto);
+                adminC.guardaPuesto(puesto, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -363,6 +366,41 @@ public class SAdministrador extends HttpServlet {
         try {
             grupo = mapper.readValue(objectJson, CtGrupo.class);
             adminC.guardaGrupo(grupo);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaNombreMateria(HttpServletRequest request, HttpServletResponse response) {
+        CtDatosMateria nombremateria = new CtDatosMateria();
+        adminC = new AdministradorController();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            nombremateria = mapper.readValue(objectJson, CtDatosMateria.class);
+            adminC.guardaNombreMateria(nombremateria,Integer.parseInt(request.getParameter("TIPOESCUELA")));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void guardaMateria(HttpServletRequest request, HttpServletResponse response) {
+        TbMateria materia = new TbMateria();
+        adminC = new AdministradorController();
+        objectJson = request.getParameter("OBJETO");
+        mapper = new ObjectMapper();
+        try {
+            materia = mapper.readValue(objectJson, TbMateria.class);
+            adminC.guardaMateria(materia);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void eliminaMateria(HttpServletRequest request, HttpServletResponse response) {
+        adminC = new AdministradorController();
+        try {
+            adminC.eliminaMateria(Integer.parseInt(request.getParameter("ID")));
         } catch (Exception e) {
             System.out.println(e);
         }

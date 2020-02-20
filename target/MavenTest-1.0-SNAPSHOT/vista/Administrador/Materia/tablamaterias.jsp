@@ -40,7 +40,7 @@
         <tbody>
             <c:forEach items="${requestScope.listmateria}" var="listmateria">
                 <tr>
-                    <td class="center" style="display: none"></td>
+                    <td class="center" style="display: none">${listmateria.idtbmateria}</td>
                     <td class="center"><c:if test="${listmateria.status == 1}">Activo</c:if></td>
                     <td class="center">${listmateria.nombrelargo}</td>
                     <td class="center">${listmateria.nombrecorto}</td>
@@ -55,7 +55,7 @@
                                         <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="aliminarpe">
+                                    <a href="javascript:;" class="eliminamateria">
                                         <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
                                 </li>
                                 <li>
@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label >Seleccione una grado</label>
-                                            <select id="materiaAdmin" class="custom-select">
+                                            <select id="gradoselect" class="custom-select">
                                                 <c:forEach items="${requestScope.listgrado}" var="listgrado">
                                                     <option value="${listgrado.idtbgrado}">${listgrado.nombre} </option>
                                                 </c:forEach>
@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label >Seleccione una grupo</label>
-                                            <select id="materiaAdmin" class="custom-select">
+                                            <select id="gruposelect" class="custom-select">
                                                 <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
                                                     <option value="${listgrupo.idtbgrupo}">${listgrupo.nombre} </option>
                                                 </c:forEach>
@@ -119,7 +119,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label >Seleccione una área</label>
-                                            <select id="materiaAdmin" class="custom-select">
+                                            <select id="areaselect" class="custom-select">
+                                                <option value="0"> No aplica</option>
                                                 <c:forEach items="${requestScope.listarea}" var="listarea">
                                                     <option value="${listarea.idtbarea}">${listarea.nombre} </option>
                                                 </c:forEach>
@@ -127,7 +128,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label >Seleccione capaciatación para el trabajo</label>
-                                            <select id="materiaAdmin" class="custom-select">
+                                            <select id="cptselect" class="custom-select">
+                                                <option value="0"> No aplica</option>
                                                 <c:forEach items="${requestScope.listcpt}" var="listcpt">
                                                     <option value="${listcpt.idtbcpt}">${listcpt.nombre} </option>
                                                 </c:forEach>

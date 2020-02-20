@@ -33,7 +33,7 @@ public class SPrincipal extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String accion = request.getParameter("ACCION");
         switch(accion){
-            case "Preparatoria": cargaPreparatoria(request,response); break;
+            case "preparatoria": preparatoria(request,response); break;
         }
     }
 
@@ -76,9 +76,9 @@ public class SPrincipal extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void cargaPreparatoria(HttpServletRequest request, HttpServletResponse response) {
+    private void preparatoria(HttpServletRequest request, HttpServletResponse response) {
         try {
-            RequestDispatcher rd = request.getRequestDispatcher("~/indexpre.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Web Pages/indexpre.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             System.out.println(e);

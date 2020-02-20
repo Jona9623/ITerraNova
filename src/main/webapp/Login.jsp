@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : Login
     Created on : 6/02/2020, 11:20:45 AM
@@ -45,7 +46,7 @@
         <div class="form formLogin">
             <h2>Inicia Sesión</h2>
             <form action="Login" method="POST">
-                <input name="user" type="text" placeholder="Usiario" />
+                <input name="user" type="text" placeholder="Usuario" />
                 <input name="password" type="password" placeholder="Contraseña" />
                 <button class="btn-terra2">Iniciar sesión</button>
             </form>

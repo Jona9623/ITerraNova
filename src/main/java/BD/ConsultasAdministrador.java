@@ -863,7 +863,7 @@ public class ConsultasAdministrador {
         }
         return listpuesto;
     }
-    
+
     public List<GradoGrupo> getGradoGrupo() {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -943,7 +943,7 @@ public class ConsultasAdministrador {
         return listtipocali;
     }
 
-    public void guardaPuesto(CtPuesto puesto) {
+    public void guardaPuesto(CtPuesto puesto, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -952,7 +952,7 @@ public class ConsultasAdministrador {
             pst = con.prepareStatement(consulta);
             pst.setString(1, puesto.getNombre());
             pst.setInt(2, 1);
-            pst.setInt(3, 1);
+            pst.setInt(3, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -1068,7 +1068,7 @@ public class ConsultasAdministrador {
             }
         }
     }
-    
+
     public void actualizaPeriodo(CtPeriodoEscolar periodo) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1195,7 +1195,7 @@ public class ConsultasAdministrador {
     }
 
     public void eliminaArea(int id) {
-         con = new Conexion().conexion();
+        con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
@@ -1412,7 +1412,7 @@ public class ConsultasAdministrador {
     }
 
     public void actualizaTipoCali(CtTipoCalificaicon tipocali) {
-         con = new Conexion().conexion();
+        con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
             con.setAutoCommit(false);
@@ -1443,7 +1443,7 @@ public class ConsultasAdministrador {
     }
 
     public void eliminaTipoCali(int id) {
-         con = new Conexion().conexion();
+        con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
@@ -1508,6 +1508,112 @@ public class ConsultasAdministrador {
             }
         }
         return listmateriafaltante;
+    }
+
+    public void guardaNombreMateria(CtDatosMateria nombremateria, int tipoescuela) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "insert into ct_datosmateria (nombrelargo,nombrecorto,status,tipoescuela) values (?,?,?,?)";
+            pst = con.prepareStatement(consulta);
+            pst.setString(1, nombremateria.getNombrelargo());
+            pst.setString(2, nombremateria.getNombrecorto());
+            pst.setInt(3, 1);
+            pst.setInt(4, tipoescuela);
+
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al guardar");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void guardaMateria(TbMateria materia) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "insert into tb_materia (r_datosmateria,r_grado,r_grupo,r_area,r_cpt,status,tipoescuela) values (?,?,?,?,?,?,?)";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, materia.getRdatosmateria());
+            pst.setInt(2, materia.getRgrado());
+            pst.setInt(3, materia.getRgrupo());
+            if (materia.getRarea() != 0) {
+                pst.setInt(4, materia.getRarea());
+            } else {
+                pst.setString(4, null);
+            }
+            if (materia.getRcpt() != 0) {
+                pst.setInt(5, materia.getRcpt());
+            }else{
+                pst.setString(5, null);
+            }
+            pst.setInt(6, 1);
+            pst.setInt(7, 1);
+
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al guardar");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void eliminaMateria(int id) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "update `terranova`.`tb_materia` set `status` = 2 where `idTb_Materia` = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, id);
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al eliminar");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
 }
