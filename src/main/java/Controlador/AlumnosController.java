@@ -39,37 +39,37 @@ import javax.swing.JOptionPane;
  */
 public class AlumnosController {
 
-    public List<CtPeriodoEscolar> getPeriodos() {
+    public List<CtPeriodoEscolar> getPeriodos(int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return consulta.getPeriodos();
+        return consulta.getPeriodos(tipoescuela);
     }
 
-    public List<TbMateria> getMaterias() {
+    public List<TbMateria> getMaterias(int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return consulta.getMaterias();
+        return consulta.getMaterias(tipoescuela);
     }
 
-    public List<CtIncidente> getIncidentes() {
+    public List<CtIncidente> getIncidentes(int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return consulta.getIncidentes();
+        return consulta.getIncidentes(tipoescuela);
     }
 
-    public List<Alumno> getAlumnos(int grado, int grupo) {
+    public List<Alumno> getAlumnos(int grado, int grupo, int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return consulta.getAlumnos(grado, grupo);
+        return consulta.getAlumnos(grado, grupo, tipoescuela);
     }
 
-    public void guardaIncidente(CtIncidente incidente) {
+    public void guardaIncidente(CtIncidente incidente, int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        consulta.guardaIincidente(incidente);
+        consulta.guardaIincidente(incidente, tipoescuela);
     }
 
-    public void guardaReporteD(TbReporteDisciplinar reporteD, String ruta, int status) {
+    public void guardaReporteD(TbReporteDisciplinar reporteD, String ruta, int status, int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        consulta.guardaReporteD(reporteD, ruta);
+        consulta.guardaReporteD(reporteD, ruta,tipoescuela);
         if (status == 1) {
             TbReporteDisciplinar reporte = new TbReporteDisciplinar();
-            reporte = consulta.datosReporteD(reporteD.getRalumno(), reporteD.getFecha(), reporteD.getHora());
+            reporte = consulta.datosReporteD(reporteD.getRalumno(), reporteD.getFecha(), reporteD.getHora(),tipoescuela);
             String correotutor = reporte.getCorreotutor();
             String asunto = "Notificacion de Reporte Disciplinar";
             String cuerpo = "Estimado padre de familia, le informo que el dia " + reporte.getHora() + " su hijo " + reporte.getAlumno() + "" + reporte.getAlumnoapep() + "" + reporte.getAlumnoapem() + " "
@@ -81,14 +81,14 @@ public class AlumnosController {
             System.out.println("No entro");
     }
 
-    public List<TbReporteDisciplinar> getAlumnosReporteD() {
+    public List<TbReporteDisciplinar> getAlumnosReporteD(int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return consulta.getAlumnosReporteD();
+        return consulta.getAlumnosReporteD(tipoescuela);
     }
 
-    public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora) {
+    public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora, int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return (consulta.datosReporteD(id, fecha, hora));
+        return (consulta.datosReporteD(id, fecha, hora,tipoescuela));
     }
     
     public TbReporteDisciplinar editarReporteD(int id, String fecha, String hora) {
@@ -137,34 +137,34 @@ public class AlumnosController {
         consulta.guardareditarReporteD(reporteD);
     }
 
-    public List<CtSemanaFiscal> getSemanaiscal() {
+    public List<CtSemanaFiscal> getSemanaiscal(int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return consulta.getSemanaFiscal();
+        return consulta.getSemanaFiscal(tipoescuela);
     }
 
-    public List<CtAtencion> getAtencion() {
+    public List<CtAtencion> getAtencion(int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return consulta.getAtencion();
+        return consulta.getAtencion(tipoescuela);
     }
 
-    public void guardaActividadSemanal(TbTareaSemanal tarea) {
+    public void guardaActividadSemanal(TbTareaSemanal tarea,int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        consulta.guardaActividadSemanal(tarea);
+        consulta.guardaActividadSemanal(tarea,tipoescuela);
     }
 
-    public void guardaReporteAcademico(TbReporteAcademico reporteA) {
+    public void guardaReporteAcademico(TbReporteAcademico reporteA,int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        consulta.guardaReporteAcademico(reporteA);
+        consulta.guardaReporteAcademico(reporteA,tipoescuela);
     }
 
-    public void guardaComportamiento(CtAtencion atencion) {
+    public void guardaComportamiento(CtAtencion atencion, int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        consulta.guardaComportamiento(atencion);
+        consulta.guardaComportamiento(atencion,tipoescuela);
     }
 
-    public void guardaSemana(CtSemanaFiscal semana) {
+    public void guardaSemana(CtSemanaFiscal semana, int tipoescuela) {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        consulta.guardaSemana(semana);
+        consulta.guardaSemana(semana, tipoescuela);
     }
 
 }

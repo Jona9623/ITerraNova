@@ -37,7 +37,8 @@ $(document).ready(function () {
         }
         $.get("SAdministrador",{
             ACCION: "guardaGrado",
-            OBJETO: JSON.stringify(grado)
+            OBJETO: JSON.stringify(grado),
+            TIPOESCUELA: tipoescuela
         }).then(function(){
             swal("Hecho!", "Datos guardados correctamente", "success");
         })
@@ -48,13 +49,13 @@ $(document).ready(function () {
         }
         $.get("SAdministrador",{
             ACCION: "guardaGrupo",
-            OBJETO: JSON.stringify(grupo)
+            OBJETO: JSON.stringify(grupo),
+            TIPOESCUELA: tipoescuela
         }).then(function(){
             swal("Hecho!", "Datos guardados correctamente", "success");
         })
     });
     $("#guardanombremateria").on('click',function(){
-        alert(tipoescuela);
        var materia = {
            "nombrelargo": $("#nombrelargoAdmin").val(),
            "nombrecorto": $("#nombrecortoAdmin").val()

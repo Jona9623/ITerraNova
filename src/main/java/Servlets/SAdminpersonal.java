@@ -102,7 +102,7 @@ public class SAdminpersonal extends HttpServlet {
         adminC = new AdministradorController();
         List<TbPersonal> listpersonal = new ArrayList<>();
         try {
-            listpersonal = adminC.getPersonal();
+            listpersonal = adminC.getPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listpersonal", listpersonal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablapersonal.jsp");
             rd.forward(request, response);
@@ -116,7 +116,7 @@ public class SAdminpersonal extends HttpServlet {
         TbPersonal personal = new TbPersonal();
         List<CtPuesto> listpuesto = new ArrayList<>();
         try {
-            listpuesto = adminC.getPuesto();
+            listpuesto = adminC.getPuesto(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listpuesto", listpuesto);
             personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("IDPERSONAL")));
             request.setAttribute("personal", personal);
@@ -140,7 +140,7 @@ public class SAdminpersonal extends HttpServlet {
         adminC = new AdministradorController();
         List<CtPuesto> listpuesto = new ArrayList<>();
         try {
-            listpuesto = adminC.getPuesto();
+            listpuesto = adminC.getPuesto(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listpuesto", listpuesto);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formpersonal.jsp");
             rd.forward(request, response);
@@ -158,7 +158,7 @@ public class SAdminpersonal extends HttpServlet {
             if (personal.getIdtbpersonal() > 0) {
                 adminC.actualizaPersonal(personal);
             } else {
-                adminC.guardaPersonal(personal);
+                adminC.guardaPersonal(personal, Integer.parseInt(request.getParameter("TIPOESCUELA")));
             }
 
         } catch (Exception e) {

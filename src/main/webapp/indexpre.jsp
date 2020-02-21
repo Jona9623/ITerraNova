@@ -93,6 +93,12 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default animated jello">                                    
+                                    <% if (x == 5) { %>
+                                    <li>
+                                        <a data-toggle="modal" data-target="#modalUsuario">
+                                            <i class="icon-bell"></i> Agregar usuario </a>
+                                    </li>
+                                    <% } %>
                                     <li>
                                         <a href="Logout">
                                             <i class="icon-logout"></i> Salir </a>
@@ -259,9 +265,17 @@
                         </div>
                     </div></div>
                 <!-- end page content -->
+                <!-- start footer -->
+                <div class="page-footer">
+                    <div class="scroll-to-top">
+                        <i class="icon-arrow-up"></i>
+                    </div>
+                </div>
+                <!-- end footer -->
             </div>
             <!-- end page container -->
         </div>
+        <% if (x == 5 || x == 4 || x == 3) { %>
         <div class="modal fade" id="modalGrado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -374,6 +388,50 @@
                 </div>
             </div>
         </div>
+        <% } %>
+        <% if (x == 5){%>
+        <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                                <header>Formulario Usuario</header>
+                            </div></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="">
+                                    <div class="">
+                                        <h2>Nueva cuenta</h2>
+                                        <form action="RegistroLogin" method="POST">
+                                            <input name="newuser"  type="text" placeholder="Usuario" />
+                                            <input name="newpassword" type="password" placeholder="Contraseña" /> <br>
+                                            <label >Seleccione un tipo de usuario</label>
+                                            <select name="newtipo" id="tipousuario" class="custom-select" name="tipousuario">
+                                                <option value="1">Prefectos</option>
+                                                <option value="2">Maestros</option>
+                                                <option value="3">Sub director</option>
+                                                <option value="4">Control escolar</option>
+                                                <option value="5">Administrador</option>
+                                            </select> <br> <br>
+                                            <button class="btn-terra2">Registrar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
         <!-- start js include path -->
         <script src="assets/plugins/jquery/jquery.min.js" ></script>
         <script src="assets/plugins/popper/popper.min.js" ></script>
@@ -426,7 +484,7 @@
         <script type="text/javascript" src="assets/js/pages/Administrador/Alumnos.js"></script>
         <script type="text/javascript" src="assets/js/pages/Administrador/Personal.js"></script>
         <script type="text/javascript" src="assets/js/pages/Administrador/Administrador.js"></script>
-        
+
         <!-- data tables -->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js" ></script>

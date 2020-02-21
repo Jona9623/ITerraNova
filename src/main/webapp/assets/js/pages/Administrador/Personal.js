@@ -1,8 +1,10 @@
 var Adminpersonal = (function () {
+    var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     return {
         tablaPersonal: function () {
             $.get("SAdminpersonal", {
-                ACCION: "MuestraAgregaPersonal"
+                ACCION: "MuestraAgregaPersonal",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $('#content').html(arguments[0]);
                 $('#tablapersonal').DataTable({
@@ -60,7 +62,8 @@ var Adminpersonal = (function () {
         },
         agregaPersonal: function () {
             $.get("SAdminpersonal", {
-                ACCION: "AgregaPersonal"
+                ACCION: "AgregaPersonal",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 Adminpersonal.formulariospe(arguments[0]);
             });
@@ -68,9 +71,10 @@ var Adminpersonal = (function () {
         guardaPersonal: function (objeto, accion) {
             $.get("SAdminpersonal", {
                 ACCION: accion,
-                PERSONAL: JSON.stringify(objeto)
+                PERSONAL: JSON.stringify(objeto),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
-                alert('Personal guardado');
+                swal("Hecho!", "Datos guardados correctamente", "success");
                 Adminpersonal.tablaPersonal();
             });
         },

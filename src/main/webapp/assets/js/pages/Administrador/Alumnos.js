@@ -1,9 +1,11 @@
 
 var Adminalumno = (function () {
+    var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     return {
         tablaAlumnos: function () {
             $.get("SAdminalumno", {
-                ACCION: "MuestraAgregaAlumno"
+                ACCION: "MuestraAgregaAlumno",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $('#content').html(arguments[0]);
                 $("#tablaalumnos").DataTable({
@@ -55,7 +57,8 @@ var Adminalumno = (function () {
             $.get("SAdminalumno", {
                 ACCION: "editarAlumno",
                 IDALUMNO: idalumno,
-                IDTUTOR: idtutor
+                IDTUTOR: idtutor,
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 Adminalumno.formularios(arguments[0]);
             });
@@ -70,7 +73,8 @@ var Adminalumno = (function () {
         },
         agregaAlumno: function () {
             $.get("SAdminalumno", {
-                ACCION: "AgregaAlumno"
+                ACCION: "AgregaAlumno",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 Adminalumno.formularios(arguments[0]);
             });
@@ -78,7 +82,8 @@ var Adminalumno = (function () {
         guardaTutor: function (objeto, accion) {
             $.get("SAdminalumno", {
                 ACCION: accion,
-                TUTOR: JSON.stringify(objeto)
+                TUTOR: JSON.stringify(objeto),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
@@ -86,7 +91,8 @@ var Adminalumno = (function () {
         guardaAlumno: function (objeto, accion) {
             $.get("SAdminalumno", {
                 ACCION: accion,
-                ALUMNO: JSON.stringify(objeto)
+                ALUMNO: JSON.stringify(objeto),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Adminalumno.tablaAlumnos();

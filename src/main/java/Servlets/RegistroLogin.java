@@ -41,7 +41,7 @@ public class RegistroLogin extends HttpServlet {
             newuser.setContrasena(contra);
             Usuarios usuarios = new Usuarios();
             if(usuarios.registroUsuario(newuser)!= 0)
-                response.sendRedirect(request.getContextPath()+ "/Login.jsp");
+                response.sendRedirect(request.getContextPath()+ "/indexpre.jsp");
             else response.sendRedirect(request.getContextPath()+ "/Login.jsp");
         } catch (Exception e) {
             System.out.println(e);

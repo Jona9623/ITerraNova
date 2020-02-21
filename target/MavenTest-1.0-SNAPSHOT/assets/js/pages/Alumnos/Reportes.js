@@ -1,12 +1,14 @@
 
 
 var Reportes = (function () {
+    var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     var grado;
     var grupo;
     return {
         reporteDisciplinar: function () {
             $.get("SReportes", {
-                ACCION: "Rdisciplinar"
+                ACCION: "Rdisciplinar",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
                 grado = $("#gradodisciplinar").val();
@@ -17,7 +19,6 @@ var Reportes = (function () {
                     Reportes.agregaFalta();
                 });
                 $("#guardaincidente").on('click', function () {
-                    alert("sadas");
                     Reportes.guardaIncidente(Reportes.datosIncidente(), "guardaIncidente");
                 });
                 Reportes.guardarD();
@@ -91,7 +92,8 @@ var Reportes = (function () {
             $.get("SReportes", {
                 ACCION: "alumnoGradoGrupo",
                 GRADO: grado,
-                GRUPO: grupo
+                GRUPO: grupo,
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#alumnogradoD").html(arguments[0]);
                 $("#gradodisciplinar").change(function () {
@@ -111,7 +113,8 @@ var Reportes = (function () {
             $.get("SReportes", {
                 ACCION: "alumnoGradoGrupoAca",
                 GRADOHONOR: gradohonor,
-                GRUPOHONOR: grupohonor
+                GRUPOHONOR: grupohonor,
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 //  $("#alumnogradoA").html(arguments[0]);
                 $("#alumnogradoAA").html(arguments[0]);
@@ -140,7 +143,8 @@ var Reportes = (function () {
             $.get("SReportes", {
                 ACCION: "alumnoGradoGrupoAcaAtencion",
                 GRADOATENCION: gradoatencion,
-                GRUPOATENCION: grupoatencion
+                GRUPOATENCION: grupoatencion,
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#alumnogradoA").html(arguments[0]);
                 $("#gradoatencion").change(function () {
@@ -156,14 +160,16 @@ var Reportes = (function () {
         guardaIncidente: function (objeto, accion) {
             $.get("SReportes", {
                 ACCION: accion,
-                OBJETO: JSON.stringify(objeto)
+                OBJETO: JSON.stringify(objeto),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 
             });
         },
         mostrarReportes: function () {
             $.get("SReportes", {
-                ACCION: "mostrarReportes"
+                ACCION: "mostrarReportes",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#tablareporteD").DataTable({
@@ -195,7 +201,8 @@ var Reportes = (function () {
                 ACCION: "infoReporteD",
                 ID: alumnoreporte,
                 FECHA: reportefecha,
-                HORA: hora
+                HORA: hora,
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
             });
@@ -209,7 +216,6 @@ var Reportes = (function () {
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#editarreporteD").on('click', function () {
-                    alert("entra");
                     Reportes.guardaeditarReporteD(Reportes.datosReporteD(), "guardaeditarReporteD")
                 });
             })
@@ -217,7 +223,8 @@ var Reportes = (function () {
         guardaeditarReporteD: function (objeto, accion) {
             $.get("SReportes", {
                 ACCION: accion,
-                OBJETO: JSON.stringify(objeto)
+                OBJETO: JSON.stringify(objeto),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos actualizados correctamente", "success");
                 Reportes.mostrarReportes();
@@ -225,7 +232,8 @@ var Reportes = (function () {
         },
         reporteAcademico: function () {
             $.get("SReportes", {
-                ACCION: "Racademico"
+                ACCION: "Racademico",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
                 gradohonor = $("#gradohonor").val();
@@ -234,11 +242,9 @@ var Reportes = (function () {
                 grupoatencion = $("#grupoatencion").val();
                 Reportes.getAlumnoAca(gradohonor, grupohonor);
                 $("#guardacomportammiento").on('click', function () {
-                    alert("Entra");
                     Reportes.guardaComportamiento();
                 });
                 $("#guardasemana").on('click', function () {
-                     alert("Entra");
                     Reportes.guardaSemana();
                 });
                 $("#guardasemana2").on('click', function () {
@@ -265,7 +271,8 @@ var Reportes = (function () {
             }
             $.get("SReportes", {
                 ACCION: "guardaReporteAcademico",
-                OBJETO: JSON.stringify(reporteA)
+                OBJETO: JSON.stringify(reporteA),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Reportes.imagenReporteAca();
@@ -280,7 +287,8 @@ var Reportes = (function () {
             }
             $.get("SReportes", {
                 ACCION: "guardaActividadSemanal",
-                OBJETO: JSON.stringify(actividad)
+                OBJETO: JSON.stringify(actividad),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
@@ -289,18 +297,19 @@ var Reportes = (function () {
             var comportamiento = {"nombre": $("#comport").val()}
             $.get("SReportes", {
                 ACCION: "guardaComportamiento",
-                OBJETO: JSON.stringify(comportamiento)
+                OBJETO: JSON.stringify(comportamiento),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Reportes.reporteDisciplinar();
             });
         },
         guardaSemana: function () {
-            alert("Entra2");
             var semana = {"nombre": $("#semana").val()}
             $.get("SReportes", {
                 ACCION: "guardaSemana",
-                OBJETO: JSON.stringify(semana)
+                OBJETO: JSON.stringify(semana),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
@@ -309,7 +318,8 @@ var Reportes = (function () {
             var semana = {"nombre": $("#semana2").val()}
             $.get("SReportes", {
                 ACCION: "guardaSemana",
-                OBJETO: JSON.stringify(semana)
+                OBJETO: JSON.stringify(semana),
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });

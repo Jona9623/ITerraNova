@@ -41,7 +41,7 @@
     </div>
     <!-- Login Form-->
     <div class="login-form text-center">
-        <div class="toggle"><i class="fa fa-user-plus"></i>
+        <div class=""><i class=""></i>
         </div>
         <div class="form formLogin">
             <h2>Inicia Sesión</h2>
@@ -49,22 +49,6 @@
                 <input name="user" type="text" placeholder="Usuario" />
                 <input name="password" type="password" placeholder="Contraseña" />
                 <button class="btn-terra2">Iniciar sesión</button>
-            </form>
-        </div>
-        <div class="form formRegister">
-            <h2>Nueva cuenta</h2>
-            <form action="RegistroLogin" method="POST">
-                <input name="newuser"  type="text" placeholder="Usuario" />
-                <input name="newpassword" type="password" placeholder="Contraseña" />
-                <label >Seleccione periodo escolar</label>
-                <select name="newtipo" id="tipousuario" class="custom-select" name="tipousuario">
-                        <option value="1">Prefectos</option>
-                        <option value="2">Maestros</option>
-                        <option value="3">Sub director</option>
-                        <option value="4">Control escolar</option>
-                        <option value="5">Administrador</option>
-                    </select>
-                <button class="btn-terra2">Registrar</button>
             </form>
         </div>
     </div>

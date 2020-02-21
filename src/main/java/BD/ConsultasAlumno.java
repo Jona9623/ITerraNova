@@ -33,15 +33,16 @@ public class ConsultasAlumno {
     private Connection con;
     private int x = 1;
 
-    public List<CtPeriodoEscolar> getPeriodos() {
+    public List<CtPeriodoEscolar> getPeriodos(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_periodoescolar where status = 1 and tipoescuela = 1 order by idCt_PeriodoEscolar desc";
+            String consulta = "select * from ct_periodoescolar where status = 1 and tipoescuela = ? order by idCt_PeriodoEscolar desc";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtPeriodoEscolar periodo = new CtPeriodoEscolar();
@@ -72,15 +73,16 @@ public class ConsultasAlumno {
         return listperiodo;
     }
 
-    public List<TbMateria> getMaterias() {
+    public List<TbMateria> getMaterias(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<TbMateria> listmateria = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from (tb_materia inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria) where tb_materia.status = 1 and tb_materia.tipoescuela = 1";
+            String consulta = "select * from (tb_materia inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria) where tb_materia.status = 1 and tb_materia.tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 TbMateria materia = new TbMateria();
@@ -112,15 +114,16 @@ public class ConsultasAlumno {
         return listmateria;
     }
 
-    public List<CtIncidente> getIncidentes() {
+    public List<CtIncidente> getIncidentes(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtIncidente> listincidente = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_incidente where status = 1 and tipoescuela = 1";
+            String consulta = "select * from ct_incidente where status = 1 and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtIncidente incidente = new CtIncidente();
@@ -151,17 +154,18 @@ public class ConsultasAlumno {
         return listincidente;
     }
 
-    public List<Alumno> getAlumnos(int grado, int grupo) {
+    public List<Alumno> getAlumnos(int grado, int grupo, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<Alumno> listalumno = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from tb_alumnos where r_grado = ? and r_grupo = ?";
+            String consulta = "select * from tb_alumnos where r_grado = ? and r_grupo = ? and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, grado);
             pst.setInt(2, grupo);
+            pst.setInt(3, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 Alumno alumno = new Alumno();
@@ -192,7 +196,7 @@ public class ConsultasAlumno {
         return listalumno;
     }
 
-    public void guardaIincidente(CtIncidente incidente) {
+    public void guardaIincidente(CtIncidente incidente, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -201,7 +205,7 @@ public class ConsultasAlumno {
             pst = con.prepareStatement(consulta);
             pst.setString(1, incidente.getNombre());
             pst.setInt(2, 1);
-            pst.setInt(3, 1);
+            pst.setInt(3, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -224,7 +228,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public void guardaReporteD(TbReporteDisciplinar reporteD, String ruta) {
+    public void guardaReporteD(TbReporteDisciplinar reporteD, String ruta, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -255,7 +259,7 @@ public class ConsultasAlumno {
             pst.setString(13, reporteD.getDescripcion());
             pst.setString(14, ruta);
             pst.setInt(15, 1);
-            pst.setInt(16, 1);
+            pst.setInt(16, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -278,7 +282,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public List<TbReporteDisciplinar> getAlumnosReporteD() {
+    public List<TbReporteDisciplinar> getAlumnosReporteD(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -295,8 +299,9 @@ public class ConsultasAlumno {
                     + " join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo\n"
                     + " join tb_personal as tb1 on tb_reportedisciplinar.r_personalllena = tb1.idTb_Personal\n"
                     + " join tb_personal as tb2 on tb_reportedisciplinar.r_personalsolicita = tb2.idTb_Personal\n"
-                    + " where tb_reportedisciplinar.status = 1 and tb_reportedisciplinar.tipoescuela = 1";
+                    + " where tb_reportedisciplinar.status = 1 and tb_reportedisciplinar.tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
@@ -343,7 +348,7 @@ public class ConsultasAlumno {
         return alumnosdisciplinar;
     }
 
-    public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora) {
+    public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -361,12 +366,13 @@ public class ConsultasAlumno {
                     + " join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo\n"
                     + " join tb_personal as tb1 on tb_reportedisciplinar.r_personalllena = tb1.idTb_Personal\n"
                     + " join tb_personal as tb2 on tb_reportedisciplinar.r_personalsolicita = tb2.idTb_Personal\n"
-                    + " where tb_reportedisciplinar.status = 1 and tb_reportedisciplinar.tipoescuela = 1 "
+                    + " where tb_reportedisciplinar.status = 1 and tb_reportedisciplinar.tipoescuela = ? "
                     + "and tb_reportedisciplinar.r_alumno = ? and tb_reportedisciplinar.fecha = ? and tb_reportedisciplinar.hora = ?";
             pst = con.prepareStatement(consulta);
-            pst.setInt(1, id);
-            pst.setString(2, fecha);
-            pst.setString(3, hora);
+            pst.setInt(1, tipoescuela);
+            pst.setInt(2, id);
+            pst.setString(3, fecha);
+            pst.setString(4, hora);
             rs = pst.executeQuery();
             while (rs.next()) {
                 datosreporteD.setIdtbreporte(rs.getInt("idTb_ReporteDisciplinar"));
@@ -534,15 +540,16 @@ public class ConsultasAlumno {
         }
     }
 
-    public List<CtSemanaFiscal> getSemanaFiscal() {
+    public List<CtSemanaFiscal> getSemanaFiscal(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_semanafiscal where status = 1 and tipoescuela = 1";
+            String consulta = "select * from ct_semanafiscal where status = 1 and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtSemanaFiscal semana = new CtSemanaFiscal();
@@ -573,15 +580,16 @@ public class ConsultasAlumno {
         return listsemana;
     }
 
-    public List<CtAtencion> getAtencion() {
+    public List<CtAtencion> getAtencion(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtAtencion> listatencion = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_atencion where status = 1 and tipoescuela = 1";
+            String consulta = "select * from ct_atencion where status = 1 and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtAtencion atencion = new CtAtencion();
@@ -612,7 +620,7 @@ public class ConsultasAlumno {
         return listatencion;
     }
 
-    public void guardaActividadSemanal(TbTareaSemanal tarea) {
+    public void guardaActividadSemanal(TbTareaSemanal tarea, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -624,7 +632,7 @@ public class ConsultasAlumno {
             pst.setInt(3, tarea.getRdia());
             pst.setInt(4, tarea.getRpersonal());
             pst.setInt(5,1);
-            pst.setInt(6,1);
+            pst.setInt(6,tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -647,7 +655,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public void guardaReporteAcademico(TbReporteAcademico reporteA) {
+    public void guardaReporteAcademico(TbReporteAcademico reporteA, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -663,7 +671,7 @@ public class ConsultasAlumno {
             pst.setInt(5, reporteA.getRatencion());
             pst.setInt(6, reporteA.getRperiodo());
             pst.setInt(7,1);
-            pst.setInt(8,1);
+            pst.setInt(8,tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -686,7 +694,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public void guardaComportamiento(CtAtencion atencion) {
+    public void guardaComportamiento(CtAtencion atencion, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -695,7 +703,7 @@ public class ConsultasAlumno {
             pst = con.prepareStatement(consulta);
             pst.setString(1, atencion.getNombre());
             pst.setInt(2, 1);
-            pst.setInt(3, 1);
+            pst.setInt(3, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -718,7 +726,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public void guardaSemana(CtSemanaFiscal semana) {
+    public void guardaSemana(CtSemanaFiscal semana, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -727,7 +735,7 @@ public class ConsultasAlumno {
             pst = con.prepareStatement(consulta);
             pst.setString(1, semana.getNombre());
             pst.setInt(2, 1);
-            pst.setInt(3, 1);
+            pst.setInt(3, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();

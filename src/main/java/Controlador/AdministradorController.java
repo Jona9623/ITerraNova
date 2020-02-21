@@ -28,23 +28,23 @@ import java.util.List;
  */
 public class AdministradorController {
     
-    public List<TbAlumnos> getAlumnos() {
+    public List<TbAlumnos> getAlumnos(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getAlumnos();
+        return consulta.getAlumnos(tipoescuela);
     }
     
-    public List<TbPersonal> getPersonal() {
+    public List<TbPersonal> getPersonal(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getPersonal();
+        return consulta.getPersonal(tipoescuela);
     }
-    public void guardaTutor(TbTutor tutor){
+    public void guardaTutor(TbTutor tutor, int tipoescuela){
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaTutor(tutor);
+        consulta.guardaTutor(tutor, tipoescuela);
     }
     
-    public void guardaAlumno(TbAlumnos alumno) {
+    public void guardaAlumno(TbAlumnos alumno, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaAlumno(alumno);
+        consulta.guardaAlumno(alumno, tipoescuela);
     }
     
     public TbAlumnos datosAlumno(int idalumno) {
@@ -87,44 +87,44 @@ public class AdministradorController {
         consulta.eliminaPersonal(id);
     }
     
-    public void guardaPersonal(TbPersonal personal) {
+    public void guardaPersonal(TbPersonal personal, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaPersonal(personal);
+        consulta.guardaPersonal(personal, tipoescuela);
     }
 
-    public List<CtGrado> getGrado() {
+    public List<CtGrado> getGrado(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getGrado();
+        return consulta.getGrado(tipoescuela);
     }
 
-    public List<CtGrupo> getGrupo() {
+    public List<CtGrupo> getGrupo(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getGrupo();
+        return consulta.getGrupo(tipoescuela);
     }
 
-    public List<CtAreaalumno> getArea() {
+    public List<CtAreaalumno> getArea(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getArea();
+        return consulta.getArea(tipoescuela);
     }
 
-    public List<CtCptalumno> getCpt() {
+    public List<CtCptalumno> getCpt(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getCpt();
+        return consulta.getCpt(tipoescuela);
     }
 
-    public List<CtPuesto> getPuesto() {
+    public List<CtPuesto> getPuesto(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getPuesto();
+        return consulta.getPuesto(tipoescuela);
     }
     
-    public List<GradoGrupo> getGradoGrupo() {
+    public List<GradoGrupo> getGradoGrupo(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getGradoGrupo();
+        return consulta.getGradoGrupo(tipoescuela);
     }
 
-    public List<CtTipoCalificaicon> getTipoCali() {
+    public List<CtTipoCalificaicon> getTipoCali(int tipoescuela) {
        ConsultasAdministrador consulta = new ConsultasAdministrador();
-       return consulta.getTipoCali();
+       return consulta.getTipoCali(tipoescuela);
     }
 
     public void guardaPuesto(CtPuesto puesto, int tipoescuela) {
@@ -142,9 +142,9 @@ public class AdministradorController {
         consulta.eliminaPuesto(id);
     }
 
-    public void guardaPeriodo(CtPeriodoEscolar periodo) {
+    public void guardaPeriodo(CtPeriodoEscolar periodo, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaPeriodo(periodo);
+        consulta.guardaPeriodo(periodo, tipoescuela);
     }
 
     public void actualizaPeriodo(CtPeriodoEscolar periodo) {
@@ -157,9 +157,9 @@ public class AdministradorController {
         consulta.eliminaPeriodo(id);
     }
 
-    public void guardaArea(CtAreaalumno area) {
+    public void guardaArea(CtAreaalumno area, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaArea(area);
+        consulta.guardaArea(area,tipoescuela);
     }
 
     public void actualizaArea(CtAreaalumno area) {
@@ -172,9 +172,9 @@ public class AdministradorController {
         consulta.eliminaArea(id);
     }
 
-    public void guardaCpt(CtCptalumno cpt) {
+    public void guardaCpt(CtCptalumno cpt,int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaCpt(cpt);
+        consulta.guardaCpt(cpt, tipoescuela);
     }
 
     public void actualizaCpt(CtCptalumno cpt) {
@@ -187,19 +187,19 @@ public class AdministradorController {
         consulta.eliminaCpt(id);
     }
 
-    public void guardaGrado(CtGrado grado) {
+    public void guardaGrado(CtGrado grado, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaGrado(grado);
+        consulta.guardaGrado(grado, tipoescuela);
     }
 
-    public void guardaGrupo(CtGrupo grupo) {
+    public void guardaGrupo(CtGrupo grupo, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaGrupo(grupo);
+        consulta.guardaGrupo(grupo, tipoescuela);
     }
 
-    public void guardaTipoCali(CtTipoCalificaicon tipocali) {
+    public void guardaTipoCali(CtTipoCalificaicon tipocali, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaTipoCali(tipocali);
+        consulta.guardaTipoCali(tipocali, tipoescuela);
     }
 
     public void actualizaTipoCali(CtTipoCalificaicon tipocali) {
@@ -212,9 +212,9 @@ public class AdministradorController {
         consulta.eliminaTipoCali(id);
     }
 
-    public List<CtDatosMateria> getMateriasFaltantes() {
+    public List<CtDatosMateria> getMateriasFaltantes(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getMateriasFaltantes();
+        return consulta.getMateriasFaltantes(tipoescuela);
     }
 
     public void guardaNombreMateria(CtDatosMateria nombremateria, int tipoescuela) {
@@ -222,9 +222,9 @@ public class AdministradorController {
         consulta.guardaNombreMateria(nombremateria,tipoescuela);
     }
 
-    public void guardaMateria(TbMateria materia) {
+    public void guardaMateria(TbMateria materia, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaMateria(materia);
+        consulta.guardaMateria(materia, tipoescuela);
     }
 
     public void eliminaMateria(int id) {

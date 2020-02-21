@@ -34,7 +34,7 @@ public class ConsultasAdministrador {
     private Connection con;
     private int x = 1;
 
-    public List<TbAlumnos> getAlumnos() {
+    public List<TbAlumnos> getAlumnos(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -43,8 +43,9 @@ public class ConsultasAdministrador {
             con.setAutoCommit(false);
             String consulta = "select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from\n"
                     + "(((tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado) inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo) inner join\n"
-                    + "tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor) where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = 1";
+                    + "tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor) where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 TbAlumnos alumno = new TbAlumnos();
@@ -80,7 +81,7 @@ public class ConsultasAdministrador {
         return listalumnos;
     }
 
-    public List<TbPersonal> getPersonal() {
+    public List<TbPersonal> getPersonal(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -88,8 +89,9 @@ public class ConsultasAdministrador {
         try {
             con.setAutoCommit(false);
             String consulta = "select tb_personal.idTb_Personal, tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno, tb_personal.correo, ct_puesto.nombre from (tb_personal inner join\n"
-                    + "ct_puesto on tb_personal.r_puesto = ct_puesto.idCt_Puesto) where tb_personal.status = 1 and tb_personal.tipoescuela = 1";
+                    + "ct_puesto on tb_personal.r_puesto = ct_puesto.idCt_Puesto) where tb_personal.status = 1 and tb_personal.tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 TbPersonal personal = new TbPersonal();
@@ -122,7 +124,7 @@ public class ConsultasAdministrador {
         return listpersonal;
     }
 
-    public void guardaTutor(TbTutor tutor) {
+    public void guardaTutor(TbTutor tutor, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -143,7 +145,7 @@ public class ConsultasAdministrador {
             pst.setString(11, tutor.getCelular());
             pst.setString(12, tutor.getCorreo());
             pst.setInt(13, 1);
-            pst.setInt(14, 1);
+            pst.setInt(14, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -166,7 +168,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaAlumno(TbAlumnos alumno) {
+    public void guardaAlumno(TbAlumnos alumno, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         int id = 0;
@@ -220,7 +222,7 @@ public class ConsultasAdministrador {
             pst.setString(27, alumno.getMunicipioante());
             pst.setInt(28, id);
             pst.setInt(29, 1);
-            pst.setInt(30, 1);
+            pst.setInt(30, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -435,8 +437,16 @@ public class ConsultasAdministrador {
             pst.setString(18, alumno.getNivelcursa());
             pst.setInt(19, alumno.getRgrado());
             pst.setInt(20, alumno.getRgrupo());
-            pst.setInt(21, alumno.getRarea());
-            pst.setInt(22, alumno.getRcpt());
+            if (alumno.getRarea() != 0) {
+                pst.setInt(21, alumno.getRarea());
+            } else {
+                pst.setString(21, null);
+            }
+            if (alumno.getRcpt() != 0) {
+                pst.setInt(22, alumno.getRcpt());
+            } else {
+                pst.setString(22, null);
+            }
             pst.setString(23, alumno.getPlantelproce());
             pst.setInt(24, alumno.getNivelanterior());
             pst.setInt(25, alumno.getGradoanterior());
@@ -612,7 +622,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaPersonal(TbPersonal personal) {
+    public void guardaPersonal(TbPersonal personal, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -645,7 +655,7 @@ public class ConsultasAdministrador {
             pst.setString(22, personal.getDoctorado());
             pst.setInt(23, personal.getRpuesto());
             pst.setInt(24, 1);
-            pst.setInt(25, 1);
+            pst.setInt(25, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -668,15 +678,16 @@ public class ConsultasAdministrador {
         }
     }
 
-    public List<CtGrado> getGrado() {
+    public List<CtGrado> getGrado(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtGrado> listgrado = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_grado where status =1 and tipoescuela = 1";
+            String consulta = "select * from ct_grado where status =1 and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtGrado grado = new CtGrado();
@@ -707,15 +718,16 @@ public class ConsultasAdministrador {
         return listgrado;
     }
 
-    public List<CtGrupo> getGrupo() {
+    public List<CtGrupo> getGrupo(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtGrupo> listgrupo = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_grupo where status = 1 and tipoescuela = 1";
+            String consulta = "select * from ct_grupo where status = 1 and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtGrupo grupo = new CtGrupo();
@@ -746,15 +758,16 @@ public class ConsultasAdministrador {
         return listgrupo;
     }
 
-    public List<CtAreaalumno> getArea() {
+    public List<CtAreaalumno> getArea(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtAreaalumno> listarea = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_areaalumno where status = 1 and tipoescuela = 1";
+            String consulta = "select * from ct_areaalumno where status = 1 and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtAreaalumno area = new CtAreaalumno();
@@ -786,15 +799,16 @@ public class ConsultasAdministrador {
 
     }
 
-    public List<CtCptalumno> getCpt() {
+    public List<CtCptalumno> getCpt(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtCptalumno> listcpt = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_cptalumno where status = 1 and tipoescuela = 1";
+            String consulta = "select * from ct_cptalumno where status = 1 and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtCptalumno cpt = new CtCptalumno();
@@ -825,15 +839,16 @@ public class ConsultasAdministrador {
         return listcpt;
     }
 
-    public List<CtPuesto> getPuesto() {
+    public List<CtPuesto> getPuesto(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtPuesto> listpuesto = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_puesto where status = 1 and tipoescuela = 1";
+            String consulta = "select * from ct_puesto where status = 1 and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtPuesto puesto = new CtPuesto();
@@ -864,15 +879,16 @@ public class ConsultasAdministrador {
         return listpuesto;
     }
 
-    public List<GradoGrupo> getGradoGrupo() {
+    public List<GradoGrupo> getGradoGrupo(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<GradoGrupo> listgradogrupo = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "SELECT * FROM ct_grupo, ct_grado where ct_grado.status = 1 and ct_grado.tipoescuela = 1 and ct_grupo.status = 1 and ct_grupo.tipoescuela = 1";
+            String consulta = "SELECT * FROM ct_grupo, ct_grado where ct_grado.status = 1 and ct_grado.tipoescuela = 1 and ct_grupo.status = 1 and ct_grupo.tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 GradoGrupo gradogrupo = new GradoGrupo();
@@ -904,15 +920,16 @@ public class ConsultasAdministrador {
         return listgradogrupo;
     }
 
-    public List<CtTipoCalificaicon> getTipoCali() {
+    public List<CtTipoCalificaicon> getTipoCali(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtTipoCalificaicon> listtipocali = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_tipocalificacion where status = 1 and tipoescuela = 1";
+            String consulta = "select * from ct_tipocalificacion where status = 1 and tipoescuela = ?";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtTipoCalificaicon tipocali = new CtTipoCalificaicon();
@@ -1035,7 +1052,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaPeriodo(CtPeriodoEscolar periodo) {
+    public void guardaPeriodo(CtPeriodoEscolar periodo, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1046,7 +1063,7 @@ public class ConsultasAdministrador {
             pst.setString(2, periodo.getFechainicio());
             pst.setString(3, periodo.getFechafin());
             pst.setInt(4, 1);
-            pst.setInt(5, 1);
+            pst.setInt(5, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -1131,7 +1148,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaArea(CtAreaalumno area) {
+    public void guardaArea(CtAreaalumno area, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1140,7 +1157,7 @@ public class ConsultasAdministrador {
             pst = con.prepareStatement(consulta);
             pst.setString(1, area.getNombre());
             pst.setInt(2, 1);
-            pst.setInt(3, 1);
+            pst.setInt(3, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -1223,7 +1240,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaCpt(CtCptalumno cpt) {
+    public void guardaCpt(CtCptalumno cpt, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1232,7 +1249,7 @@ public class ConsultasAdministrador {
             pst = con.prepareStatement(consulta);
             pst.setString(1, cpt.getNombre());
             pst.setInt(2, 1);
-            pst.setInt(3, 1);
+            pst.setInt(3, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -1315,7 +1332,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaGrado(CtGrado grado) {
+    public void guardaGrado(CtGrado grado, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1324,7 +1341,7 @@ public class ConsultasAdministrador {
             pst = con.prepareStatement(consulta);
             pst.setString(1, grado.getNombre());
             pst.setInt(2, 1);
-            pst.setInt(3, 1);
+            pst.setInt(3, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -1347,7 +1364,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaGrupo(CtGrupo grupo) {
+    public void guardaGrupo(CtGrupo grupo, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1356,7 +1373,7 @@ public class ConsultasAdministrador {
             pst = con.prepareStatement(consulta);
             pst.setString(1, grupo.getNombre());
             pst.setInt(2, 1);
-            pst.setInt(3, 1);
+            pst.setInt(3, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -1379,7 +1396,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaTipoCali(CtTipoCalificaicon tipocali) {
+    public void guardaTipoCali(CtTipoCalificaicon tipocali, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1388,7 +1405,7 @@ public class ConsultasAdministrador {
             pst = con.prepareStatement(consulta);
             pst.setString(1, tipocali.getNombre());
             pst.setInt(2, 1);
-            pst.setInt(3, 1);
+            pst.setInt(3, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -1471,16 +1488,18 @@ public class ConsultasAdministrador {
         }
     }
 
-    public List<CtDatosMateria> getMateriasFaltantes() {
+    public List<CtDatosMateria> getMateriasFaltantes(int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtDatosMateria> listmateriafaltante = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select ct_datosmateria.nombrelargo, ct_datosmateria.nombrecorto, tb_materia.r_datosmateria, ct_datosmateria.idCt_DatosMateria from "
-                    + "tb_materia right join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where tb_materia.r_datosmateria IS NULL; ";
+            String consulta = "select ct_datosmateria.nombrelargo, ct_datosmateria.nombrecorto, tb_materia.r_datosmateria, ct_datosmateria.idCt_DatosMateria from \n"
+                    + "tb_materia right join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where tb_materia.r_datosmateria IS NULL\n"
+                    + "and ct_datosmateria.tipoescuela = ? and ct_datosmateria.status = 1";
             pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtDatosMateria materiafaltante = new CtDatosMateria();
@@ -1543,7 +1562,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaMateria(TbMateria materia) {
+    public void guardaMateria(TbMateria materia, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1560,11 +1579,11 @@ public class ConsultasAdministrador {
             }
             if (materia.getRcpt() != 0) {
                 pst.setInt(5, materia.getRcpt());
-            }else{
+            } else {
                 pst.setString(5, null);
             }
             pst.setInt(6, 1);
-            pst.setInt(7, 1);
+            pst.setInt(7, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();

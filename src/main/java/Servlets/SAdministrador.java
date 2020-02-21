@@ -119,7 +119,7 @@ public class SAdministrador extends HttpServlet {
         adminC = new AdministradorController();
         List <CtPuesto> listpuesto = new ArrayList<>();
         try {
-            listpuesto = adminC.getPuesto();
+            listpuesto = adminC.getPuesto(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listpuesto", listpuesto);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/Puesto/tablapuesto.jsp");
             rd.forward(request, response);
@@ -157,7 +157,7 @@ public class SAdministrador extends HttpServlet {
         alumC = new AlumnosController();
         List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
         try {
-            listperiodo = alumC.getPeriodos();
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/PeriodoEscolar/tablaperiodo.jsp");
             rd.forward(request, response);
@@ -176,7 +176,7 @@ public class SAdministrador extends HttpServlet {
             if(periodo.getIdtbperiodo() > 0)
                 adminC.actualizaPeriodo(periodo);
             else
-                adminC.guardaPeriodo(periodo);
+                adminC.guardaPeriodo(periodo, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -195,7 +195,7 @@ public class SAdministrador extends HttpServlet {
         adminC = new AdministradorController();
         List <CtAreaalumno> listarea = new ArrayList<>();
         try {
-            listarea = adminC.getArea();
+            listarea = adminC.getArea(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listarea", listarea);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/AreaAlumno/tablaareaalumno.jsp");
             rd.forward(request, response);
@@ -214,7 +214,7 @@ public class SAdministrador extends HttpServlet {
             if(area.getIdtbarea() > 0)
                 adminC.actualizaArea(area);
             else
-                adminC.guardaArea(area);
+                adminC.guardaArea(area, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -233,7 +233,7 @@ public class SAdministrador extends HttpServlet {
         adminC = new AdministradorController();
         List <CtCptalumno> listcpt = new ArrayList<>();
          try {
-             listcpt = adminC.getCpt();
+             listcpt = adminC.getCpt(Integer.parseInt(request.getParameter("TIPOESCUELA")));
              request.setAttribute("listcpt", listcpt);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/Cptalumno/tablacptalumno.jsp");
             rd.forward(request, response);
@@ -251,7 +251,7 @@ public class SAdministrador extends HttpServlet {
             if(cpt.getIdtbcpt() > 0)
                 adminC.actualizaCpt(cpt);
             else
-                adminC.guardaCpt(cpt);
+                adminC.guardaCpt(cpt, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -270,7 +270,7 @@ public class SAdministrador extends HttpServlet {
         adminC = new AdministradorController();
         List <GradoGrupo> listgradogrupo = new ArrayList<>();
         try {
-            listgradogrupo = adminC.getGradoGrupo();
+            listgradogrupo = adminC.getGradoGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listgradogrupo", listgradogrupo);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/TipoCalificacion/tablagradogrupo.jsp");
             rd.forward(request, response);
@@ -283,7 +283,7 @@ public class SAdministrador extends HttpServlet {
         adminC = new AdministradorController();
         List <CtTipoCalificaicon> listtipocali = new ArrayList<>();
         try {
-            listtipocali = adminC.getTipoCali();
+            listtipocali = adminC.getTipoCali(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listtipocali", listtipocali);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/TipoCalificacion/tablatipocalificacion.jsp");
             rd.forward(request, response);
@@ -302,7 +302,7 @@ public class SAdministrador extends HttpServlet {
             if(tipocali.getIdtbtipocali() > 0)
                 adminC.actualizaTipoCali(tipocali);
             else
-                adminC.guardaTipoCali(tipocali);
+                adminC.guardaTipoCali(tipocali, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
         }
     }
@@ -326,17 +326,17 @@ public class SAdministrador extends HttpServlet {
         List <CtGrupo> listgrupo = new ArrayList<>();
         
         try {
-            listmateria = alumC.getMaterias();
+            listmateria = alumC.getMaterias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listmateria", listmateria);
-            listmateriafaltante = adminC.getMateriasFaltantes();
+            listmateriafaltante = adminC.getMateriasFaltantes(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listmateriafaltante", listmateriafaltante);
-            listarea = adminC.getArea();
+            listarea = adminC.getArea(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listarea", listarea);
-            listcpt = adminC.getCpt();
+            listcpt = adminC.getCpt(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listcpt", listcpt);
-            listgrado = adminC.getGrado();
+            listgrado = adminC.getGrado(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listgrado", listgrado);
-            listgrupo = adminC.getGrupo();
+            listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listgrupo", listgrupo);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/Materia/tablamaterias.jsp");
             rd.forward(request, response);
@@ -352,7 +352,7 @@ public class SAdministrador extends HttpServlet {
         mapper = new ObjectMapper();
         try {
             grado = mapper.readValue(objectJson, CtGrado.class);
-            adminC.guardaGrado(grado);
+            adminC.guardaGrado(grado, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -365,7 +365,7 @@ public class SAdministrador extends HttpServlet {
         mapper = new ObjectMapper();
         try {
             grupo = mapper.readValue(objectJson, CtGrupo.class);
-            adminC.guardaGrupo(grupo);
+            adminC.guardaGrupo(grupo, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -391,7 +391,7 @@ public class SAdministrador extends HttpServlet {
         mapper = new ObjectMapper();
         try {
             materia = mapper.readValue(objectJson, TbMateria.class);
-            adminC.guardaMateria(materia);
+            adminC.guardaMateria(materia, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             System.out.println(e);
         }

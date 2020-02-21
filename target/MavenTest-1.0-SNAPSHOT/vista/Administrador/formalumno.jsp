@@ -174,13 +174,13 @@
                                                             <c:choose>
                                                                 <c:when test="${requestScope.alumno.sexo}">
                                                                     <div class="radio p-0">
-                                                                        <input checked="true" type="radio" name="sexoah" id="sexoah" value="true">
+                                                                        <input checked="true" type="radio" name="sexo" id="sexoah" value="true">
                                                                         <label for="sexoah">
                                                                             Hombre
                                                                         </label>
                                                                     </div>
                                                                     <div class="radio p-0">
-                                                                        <input   type="radio" name="sexoam" id="sexoam" value="false">
+                                                                        <input   type="radio" name="sexo" id="sexoam" value="false">
                                                                         <label for="sexoam">
                                                                             Mujer
                                                                         </label>
@@ -188,24 +188,19 @@
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <div class="radio p-0">
-                                                                        <input  type="radio" name="sexoah" id="sexoah" value="true">
+                                                                        <input  type="radio" name="sexo" id="sexoah" value="true">
                                                                         <label for="sexoah">
                                                                             Hombre
                                                                         </label>
                                                                     </div>
                                                                     <div class="radio p-0">
-                                                                        <input checked="true"  type="radio" name="sexoam" id="sexoam" value="false">
+                                                                        <input checked="true"  type="radio" name="sexo" id="sexoam" value="false">
                                                                         <label for="sexoam">
                                                                             Mujer
                                                                         </label>
                                                                     </div>
                                                                 </c:otherwise>
                                                             </c:choose>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <a class="material-icons f-left">camera_enhance</a>
-                                                            <a> Agregar fotografía</a> <br>
-                                                            <input id="fotoalumno" type="file" name="fotoalumno">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Calle del domicilio</label>
@@ -323,6 +318,11 @@
                                                             <div class="form-group">
                                                                 <label>Municipio del plantel anterior</label>
                                                                 <input id="plantelanterior" value="${requestScope.alumno.municipioante}" type="text" class="form-control" placeholder="plantel anterior">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <a class="material-icons f-left">camera_enhance</a>
+                                                            <a> Agregar fotografía</a> <br>
+                                                            <input id="fotoalumno" type="file" name="fotoalumno">
                                                         </div>
                                                     </div>
                                                 </div>

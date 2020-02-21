@@ -8,7 +8,8 @@ var Admin = (function () {
     return {
         tablaPuesto: function () {
             $.get("SAdministrador", {
-                ACCION: "tablaPuesto"
+                ACCION: "tablaPuesto",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardapuesto").on('click', function () {
@@ -65,7 +66,8 @@ var Admin = (function () {
         },
         tablaPeriodo: function () {
             $.get("SAdministrador", {
-                ACCION: "tablaPeriodo"
+                ACCION: "tablaPeriodo",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardaperiodo").on('click', function(){
@@ -99,7 +101,8 @@ var Admin = (function () {
           }
           $.get("SAdministrador",{
               ACCION: "guardaPeriodo",
-              OBJETO: JSON.stringify(periodo)
+              OBJETO: JSON.stringify(periodo),
+              TIPOESCUELA: tipoescuela
           }).then(function(){
               swal("Hecho!", "Datos guardados correctamente", "success");
           });
@@ -115,11 +118,11 @@ var Admin = (function () {
         },
         tablaArea: function () {
             $.get("SAdministrador", {
-                ACCION: "tablaArea"
+                ACCION: "tablaArea",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardaarea").on('click',function(){
-                    alert("entra");
                    Admin.guardaArea(); 
                 });
                 $(".eliminararea").on('click',function(){
@@ -148,7 +151,8 @@ var Admin = (function () {
           }
           $.get("SAdministrador",{
               ACCION: "guardaArea",
-              OBJETO: JSON.stringify(area)
+              OBJETO: JSON.stringify(area),
+              TIPOESCUELA: tipoescuela
           }).then(function(){
               swal("Hecho!", "Datos guardados correctamente", "success");
           });
@@ -163,7 +167,8 @@ var Admin = (function () {
         },
         tablaCpt: function () {
             $.get("SAdministrador", {
-                ACCION: "tablaCpt"
+                ACCION: "tablaCpt",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardarcpt").on('click',function(){
@@ -195,7 +200,8 @@ var Admin = (function () {
           }
           $.get("SAdministrador",{
               ACCION: "guardaCpt",
-              OBJETO: JSON.stringify(cpt)
+              OBJETO: JSON.stringify(cpt),
+              TIPOESCUELA: tipoescuela
           }).then(function(){
               swal("Hecho!", "Datos guardados correctamente", "success");
           });
@@ -210,14 +216,16 @@ var Admin = (function () {
         },
         tablaGradoGrupo: function () {
             $.get("SAdministrador", {
-                ACCION: "tablaGradoGrupo"
+                ACCION: "tablaGradoGrupo",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
             });
         },
         tablaTipoCalificacion: function () {
             $.get("SAdministrador", {
-                ACCION: "tablaTipoCalificacion"
+                ACCION: "tablaTipoCalificacion",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardatipocali").on('click',function(){
@@ -249,7 +257,8 @@ var Admin = (function () {
           }
           $.get("SAdministrador",{
               ACCION: "guardaTipoCali",
-              OBJETO: JSON.stringify(tipocali)
+              OBJETO: JSON.stringify(tipocali),
+              TIPOESCUELA: tipoescuela
           }).then(function(){
               swal("Hecho!", "Datos guardados correctamente", "success");
           });
@@ -264,7 +273,8 @@ var Admin = (function () {
         },
         tablaMateria: function () {
             $.get("SAdministrador", {
-                ACCION: "tablaMateria"
+                ACCION: "tablaMateria",
+                TIPOESCUELA: tipoescuela
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardamateria").on('click',function(){
@@ -300,7 +310,8 @@ var Admin = (function () {
             }
             $.get("SAdministrador",{
                 ACCION: "guardaMateria",
-                OBJETO: JSON.stringify(materia)
+                OBJETO: JSON.stringify(materia),
+                TIPOESCUELA: tipoescuela
             }).then(function(){
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
