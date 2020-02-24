@@ -49,6 +49,10 @@ var Admin = (function () {
                 TIPOESCUELA: tipoescuela
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
+                //$("#modalPuesto").modal('hide');                
+                //$("#modalPuesto").hide();                                
+                Admin.tablaPuesto();
+                
             });
         },
         editarPuesto: function (idpuesto) {

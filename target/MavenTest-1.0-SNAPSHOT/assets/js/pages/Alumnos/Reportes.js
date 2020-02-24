@@ -6,10 +6,21 @@ var Reportes = (function () {
     var grupo;
     return {
         reporteDisciplinar: function () {
+            
             $.get("SReportes", {
                 ACCION: "Rdisciplinar",
                 TIPOESCUELA: tipoescuela
-            }).then(function () {
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
+            });
+            /*then(function (suc, err) {
+                console.log(suc);
+                console.log(err);
                 $("#content").html(arguments[0]);
                 grado = $("#gradodisciplinar").val();
                 grupo = $("#grupodisciplinar").val();
@@ -25,7 +36,7 @@ var Reportes = (function () {
                 $("#mostrarreportes").on('click', function () {
                     Reportes.mostrarReportes();
                 });
-            });
+            });*/
         },
         guardarD: function () {
             $('form[name="formreporteD"]').ajaxForm(function () {
@@ -149,11 +160,11 @@ var Reportes = (function () {
                 $("#alumnogradoA").html(arguments[0]);
                 $("#gradoatencion").change(function () {
                     gradoatencion = $("#gradoatencion").val();
-                    Reportes.getAlumnoAca(gradoatencion, grupoatencion);
+                    Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
                 }),
                         $("#grupoatencion").change(function () {
                     grupoatencion = $("#grupoatencion").val();
-                    Reportes.getAlumnoAca(gradoatencion, grupoatencion);
+                    Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
                 });
             });
         },
@@ -241,6 +252,7 @@ var Reportes = (function () {
                 gradoatencion = $("#gradoatencion").val();
                 grupoatencion = $("#grupoatencion").val();
                 Reportes.getAlumnoAca(gradohonor, grupohonor);
+                Reportes.getAlumnoAcaAtencion(gradoatencion,grupoatencion);
                 $("#guardacomportammiento").on('click', function () {
                     Reportes.guardaComportamiento();
                 });
@@ -256,7 +268,6 @@ var Reportes = (function () {
                 $("#actividadsemanal").on('click', function () {
                     Reportes.guardaActividadSemanal();
                 });
-                //  Reportes.getAlumnoAcaAtencion(gradoatencion,grupoatencion);
             });
         },
         guardarA: function () {

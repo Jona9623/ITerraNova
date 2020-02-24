@@ -268,7 +268,7 @@
                 <!-- start footer -->
                 <div class="page-footer">
                     <div class="scroll-to-top">
-                        <i class="icon-arrow-up"></i>
+                        <i class="icon-arrow-up">Instituto Terra Nova</i>
                     </div>
                 </div>
                 <!-- end footer -->

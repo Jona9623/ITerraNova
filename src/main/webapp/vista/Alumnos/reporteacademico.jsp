@@ -125,7 +125,11 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
-
+                                                            <div id="alumnogradoA">
+                                                                <jsp:include page='alumnogradogrupoatencion.jsp'>
+                                                                    <jsp:param name="article1" value=""/>
+                                                                </jsp:include>
+                                                            </div>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
                                                             <label >Seleccione Tipo de comportamiento</label>
