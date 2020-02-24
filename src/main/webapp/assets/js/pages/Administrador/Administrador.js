@@ -10,6 +10,15 @@ var Admin = (function () {
             $.get("SAdministrador", {
                 ACCION: "tablaPuesto",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardapuesto").on('click', function () {
@@ -47,6 +56,15 @@ var Admin = (function () {
                 ACCION: "guardaPuesto",
                 OBJETO: JSON.stringify(puesto),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 //$("#modalPuesto").modal('hide');                
@@ -72,6 +90,15 @@ var Admin = (function () {
             $.get("SAdministrador", {
                 ACCION: "tablaPeriodo",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardaperiodo").on('click', function(){
@@ -107,8 +134,18 @@ var Admin = (function () {
               ACCION: "guardaPeriodo",
               OBJETO: JSON.stringify(periodo),
               TIPOESCUELA: tipoescuela
-          }).then(function(){
+          }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
+            }).then(function () {
               swal("Hecho!", "Datos guardados correctamente", "success");
+              Admin.tablaPeriodo();
           });
                  
         },
@@ -124,6 +161,15 @@ var Admin = (function () {
             $.get("SAdministrador", {
                 ACCION: "tablaArea",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardaarea").on('click',function(){
@@ -157,8 +203,18 @@ var Admin = (function () {
               ACCION: "guardaArea",
               OBJETO: JSON.stringify(area),
               TIPOESCUELA: tipoescuela
-          }).then(function(){
+          }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
+            }).then(function () {
               swal("Hecho!", "Datos guardados correctamente", "success");
+              Admin.tablaArea();
           });
         },
         eliminarArea: function(idarea){
@@ -173,6 +229,15 @@ var Admin = (function () {
             $.get("SAdministrador", {
                 ACCION: "tablaCpt",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardarcpt").on('click',function(){
@@ -206,8 +271,18 @@ var Admin = (function () {
               ACCION: "guardaCpt",
               OBJETO: JSON.stringify(cpt),
               TIPOESCUELA: tipoescuela
-          }).then(function(){
+          }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
+            }).then(function () {
               swal("Hecho!", "Datos guardados correctamente", "success");
+              Admin.tablaCpt();
           });
         },
         eliminarCpt: function (idcpt){
@@ -222,6 +297,15 @@ var Admin = (function () {
             $.get("SAdministrador", {
                 ACCION: "tablaGradoGrupo",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
             });
@@ -230,6 +314,15 @@ var Admin = (function () {
             $.get("SAdministrador", {
                 ACCION: "tablaTipoCalificacion",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardatipocali").on('click',function(){
@@ -263,8 +356,18 @@ var Admin = (function () {
               ACCION: "guardaTipoCali",
               OBJETO: JSON.stringify(tipocali),
               TIPOESCUELA: tipoescuela
-          }).then(function(){
+          }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
+            }).then(function () {
               swal("Hecho!", "Datos guardados correctamente", "success");
+              Admin.tablaTipoCalificacion();
           });
         },
         eliminarTipoCali: function (idtipo){
@@ -279,6 +382,15 @@ var Admin = (function () {
             $.get("SAdministrador", {
                 ACCION: "tablaMateria",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardamateria").on('click',function(){
@@ -316,8 +428,18 @@ var Admin = (function () {
                 ACCION: "guardaMateria",
                 OBJETO: JSON.stringify(materia),
                 TIPOESCUELA: tipoescuela
-            }).then(function(){
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
+            }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
+                Admin.tablaMateria();
             });
         },
         eliminaMateria: function(idmateria){

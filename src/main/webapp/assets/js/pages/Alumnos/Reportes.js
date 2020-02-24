@@ -14,13 +14,12 @@ var Reportes = (function () {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
             }).fail(function(xhr, status, error){
                 console.log(
                         window.location.pathname);
-            });
-            /*then(function (suc, err) {
-                console.log(suc);
-                console.log(err);
+            }).then(function () {
                 $("#content").html(arguments[0]);
                 grado = $("#gradodisciplinar").val();
                 grupo = $("#grupodisciplinar").val();
@@ -36,7 +35,7 @@ var Reportes = (function () {
                 $("#mostrarreportes").on('click', function () {
                     Reportes.mostrarReportes();
                 });
-            });*/
+            });
         },
         guardarD: function () {
             $('form[name="formreporteD"]').ajaxForm(function () {
@@ -105,6 +104,15 @@ var Reportes = (function () {
                 GRADO: grado,
                 GRUPO: grupo,
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#alumnogradoD").html(arguments[0]);
                 $("#gradodisciplinar").change(function () {
@@ -173,6 +181,15 @@ var Reportes = (function () {
                 ACCION: accion,
                 OBJETO: JSON.stringify(objeto),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 
             });
@@ -181,6 +198,15 @@ var Reportes = (function () {
             $.get("SReportes", {
                 ACCION: "mostrarReportes",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#tablareporteD").DataTable({
@@ -214,6 +240,15 @@ var Reportes = (function () {
                 FECHA: reportefecha,
                 HORA: hora,
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
             });
@@ -224,6 +259,15 @@ var Reportes = (function () {
                 ID: id,
                 FECHA: fecha,
                 HORA: hora
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#editarreporteD").on('click', function () {
@@ -236,6 +280,15 @@ var Reportes = (function () {
                 ACCION: accion,
                 OBJETO: JSON.stringify(objeto),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos actualizados correctamente", "success");
                 Reportes.mostrarReportes();
@@ -245,6 +298,15 @@ var Reportes = (function () {
             $.get("SReportes", {
                 ACCION: "Racademico",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $("#content").html(arguments[0]);
                 gradohonor = $("#gradohonor").val();
@@ -284,6 +346,15 @@ var Reportes = (function () {
                 ACCION: "guardaReporteAcademico",
                 OBJETO: JSON.stringify(reporteA),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Reportes.imagenReporteAca();
@@ -300,6 +371,15 @@ var Reportes = (function () {
                 ACCION: "guardaActividadSemanal",
                 OBJETO: JSON.stringify(actividad),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
@@ -310,6 +390,15 @@ var Reportes = (function () {
                 ACCION: "guardaComportamiento",
                 OBJETO: JSON.stringify(comportamiento),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Reportes.reporteDisciplinar();
@@ -321,6 +410,15 @@ var Reportes = (function () {
                 ACCION: "guardaSemana",
                 OBJETO: JSON.stringify(semana),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
@@ -331,6 +429,15 @@ var Reportes = (function () {
                 ACCION: "guardaSemana",
                 OBJETO: JSON.stringify(semana),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });

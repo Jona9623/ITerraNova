@@ -50,19 +50,34 @@ public class SAdminalumno extends HttpServlet {
         String accion = request.getParameter("ACCION");
         switch (accion) {
             case "MuestraAgregaAlumno":
-                MuestraAgregaalumno(request, response);
+                try {
+                    MuestraAgregaalumno(request, response);
+                } catch (Exception e) {
+                }
                 break;
             case "AgregaAlumno":
-                Agregaalumno(request, response);
+                try {
+                    Agregaalumno(request, response);
+                } catch (Exception e) {
+                }
                 break;
             case "editarAlumno":
-                editarAlumno(request, response);
+                try {
+                    editarAlumno(request, response);
+                } catch (Exception e) {
+                }
                 break;
             case "GuardaTutor":
-                GuardaTutor(request, response);
+                try {
+                   GuardaTutor(request, response); 
+                } catch (Exception e) {
+                }
                 break;
             case "GuardaAlumno":
-                GuardaAlumno(request, response);
+                try {
+                    GuardaAlumno(request, response);
+                } catch (Exception e) {
+                }
                 break;
             case "eliminarAlumno":
                 eliminarAlumno(request, response);
@@ -109,7 +124,7 @@ public class SAdminalumno extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void MuestraAgregaalumno(HttpServletRequest request, HttpServletResponse response) {
+    private void MuestraAgregaalumno(HttpServletRequest request, HttpServletResponse response) throws Exception{
         adminC = new AdministradorController();
         List<TbAlumnos> listalumnos = new ArrayList<>();
         try {
@@ -118,11 +133,12 @@ public class SAdminalumno extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablaalumnos.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
-    private void editarAlumno(HttpServletRequest request, HttpServletResponse response) {
+    private void editarAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         TbTutor tutor = new TbTutor();
         TbAlumnos alumno = new TbAlumnos();
@@ -146,7 +162,8 @@ public class SAdminalumno extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formalumno.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
     
@@ -159,7 +176,7 @@ public class SAdminalumno extends HttpServlet {
         }
     }
 
-    private void Agregaalumno(HttpServletRequest request, HttpServletResponse response) {
+    private void Agregaalumno(HttpServletRequest request, HttpServletResponse response)throws Exception{
         adminC = new AdministradorController();
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
@@ -177,11 +194,12 @@ public class SAdminalumno extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formalumno.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
-    private void GuardaTutor(HttpServletRequest request, HttpServletResponse response) {
+    private void GuardaTutor(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TbTutor tutor = new TbTutor();
         adminC = new AdministradorController();
         objectJson = request.getParameter("TUTOR");
@@ -194,11 +212,12 @@ public class SAdminalumno extends HttpServlet {
                 adminC.guardaTutor(tutor, Integer.parseInt(request.getParameter("TIPOESCUELA")));
             }
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
-    private void GuardaAlumno(HttpServletRequest request, HttpServletResponse response) {
+    private void GuardaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TbAlumnos alumno = new TbAlumnos();
         adminC = new AdministradorController();
         objectJson = request.getParameter("ALUMNO");
@@ -211,7 +230,8 @@ public class SAdminalumno extends HttpServlet {
                 adminC.guardaAlumno(alumno, Integer.parseInt(request.getParameter("TIPOESCUELA")));
             }
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 

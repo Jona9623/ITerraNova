@@ -667,7 +667,7 @@ public class ConsultasAlumno {
             pst.setInt(2, reporteA.getRmateria());
             pst.setInt(3, reporteA.getRsemana());
             pst.setInt(4, reporteA.getRalumnohonor());
-            //pst.setInt(5, reporteA.getRalumnoatencion());
+            pst.setInt(5, reporteA.getRalumnoatencion());
             pst.setInt(5, reporteA.getRatencion());
             pst.setInt(6, reporteA.getRperiodo());
             pst.setInt(7,1);

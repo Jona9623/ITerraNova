@@ -6,6 +6,15 @@ var Adminalumno = (function () {
             $.get("SAdminalumno", {
                 ACCION: "MuestraAgregaAlumno",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $('#content').html(arguments[0]);
                 $("#tablaalumnos").DataTable({
@@ -59,6 +68,15 @@ var Adminalumno = (function () {
                 IDALUMNO: idalumno,
                 IDTUTOR: idtutor,
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 Adminalumno.formularios(arguments[0]);
             });
@@ -75,6 +93,15 @@ var Adminalumno = (function () {
             $.get("SAdminalumno", {
                 ACCION: "AgregaAlumno",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 Adminalumno.formularios(arguments[0]);
             });
@@ -84,6 +111,15 @@ var Adminalumno = (function () {
                 ACCION: accion,
                 TUTOR: JSON.stringify(objeto),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
@@ -93,6 +129,15 @@ var Adminalumno = (function () {
                 ACCION: accion,
                 ALUMNO: JSON.stringify(objeto),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Adminalumno.tablaAlumnos();

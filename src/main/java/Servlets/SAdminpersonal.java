@@ -44,16 +44,28 @@ public class SAdminpersonal extends HttpServlet {
         String accion = request.getParameter("ACCION");
         switch (accion) {
             case "MuestraAgregaPersonal":
-                MuestraAgregaPersonal(request, response);
+                try {
+                   MuestraAgregaPersonal(request, response); 
+                } catch (Exception e) {
+                }
                 break;
             case "AgregaPersonal":
-                AgregaPersonal(request, response);
+                try {
+                   AgregaPersonal(request, response); 
+                } catch (Exception e) {
+                }
                 break;
             case "GuardaPersonal":
-                GuardaPersonal(request, response);
+                try {
+                    GuardaPersonal(request, response);
+                } catch (Exception e) {
+                }
                 break;
             case "editarPersonal":
-                editarPersonal(request, response);
+                try {
+                    editarPersonal(request, response);
+                } catch (Exception e) {
+                }
                 break;
             case "eliminarPersonal": eliminarPersonal (request, response); break;    
         }
@@ -98,7 +110,7 @@ public class SAdminpersonal extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void MuestraAgregaPersonal(HttpServletRequest request, HttpServletResponse response) {
+    private void MuestraAgregaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception{
         adminC = new AdministradorController();
         List<TbPersonal> listpersonal = new ArrayList<>();
         try {
@@ -107,11 +119,12 @@ public class SAdminpersonal extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablapersonal.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
-    private void editarPersonal(HttpServletRequest request, HttpServletResponse response) {
+    private void editarPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         TbPersonal personal = new TbPersonal();
         List<CtPuesto> listpuesto = new ArrayList<>();
@@ -123,7 +136,8 @@ public class SAdminpersonal extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formpersonal.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
     
@@ -136,7 +150,7 @@ public class SAdminpersonal extends HttpServlet {
         }
     }
 
-    private void AgregaPersonal(HttpServletRequest request, HttpServletResponse response) {
+    private void AgregaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<CtPuesto> listpuesto = new ArrayList<>();
         try {
@@ -145,11 +159,12 @@ public class SAdminpersonal extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/formpersonal.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
-    private void GuardaPersonal(HttpServletRequest request, HttpServletResponse response) {
+    private void GuardaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         objectJson = request.getParameter("PERSONAL");
         mapper = new ObjectMapper();
         TbPersonal personal = new TbPersonal();
@@ -162,7 +177,9 @@ public class SAdminpersonal extends HttpServlet {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+            
         }
 
     }

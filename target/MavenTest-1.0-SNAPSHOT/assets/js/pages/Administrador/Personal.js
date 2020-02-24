@@ -5,6 +5,15 @@ var Adminpersonal = (function () {
             $.get("SAdminpersonal", {
                 ACCION: "MuestraAgregaPersonal",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 $('#content').html(arguments[0]);
                 $('#tablapersonal').DataTable({
@@ -48,6 +57,15 @@ var Adminpersonal = (function () {
             $.get("SAdminpersonal", {
                 ACCION: "editarPersonal",
                 IDPERSONAL: idpersonal
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 Adminpersonal.formulariospe(arguments[0]);
             });
@@ -64,6 +82,15 @@ var Adminpersonal = (function () {
             $.get("SAdminpersonal", {
                 ACCION: "AgregaPersonal",
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 Adminpersonal.formulariospe(arguments[0]);
             });
@@ -73,6 +100,15 @@ var Adminpersonal = (function () {
                 ACCION: accion,
                 PERSONAL: JSON.stringify(objeto),
                 TIPOESCUELA: tipoescuela
+            }).done(function(xhr, status, error){
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"),"","warning");
+            }).fail(function(xhr, status, error){
+                console.log(
+                        window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Adminpersonal.tablaPersonal();

@@ -143,7 +143,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="guardamateria" class="btn btn-terra">Guardar</button>
+                <button type="button" id="guardamateria" class="btn btn-terra" data-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
