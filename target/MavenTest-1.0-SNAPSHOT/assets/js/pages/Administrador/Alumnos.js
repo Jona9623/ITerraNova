@@ -54,13 +54,20 @@ var Adminalumno = (function () {
                 } else
                     swal("Faltan campos requeridos","","warning");
             });
-            $('#guardaalumno').on('click', function () {
+            Adminalumno.guardarAlumno();
+           /* $('#guardaalumno').on('click', function () {
                 if (validacionAlumno()) {
                     Adminalumno.guardaAlumno(Adminalumno.datosAlumno(), 'GuardaAlumno');
                 }
                 else
                     swal("Faltan campos requeridos","","warning");
-            });
+            });*/
+        },
+        guardarAlumno: function(){
+          $('form[name="formAlumno"]').ajaxForm(function () {
+                swal("Hecho!", "Datos guardados correctamente", "success");
+                Adminalumno.tablaAlumnos();
+            });  
         },
         editarAlumno: function (idalumno, idtutor) {
             $.get("SAdminalumno", {
@@ -124,7 +131,7 @@ var Adminalumno = (function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
         },
-        guardaAlumno: function (objeto, accion) {
+      /*  guardaAlumno: function (objeto, accion) {
             $.get("SAdminalumno", {
                 ACCION: accion,
                 ALUMNO: JSON.stringify(objeto),
@@ -142,7 +149,7 @@ var Adminalumno = (function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Adminalumno.tablaAlumnos();
             });
-        },
+        },*/
         datosTutor: function () {
             var tutor = {
                 "idtbtutor": $("#idtutor").val(),
@@ -162,8 +169,8 @@ var Adminalumno = (function () {
                 "tipoescuela": 1
             }
             return tutor;
-        },
-        datosAlumno: function () {
+        }
+      /*  datosAlumno: function () {
             var alumno = {
                 "idtbalumnos": $("#idalumno").val(),
                 "matricula": $("#matricula").val(),
@@ -197,7 +204,7 @@ var Adminalumno = (function () {
                 "tipoescuela": 1
             }
             return alumno;
-        }
+        }*/
     }
 }());
 $("body").on("focus","input",function(event){

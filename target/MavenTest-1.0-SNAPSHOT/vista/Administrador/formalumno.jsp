@@ -23,8 +23,7 @@
     <div class="p-rl-20">
         <ul class="nav customtab nav-tabs" role="tablist">
             <li class="nav-item"><a href="#tab1" class="nav-link active show" data-toggle="tab">Tutor</a></li>
-            <li class="nav-item"><a href="#tab2" class="nav-link" data-toggle="tab">Datos Personales</a></li>
-            <li class="nav-item"><a href="#tab3" class="nav-link" data-toggle="tab">Datos Escolridad</a></li>
+            <li class="nav-item"><a href="#tab2" class="nav-link" data-toggle="tab">Datos Alumno</a></li>
         </ul>
     </div>
 </div>
@@ -116,58 +115,57 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <strong type="text" >Los campos con signo * son obligatorios</strong>
-                                            <form>
+                                            <form id="formAlumno" enctype="multipart/form-data" method="POST" action="SAdminalumno" name="formAlumno">
+                                                <input type="text" name="ACCION" id="ACCION" value="GuardaAlumno" hidden="true">
                                                 <div class="card-body row">
                                                     <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
                                                             <label>Matricula</label>
-                                                            <input id="matricula" value="${requestScope.alumno.matricula}" type="text" class="form-control" placeholder="matricula">
+                                                            <input id="matricula" name="matricula" value="${requestScope.alumno.matricula}" type="text" class="form-control" placeholder="matricula">
                                                         </div>
                                                         <div class="form-group" id="div-nombrea">
                                                             <label>Nombre(s)*</label>
-                                                            <input  id="nombrea" value="${requestScope.alumno.nombre}" type="text" class="form-control" placeholder="nombre(s)">
+                                                            <input  id="nombrea" name="nombrea" value="${requestScope.alumno.nombre}" type="text" class="form-control" placeholder="nombre(s)">
                                                         </div>
                                                         <div class="form-group" id="div-apellidopa">
                                                             <label>Apellido paterno*</label>
-                                                            <input id="apellidopa" value="${requestScope.alumno.apellidop}" type="text" class="form-control" placeholder="apellido paterno">
+                                                            <input id="apellidopa" name="apellidopa" value="${requestScope.alumno.apellidop}" type="text" class="form-control" placeholder="apellido paterno">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Apellido materno</label>
-                                                            <input id="apellidoma" value="${requestScope.alumno.apellidom}" type="text" class="form-control" placeholder="apellido materno">
+                                                            <input id="apellidoma" name="apellidoma" value="${requestScope.alumno.apellidom}" type="text" class="form-control" placeholder="apellido materno">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Fecha de nacimiento</label>
-                                                            <input id="fechanaa" value="${requestScope.alumno.fechanacimiento}" type="date" class="form-control" placeholder="fecha nacimiento">
+                                                            <input id="fechanaa" name="fechanaa" value="${requestScope.alumno.fechanacimiento}" type="date" class="form-control" placeholder="fecha nacimiento">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>CURP</label>
-                                                            <input id="curpa" value="${requestScope.alumno.curp}" type="text" class="form-control" placeholder="curp">
+                                                            <input id="curpa" name="curpa" value="${requestScope.alumno.curp}" type="text" class="form-control" placeholder="curp">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Teléfono de casa</label>
-                                                            <input id="telcasaa" value="${requestScope.alumno.telefonocasa}" type="number" class="form-control" placeholder="telefono casa">
+                                                            <input id="telcasaa" name="telcasaa" value="${requestScope.alumno.telefonocasa}" type="number" class="form-control" placeholder="telefono casa">
                                                         </div>
                                                         <div class="form-group" id="div-celulara">
                                                             <label>Celular*</label>
-                                                            <input id="celulara" value="${requestScope.alumno.celular}" type="number" class="form-control" placeholder="celular">
+                                                            <input id="celulara" name="celulara" value="${requestScope.alumno.celular}" type="number" class="form-control" placeholder="celular">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Correo</label>
-                                                            <input id="correoa" value="${requestScope.alumno.correo}" type="email" class="form-control" placeholder="correo">
+                                                            <input id="correoa" name="correoa" value="${requestScope.alumno.correo}" type="email" class="form-control" placeholder="correo">
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
                                                             <label>Municipio de nacimiento</label>
-                                                            <input id="municipionaca" value="${requestScope.alumno.municipiona}" type="text" class="form-control" placeholder="municipio nacimiento">
+                                                            <input id="municipionaca" name="municipionaca" value="${requestScope.alumno.municipiona}" type="text" class="form-control" placeholder="municipio nacimiento">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Estado de nacimiento</label>
-                                                            <input id="estadonaca" value="${requestScope.alumno.estadona}" type="text" class="form-control" placeholder="estado nacimiento">
+                                                            <input id="estadonaca" name="estadonaca" value="${requestScope.alumno.estadona}" type="text" class="form-control" placeholder="estado nacimiento">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Nacionalidad</label>
-                                                            <input id="nacionalidada" value="${requestScope.alumno.nacionalidad}" type="text" class="form-control" placeholder="nacionalidad">
+                                                            <input id="nacionalidada" name="nacionalidada" value="${requestScope.alumno.nacionalidad}" type="text" class="form-control" placeholder="nacionalidad">
                                                         </div>
                                                         <label>Sexo</label>
                                                         <div class="form-group">
@@ -202,49 +200,31 @@
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
                                                             <label>Calle del domicilio</label>
-                                                            <input id="calledoma" value="${requestScope.alumno.calledom}" type="text" class="form-control" placeholder="calle domicilio">
+                                                            <input id="calledoma" name="calledoma" value="${requestScope.alumno.calledom}" type="text" class="form-control" placeholder="calle domicilio">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Número del domicilio</label>
-                                                            <input id="numerodoma" value="${requestScope.alumno.numerodom}" type="number" class="form-control" placeholder="numero domicilio">
+                                                            <input id="numerodoma" name="numerodoma" value="${requestScope.alumno.numerodom}" type="number" class="form-control" placeholder="numero domicilio">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Colonia del domicilio</label>
-                                                            <input id="coloniadoa" value="${requestScope.alumno.coloniadom}" type="text" class="form-control" placeholder="colonia del domicilio">
+                                                            <input id="coloniadoa" name="coloniadoa" value="${requestScope.alumno.coloniadom}" type="text" class="form-control" placeholder="colonia del domicilio">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Código postal</label>
-                                                            <input id="codigopostala" value="${requestScope.alumno.codigopostal}" type="number" class="form-control" placeholder="codigo postal">
+                                                            <input id="codigopostala" name="codigopostala" value="${requestScope.alumno.codigopostal}" type="number" class="form-control" placeholder="codigo postal">
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <label>Al término de éste formulario pasar a siguiente pestaña</label>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="tab3">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <div class="card-body " id="bar-parent2">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <strong type="text" >Los campos con signo * son obligatorios</strong>
-                                            <form>
-                                                <div class="card-body row">
-                                                    <div class="col-md-6 col-sm-6">
                                                         <div class="form-group" id="div-nivela">
                                                             <label>Nivel que cursa*</label>
-                                                            <input id="nivela" value="${requestScope.alumno.nivelcursa}" type="text" class="form-control" placeholder="nivel">
+                                                            <input id="nivela" name="nivela" value="${requestScope.alumno.nivelcursa}" type="text" class="form-control" placeholder="nivel">
                                                         </div>
                                                         <div class="form-group" id="div-grado">
                                                             <label >Seleccione el grado*</label>
-                                                            <select id="grado" class="custom-select">
+                                                            <select id="grado" name="grado" class="custom-select">
                                                                 <c:forEach items="${requestScope.listgrado}" var="listgrado">
                                                                     <option value="${listgrado.idtbgrado}" 
                                                                             <c:if test="${listgrado.idtbgrado == requestScope.alumno.rgrado}">
@@ -257,7 +237,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione el grupo</label>
-                                                            <select id="grupo" class="custom-select">
+                                                            <select id="grupo" name="grupo" class="custom-select">
                                                                 <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
                                                                     <option value="${listgrupo.idtbgrupo}" 
                                                                             <c:if test="${listgrupo.idtbgrupo == requestScope.alumno.rgrupo}">
@@ -270,7 +250,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione el area</label>
-                                                            <select id="area" class="custom-select">
+                                                            <select id="area" name="area" class="custom-select">
                                                                 <option value="">No aún</option>
                                                                 <c:forEach items="${requestScope.listarea}" var="listarea">
                                                                     <option value="${listarea.idtbarea}" 
@@ -283,7 +263,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Seleccione capacitacion para el trabajo</label>
-                                                            <select id="cpt" class="custom-select">
+                                                            <select id="cpt" name="cpt" class="custom-select">
                                                                 <option value="">No aún</option>
                                                                 <c:forEach items="${requestScope.listcpt}" var="listcpt">
                                                                     <option value="${listcpt.idtbcpt}" 
@@ -294,30 +274,28 @@
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
                                                             <label>Plantel de procedencia</label>
-                                                            <input id="plantelproce" value="${requestScope.alumno.plantelproce}" type="text" class="form-control" placeholder="plantel procedencia">
+                                                            <input id="plantelproce" name="plantelproce" value="${requestScope.alumno.plantelproce}" type="text" class="form-control" placeholder="plantel procedencia">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Nivel cursado anteriormente</label>
-                                                            <input id="nivelanterior" value="${requestScope.alumno.nivelanterior}" type="number" class="form-control" placeholder="nivel anterior">
+                                                            <input id="nivelanterior" name="nivelanterior" value="${requestScope.alumno.nivelanterior}" type="number" class="form-control" placeholder="nivel anterior">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Grado cursado anteriormente</label>
-                                                            <input id="gradoanterior" value="${requestScope.alumno.gradoanterior}" type="number" class="form-control" placeholder="grado anterior">
+                                                            <input id="gradoanterior" name="gradoanterior" value="${requestScope.alumno.gradoanterior}" type="number" class="form-control" placeholder="grado anterior">
                                                         </div>
                                                         <div class="form-group">
                                                             <label >Turno cursado anteriormente</label>
-                                                            <select id="turnoanterior" class="custom-select">
+                                                            <select id="turnoanterior" name="turnoanterior" class="custom-select">
                                                                 <option value="1" <c:if test="${requestScope.alumno.turnoanterior == 1}"> selected=""</c:if>>Matutino</option>
                                                                 <option value="2" <c:if test="${requestScope.alumno.turnoanterior == 2}"> selected=""</c:if>>Vespertino</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Municipio del plantel anterior</label>
-                                                                <input id="plantelanterior" value="${requestScope.alumno.municipioante}" type="text" class="form-control" placeholder="plantel anterior">
+                                                                <input id="plantelanterior" name="plantelanterior" value="${requestScope.alumno.municipioante}" type="text" class="form-control" placeholder="plantel anterior">
                                                         </div>
                                                         <div class="form-group">
                                                             <a class="material-icons f-left">camera_enhance</a>
@@ -326,14 +304,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button id="guardaalumno" type="button" class="btn btn-terra">Guardar</button>
+                                                <button id="guardaalumno" type="submit" class="btn btn-terra">Guardar</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>           

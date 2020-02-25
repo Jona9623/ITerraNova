@@ -42,9 +42,9 @@ public class AdministradorController {
         consulta.guardaTutor(tutor, tipoescuela);
     }
     
-    public void guardaAlumno(TbAlumnos alumno, int tipoescuela) {
+    public void guardaAlumno(TbAlumnos alumno, int tipoescuela, String ruta) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaAlumno(alumno, tipoescuela);
+        consulta.guardaAlumno(alumno, tipoescuela, ruta);
     }
     
     public TbAlumnos datosAlumno(int idalumno) {

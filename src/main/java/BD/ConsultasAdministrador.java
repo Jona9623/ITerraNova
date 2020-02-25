@@ -168,7 +168,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaAlumno(TbAlumnos alumno, int tipoescuela) {
+    public void guardaAlumno(TbAlumnos alumno, int tipoescuela, String ruta) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         int id = 0;
@@ -182,8 +182,8 @@ public class ConsultasAdministrador {
             }
             String consulta = "insert into tb_alumnos (matricula,nombre,apellidopaterno,apellidomaterno,fechanacimiento,curp,municipionacimiento,estadonacimiento,\n"
                     + "nacionalidad,sexo,calledomicilio,numerodomicilio,coloniadomicilio,codigopostal,telefonocasa,celularalumno,correoalumno,nivelcursa,\n"
-                    + "r_grado,r_grupo,r_area,r_cpt,plantelprocedencia,nivelanterior,gradoanterior,turnoanterior,municipioanterior,r_tutor,status,tipoescuela) values (?,?,?,?,?,?,?,?"
-                    + ",?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "r_grado,r_grupo,r_area,r_cpt,plantelprocedencia,nivelanterior,gradoanterior,turnoanterior,municipioanterior,r_tutor,foto,status,tipoescuela) values (?,?,?,?,?,?,?,?"
+                    + ",?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(consulta);
             pst.setString(1, alumno.getMatricula());
             pst.setString(2, alumno.getNombre());
@@ -221,8 +221,9 @@ public class ConsultasAdministrador {
             pst.setInt(26, alumno.getTurnoanterior());
             pst.setString(27, alumno.getMunicipioante());
             pst.setInt(28, id);
-            pst.setInt(29, 1);
-            pst.setInt(30, tipoescuela);
+            pst.setString(29, ruta);
+            pst.setInt(30, 1);
+            pst.setInt(31, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
