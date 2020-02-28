@@ -405,7 +405,7 @@ public class SReportes extends HttpServlet {
             String foto = (String.valueOf(request.getParameter("Archivo")));
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
-                String uploadPath = "C:\\Users\\Complx\\perro"; //applicationPath + File.separator + "archivos";
+                String uploadPath = "C:\\Users\\Complx\\Desktop"; //applicationPath + File.separator + "archivos";
                 File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();

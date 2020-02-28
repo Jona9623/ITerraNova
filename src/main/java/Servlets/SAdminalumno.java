@@ -26,12 +26,14 @@ import java.io.File;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
 
 /**
  *
  * @author complx
  */
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 30, maxRequestSize = 1024 * 1024 * 50)
 public class SAdminalumno extends HttpServlet {
 
     AdministradorController adminC;
@@ -73,7 +75,7 @@ public class SAdminalumno extends HttpServlet {
                 break;
             case "GuardaTutor":
                 try {
-                   GuardaTutor(request, response); 
+                    GuardaTutor(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -85,6 +87,12 @@ public class SAdminalumno extends HttpServlet {
                 break;
             case "eliminarAlumno":
                 eliminarAlumno(request, response);
+                break;
+            case "importaAlumno":
+                try {
+                    importaAlumno(request, response);
+                } catch (Exception e) {
+                }
                 break;
         }
     }
@@ -128,7 +136,7 @@ public class SAdminalumno extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void MuestraAgregaalumno(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    private void MuestraAgregaalumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<TbAlumnos> listalumnos = new ArrayList<>();
         try {
@@ -171,17 +179,17 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
-    
+
     private void eliminarAlumno(HttpServletRequest request, HttpServletResponse response) {
         adminC = new AdministradorController();
         try {
-           adminC.eliminaAlumno(Integer.parseInt(request.getParameter("IDALUMNO"))); 
+            adminC.eliminaAlumno(Integer.parseInt(request.getParameter("IDALUMNO")));
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    private void Agregaalumno(HttpServletRequest request, HttpServletResponse response)throws Exception{
+    private void Agregaalumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
@@ -230,17 +238,17 @@ public class SAdminalumno extends HttpServlet {
         //mapper = new ObjectMapper();
         try {
             String foto = (request.getParameter("fotoalumno"));
-            if(foto.equals("null")){
+            if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
                 String uploadPath = "C:\\Users\\Complx\\Desktop";
-                File fileUploadDirectory = new File (uploadPath);
-                if(!fileUploadDirectory.exists()){
+                File fileUploadDirectory = new File(uploadPath);
+                if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();
                 }
                 Part part = request.getPart("fotoalumno");
                 String nombrearchivo = extractFileName(part);
                 ruta = uploadPath + File.separator + nombrearchivo;
-                System.out.println("Ruta:"+ ruta);
+                System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
             alumno.setNombre(request.getParameter("nombrea"));
@@ -269,7 +277,7 @@ public class SAdminalumno extends HttpServlet {
             alumno.setTurnoanterior(Integer.parseInt(request.getParameter("turnoanterior")));
             alumno.setGradoanterior(Integer.parseInt(request.getParameter("gradoanterior")));
             alumno.setPlantelproce(request.getParameter("plantelanterior"));
-           // alumno = mapper.readValue(objectJson, TbAlumnos.class);
+            // alumno = mapper.readValue(objectJson, TbAlumnos.class);
             if (alumno.getIdtbalumnos() > 0) {
                 adminC.actualizaAlumno(alumno);
             } else {
@@ -280,6 +288,7 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
+
     private String extractFileName(Part part) {
         String fileName = "",
                 contentDisposition = part.getHeader("content-disposition");
@@ -290,6 +299,33 @@ public class SAdminalumno extends HttpServlet {
             }
         }
         return fileName;
+    }
+
+    private void importaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        List<TbAlumnos> listalumnos = new ArrayList<>();
+        String ruta = null;
+        try {
+            String foto = (String.valueOf(request.getParameter("importaAlumno")));
+            if (foto.equals("null")) {
+                String applicationPath = getServletContext().getRealPath("");
+                String uploadPath = applicationPath; //applicationPath + File.separator + "archivos";
+                File fileUploadDirectory = new File(uploadPath);
+                if (!fileUploadDirectory.exists()) {
+                    fileUploadDirectory.mkdirs();
+                }
+                Part part = request.getPart("importaAlumno");
+                String nombrearchivo = extractFileName(part);
+                ruta = uploadPath + File.separator + nombrearchivo;
+                System.out.println("Ruta:" + ruta);
+                part.write(ruta);
+            }
+            listalumnos = adminC.exportaAlumnos(ruta);
+            String f = null;
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
     }
 
 }

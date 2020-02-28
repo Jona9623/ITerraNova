@@ -56,7 +56,8 @@ var Adminpersonal = (function () {
         editarPersonal: function (idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "editarPersonal",
-                IDPERSONAL: idpersonal
+                IDPERSONAL: idpersonal,
+                TIPOESCUELA: tipoescuela
             }).done(function(xhr, status, error){
                 console.log(arguments);
                 console.log(error.status);

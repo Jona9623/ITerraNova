@@ -6,13 +6,13 @@ var Adminalumno = (function () {
             $.get("SAdminalumno", {
                 ACCION: "MuestraAgregaAlumno",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -20,6 +20,14 @@ var Adminalumno = (function () {
                 $("#tablaalumnos").DataTable({
                     "scrollX": true
                 });
+                /*$("#importaAlumno").on('click',function(){
+                 $.get("SAdminalumno",{
+                 ACCION: "importaAlumno"
+                 }).then(function(){
+                 Adminalumno.tablaAlumnos(); 
+                 }); 
+                 });*/
+                    Adminalumno.importaAlumno();
                 $('#btnagregaA').on('click', function () {
                     Adminalumno.agregaAlumno();
                 }),
@@ -46,28 +54,33 @@ var Adminalumno = (function () {
                 });
             });
         },
+        importaAlumno: function(){
+            $('form[name="importaralumno"]').ajaxForm(function () {
+                swal("Hecho!", "Datos importados correctamente", "success");
+            });
+        },
         formularios: function (argumento) {
             $('#content').html(argumento);
+            Adminalumno.guardarAlumno();
             $('#guardatutor').on('click', function () {
                 if (validacionTutor()) {
                     Adminalumno.guardaTutor(Adminalumno.datosTutor(), 'GuardaTutor');
                 } else
-                    swal("Faltan campos requeridos","","warning");
+                    swal("Faltan campos requeridos", "", "warning");
             });
-            Adminalumno.guardarAlumno();
-           /* $('#guardaalumno').on('click', function () {
-                if (validacionAlumno()) {
-                    Adminalumno.guardaAlumno(Adminalumno.datosAlumno(), 'GuardaAlumno');
-                }
-                else
-                    swal("Faltan campos requeridos","","warning");
-            });*/
+            /* $('#guardaalumno').on('click', function () {
+             if (validacionAlumno()) {
+             Adminalumno.guardaAlumno(Adminalumno.datosAlumno(), 'GuardaAlumno');
+             }
+             else
+             swal("Faltan campos requeridos","","warning");
+             });*/
         },
-        guardarAlumno: function(){
-          $('form[name="formAlumno"]').ajaxForm(function () {
+        guardarAlumno: function () {
+            $('form[name="formAlumno"]').ajaxForm(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
                 Adminalumno.tablaAlumnos();
-            });  
+            });
         },
         editarAlumno: function (idalumno, idtutor) {
             $.get("SAdminalumno", {
@@ -75,13 +88,13 @@ var Adminalumno = (function () {
                 IDALUMNO: idalumno,
                 IDTUTOR: idtutor,
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -100,13 +113,13 @@ var Adminalumno = (function () {
             $.get("SAdminalumno", {
                 ACCION: "AgregaAlumno",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -118,38 +131,38 @@ var Adminalumno = (function () {
                 ACCION: accion,
                 TUTOR: JSON.stringify(objeto),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
             });
         },
-      /*  guardaAlumno: function (objeto, accion) {
-            $.get("SAdminalumno", {
-                ACCION: accion,
-                ALUMNO: JSON.stringify(objeto),
-                TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
-                console.log(arguments);
-                console.log(error.status);
-                console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
-                Adminalumno.tablaAlumnos();
-            });
-        },*/
+        /*  guardaAlumno: function (objeto, accion) {
+         $.get("SAdminalumno", {
+         ACCION: accion,
+         ALUMNO: JSON.stringify(objeto),
+         TIPOESCUELA: tipoescuela
+         }).done(function(xhr, status, error){
+         console.log(arguments);
+         console.log(error.status);
+         console.log(error.getResponseHeader("ERROR"));
+         if(error.status != 200)
+         swal(error.getResponseHeader("ERROR"),"","warning");
+         }).fail(function(xhr, status, error){
+         console.log(
+         window.location.pathname);
+         }).then(function () {
+         swal("Hecho!", "Datos guardados correctamente", "success");
+         Adminalumno.tablaAlumnos();
+         });
+         },*/
         datosTutor: function () {
             var tutor = {
                 "idtbtutor": $("#idtutor").val(),
@@ -170,47 +183,47 @@ var Adminalumno = (function () {
             }
             return tutor;
         }
-      /*  datosAlumno: function () {
-            var alumno = {
-                "idtbalumnos": $("#idalumno").val(),
-                "matricula": $("#matricula").val(),
-                "nombre": $("#nombrea").val(),
-                "apellidop": $("#apellidopa").val(),
-                "apellidom": $("#apellidoma").val(),
-                "fechanacimiento": $("#fechanaa").val(),
-                "curp": $("#curpa").val(),
-                "municipiona": $("#municipionaca").val(),
-                "estadona": $("#estadonaca").val(),
-                "nacionalidad": $("#nacionalidada").val(),
-                "sexo": $("input[name = 'sexo']:checked").val(),
-                "calledom": $("#calledoma").val(),
-                "numerodom": $("#numerodoma").val(),
-                "coloniadom": $("#coloniadoa").val(),
-                "codigopostal": $("#codigopostala").val(),
-                "telefonocasa": $("#telcasaa").val(),
-                "celular": $("#celulara").val(),
-                "correo": $("#correoa").val(),
-                "nivelcursa": $("#nivela").val(),
-                "rgrado": $("#grado").val(),
-                "rgrupo": $("#grupo").val(),
-                "rarea": $("#area").val(),
-                "rcpt": $("#cpt").val(),
-                "plantelproce": $("#plantelproce").val(),
-                "nivelanterior": $("#nivelanterior").val(),
-                "gradoanterior": $("#gradoanterior").val(),
-                "turnoanterior": $("#turnoanterior").val(),
-                "municipioante": $("#plantelanterior").val(),
-                "status": 1,
-                "tipoescuela": 1
-            }
-            return alumno;
-        }*/
+        /*  datosAlumno: function () {
+         var alumno = {
+         "idtbalumnos": $("#idalumno").val(),
+         "matricula": $("#matricula").val(),
+         "nombre": $("#nombrea").val(),
+         "apellidop": $("#apellidopa").val(),
+         "apellidom": $("#apellidoma").val(),
+         "fechanacimiento": $("#fechanaa").val(),
+         "curp": $("#curpa").val(),
+         "municipiona": $("#municipionaca").val(),
+         "estadona": $("#estadonaca").val(),
+         "nacionalidad": $("#nacionalidada").val(),
+         "sexo": $("input[name = 'sexo']:checked").val(),
+         "calledom": $("#calledoma").val(),
+         "numerodom": $("#numerodoma").val(),
+         "coloniadom": $("#coloniadoa").val(),
+         "codigopostal": $("#codigopostala").val(),
+         "telefonocasa": $("#telcasaa").val(),
+         "celular": $("#celulara").val(),
+         "correo": $("#correoa").val(),
+         "nivelcursa": $("#nivela").val(),
+         "rgrado": $("#grado").val(),
+         "rgrupo": $("#grupo").val(),
+         "rarea": $("#area").val(),
+         "rcpt": $("#cpt").val(),
+         "plantelproce": $("#plantelproce").val(),
+         "nivelanterior": $("#nivelanterior").val(),
+         "gradoanterior": $("#gradoanterior").val(),
+         "turnoanterior": $("#turnoanterior").val(),
+         "municipioante": $("#plantelanterior").val(),
+         "status": 1,
+         "tipoescuela": 1
+         }
+         return alumno;
+         }*/
     }
 }());
-$("body").on("focus","input",function(event){
+$("body").on("focus", "input", function (event) {
     $(this).parent().removeClass('has-error');
 });
-$("body").on("focus","textarea",function(event){
+$("body").on("focus", "textarea", function (event) {
     $(this).parent().removeClass('has-error');
 });
 function validacionAlumno() {
@@ -243,14 +256,14 @@ function validacionTutor() {
         $("#div-apellidopt").addClass("has-error");
         valido = false;
     }
-     if ($("#parentesco").val().trim() == "") {
-         $("#div-parentesco").addClass("has-error");
-         valido = false;
-     }
-     if ($("#celulart").val().trim() == "") {
-         $("#div-celular").addClass("has-error");
-         valido = false;
-     }
+    if ($("#parentesco").val().trim() == "") {
+        $("#div-parentesco").addClass("has-error");
+        valido = false;
+    }
+    if ($("#celulart").val().trim() == "") {
+        $("#div-celular").addClass("has-error");
+        valido = false;
+    }
     return valido;
 }
 

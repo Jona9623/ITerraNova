@@ -25,6 +25,9 @@
             <div class="btn-group">
                 <button id="btnagregaA"type="button" class="btn btn-terra">Agregar Alumno</button> <br>
             </div>
+            <div class="btn-group">
+                <a data-toggle="modal" data-target="#modalArchivo" id="importaAlumno"type="button" class="btn btn-terra">Importar Alumno</a> <br> 
+            </div>
         </div>
     </div>
 
@@ -83,4 +86,40 @@
             </c:forEach>
         </tbody>
     </table>
+</div>
+<div class="modal fade" id="modalArchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                    </div></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="">
+                            <form id="importarAlumno" enctype="multipart/form-data" method="POST" action="SAdminalumno" name="importaralumno">
+                                <input type="text" name="ACCION" id="ACCION" value="importaAlumno" hidden="true">
+                                <div class="card-body row">
+                                    <div class="col-lg-10 p-t-20"> 
+                                        <div class="form-group">
+                                            <label>Seleccione archivo para importar</label>
+                                            <input id="importaalumno" type="file" name="importaAlumno">
+                                        </div>
+                                    </div><br>
+                                </div>
+                                <button type="submit" id="" class="btn btn-terra" >Importar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>

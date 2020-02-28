@@ -660,18 +660,18 @@ public class ConsultasAlumno {
         PreparedStatement pst = null;
         try {
             con.setAutoCommit(false);
-            String consulta = "insert into tb_reporteacademico (r_personal,r_materia,r_semanafiscal,r_alumnohonor,r_atencion,r_periodo,status,tipoescuela)"
-                    + " values (?,?,?,?,?,?,?,?)";
+            String consulta = "insert into tb_reporteacademico (r_personal,r_materia,r_semanafiscal,r_alumnohonor,r_alumnoatencion,r_atencion,r_periodo,status,tipoescuela)"
+                    + " values (?,?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, reporteA.getRpersonal());
             pst.setInt(2, reporteA.getRmateria());
             pst.setInt(3, reporteA.getRsemana());
             pst.setInt(4, reporteA.getRalumnohonor());
             pst.setInt(5, reporteA.getRalumnoatencion());
-            pst.setInt(5, reporteA.getRatencion());
-            pst.setInt(6, reporteA.getRperiodo());
-            pst.setInt(7,1);
-            pst.setInt(8,tipoescuela);
+            pst.setInt(6, reporteA.getRatencion());
+            pst.setInt(7, reporteA.getRperiodo());
+            pst.setInt(8,1);
+            pst.setInt(9,tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();

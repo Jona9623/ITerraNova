@@ -20,6 +20,13 @@ import Modelos.TbAlumnos;
 import Modelos.TbMateria;
 import Modelos.TbPersonal;
 import Modelos.TbTutor;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +52,11 @@ public class AdministradorController {
     public void guardaAlumno(TbAlumnos alumno, int tipoescuela, String ruta) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.guardaAlumno(alumno, tipoescuela, ruta);
+    }
+    public List <TbAlumnos> exportaAlumnos(String ruta){
+        List <TbAlumnos> alumnos = new ArrayList<>();
+        alumnos = readFromCSV(ruta);
+        return alumnos;
     }
     
     public TbAlumnos datosAlumno(int idalumno) {
@@ -230,6 +242,37 @@ public class AdministradorController {
     public void eliminaMateria(int id) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.eliminaMateria(id);
+    }
+
+    private List<TbAlumnos> readFromCSV(String csvExample) {
+        List <TbAlumnos> alumnos = new ArrayList<>();
+        Path pathToFile = Paths.get(csvExample);
+        
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)){
+            String line = br.readLine();
+            
+            while(line != null){
+                String[] attributes = line.split(",");
+                TbAlumnos alumno = creaAlumno(attributes);
+                alumnos.add(alumno);
+                line = br.readLine();
+            }
+            
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
+        return alumnos;
+    }
+
+    private TbAlumnos creaAlumno(String[] attributes) {
+        TbAlumnos alumno = new TbAlumnos();
+        alumno.setNombre(attributes[0]);
+        alumno.setApellidop(attributes[1]);
+        alumno.setApellidom(attributes[2]);
+        alumno.setFechanacimiento(attributes[3]);
+        alumno.setCurp(attributes[4]);
+        
+        return alumno;
     }
 
 }

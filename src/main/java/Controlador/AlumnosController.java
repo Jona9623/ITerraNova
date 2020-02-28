@@ -77,8 +77,7 @@ public class AlumnosController {
                     + "Le pedimos que platique con su hij@, y cualquier duda con mucho gusto contactar a la institución para poder platicar mas adelante\n"
                     + "\nNOTA: En caso de que la información se encuentre equivocada, favor de comunicarse a la institucuión ";
             enviarCorreo(correotutor, asunto, cuerpo);
-        }else
-            System.out.println("No entro");
+        }
     }
 
     public List<TbReporteDisciplinar> getAlumnosReporteD(int tipoescuela) {

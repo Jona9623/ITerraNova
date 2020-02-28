@@ -4,19 +4,20 @@ var Reportes = (function () {
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     var grado;
     var grupo;
+    var data;
     return {
         reporteDisciplinar: function () {
-            
+
             $.get("SReportes", {
                 ACCION: "Rdisciplinar",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -25,7 +26,7 @@ var Reportes = (function () {
                 grupo = $("#grupodisciplinar").val();
                 Reportes.getAlumno(grado, grupo);
                 $("#agregafalta").on('click', function () {
-                    
+
                     Reportes.agregaFalta();
                 });
                 $("#guardaincidente").on('click', function () {
@@ -104,13 +105,13 @@ var Reportes = (function () {
                 GRADO: grado,
                 GRUPO: grupo,
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -181,30 +182,30 @@ var Reportes = (function () {
                 ACCION: accion,
                 OBJETO: JSON.stringify(objeto),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
-                
+
             });
         },
         mostrarReportes: function () {
             $.get("SReportes", {
                 ACCION: "mostrarReportes",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -240,13 +241,13 @@ var Reportes = (function () {
                 FECHA: reportefecha,
                 HORA: hora,
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -258,14 +259,15 @@ var Reportes = (function () {
                 ACCION: "editarReporteD",
                 ID: id,
                 FECHA: fecha,
-                HORA: hora
-            }).done(function(xhr, status, error){
+                HORA: hora,
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -280,13 +282,13 @@ var Reportes = (function () {
                 ACCION: accion,
                 OBJETO: JSON.stringify(objeto),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -298,13 +300,13 @@ var Reportes = (function () {
             $.get("SReportes", {
                 ACCION: "Racademico",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -314,7 +316,7 @@ var Reportes = (function () {
                 gradoatencion = $("#gradoatencion").val();
                 grupoatencion = $("#grupoatencion").val();
                 Reportes.getAlumnoAca(gradohonor, grupohonor);
-                Reportes.getAlumnoAcaAtencion(gradoatencion,grupoatencion);
+                Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
                 $("#guardacomportammiento").on('click', function () {
                     Reportes.guardaComportamiento();
                 });
@@ -338,7 +340,7 @@ var Reportes = (function () {
                 "rmateria": $("#materiaA").val(),
                 "rsemana": $("#semanafiscal").val(),
                 "ralumnohonor": $("#alumnohonor").val(),
-                //"ralumnoatencion": $("#alumnoatencion").val(),
+                "ralumnoatencion": $("#alumnoatencion").val(),
                 "ratencion": $("#comportamiento").val(),
                 "rperiodo": $("#periodoA").val()
             }
@@ -346,13 +348,13 @@ var Reportes = (function () {
                 ACCION: "guardaReporteAcademico",
                 OBJETO: JSON.stringify(reporteA),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -371,13 +373,13 @@ var Reportes = (function () {
                 ACCION: "guardaActividadSemanal",
                 OBJETO: JSON.stringify(actividad),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -390,13 +392,13 @@ var Reportes = (function () {
                 ACCION: "guardaComportamiento",
                 OBJETO: JSON.stringify(comportamiento),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -410,13 +412,13 @@ var Reportes = (function () {
                 ACCION: "guardaSemana",
                 OBJETO: JSON.stringify(semana),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -429,13 +431,13 @@ var Reportes = (function () {
                 ACCION: "guardaSemana",
                 OBJETO: JSON.stringify(semana),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -448,18 +450,48 @@ var Reportes = (function () {
             }).then(function () {
                 $("#content").html(arguments[0]);
                 $("#guardarimagen").on('click', function () {
-                    html2canvas($(".imagen"), {
-                        dpi: 192,
+                    html2canvas([document.getElementById('imagen')], {
                         onrendered: function (canvas) {
+                            var data = canvas.toDataURL('image/png');
+                            var image = new Image();
+                            image.src = data;
+                            console.log(data);
+                            console.log(image);
                             $("#blanko").attr('href', canvas.toDataURL("image/png"));
-                            $("#blanko").attr('download', "Image.png")
-                            $("#blanko")[0].click();
+                             $("#blanko").attr('download', "Image.png")
+                             $("#blanko")[0].click();
                         }
-                    })
+                    });
+                   /* var file = dataURLtoFile(data, 'image.png');
+                    console.log(file);*/
+
+                    /* html2canvas($(".imagen"), {
+                     dpi: 192,
+                     onrendered: function (canvas) {
+                     $("#blanko").attr('href', canvas.toDataURL("image/png"));
+                     $("#blanko").attr('download', "Image.png")
+                     $("#blanko")[0].click();
+                     }
+                     })*/
                 })
 
             });
-        }
+        },
+        
     }
     ;
 }());
+function dataURLtoFile(dataurl, filename) {
+ 
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), 
+            n = bstr.length, 
+            u8arr = new Uint8Array(n);
+            
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        
+        return new File([u8arr], filename, {type:mime});
+    }
