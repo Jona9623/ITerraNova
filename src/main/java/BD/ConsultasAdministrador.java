@@ -286,6 +286,7 @@ public class ConsultasAdministrador {
                 alumno.setGradoanterior(rs.getInt("gradoanterior"));
                 alumno.setTurnoanterior(rs.getInt("turnoanterior"));
                 alumno.setMunicipioante(rs.getString("municipioanterior"));
+                alumno.setFoto(rs.getString("foto"));
             }
         } catch (Exception e) {
             System.out.print("Error" + e);
@@ -408,14 +409,14 @@ public class ConsultasAdministrador {
         return personal;
     }
 
-    public void actualizaAlumno(TbAlumnos alumno) {
+    public void actualizaAlumno(TbAlumnos alumno, String ruta) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
             String consulta = "UPDATE `terranova`.`tb_alumnos` SET `matricula` = ?, `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `fechanacimiento` = ?, `curp` = ?, \n"
                     + "`municipionacimiento` = ?, `estadonacimiento` = ?, `nacionalidad` = ?, `sexo` = ?, `calledomicilio` = ?, `numerodomicilio` = ?, `coloniadomicilio` = ?,\n"
                     + " `codigopostal` = ?, `telefonocasa` = ?, `celularalumno` = ?, `correoalumno` = ?, `nivelcursa` = ?, `r_grado` = ?, `r_grupo` = ?,\n"
-                    + " `r_area` = ?, `r_cpt` = ?, `plantelprocedencia` = ?, `nivelanterior` = ?, `gradoanterior` = ?, `turnoanterior` = ?, `municipioanterior` = ? \n"
+                    + " `r_area` = ?, `r_cpt` = ?, `plantelprocedencia` = ?, `nivelanterior` = ?, `gradoanterior` = ?, `turnoanterior` = ?, `municipioanterior` = ?,`foto` = ? \n"
                     + " WHERE (`idTb_Alumnos` = ?)";
             pst = con.prepareStatement(consulta);
             pst.setString(1, alumno.getMatricula());
@@ -453,7 +454,8 @@ public class ConsultasAdministrador {
             pst.setInt(25, alumno.getGradoanterior());
             pst.setInt(26, alumno.getTurnoanterior());
             pst.setString(27, alumno.getMunicipioante());
-            pst.setInt(28, alumno.getIdtbalumnos());
+            pst.setString(28, ruta);
+            pst.setInt(29, alumno.getIdtbalumnos());
             if (pst.executeUpdate() == 1) {
                 con.commit();
             }

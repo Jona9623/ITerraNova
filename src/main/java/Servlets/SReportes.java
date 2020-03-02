@@ -405,14 +405,17 @@ public class SReportes extends HttpServlet {
             String foto = (String.valueOf(request.getParameter("Archivo")));
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
-                String uploadPath = "C:\\Users\\Jonat\\Desktop"; //applicationPath + File.separator + "archivos";
+                System.out.println("OTRA RUTA" +applicationPath);
+                String uploadPath = "assets"; //applicationPath + File.separator + "archivos";
+                //String uploadPath = "/home/escape9/";
                 File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();
                 }
                 Part part = request.getPart("Archivo");
                 String nombrearchivo = extractFileName(part);
-                ruta = uploadPath + File.separator + nombrearchivo;
+                ruta = applicationPath + uploadPath + File.separator + nombrearchivo;
+                //ruta = uploadPath + File.separator + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
@@ -433,6 +436,7 @@ public class SReportes extends HttpServlet {
             alumnoC.guardaReporteD(reporteD, ruta, status, tipoescuelareporteD);
 
         } catch (Exception e) {
+            System.out.println(e);
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }

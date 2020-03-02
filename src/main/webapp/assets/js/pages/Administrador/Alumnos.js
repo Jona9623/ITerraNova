@@ -1,7 +1,6 @@
 
 var Adminalumno = (function () {
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
-    alert(tipoescuela);
     return {
         tablaAlumnos: function () {
             $.get("SAdminalumno", {

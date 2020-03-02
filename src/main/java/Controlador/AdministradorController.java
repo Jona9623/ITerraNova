@@ -69,9 +69,9 @@ public class AdministradorController {
         consulta.actualizaTutor(tutor);
     }
     
-    public void actualizaAlumno(TbAlumnos alumno) {
+    public void actualizaAlumno(TbAlumnos alumno, String ruta) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.actualizaAlumno(alumno);
+        consulta.actualizaAlumno(alumno,ruta);
     }
     
     public void eliminaAlumno(int id) {

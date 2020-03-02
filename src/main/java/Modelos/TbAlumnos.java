@@ -46,6 +46,17 @@ public class TbAlumnos {
     private String municipioante;
     private int rtutor;
     private String tutor;
+    private String foto;
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    
+    
 
     public String getGrupo() {
         return grupo;

@@ -116,6 +116,11 @@
                                                 <strong type="text" >Los campos con signo * son obligatorios</strong>
                                                 <form id="formalumno" enctype="multipart/form-data" method="POST" action="SAdminalumno" name="formAlumno">
                                                     <input type="text" name="ACCION" id="ACCION" value="GuardaAlumno" hidden="true">
+                                                    <input type="text" id="idalumno" name="idalumno"<c:choose>
+                                                               <c:when test="${requestScope.alumno.idtbalumnos>0}"> value="${requestScope.alumno.idtbalumnos}" </c:when>
+                                                               <c:otherwise> value="0" </c:otherwise>
+                                                           </c:choose> 
+                                                           hidden="true">
                                                     <div class="card-body row">
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group">
@@ -297,9 +302,12 @@
                                                                     <input id="plantelanterior" name="plantelanterior" value="${requestScope.alumno.municipioante}" type="text" class="form-control" placeholder="plantel anterior">
                                                             </div>
                                                             <div class="form-group">
+                                                                <c:if test="${requestScope.alumno.foto != null}">
+                                                                    <img src="file://${requestScope.alumno.foto}">
+                                                                </c:if>
                                                                 <a class="material-icons f-left">camera_enhance</a>
                                                                 <a> Agregar fotografía</a> <br>
-                                                                <input id="fotoalumno" type="file" name="fotoAlumno">
+                                                                <input id="fotoalumno" type="file" name="fotoAlumno" value="${requestScope.alumno.foto}">
                                                             </div>
                                                         </div>
                                                     </div>

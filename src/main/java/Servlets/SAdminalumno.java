@@ -241,17 +241,19 @@ public class SAdminalumno extends HttpServlet {
             String foto = (String.valueOf(request.getParameter("fotoAlumno")));
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
-                String uploadPath = "C:\\Users\\Jonat\\Desktop";
+                System.out.println("OTRA RUTA" +applicationPath);
+                String uploadPath = "assets";
                 File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();
                 }
                 Part part = request.getPart("fotoAlumno");
                 String nombrearchivo = extractFileName(part);
-                ruta = uploadPath + File.separator + nombrearchivo;
+                ruta = applicationPath + uploadPath + File.separator + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
+            alumno.setIdtbalumnos(Integer.parseInt(request.getParameter("idalumno")));
             alumno.setNombre(String.valueOf(request.getParameter("nombrea")));
             alumno.setApellidop(String.valueOf(request.getParameter("apellidopa")));
             alumno.setApellidom(String.valueOf(request.getParameter("apellidoma")));
@@ -280,11 +282,12 @@ public class SAdminalumno extends HttpServlet {
             alumno.setPlantelproce(String.valueOf(request.getParameter("plantelanterior")));
             // alumno = mapper.readValue(objectJson, TbAlumnos.class);
             if (alumno.getIdtbalumnos() > 0) {
-                adminC.actualizaAlumno(alumno);
+                adminC.actualizaAlumno(alumno,ruta);
             } else {
                 adminC.guardaAlumno(alumno, tipoescuelaAlumno, ruta);
             }
         } catch (Exception e) {
+            System.out.println(e);
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
