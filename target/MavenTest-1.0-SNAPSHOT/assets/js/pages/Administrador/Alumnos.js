@@ -1,6 +1,7 @@
 
 var Adminalumno = (function () {
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
+    alert(tipoescuela);
     return {
         tablaAlumnos: function () {
             $.get("SAdminalumno", {
@@ -167,8 +168,8 @@ var Adminalumno = (function () {
             var tutor = {
                 "idtbtutor": $("#idtutor").val(),
                 "nombre": $("#nombret").val(),
-                "apellidop": $("#apellidomt").val(),
-                "apellidom": $("#apellidopt").val(),
+                "apellidop": $("#apellidopt").val(),
+                "apellidom": $("#apellidomt").val(),
                 "ocupacion": $("#ocupacion").val(),
                 "parentesco": $("#parentesco").val(),
                 "calledom": $("#calledomt").val(),

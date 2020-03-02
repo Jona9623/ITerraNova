@@ -306,6 +306,32 @@
                                                     <button type="submit" class="btn btn-terra">Guardar</button>
                                                 </form>
                                             </div>
+                                            <script>
+                                                var form = document.getElementById("formalumno");
+                                                form.onsubmit = function (e) {
+                                                    var valido = true;
+                                                    if ($("#nombrea").val().trim() == "") {
+                                                        $("#div-nombrea").addClass("has-error");
+                                                        valido = false;
+                                                    }
+                                                    if ($("#apellidopa").val().trim() == "") {
+                                                        $("#div-apellidopa").addClass("has-error");
+                                                        valido = false;
+                                                    }
+                                                    if ($("#nivela").val().trim() == "") {
+                                                        $("#div-nivela").addClass("has-error");
+                                                        valido = false;
+                                                    }
+                                                    if ($("#celulara").val().trim() == "") {
+                                                        $("#div-celulara").addClass("has-error");
+                                                        valido = false;
+                                                    }
+                                                    if (valido == false) {
+                                                        swal("Faltan campos requeridos", "", "warning");
+                                                        e.preventDefault();
+                                                    }
+                                                }
+                                            </script>
                                         </div>
                                     </div>
                                 </div>

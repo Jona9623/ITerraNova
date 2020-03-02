@@ -140,6 +140,7 @@ public class SAdminalumno extends HttpServlet {
         adminC = new AdministradorController();
         List<TbAlumnos> listalumnos = new ArrayList<>();
         try {
+            tipoescuelaAlumno = Integer.parseInt(request.getParameter("TIPOESCUELA"));
             listalumnos = adminC.getAlumnos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumnos", listalumnos);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablaalumnos.jsp");
@@ -159,7 +160,7 @@ public class SAdminalumno extends HttpServlet {
         List<CtAreaalumno> listarea = new ArrayList<>();
         List<CtCptalumno> listcpt = new ArrayList<>();
         try {
-            tipoescuelaAlumno = Integer.parseInt(request.getParameter("TIPOESCUELA"));
+            
             tutor = adminC.datosTutor(Integer.parseInt(request.getParameter("IDTUTOR")));
             request.setAttribute("tutor", tutor);
             alumno = adminC.datosAlumno(Integer.parseInt(request.getParameter("IDALUMNO")));
@@ -237,46 +238,46 @@ public class SAdminalumno extends HttpServlet {
         //objectJson = request.getParameter("ALUMNO");
         //mapper = new ObjectMapper();
         try {
-            String foto = (request.getParameter("fotoalumno"));
+            String foto = (String.valueOf(request.getParameter("fotoAlumno")));
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
-                String uploadPath = "C:\\Users\\Complx\\Desktop";
+                String uploadPath = "C:\\Users\\Jonat\\Desktop";
                 File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();
                 }
-                Part part = request.getPart("fotoalumno");
+                Part part = request.getPart("fotoAlumno");
                 String nombrearchivo = extractFileName(part);
                 ruta = uploadPath + File.separator + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
-            alumno.setNombre(request.getParameter("nombrea"));
-            alumno.setApellidop(request.getParameter("apellidopa"));
-            alumno.setApellidom(request.getParameter("apellidoma"));
-            alumno.setFechanacimiento(request.getParameter("fechanaa"));
-            alumno.setCurp(request.getParameter("curpa"));
-            alumno.setTelefonocasa(request.getParameter("telcasaa"));
-            alumno.setCelular(request.getParameter("celulara"));
-            alumno.setCorreo(request.getParameter("correoa"));
-            alumno.setMunicipiona(request.getParameter("municipionaca"));
-            alumno.setEstadona(request.getParameter("estadonaca"));
-            alumno.setNacionalidad(request.getParameter("nacionalidada"));
+            alumno.setNombre(String.valueOf(request.getParameter("nombrea")));
+            alumno.setApellidop(String.valueOf(request.getParameter("apellidopa")));
+            alumno.setApellidom(String.valueOf(request.getParameter("apellidoma")));
+            alumno.setFechanacimiento(String.valueOf(request.getParameter("fechanaa")));
+            alumno.setCurp(String.valueOf(request.getParameter("curpa")));
+            alumno.setTelefonocasa(String.valueOf(request.getParameter("telcasaa")));
+            alumno.setCelular(String.valueOf(request.getParameter("celulara")));
+            alumno.setCorreo(String.valueOf(request.getParameter("correoa")));
+            alumno.setMunicipiona(String.valueOf(request.getParameter("municipionaca")));
+            alumno.setEstadona(String.valueOf(request.getParameter("estadonaca")));
+            alumno.setNacionalidad(String.valueOf(request.getParameter("nacionalidada")));
             alumno.setSexo(Boolean.parseBoolean(request.getParameter("sexo")));
-            alumno.setCalledom(request.getParameter("calledoma"));
+            alumno.setCalledom(String.valueOf(request.getParameter("calledoma")));
             alumno.setNumerodom(Integer.parseInt(request.getParameter("numerodoma")));
-            alumno.setColoniadom(request.getParameter("coloniadoa"));
+            alumno.setColoniadom(String.valueOf(request.getParameter("coloniadoa")));
             alumno.setCodigopostal(Integer.parseInt(request.getParameter("codigopostala")));
-            alumno.setNivelcursa(request.getParameter("nivela"));
+            alumno.setNivelcursa(String.valueOf(request.getParameter("nivela")));
             alumno.setRgrado(Integer.parseInt(request.getParameter("grado")));
             alumno.setRgrupo(Integer.parseInt(request.getParameter("grupo")));
             alumno.setRarea(Integer.parseInt(request.getParameter("area")));
             alumno.setRcpt(Integer.parseInt(request.getParameter("cpt")));
-            alumno.setPlantelproce(request.getParameter("plantelproce"));
+            alumno.setPlantelproce(String.valueOf(request.getParameter("plantelproce")));
             alumno.setNivelanterior(Integer.parseInt(request.getParameter("nivelanterior")));
             alumno.setTurnoanterior(Integer.parseInt(request.getParameter("turnoanterior")));
             alumno.setGradoanterior(Integer.parseInt(request.getParameter("gradoanterior")));
-            alumno.setPlantelproce(request.getParameter("plantelanterior"));
+            alumno.setPlantelproce(String.valueOf(request.getParameter("plantelanterior")));
             // alumno = mapper.readValue(objectJson, TbAlumnos.class);
             if (alumno.getIdtbalumnos() > 0) {
                 adminC.actualizaAlumno(alumno);
