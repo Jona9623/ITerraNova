@@ -12,11 +12,8 @@ var Adminalumno = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $('#content').html(arguments[0]);
+                else{
+                  $('#content').html(arguments[0]);
                 $("#tablaalumnos").DataTable({
                     "scrollX": true
                 });
@@ -51,7 +48,11 @@ var Adminalumno = (function () {
                         Adminalumno.eliminarAlumno(idalumno);
                     });
 
-                });
+                });  
+                }
+            });
+            $("#actualizaTablaA").on('click',function(){
+               Adminalumno.tablaAlumnos(); 
             });
         },
         importaAlumno: function(){
@@ -94,20 +95,21 @@ var Adminalumno = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                Adminalumno.formularios(arguments[0]);
+                else {
+                   Adminalumno.formularios(arguments[0]); 
+                }
             });
         },
         eliminarAlumno: function (idalumno) {
             $.get("SAdminalumno", {
                 ACCION: "eliminarAlumno",
                 IDALUMNO: idalumno
-            }).then(function () {
-                Adminalumno.tablaAlumnos();
-            })
+            }).done(function(xhr,status,error){
+                if(error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Adminalumno.tablaAlumnos();
+            });
         },
         agregaAlumno: function () {
             $.get("SAdminalumno", {
@@ -119,11 +121,8 @@ var Adminalumno = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                Adminalumno.formularios(arguments[0]);
+                else 
+                    Adminalumno.formularios(arguments[0]);
             });
         },
         guardaTutor: function (objeto, accion) {
@@ -137,11 +136,8 @@ var Adminalumno = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
+                else
+                    swal("Hecho!", "Datos guardados correctamente", "success");
             });
         },
         /*  guardaAlumno: function (objeto, accion) {

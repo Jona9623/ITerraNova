@@ -34,114 +34,143 @@ import java.util.List;
  * @author Jonat
  */
 public class AdministradorController {
-    
-    public List<TbAlumnos> getAlumnos(int tipoescuela) {
+
+    public List<TbAlumnos> getAlumnos(int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getAlumnos(tipoescuela);
     }
-    
-    public List<TbPersonal> getPersonal(int tipoescuela) {
+
+    public List<TbPersonal> getPersonal(int tipoescuela) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getPersonal(tipoescuela);
     }
-    public void guardaTutor(TbTutor tutor, int tipoescuela){
+
+    public void guardaTutor(TbTutor tutor, int tipoescuela) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.guardaTutor(tutor, tipoescuela);
     }
-    
-    public void guardaAlumno(TbAlumnos alumno, int tipoescuela, String ruta) {
+
+    public List<TbTutor> exportaTutor(String ruta) {
+        List<TbTutor> listtutor = new ArrayList<>();
+        listtutor = readFromCSVT(ruta);
+        return listtutor;
+    }
+
+    public void guardaImportaTutor(List<TbTutor> listtutor) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaImportaTutor(listtutor);
+    }
+
+    public void guardaAlumno(TbAlumnos alumno, int tipoescuela, String ruta) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.guardaAlumno(alumno, tipoescuela, ruta);
     }
-    public List <TbAlumnos> exportaAlumnos(String ruta){
-        List <TbAlumnos> alumnos = new ArrayList<>();
-        alumnos = readFromCSV(ruta);
+
+    public List<TbAlumnos> exportaAlumnos(String ruta) {
+        List<TbAlumnos> alumnos = new ArrayList<>();
+        alumnos = readFromCSVA(ruta);
         return alumnos;
     }
-    
-    public TbAlumnos datosAlumno(int idalumno) {
-        ConsultasAdministrador consulta = new  ConsultasAdministrador();
+
+    public void guardaImportaAlumnos(List<TbAlumnos> listalumnos) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaImportaAlumnos(listalumnos);
+    }
+
+    public List<TbPersonal> exportaPersonal(String ruta) {
+        List<TbPersonal> personal = new ArrayList<>();
+        personal = readFromCSVP(ruta);
+        return personal;
+    }
+
+    public void guardaImportaPersonal(List<TbPersonal> listpersonal) {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.guardaImportaPersonal(listpersonal);
+    }
+
+    public TbAlumnos datosAlumno(int idalumno) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.datosAlumno(idalumno);
     }
-    
+
     public void actualizaTutor(TbTutor tutor) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.actualizaTutor(tutor);
     }
-    
+
     public void actualizaAlumno(TbAlumnos alumno, String ruta) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.actualizaAlumno(alumno,ruta);
+        consulta.actualizaAlumno(alumno, ruta);
     }
-    
-    public void eliminaAlumno(int id) {
+
+    public void eliminaAlumno(int id) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.eliminaAlumno(id);
     }
-    
-    public TbTutor datosTutor(int idtutor) {
+
+    public TbTutor datosTutor(int idtutor) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.datosTutor(idtutor);
     }
-    
-    public TbPersonal datosPeronal(int idpersonal) {
+
+    public TbPersonal datosPeronal(int idpersonal) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.datosPersonal(idpersonal);
     }
-    
-    public void actualizaPersonal(TbPersonal personal) {
+
+    public void actualizaPersonal(TbPersonal personal) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.actualizaPersonal(personal);
     }
-    
-    public void eliminaPersonal(int id) {
+
+    public void eliminaPersonal(int id) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.eliminaPersonal(id);
     }
-    
-    public void guardaPersonal(TbPersonal personal, int tipoescuela) {
+
+    public void guardaPersonal(TbPersonal personal, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.guardaPersonal(personal, tipoescuela);
     }
 
-    public List<CtGrado> getGrado(int tipoescuela) {
+    public List<CtGrado> getGrado(int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getGrado(tipoescuela);
     }
 
-    public List<CtGrupo> getGrupo(int tipoescuela) {
+    public List<CtGrupo> getGrupo(int tipoescuela)throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getGrupo(tipoescuela);
     }
 
-    public List<CtAreaalumno> getArea(int tipoescuela) {
+    public List<CtAreaalumno> getArea(int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getArea(tipoescuela);
     }
 
-    public List<CtCptalumno> getCpt(int tipoescuela) {
+    public List<CtCptalumno> getCpt(int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getCpt(tipoescuela);
+            return consulta.getCpt(tipoescuela);
     }
 
-    public List<CtPuesto> getPuesto(int tipoescuela) {
+    public List<CtPuesto> getPuesto(int tipoescuela) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getPuesto(tipoescuela);
     }
-    
+
     public List<GradoGrupo> getGradoGrupo(int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getGradoGrupo(tipoescuela);
     }
 
     public List<CtTipoCalificaicon> getTipoCali(int tipoescuela) {
-       ConsultasAdministrador consulta = new ConsultasAdministrador();
-       return consulta.getTipoCali(tipoescuela);
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getTipoCali(tipoescuela);
     }
 
-    public void guardaPuesto(CtPuesto puesto, int tipoescuela) {
+    public void guardaPuesto(CtPuesto puesto, int tipoescuela) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaPuesto(puesto,tipoescuela);
+        consulta.guardaPuesto(puesto, tipoescuela);
     }
 
     public void actualizaPuesto(CtPuesto puesto) {
@@ -149,12 +178,12 @@ public class AdministradorController {
         consulta.actualizaPuesto(puesto);
     }
 
-    public void eliminaPuesto(int id) {
+    public void eliminaPuesto(int id) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.eliminaPuesto(id);
     }
 
-    public void guardaPeriodo(CtPeriodoEscolar periodo, int tipoescuela) {
+    public void guardaPeriodo(CtPeriodoEscolar periodo, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.guardaPeriodo(periodo, tipoescuela);
     }
@@ -163,7 +192,7 @@ public class AdministradorController {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.actualizaPeriodo(periodo);
     }
-    
+
     public void eliminaPeriodo(int id) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.eliminaPeriodo(id);
@@ -171,7 +200,7 @@ public class AdministradorController {
 
     public void guardaArea(CtAreaalumno area, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaArea(area,tipoescuela);
+        consulta.guardaArea(area, tipoescuela);
     }
 
     public void actualizaArea(CtAreaalumno area) {
@@ -184,9 +213,13 @@ public class AdministradorController {
         consulta.eliminaArea(id);
     }
 
-    public void guardaCpt(CtCptalumno cpt,int tipoescuela) {
+    public void guardaCpt(CtCptalumno cpt, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaCpt(cpt, tipoescuela);
+        try {
+            consulta.guardaCpt(cpt, tipoescuela);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void actualizaCpt(CtCptalumno cpt) {
@@ -194,19 +227,31 @@ public class AdministradorController {
         consulta.actualizaCpt(cpt);
     }
 
-    public void eliminaCpt(int id) {
+    public void eliminaCpt(int id) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.eliminaCpt(id);
+        try {
+            consulta.eliminaCpt(id);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    public void guardaGrado(CtGrado grado, int tipoescuela) {
+    public void guardaGrado(CtGrado grado, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaGrado(grado, tipoescuela);
+        try {
+            consulta.guardaGrado(grado, tipoescuela);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    public void guardaGrupo(CtGrupo grupo, int tipoescuela) {
+    public void guardaGrupo(CtGrupo grupo, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaGrupo(grupo, tipoescuela);
+        try {
+            consulta.guardaGrupo(grupo, tipoescuela);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void guardaTipoCali(CtTipoCalificaicon tipocali, int tipoescuela) {
@@ -231,7 +276,7 @@ public class AdministradorController {
 
     public void guardaNombreMateria(CtDatosMateria nombremateria, int tipoescuela) {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaNombreMateria(nombremateria,tipoescuela);
+        consulta.guardaNombreMateria(nombremateria, tipoescuela);
     }
 
     public void guardaMateria(TbMateria materia, int tipoescuela) {
@@ -244,21 +289,21 @@ public class AdministradorController {
         consulta.eliminaMateria(id);
     }
 
-    private List<TbAlumnos> readFromCSV(String csvExample) {
-        List <TbAlumnos> alumnos = new ArrayList<>();
-        Path pathToFile = Paths.get(csvExample);
-        
-        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)){
+    private List<TbAlumnos> readFromCSVA(String ruta) {
+        List<TbAlumnos> alumnos = new ArrayList<>();
+        Path pathToFile = Paths.get(ruta);
+
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
             String line = br.readLine();
-            
-            while(line != null){
+
+            while (line != null) {
                 String[] attributes = line.split(",");
                 TbAlumnos alumno = creaAlumno(attributes);
                 alumnos.add(alumno);
                 line = br.readLine();
             }
-            
-        }catch(IOException ioe){
+
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return alumnos;
@@ -271,8 +316,69 @@ public class AdministradorController {
         alumno.setApellidom(attributes[2]);
         alumno.setFechanacimiento(attributes[3]);
         alumno.setCurp(attributes[4]);
-        
+
         return alumno;
+    }
+
+    private List<TbPersonal> readFromCSVP(String ruta) {
+        List<TbPersonal> personal = new ArrayList<>();
+        Path pathToFile = Paths.get(ruta);
+
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
+            String line = br.readLine();
+
+            while (line != null) {
+                String[] attributes = line.split(",");
+                TbPersonal persona = creaPersonal(attributes);
+                personal.add(persona);
+                line = br.readLine();
+            }
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return personal;
+    }
+
+    private TbPersonal creaPersonal(String[] attributes) {
+        TbPersonal personal = new TbPersonal();
+        personal.setNombre(attributes[0]);
+        personal.setApellidop(attributes[1]);
+        personal.setApellidom(attributes[2]);
+        personal.setCurp(attributes[3]);
+        personal.setFechanacimiento(attributes[4]);
+
+        return personal;
+    }
+
+    private List<TbTutor> readFromCSVT(String ruta) {
+        List<TbTutor> listtutor = new ArrayList<>();
+        Path pathToFile = Paths.get(ruta);
+
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
+            String line = br.readLine();
+
+            while (line != null) {
+                String[] attributes = line.split(",");
+                TbTutor tutor = creaTutor(attributes);
+                listtutor.add(tutor);
+                line = br.readLine();
+            }
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return listtutor;
+    }
+
+    private TbTutor creaTutor(String[] attributes) {
+        TbTutor tutor = new TbTutor();
+        tutor.setNombre(attributes[0]);
+        tutor.setApellidop(attributes[1]);
+        tutor.setApellidom(attributes[2]);
+        tutor.setOcupacion(attributes[3]);
+        tutor.setParentesco(attributes[4]);
+        return tutor;
     }
 
 }

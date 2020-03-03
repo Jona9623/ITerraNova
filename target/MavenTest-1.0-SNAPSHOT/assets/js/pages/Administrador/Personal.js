@@ -11,14 +11,12 @@ var Adminpersonal = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if(error.status != 200)
                     swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $('#content').html(arguments[0]);
+                else {
+                   $('#content').html(arguments[0]);
                 $('#tablapersonal').DataTable({
                     "scrollX": true
                 });
+                Adminpersonal.importarPersonal();
                 $('#btnaregarP').on('click', function () {
                     Adminpersonal.agregaPersonal();
                 }),
@@ -41,8 +39,17 @@ var Adminpersonal = (function () {
                         Adminpersonal.eliminarPersonal(idpersonal);
                     });
 
-                });
+                }); 
+                }
             });
+            $("#actualizaTablaP").on('click',function(){
+                Adminpersonal.tablaPersonal();
+            })
+        },
+        importarPersonal: function(){
+          $('form[name="importarpersonal"]').ajaxForm(function () {
+                swal("Hecho!", "Datos importados correctamente", "success");
+            });  
         },
         formulariospe: function (argumento) {
             $('#content').html(argumento);
@@ -64,20 +71,21 @@ var Adminpersonal = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if(error.status != 200)
                     swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                Adminpersonal.formulariospe(arguments[0]);
+                else {
+                    Adminpersonal.formulariospe(arguments[0]);
+                }
             });
         },
         eliminarPersonal: function (idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "eliminarPersonal",
                 IDPERSONAL: idpersonal
-            }).then(function () {
-                Adminpersonal.tablaPersonal();
-            })
+            }).done(function(hxr,status,error){
+                if (error.status != 200)
+                   swal(error.getResponseHeader("ERROR"),"","warning");
+               else
+                   Adminpersonal.tablaPersonal();
+            });
         },
         agregaPersonal: function () {
             $.get("SAdminpersonal", {
@@ -89,11 +97,8 @@ var Adminpersonal = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if(error.status != 200)
                     swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                Adminpersonal.formulariospe(arguments[0]);
+                else
+                    Adminpersonal.formulariospe(arguments[0]);
             });
         },
         guardaPersonal: function (objeto, accion) {
@@ -107,12 +112,10 @@ var Adminpersonal = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if(error.status != 200)
                     swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
-                Adminpersonal.tablaPersonal();
+                else {
+                   swal("Hecho!", "Datos guardados correctamente", "success");
+                Adminpersonal.tablaPersonal(); 
+                }
             });
         },
         datosPersonal: function () {

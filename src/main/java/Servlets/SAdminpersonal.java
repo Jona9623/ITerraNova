@@ -9,20 +9,24 @@ import Controlador.AdministradorController;
 import Modelos.CtPuesto;
 import Modelos.TbPersonal;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author complx
  */
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 30, maxRequestSize = 1024 * 1024 * 50)
 public class SAdminpersonal extends HttpServlet {
 
     AdministradorController adminC;
@@ -45,13 +49,13 @@ public class SAdminpersonal extends HttpServlet {
         switch (accion) {
             case "MuestraAgregaPersonal":
                 try {
-                   MuestraAgregaPersonal(request, response); 
+                    MuestraAgregaPersonal(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "AgregaPersonal":
                 try {
-                   AgregaPersonal(request, response); 
+                    AgregaPersonal(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -67,7 +71,15 @@ public class SAdminpersonal extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
-            case "eliminarPersonal": eliminarPersonal (request, response); break;    
+            case "eliminarPersonal":
+                eliminarPersonal(request, response);
+                break;
+            case "importaPersonal":
+                try {
+                    importaPersonal(request, response);
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -110,7 +122,7 @@ public class SAdminpersonal extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void MuestraAgregaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    private void MuestraAgregaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<TbPersonal> listpersonal = new ArrayList<>();
         try {
@@ -140,13 +152,14 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-    
-    private void eliminarPersonal(HttpServletRequest request, HttpServletResponse response) {
+
+    private void eliminarPersonal(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
-           adminC.eliminaPersonal(Integer.parseInt(request.getParameter("IDPERSONAL"))); 
+            adminC.eliminaPersonal(Integer.parseInt(request.getParameter("IDPERSONAL")));
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
@@ -179,9 +192,49 @@ public class SAdminpersonal extends HttpServlet {
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
-            
+
         }
 
+    }
+
+    private void importaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        List<TbPersonal> listpersonal = new ArrayList<>();
+        String ruta = null;
+        try {
+            String foto = (String.valueOf(request.getParameter("importaPersonal")));
+            if (foto.equals("null")) {
+                String applicationPath = getServletContext().getRealPath("");
+                String uploadPath = applicationPath; //applicationPath + File.separator + "archivos";
+                File fileUploadDirectory = new File(uploadPath);
+                if (!fileUploadDirectory.exists()) {
+                    fileUploadDirectory.mkdirs();
+                }
+                Part part = request.getPart("importaPersonal");
+                String nombrearchivo = extractFileName(part);
+                ruta = uploadPath + File.separator + nombrearchivo;
+                System.out.println("Ruta:" + ruta);
+                part.write(ruta);
+            }
+            listpersonal = adminC.exportaPersonal(ruta);
+            //adminC.guardaImportaPersonal(listpersonal);
+            String f = null;
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+
+    private String extractFileName(Part part) {
+        String fileName = "",
+                contentDisposition = part.getHeader("content-disposition");
+        String[] items = contentDisposition.split(";");
+        for (String item : items) {
+            if (item.trim().startsWith("filename")) {
+                fileName = item.substring(item.indexOf("=") + 2, item.length() - 1);
+            }
+        }
+        return fileName;
     }
 
 }

@@ -21,6 +21,7 @@ import Modelos.TbTutor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class ConsultasAdministrador {
     private Connection con;
     private int x = 1;
 
-    public List<TbAlumnos> getAlumnos(int tipoescuela) {
+    public List<TbAlumnos> getAlumnos(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -62,7 +63,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -81,7 +82,7 @@ public class ConsultasAdministrador {
         return listalumnos;
     }
 
-    public List<TbPersonal> getPersonal(int tipoescuela) {
+    public List<TbPersonal> getPersonal(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -105,7 +106,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -124,7 +125,7 @@ public class ConsultasAdministrador {
         return listpersonal;
     }
 
-    public void guardaTutor(TbTutor tutor, int tipoescuela) {
+    public void guardaTutor(TbTutor tutor, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -153,7 +154,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -168,7 +169,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaAlumno(TbAlumnos alumno, int tipoescuela, String ruta) {
+    public void guardaAlumno(TbAlumnos alumno, int tipoescuela, String ruta) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         int id = 0;
@@ -232,7 +233,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -247,7 +248,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public TbAlumnos datosAlumno(int id) {
+    public TbAlumnos datosAlumno(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -289,7 +290,7 @@ public class ConsultasAdministrador {
                 alumno.setFoto(rs.getString("foto"));
             }
         } catch (Exception e) {
-            System.out.print("Error" + e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -308,7 +309,7 @@ public class ConsultasAdministrador {
         return alumno;
     }
 
-    public TbTutor datosTutor(int id) {
+    public TbTutor datosTutor(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -334,7 +335,7 @@ public class ConsultasAdministrador {
                 tutor.setCorreo(rs.getString("correo"));
             }
         } catch (Exception e) {
-            System.out.print("Error" + e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -353,7 +354,7 @@ public class ConsultasAdministrador {
         return tutor;
     }
 
-    public TbPersonal datosPersonal(int idpersonal) {
+    public TbPersonal datosPersonal(int idpersonal) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -390,7 +391,7 @@ public class ConsultasAdministrador {
                 personal.setRpuesto(rs.getInt("r_puesto"));
             }
         } catch (Exception e) {
-            System.out.print("Error" + e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -515,7 +516,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void actualizaPersonal(TbPersonal personal) {
+    public void actualizaPersonal(TbPersonal personal) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -552,7 +553,7 @@ public class ConsultasAdministrador {
                 con.commit();
             }
         } catch (Exception e) {
-            System.out.print("Error" + e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -567,7 +568,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void eliminaAlumno(int id) {
+    public void eliminaAlumno(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -581,7 +582,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al eliminar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -596,7 +597,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void eliminaPersonal(int id) {
+    public void eliminaPersonal(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -610,7 +611,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al eliminar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -625,7 +626,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaPersonal(TbPersonal personal, int tipoescuela) {
+    public void guardaPersonal(TbPersonal personal, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -666,7 +667,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -681,7 +682,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public List<CtGrado> getGrado(int tipoescuela) {
+    public List<CtGrado> getGrado(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -702,7 +703,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -721,7 +722,7 @@ public class ConsultasAdministrador {
         return listgrado;
     }
 
-    public List<CtGrupo> getGrupo(int tipoescuela) {
+    public List<CtGrupo> getGrupo(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -742,7 +743,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -761,7 +762,7 @@ public class ConsultasAdministrador {
         return listgrupo;
     }
 
-    public List<CtAreaalumno> getArea(int tipoescuela) {
+    public List<CtAreaalumno> getArea(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -782,7 +783,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -802,7 +803,7 @@ public class ConsultasAdministrador {
 
     }
 
-    public List<CtCptalumno> getCpt(int tipoescuela) {
+    public List<CtCptalumno> getCpt(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -822,8 +823,8 @@ public class ConsultasAdministrador {
                 listcpt.add(cpt);
             }
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -842,7 +843,7 @@ public class ConsultasAdministrador {
         return listcpt;
     }
 
-    public List<CtPuesto> getPuesto(int tipoescuela) {
+    public List<CtPuesto> getPuesto(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -863,7 +864,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -963,7 +964,7 @@ public class ConsultasAdministrador {
         return listtipocali;
     }
 
-    public void guardaPuesto(CtPuesto puesto, int tipoescuela) {
+    public void guardaPuesto(CtPuesto puesto, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -980,7 +981,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1026,7 +1027,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void eliminaPuesto(int id) {
+    public void eliminaPuesto(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -1040,7 +1041,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al eliminar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1055,7 +1056,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaPeriodo(CtPeriodoEscolar periodo, int tipoescuela) {
+    public void guardaPeriodo(CtPeriodoEscolar periodo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1074,7 +1075,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+           throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1243,7 +1244,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaCpt(CtCptalumno cpt, int tipoescuela) {
+    public void guardaCpt(CtCptalumno cpt, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1259,8 +1260,8 @@ public class ConsultasAdministrador {
             } else {
                 System.out.println("Error al guardar");
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1306,7 +1307,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void eliminaCpt(int id) {
+    public void eliminaCpt(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -1320,7 +1321,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al eliminar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1335,7 +1336,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaGrado(CtGrado grado, int tipoescuela) {
+    public void guardaGrado(CtGrado grado, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1352,7 +1353,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1367,7 +1368,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaGrupo(CtGrupo grupo, int tipoescuela) {
+    public void guardaGrupo(CtGrupo grupo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1384,7 +1385,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1622,6 +1623,195 @@ public class ConsultasAdministrador {
             } else {
                 System.out.println("Error al eliminar");
             }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void guardaImportaPersonal(List<TbPersonal> listpersonal) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            for (TbPersonal item : listpersonal) {
+                con.setAutoCommit(false);
+                String consulta = "insert into tb_personal (nombre,apellidopaterno,apellidomaterno,fechanacimiento,curp,municipionacimiento,estadonacimiento,nacionalidad,sexo,calledomicilio,"
+                        + "numerodomicilio,coloniadomicilio,codigopostal,telefonocasa,celular,correo,nss,rfc,nivelmaxestudios,licenciatura,maestria,doctorado,r_puesto,status,tipoescuela) values"
+                        + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                pst = con.prepareStatement(consulta);
+                pst.setString(1, item.getNombre());
+                pst.setString(2, item.getApellidop());
+                pst.setString(3, item.getApellidom());
+                pst.setString(4, item.getFechanacimiento());
+                pst.setString(5, item.getCurp());
+                pst.setString(6, item.getMunicipionac());
+                pst.setString(7, item.getEstadonac());
+                pst.setString(8, item.getNacionalidad());
+                pst.setBoolean(9, item.getSexo());
+                pst.setString(10, item.getCalledom());
+                pst.setInt(11, item.getNumerodom());
+                pst.setString(12, item.getColoniadom());
+                pst.setInt(13, item.getCodigopostal());
+                pst.setString(14, item.getTelefonocasa());
+                pst.setString(15, item.getCelular());
+                pst.setString(16, item.getCorreo());
+                pst.setString(17, item.getNss());
+                pst.setString(18, item.getRfc());
+                pst.setString(19, item.getNivelestudios());
+                pst.setString(20, item.getLicenciatura());
+                pst.setString(21, item.getMaestria());
+                pst.setString(22, item.getDoctorado());
+                pst.setInt(23, item.getRpuesto());
+                pst.setInt(24, 1);
+                pst.setInt(25, item.getTipoescuela());
+
+                if (pst.executeUpdate() == 1) {
+                    con.commit();
+                } else {
+                    System.out.println("Error al guardar");
+                }
+                pst = null;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void guardaImportaAlumnos(List<TbAlumnos> listalumnos) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        int tutores = 0;
+        try {
+            con.setAutoCommit(false);
+            String sql = "select count(idTb_Tutor) AS tutoresTotales from tb_tutor";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                tutores = rs.getInt(1);
+            }
+            for (TbAlumnos item : listalumnos) {
+                String consulta = "insert into tb_alumnos (matricula,nombre,apellidopaterno,apellidomaterno,fechanacimiento,curp,municipionacimiento,estadonacimiento,\n"
+                        + "nacionalidad,sexo,calledomicilio,numerodomicilio,coloniadomicilio,codigopostal,telefonocasa,celularalumno,correoalumno,nivelcursa,\n"
+                        + "r_grado,r_grupo,r_area,r_cpt,plantelprocedencia,nivelanterior,gradoanterior,turnoanterior,municipioanterior,r_tutor,status,tipoescuela) values (?,?,?,?,?,?,?,?"
+                        + ",?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                pst = con.prepareStatement(consulta);
+                pst.setString(1, item.getMatricula());
+                pst.setString(2, item.getNombre());
+                pst.setString(3, item.getApellidop());
+                pst.setString(4, item.getApellidom());
+                pst.setString(5, item.getFechanacimiento());
+                pst.setString(6, item.getCurp());
+                pst.setString(7, item.getMunicipiona());
+                pst.setString(8, item.getEstadona());
+                pst.setString(9, item.getNacionalidad());
+                pst.setBoolean(10, item.getSexo());
+                pst.setString(11, item.getCalledom());
+                pst.setInt(12, item.getNumerodom());
+                pst.setString(13, item.getColoniadom());
+                pst.setInt(14, item.getCodigopostal());
+                pst.setString(15, item.getTelefonocasa());
+                pst.setString(16, item.getCelular());
+                pst.setString(17, item.getCorreo());
+                pst.setString(18, item.getNivelcursa());
+                pst.setInt(19, item.getRgrado());
+                pst.setInt(20, item.getRgrupo());
+                if (item.getRarea() != 0) {
+                    pst.setInt(21, item.getRarea());
+                } else {
+                    pst.setString(21, null);
+                }
+                if (item.getRcpt() != 0) {
+                    pst.setInt(22, item.getRcpt());
+                } else {
+                    pst.setString(22, null);
+                }
+                pst.setString(23, item.getPlantelproce());
+                pst.setInt(24, item.getNivelanterior());
+                pst.setInt(25, item.getGradoanterior());
+                pst.setInt(26, item.getTurnoanterior());
+                pst.setString(27, item.getMunicipioante());
+                pst.setInt(28, tutores);
+                pst.setInt(29, 1);
+                pst.setInt(30, item.getTipoescuela());
+
+                if (pst.executeUpdate() == 1) {
+                    con.commit();
+                } else {
+                    System.out.println("Error al guardar");
+                }
+                pst = null;
+                tutores--;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void guardaImportaTutor(List<TbTutor> listtutor) {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            for (TbTutor item : listtutor) {
+                con.setAutoCommit(false);
+                String consulta = "insert into tb_tutor (nombre,apellidopaterno,apellidomaterno,ocupacion,parentesco,calledomicilio,numerodomicilio,\n"
+                        + "coloniadomicilio,codigopostal,telefonocasa,celular,correo,status,tipoescuela) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                pst = con.prepareStatement(consulta);
+                pst.setString(1, item.getNombre());
+                pst.setString(2, item.getApellidop());
+                pst.setString(3, item.getApellidom());
+                pst.setString(4, item.getOcupacion());
+                pst.setString(5, item.getParentesco());
+                pst.setString(6, item.getCalledom());
+                pst.setInt(7, item.getNumerodom());
+                pst.setString(8, item.getColoniadom());
+                pst.setInt(9, item.getCodigopostal());
+                pst.setString(10, item.getTelefonocasa());
+                pst.setString(11, item.getCelular());
+                pst.setString(12, item.getCorreo());
+                pst.setInt(13, 1);
+                pst.setInt(14, item.getTipoescuela());
+
+                if (pst.executeUpdate() == 1) {
+                    con.commit();
+                } else {
+                    System.out.println("Error al guardar");
+                }
+                pst = null;
+            }
+
         } catch (Exception e) {
             System.out.println(e);
         } finally {

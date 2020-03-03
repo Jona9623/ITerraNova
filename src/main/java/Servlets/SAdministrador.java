@@ -241,12 +241,13 @@ public class SAdministrador extends HttpServlet {
         }
     }
 
-    private void eliminaPuesto(HttpServletRequest request, HttpServletResponse response) {
+    private void eliminaPuesto(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
             adminC.eliminaPuesto(Integer.parseInt(request.getParameter("ID")));
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
@@ -364,12 +365,13 @@ public class SAdministrador extends HttpServlet {
         }
     }
 
-    private void eliminaCpt(HttpServletRequest request, HttpServletResponse response) {
+    private void eliminaCpt(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
             adminC.eliminaCpt(Integer.parseInt(request.getParameter("ID")));
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 

@@ -10,42 +10,40 @@ var Admin = (function () {
             $.get("SAdministrador", {
                 ACCION: "tablaPuesto",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-                $("#guardapuesto").on('click', function () {
-                    Admin.guardaPuesto();
-                });
-                $(".editarpuesto").on('click', function () {
-                    idpuesto = $(this).parents("tr").find("td").eq(0).html();
-                    Admin.editarPuesto(idpuesto);
-                });
-                $(".eliminarpuesto").on('click', function () {
-                    idpuesto = $(this).parents("tr").find("td").eq(0).html();
-                    swal({
-                        title: "Estas seguro?",
-                        text: "Se eliminara el registro",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Confirmar",
-                        closeOnConfirm: false
-                    }, function () {
-                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
-                        Admin.eliminarPuesto(idpuesto);
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#guardapuesto").on('click', function () {
+                        Admin.guardaPuesto();
                     });
-                });
-                $("#tablapuesto").DataTable({
-                    "scrollX": true
-                });
+                    $(".editarpuesto").on('click', function () {
+                        idpuesto = $(this).parents("tr").find("td").eq(0).html();
+                        Admin.editarPuesto(idpuesto);
+                    });
+                    $(".eliminarpuesto").on('click', function () {
+                        idpuesto = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Admin.eliminarPuesto(idpuesto);
+                        });
+                    });
+                    $("#tablapuesto").DataTable({
+                        "scrollX": true
+                    });
+                }
             });
         },
         guardaPuesto: function () {
@@ -56,21 +54,16 @@ var Admin = (function () {
                 ACCION: "guardaPuesto",
                 OBJETO: JSON.stringify(puesto),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
-                //$("#modalPuesto").modal('hide');                
-                //$("#modalPuesto").hide();                                
-                Admin.tablaPuesto();
-                
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Admin.tablaPuesto();
+                }
             });
         },
         editarPuesto: function (idpuesto) {
@@ -78,232 +71,233 @@ var Admin = (function () {
                 ACCION: "editarPuesto"
             })
         },
-        eliminarPuesto: function(idpuesto){
-          $.get("SAdministrador",{
-              ACCION: "eliminaPuesto",
-              ID: idpuesto
-          }).then(function(){
-             Admin.tablaPuesto(); 
-          });  
+        eliminarPuesto: function (idpuesto) {
+            $.get("SAdministrador", {
+                ACCION: "eliminaPuesto",
+                ID: idpuesto
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Admin.tablaPuesto();
+            });
         },
         tablaPeriodo: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaPeriodo",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-                $("#guardaperiodo").on('click', function(){
-                   Admin.guardaPeriodo(); 
-                });
-                $(".eliminarperiodo").on('click',function(){
-                    idperiodo = $(this).parents("tr").find("td").eq(0).html();
-                    swal({
-                        title: "Estas seguro?",
-                        text: "Se eliminara el registro",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Confirmar",
-                        closeOnConfirm: false
-                    }, function () {
-                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
-                        Admin.eliminarPeriodo(idperiodo);
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#guardaperiodo").on('click', function () {
+                        Admin.guardaPeriodo();
                     });
-                });
-                $("#tablaperiodo").DataTable({
-                    "scrollX": true
-                });
+                    $(".eliminarperiodo").on('click', function () {
+                        idperiodo = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Admin.eliminarPeriodo(idperiodo);
+                        });
+                    });
+                    $("#tablaperiodo").DataTable({
+                        "scrollX": true
+                    });
+                }
             });
         },
-        guardaPeriodo: function(){
-          var periodo = {
-              "nombre": $("#periodoAdmin").val(),
-              "fechainicio": $("#fechainicioAdmin").val(),
-              "fechafin": $("#fechafinAdmin").val()
-          }
-          $.get("SAdministrador",{
-              ACCION: "guardaPeriodo",
-              OBJETO: JSON.stringify(periodo),
-              TIPOESCUELA: tipoescuela
-          }).done(function(xhr, status, error){
+        guardaPeriodo: function () {
+            var periodo = {
+                "nombre": $("#periodoAdmin").val(),
+                "fechainicio": $("#fechainicioAdmin").val(),
+                "fechafin": $("#fechafinAdmin").val()
+            }
+            $.get("SAdministrador", {
+                ACCION: "guardaPeriodo",
+                OBJETO: JSON.stringify(periodo),
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-              swal("Hecho!", "Datos guardados correctamente", "success");
-              Admin.tablaPeriodo();
-          });
-                 
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Admin.tablaPeriodo();
+                }
+            });
+
         },
-        eliminarPeriodo: function(idperiodo){
-            $.get("SAdministrador",{
+        eliminarPeriodo: function (idperiodo) {
+            $.get("SAdministrador", {
                 ACCION: "eliminaPeriodo",
                 ID: idperiodo
-            }).then(function(){
-               Admin.tablaPeriodo(); 
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Admin.tablaPeriodo();
             });
         },
         tablaArea: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaArea",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-                $("#guardaarea").on('click',function(){
-                   Admin.guardaArea(); 
-                });
-                $(".eliminararea").on('click',function(){
-                    idarea = $(this).parents("tr").find("td").eq(0).html();
-                    swal({
-                        title: "Estas seguro?",
-                        text: "Se eliminara el registro",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Confirmar",
-                        closeOnConfirm: false
-                    }, function () {
-                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
-                        Admin.eliminarArea(idarea);
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#guardaarea").on('click', function () {
+                        Admin.guardaArea();
                     });
-                });
-                $("#tablaarea").DataTable({
-                    "sccrollX": true
-                });
+                    $(".eliminararea").on('click', function () {
+                        idarea = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Admin.eliminarArea(idarea);
+                        });
+                    });
+                    $("#tablaarea").DataTable({
+                        "sccrollX": true
+                    });
+                }
             });
         },
-        guardaArea: function(){
-          var area = {
-              "nombre": $("#areaAdmin").val()
-          }
-          $.get("SAdministrador",{
-              ACCION: "guardaArea",
-              OBJETO: JSON.stringify(area),
-              TIPOESCUELA: tipoescuela
-          }).done(function(xhr, status, error){
+        guardaArea: function () {
+            var area = {
+                "nombre": $("#areaAdmin").val()
+            }
+            $.get("SAdministrador", {
+                ACCION: "guardaArea",
+                OBJETO: JSON.stringify(area),
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-              swal("Hecho!", "Datos guardados correctamente", "success");
-              Admin.tablaArea();
-          });
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Admin.tablaArea();
+                }
+            });
         },
-        eliminarArea: function(idarea){
-          $.get("SAdministrador",{
-              ACCION: "eliminaArea",
-              ID: idarea
-          }).then(function(){
-              Admin.tablaArea();
-          })  
+        eliminarArea: function (idarea) {
+            $.get("SAdministrador", {
+                ACCION: "eliminaArea",
+                ID: idarea
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Admin.tablaArea();
+            });
         },
         tablaCpt: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaCpt",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-                $("#guardarcpt").on('click',function(){
-                   Admin.guardaCpt(); 
-                });
-                $(".eliminarcpt").on('click',function(){
-                    idcpt = $(this).parents("tr").find("td").eq(0).html();
-                    swal({
-                        title: "Estas seguro?",
-                        text: "Se eliminara el registro",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Confirmar",
-                        closeOnConfirm: false
-                    }, function () {
-                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
-                        Admin.eliminarCpt(idcpt);
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#guardarcpt").on('click', function () {
+                        Admin.guardaCpt();
                     });
-                });
-                $("#tablacpt").DataTable({
-                    "scrollX": true
-                });
+                    $(".eliminarcpt").on('click', function () {
+                        idcpt = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Admin.eliminarCpt(idcpt);
+                        });
+                    });
+                    $("#tablacpt").DataTable({
+                        "scrollX": true
+                    });
+                }
             });
         },
-        guardaCpt: function(){
-          var cpt = {
-              "nombre": $("#cptAdmin").val()
-          }
-          $.get("SAdministrador",{
-              ACCION: "guardaCpt",
-              OBJETO: JSON.stringify(cpt),
-              TIPOESCUELA: tipoescuela
-          }).done(function(xhr, status, error){
+        guardaCpt: function () {
+            var cpt = {
+                "nombre": $("#cptAdmin").val()
+            }
+            $.get("SAdministrador", {
+                ACCION: "guardaCpt",
+                OBJETO: JSON.stringify(cpt),
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-              swal("Hecho!", "Datos guardados correctamente", "success");
-              Admin.tablaCpt();
-          });
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Admin.tablaCpt();
+                }
+            });
         },
-        eliminarCpt: function (idcpt){
-            $.get("SAdministrador",{
+        eliminarCpt: function (idcpt) {
+            $.get("SAdministrador", {
                 ACCION: "eliminaCpt",
                 ID: idcpt
-            }).then(function(){
-               Admin.tablaCpt(); 
+            }).done(function (xhr, status, error) {
+
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Admin.tablaCpt();
             });
         },
         tablaGradoGrupo: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaGradoGrupo",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+            }).fail(function (xhr, status, error) {
                 console.log(
                         window.location.pathname);
             }).then(function () {
@@ -314,109 +308,106 @@ var Admin = (function () {
             $.get("SAdministrador", {
                 ACCION: "tablaTipoCalificacion",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-                $("#guardatipocali").on('click',function(){
-                   Admin.guardaTipoCali(); 
-                });
-                $(".eliminatipocali").on('click',function(){
-                    idtipo = $(this).parents("tr").find("td").eq(0).html();
-                    swal({
-                        title: "Estas seguro?",
-                        text: "Se eliminara el registro",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Confirmar",
-                        closeOnConfirm: false
-                    }, function () {
-                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
-                        Admin.eliminarTipoCali(idtipo);
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#guardatipocali").on('click', function () {
+                        Admin.guardaTipoCali();
                     });
-                });
-                $("#tablatipocali").DataTable({
-                    "scrollX": true
-                });
+                    $(".eliminatipocali").on('click', function () {
+                        idtipo = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Admin.eliminarTipoCali(idtipo);
+                        });
+                    });
+                    $("#tablatipocali").DataTable({
+                        "scrollX": true
+                    });
+                }
             });
         },
-        guardaTipoCali: function(){
-          var tipocali = {
-              "nombre": $("#tipocaliAdmin").val()
-          }
-          $.get("SAdministrador",{
-              ACCION: "guardaTipoCali",
-              OBJETO: JSON.stringify(tipocali),
-              TIPOESCUELA: tipoescuela
-          }).done(function(xhr, status, error){
+        guardaTipoCali: function () {
+            var tipocali = {
+                "nombre": $("#tipocaliAdmin").val()
+            }
+            $.get("SAdministrador", {
+                ACCION: "guardaTipoCali",
+                OBJETO: JSON.stringify(tipocali),
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-              swal("Hecho!", "Datos guardados correctamente", "success");
-              Admin.tablaTipoCalificacion();
-          });
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Admin.tablaTipoCalificacion();
+                }
+            });
         },
-        eliminarTipoCali: function (idtipo){
-          $.get("SAdministrador",{
-              ACCION: "eliminaTipoCali",
-              ID: idtipo
-          }).then(function(){
-              Admin.tablaTipoCalificacion();
-          })  
+        eliminarTipoCali: function (idtipo) {
+            $.get("SAdministrador", {
+                ACCION: "eliminaTipoCali",
+                ID: idtipo
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Admin.tablaTipoCalificacion();
+            });
         },
         tablaMateria: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaMateria",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-                $("#guardamateria").on('click',function(){
-                   Admin.guardaMateria(); 
-                });
-                $(".eliminamateria").on('click',function(){
-                   idmateria = $(this).parents("tr").find("td").eq(0).html();
-                    swal({
-                        title: "Estas seguro?",
-                        text: "Se eliminara el registro",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Confirmar",
-                        closeOnConfirm: false
-                    }, function () {
-                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
-                        Admin.eliminaMateria(idmateria);
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#guardamateria").on('click', function () {
+                        Admin.guardaMateria();
                     });
-                });
-                $("#tablamateria").DataTable({
-                    "scrollX": true
-                });
+                    $(".eliminamateria").on('click', function () {
+                        idmateria = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Admin.eliminaMateria(idmateria);
+                        });
+                    });
+                    $("#tablamateria").DataTable({
+                        "scrollX": true
+                    });
+                }
             });
         },
-        guardaMateria: function(){
+        guardaMateria: function () {
             var materia = {
                 "rdatosmateria": $("#materiaAdmin").val(),
                 "rgrado": $("#gradoselect").val(),
@@ -424,30 +415,31 @@ var Admin = (function () {
                 "rarea": $("#areaselect").val(),
                 "rcpt": $("#cptselect").val()
             }
-            $.get("SAdministrador",{
+            $.get("SAdministrador", {
                 ACCION: "guardaMateria",
                 OBJETO: JSON.stringify(materia),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
-            }).fail(function(xhr, status, error){
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
-                Admin.tablaMateria();
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Admin.tablaMateria();
+                }
             });
         },
-        eliminaMateria: function(idmateria){
-            $.get("SAdministrador",{
+        eliminaMateria: function (idmateria) {
+            $.get("SAdministrador", {
                 ACCION: "eliminaMateria",
                 ID: idmateria
-            }).then(function(){
-               Admin.tablaMateria(); 
+            }).done(function (xhr, status, error) {
+                if (eeror.status != 200)
+                    wal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Admin.tablaMateria();
             });
         }
     }

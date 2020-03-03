@@ -39,7 +39,7 @@ import javax.swing.JOptionPane;
  */
 public class AlumnosController {
 
-    public List<CtPeriodoEscolar> getPeriodos(int tipoescuela) {
+    public List<CtPeriodoEscolar> getPeriodos(int tipoescuela) throws Exception{
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getPeriodos(tipoescuela);
     }

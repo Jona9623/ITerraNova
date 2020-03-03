@@ -33,7 +33,7 @@ public class ConsultasAlumno {
     private Connection con;
     private int x = 1;
 
-    public List<CtPeriodoEscolar> getPeriodos(int tipoescuela) {
+    public List<CtPeriodoEscolar> getPeriodos(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -54,7 +54,7 @@ public class ConsultasAlumno {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {

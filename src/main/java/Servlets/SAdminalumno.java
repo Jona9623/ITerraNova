@@ -86,11 +86,20 @@ public class SAdminalumno extends HttpServlet {
                 }
                 break;
             case "eliminarAlumno":
-                eliminarAlumno(request, response);
+                try {
+                    eliminarAlumno(request, response);
+                } catch (Exception e) {
+                }
                 break;
             case "importaAlumno":
                 try {
                     importaAlumno(request, response);
+                } catch (Exception e) {
+                }
+                break;
+            case "importaTutor":
+                try {
+                    importaTutor(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -160,7 +169,7 @@ public class SAdminalumno extends HttpServlet {
         List<CtAreaalumno> listarea = new ArrayList<>();
         List<CtCptalumno> listcpt = new ArrayList<>();
         try {
-            
+
             tutor = adminC.datosTutor(Integer.parseInt(request.getParameter("IDTUTOR")));
             request.setAttribute("tutor", tutor);
             alumno = adminC.datosAlumno(Integer.parseInt(request.getParameter("IDALUMNO")));
@@ -181,12 +190,13 @@ public class SAdminalumno extends HttpServlet {
         }
     }
 
-    private void eliminarAlumno(HttpServletRequest request, HttpServletResponse response) {
+    private void eliminarAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         try {
             adminC.eliminaAlumno(Integer.parseInt(request.getParameter("IDALUMNO")));
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
@@ -241,7 +251,7 @@ public class SAdminalumno extends HttpServlet {
             String foto = (String.valueOf(request.getParameter("fotoAlumno")));
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
-                System.out.println("OTRA RUTA" +applicationPath);
+                System.out.println("OTRA RUTA" + applicationPath);
                 String uploadPath = "assets";
                 File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
@@ -282,7 +292,7 @@ public class SAdminalumno extends HttpServlet {
             alumno.setPlantelproce(String.valueOf(request.getParameter("plantelanterior")));
             // alumno = mapper.readValue(objectJson, TbAlumnos.class);
             if (alumno.getIdtbalumnos() > 0) {
-                adminC.actualizaAlumno(alumno,ruta);
+                adminC.actualizaAlumno(alumno, ruta);
             } else {
                 adminC.guardaAlumno(alumno, tipoescuelaAlumno, ruta);
             }
@@ -325,11 +335,41 @@ public class SAdminalumno extends HttpServlet {
                 part.write(ruta);
             }
             listalumnos = adminC.exportaAlumnos(ruta);
+            // adminC.guardaImportaAlumnos(listalumnos);
             String f = null;
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
+    }
+
+    private void importaTutor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        List<TbTutor> listtutor = new ArrayList<>();
+        String ruta = null;
+        try {
+            String foto = (String.valueOf(request.getParameter("importaTutor")));
+            if (foto.equals("null")) {
+                String applicationPath = getServletContext().getRealPath("");
+                String uploadPath = applicationPath; //applicationPath + File.separator + "archivos";
+                File fileUploadDirectory = new File(uploadPath);
+                if (!fileUploadDirectory.exists()) {
+                    fileUploadDirectory.mkdirs();
+                }
+                Part part = request.getPart("importaTutor");
+                String nombrearchivo = extractFileName(part);
+                ruta = uploadPath + File.separator + nombrearchivo;
+                System.out.println("Ruta:" + ruta);
+                part.write(ruta);
+            }
+            listtutor = adminC.exportaTutor(ruta);
+            //adminC.guardaImportaTutor(listtutor);
+            String f = null;
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+
     }
 
 }
