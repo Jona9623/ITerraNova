@@ -406,7 +406,7 @@ public class SReportes extends HttpServlet {
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
                 System.out.println("OTRA RUTA" +applicationPath);
-                String uploadPath = "assets"; //applicationPath + File.separator + "archivos";
+                String uploadPath = "/home/escape9/sistema.iterra.edu.mx/reportes"; //applicationPath + File.separator + "archivos";
                 //String uploadPath = "/home/escape9/";
                 File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
@@ -414,8 +414,8 @@ public class SReportes extends HttpServlet {
                 }
                 Part part = request.getPart("Archivo");
                 String nombrearchivo = extractFileName(part);
-                ruta = applicationPath + uploadPath + File.separator + nombrearchivo;
-                //ruta = uploadPath + File.separator + nombrearchivo;
+                //ruta = applicationPath + uploadPath + File.separator + nombrearchivo;
+                ruta = uploadPath + File.separator + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }

@@ -283,12 +283,13 @@ public class SAdministrador extends HttpServlet {
         }
     }
 
-    private void eliminaPeriodo(HttpServletRequest request, HttpServletResponse response) {
+    private void eliminaPeriodo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
             adminC.eliminaPeriodo(Integer.parseInt(request.getParameter("ID")));
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
@@ -324,12 +325,13 @@ public class SAdministrador extends HttpServlet {
         }
     }
 
-    private void eliminaArea(HttpServletRequest request, HttpServletResponse response) {
+    private void eliminaArea(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
             adminC.eliminaArea(Integer.parseInt(request.getParameter("ID")));
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
@@ -398,11 +400,12 @@ public class SAdministrador extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/TipoCalificacion/tablatipocalificacion.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
-    private void guardaTipoCali(HttpServletRequest request, HttpServletResponse response) {
+    private void guardaTipoCali(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CtTipoCalificaicon tipocali = new CtTipoCalificaicon();
         adminC = new AdministradorController();
         objectJson = request.getParameter("OBJETO");
@@ -415,14 +418,18 @@ public class SAdministrador extends HttpServlet {
                 adminC.guardaTipoCali(tipocali, Integer.parseInt(request.getParameter("TIPOESCUELA")));
             }
         } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
-    private void eliminaTipoCali(HttpServletRequest request, HttpServletResponse response) {
+    private void eliminaTipoCali(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
             adminC.eliminaTipoCali(Integer.parseInt(request.getParameter("ID")));
         } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
@@ -513,12 +520,13 @@ public class SAdministrador extends HttpServlet {
         }
     }
 
-    private void eliminaMateria(HttpServletRequest request, HttpServletResponse response) {
+    private void eliminaMateria(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
             adminC.eliminaMateria(Integer.parseInt(request.getParameter("ID")));
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 

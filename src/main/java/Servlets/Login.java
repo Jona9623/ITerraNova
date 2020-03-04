@@ -68,7 +68,8 @@ public class Login extends HttpServlet {
                 response.sendRedirect(request.getContextPath()+ "/Login.jsp");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 

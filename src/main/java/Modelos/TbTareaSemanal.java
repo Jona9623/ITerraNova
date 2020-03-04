@@ -15,8 +15,17 @@ public class TbTareaSemanal {
     private String tarea;
     private int rdia;
     private int rpersonal;
+    private String fechaentrega;
     private int status;
     private int tipoescuela;
+
+    public String getFechaentrega() {
+        return fechaentrega;
+    }
+
+    public void setFechaentrega(String fechaentrega) {
+        this.fechaentrega = fechaentrega;
+    }
 
     public int getIdtbtarea() {
         return idtbtarea;

@@ -573,7 +573,7 @@ public class ConsultasAdministrador {
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String consulta = "update `terranova`.`tb_alumnos` set `status` = 2 where `idTb_Alumnos` = ?";
+            String consulta = "update `tb_alumnos` set `status` = 2 where `idTb_Alumnos` = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, id);
             if (pst.executeUpdate() == 1) {
@@ -602,7 +602,7 @@ public class ConsultasAdministrador {
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String consulta = "update `terranova`.`tb_personal` set `status` = 2 where `idTb_Personal` = ?";
+            String consulta = "update `tb_personal` set `status` = 2 where `idTb_Personal` = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, id);
             if (pst.executeUpdate() == 1) {
@@ -883,7 +883,7 @@ public class ConsultasAdministrador {
         return listpuesto;
     }
 
-    public List<GradoGrupo> getGradoGrupo(int tipoescuela) {
+    public List<GradoGrupo> getGradoGrupo(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -905,7 +905,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -924,7 +924,7 @@ public class ConsultasAdministrador {
         return listgradogrupo;
     }
 
-    public List<CtTipoCalificaicon> getTipoCali(int tipoescuela) {
+    public List<CtTipoCalificaicon> getTipoCali(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -945,7 +945,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1032,7 +1032,7 @@ public class ConsultasAdministrador {
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String consulta = "update `terranova`.`ct_puesto` set `status` = 2 where `idCt_Puesto` = ?";
+            String consulta = "update `ct_puesto` set `status` = 2 where `idCt_Puesto` = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, id);
             if (pst.executeUpdate() == 1) {
@@ -1123,12 +1123,12 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void eliminaPeriodo(int id) {
+    public void eliminaPeriodo(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String consulta = "update `terranova`.`ct_periodoescolar` set `status` = 2 where `idCt_PeriodoEscolar` = ?";
+            String consulta = "update `ct_periodoescolar` set `status` = 2 where `idCt_PeriodoEscolar` = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, id);
             if (pst.executeUpdate() == 1) {
@@ -1137,7 +1137,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al eliminar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1152,7 +1152,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaArea(CtAreaalumno area, int tipoescuela) {
+    public void guardaArea(CtAreaalumno area, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1169,7 +1169,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1215,12 +1215,12 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void eliminaArea(int id) {
+    public void eliminaArea(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String consulta = "update `terranova`.`ct_areaalumno` set `status` = 2 where `idCt_AreaAlumno` = ?";
+            String consulta = "update `ct_areaalumno` set `status` = 2 where `idCt_AreaAlumno` = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, id);
             if (pst.executeUpdate() == 1) {
@@ -1229,7 +1229,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al eliminar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1312,7 +1312,7 @@ public class ConsultasAdministrador {
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String consulta = "update `terranova`.`ct_cptalumno` set `status` = 2 where `idCt_CptAlumno` = ?";
+            String consulta = "update `ct_cptalumno` set `status` = 2 where `idCt_CptAlumno` = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, id);
             if (pst.executeUpdate() == 1) {
@@ -1400,7 +1400,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaTipoCali(CtTipoCalificaicon tipocali, int tipoescuela) {
+    public void guardaTipoCali(CtTipoCalificaicon tipocali, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1417,7 +1417,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1463,12 +1463,12 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void eliminaTipoCali(int id) {
+    public void eliminaTipoCali(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String consulta = "update `terranova`.`ct_tipocalificacion` set `status` = 2 where `idCt_TipoCalificacion` = ?";
+            String consulta = "update `ct_tipocalificacion` set `status` = 2 where `idCt_TipoCalificacion` = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, id);
             if (pst.executeUpdate() == 1) {
@@ -1477,7 +1477,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al eliminar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1492,7 +1492,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public List<CtDatosMateria> getMateriasFaltantes(int tipoescuela) {
+    public List<CtDatosMateria> getMateriasFaltantes(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -1514,7 +1514,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1533,7 +1533,7 @@ public class ConsultasAdministrador {
         return listmateriafaltante;
     }
 
-    public void guardaNombreMateria(CtDatosMateria nombremateria, int tipoescuela) {
+    public void guardaNombreMateria(CtDatosMateria nombremateria, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1551,7 +1551,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1566,7 +1566,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaMateria(TbMateria materia, int tipoescuela) {
+    public void guardaMateria(TbMateria materia, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1595,7 +1595,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1610,12 +1610,12 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void eliminaMateria(int id) {
+    public void eliminaMateria(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String consulta = "update `terranova`.`tb_materia` set `status` = 2 where `idTb_Materia` = ?";
+            String consulta = "update `tb_materia` set `status` = 2 where `idTb_Materia` = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, id);
             if (pst.executeUpdate() == 1) {
@@ -1624,7 +1624,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al eliminar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1698,7 +1698,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaImportaAlumnos(List<TbAlumnos> listalumnos) {
+    public void guardaImportaAlumnos(List<TbAlumnos> listalumnos) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         int tutores = 0;
@@ -1765,7 +1765,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1780,7 +1780,7 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaImportaTutor(List<TbTutor> listtutor) {
+    public void guardaImportaTutor(List<TbTutor> listtutor) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -1813,7 +1813,7 @@ public class ConsultasAdministrador {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {

@@ -44,27 +44,27 @@ public class AlumnosController {
         return consulta.getPeriodos(tipoescuela);
     }
 
-    public List<TbMateria> getMaterias(int tipoescuela) {
+    public List<TbMateria> getMaterias(int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getMaterias(tipoescuela);
     }
 
-    public List<CtIncidente> getIncidentes(int tipoescuela) {
+    public List<CtIncidente> getIncidentes(int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getIncidentes(tipoescuela);
     }
 
-    public List<Alumno> getAlumnos(int grado, int grupo, int tipoescuela) {
+    public List<Alumno> getAlumnos(int grado, int grupo, int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getAlumnos(grado, grupo, tipoescuela);
     }
 
-    public void guardaIncidente(CtIncidente incidente, int tipoescuela) {
+    public void guardaIncidente(CtIncidente incidente, int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardaIincidente(incidente, tipoescuela);
     }
 
-    public void guardaReporteD(TbReporteDisciplinar reporteD, String ruta, int status, int tipoescuela) {
+    public void guardaReporteD(TbReporteDisciplinar reporteD, String ruta, int status, int tipoescuela) throws Exception{
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardaReporteD(reporteD, ruta,tipoescuela);
         if (status == 1) {
@@ -80,22 +80,22 @@ public class AlumnosController {
         }
     }
 
-    public List<TbReporteDisciplinar> getAlumnosReporteD(int tipoescuela) {
+    public List<TbReporteDisciplinar> getAlumnosReporteD(int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getAlumnosReporteD(tipoescuela);
     }
 
-    public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora, int tipoescuela) {
+    public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora, int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return (consulta.datosReporteD(id, fecha, hora,tipoescuela));
     }
     
-    public TbReporteDisciplinar editarReporteD(int id, String fecha, String hora) {
+    public TbReporteDisciplinar editarReporteD(int id, String fecha, String hora) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.editarReporteD(id,fecha,hora);
     }
 
-    private static void enviarCorreo(String correotutor, String asunto, String cuerpo) {
+    private static void enviarCorreo(String correotutor, String asunto, String cuerpo) throws Exception {
         String usuario = "pruebas.iterranova@gmail.com";
         String contrasena = "excelencia";
 
@@ -126,42 +126,42 @@ public class AlumnosController {
             t.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
 
     }
 
-    public void guardareditarReporteD(TbReporteDisciplinar reporteD) {
+    public void guardareditarReporteD(TbReporteDisciplinar reporteD) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardareditarReporteD(reporteD);
     }
 
-    public List<CtSemanaFiscal> getSemanaiscal(int tipoescuela) {
+    public List<CtSemanaFiscal> getSemanaiscal(int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getSemanaFiscal(tipoescuela);
     }
 
-    public List<CtAtencion> getAtencion(int tipoescuela) {
+    public List<CtAtencion> getAtencion(int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getAtencion(tipoescuela);
     }
 
-    public void guardaActividadSemanal(TbTareaSemanal tarea,int tipoescuela) {
+    public void guardaActividadSemanal(TbTareaSemanal tarea,int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardaActividadSemanal(tarea,tipoescuela);
     }
 
-    public void guardaReporteAcademico(TbReporteAcademico reporteA,int tipoescuela) {
+    public void guardaReporteAcademico(TbReporteAcademico reporteA,int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardaReporteAcademico(reporteA,tipoescuela);
     }
 
-    public void guardaComportamiento(CtAtencion atencion, int tipoescuela) {
+    public void guardaComportamiento(CtAtencion atencion, int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardaComportamiento(atencion,tipoescuela);
     }
 
-    public void guardaSemana(CtSemanaFiscal semana, int tipoescuela) {
+    public void guardaSemana(CtSemanaFiscal semana, int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardaSemana(semana, tipoescuela);
     }

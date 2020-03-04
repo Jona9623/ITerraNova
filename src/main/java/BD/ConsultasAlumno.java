@@ -73,7 +73,7 @@ public class ConsultasAlumno {
         return listperiodo;
     }
 
-    public List<TbMateria> getMaterias(int tipoescuela) {
+    public List<TbMateria> getMaterias(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -95,7 +95,7 @@ public class ConsultasAlumno {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -114,7 +114,7 @@ public class ConsultasAlumno {
         return listmateria;
     }
 
-    public List<CtIncidente> getIncidentes(int tipoescuela) {
+    public List<CtIncidente> getIncidentes(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -135,7 +135,7 @@ public class ConsultasAlumno {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -154,7 +154,7 @@ public class ConsultasAlumno {
         return listincidente;
     }
 
-    public List<Alumno> getAlumnos(int grado, int grupo, int tipoescuela) {
+    public List<Alumno> getAlumnos(int grado, int grupo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -177,7 +177,7 @@ public class ConsultasAlumno {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -196,7 +196,7 @@ public class ConsultasAlumno {
         return listalumno;
     }
 
-    public void guardaIincidente(CtIncidente incidente, int tipoescuela) {
+    public void guardaIincidente(CtIncidente incidente, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -213,7 +213,7 @@ public class ConsultasAlumno {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -282,7 +282,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public List<TbReporteDisciplinar> getAlumnosReporteD(int tipoescuela) {
+    public List<TbReporteDisciplinar> getAlumnosReporteD(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -329,7 +329,7 @@ public class ConsultasAlumno {
                 alumnosdisciplinar.add(reporteD);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -348,7 +348,7 @@ public class ConsultasAlumno {
         return alumnosdisciplinar;
     }
 
-    public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora, int tipoescuela) {
+    public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -399,7 +399,7 @@ public class ConsultasAlumno {
                 datosreporteD.setFoto(rs.getString("tb_reportedisciplinar.foto"));
             }
         } catch (Exception e) {
-            System.out.print("Error" + e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -418,7 +418,7 @@ public class ConsultasAlumno {
         return (datosreporteD);
     }
 
-    public TbReporteDisciplinar editarReporteD(int id, String fecha, String hora) {
+    public TbReporteDisciplinar editarReporteD(int id, String fecha, String hora) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -473,7 +473,7 @@ public class ConsultasAlumno {
                 reportedAlumno.setRmateria(rs.getInt("tb_reportedisciplinar.r_materia"));
             }
         } catch (Exception e) {
-            System.out.print("Error" + e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -492,11 +492,11 @@ public class ConsultasAlumno {
         return (reportedAlumno);
     }
 
-    public void guardareditarReporteD(TbReporteDisciplinar reporteD) {
+    public void guardareditarReporteD(TbReporteDisciplinar reporteD) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
-            String consulta = "UPDATE `terranova`.`tb_reportedisciplinar` SET `r_personal` = ?, `hora` = ?, `fecha` = ?, `fechareporte` = ?, "
+            String consulta = "UPDATE `tb_reportedisciplinar` SET `r_personal` = ?, `hora` = ?, `fecha` = ?, `fechareporte` = ?, "
                     + "`r_personalsolicita` = ?, `r_personalllena` = ?, `r_materia` = ?, `lugar` = ?, `r_tipoincidente` = ?, `r_periodo` = ?, `nivel` = ?, "
                     + "`descripcion` = ? WHERE (`idTb_ReporteDisciplinar` = ?);";
             pst = con.prepareStatement(consulta);
@@ -525,7 +525,7 @@ public class ConsultasAlumno {
                 con.commit();
             }
         } catch (Exception e) {
-            System.out.print("Error" + e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -540,7 +540,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public List<CtSemanaFiscal> getSemanaFiscal(int tipoescuela) {
+    public List<CtSemanaFiscal> getSemanaFiscal(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -561,7 +561,7 @@ public class ConsultasAlumno {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -580,7 +580,7 @@ public class ConsultasAlumno {
         return listsemana;
     }
 
-    public List<CtAtencion> getAtencion(int tipoescuela) {
+    public List<CtAtencion> getAtencion(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -601,7 +601,7 @@ public class ConsultasAlumno {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -620,19 +620,20 @@ public class ConsultasAlumno {
         return listatencion;
     }
 
-    public void guardaActividadSemanal(TbTareaSemanal tarea, int tipoescuela) {
+    public void guardaActividadSemanal(TbTareaSemanal tarea, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
             con.setAutoCommit(false);
-            String consulta = "insert into tb_tareasemanal (r_semanafiscal,tarea,r_dia,r_personal,status,tipoescuela) values(?,?,?,?,?,?)";
+            String consulta = "insert into tb_tareasemanal (r_semanafiscal,tarea,r_dia,r_personal,fechaentrega,status,tipoescuela) values(?,?,?,?,?,?,?)";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, tarea.getRsemana());
             pst.setString(2, tarea.getTarea());
             pst.setInt(3, tarea.getRdia());
             pst.setInt(4, tarea.getRpersonal());
-            pst.setInt(5,1);
-            pst.setInt(6,tipoescuela);
+            pst.setString(5, tarea.getFechaentrega());
+            pst.setInt(6,1);
+            pst.setInt(7,tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -640,7 +641,7 @@ public class ConsultasAlumno {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -655,7 +656,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public void guardaReporteAcademico(TbReporteAcademico reporteA, int tipoescuela) {
+    public void guardaReporteAcademico(TbReporteAcademico reporteA, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -679,7 +680,7 @@ public class ConsultasAlumno {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -694,7 +695,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public void guardaComportamiento(CtAtencion atencion, int tipoescuela) {
+    public void guardaComportamiento(CtAtencion atencion, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -711,7 +712,7 @@ public class ConsultasAlumno {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -726,7 +727,7 @@ public class ConsultasAlumno {
         }
     }
 
-    public void guardaSemana(CtSemanaFiscal semana, int tipoescuela) {
+    public void guardaSemana(CtSemanaFiscal semana, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
@@ -743,7 +744,7 @@ public class ConsultasAlumno {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {

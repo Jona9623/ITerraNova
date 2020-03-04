@@ -89,8 +89,6 @@ $(document).ready(function () {
         Admin.tablaMateria();
     });
 
-
-
 });
 
 

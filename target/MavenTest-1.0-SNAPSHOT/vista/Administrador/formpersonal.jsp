@@ -48,19 +48,19 @@
                                                             <input id="idpersonal" type="hidden" value="${requestScope.personal.idtbpersonal}">
                                                             <div class="form-group" id="div-nombrep">
                                                                 <label>Nombre(s)*</label>
-                                                                <input value="${requestScope.personal.nombre}" id="nombrep" type="text" class="form-control" placeholder="nombre">
+                                                                <input value="${requestScope.personal.nombre}" id="nombrep" type="text" class="form-control" placeholder="nombre" maxlength="35">
                                                             </div>
                                                             <div class="form-group" id="div-apellidopp">
                                                                 <label>Apellido Paterno*</label>
-                                                                <input value="${requestScope.personal.apellidop}"  id="apellidopp" type="text" class="form-control" placeholder="apellido paterno">
+                                                                <input value="${requestScope.personal.apellidop}"  id="apellidopp" type="text" class="form-control" placeholder="apellido paterno" maxlength="20">
                                                             </div>
                                                             <div class="form-group" id="div-apellidomp">
                                                                 <label>Apellido Materno*</label>
-                                                                <input value="${requestScope.personal.apellidom}" id="apellidomp" type="text" class="form-control" placeholder="apellido materno">
+                                                                <input value="${requestScope.personal.apellidom}" id="apellidomp" type="text" class="form-control" placeholder="apellido materno" maxlength="20">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>CURP</label>
-                                                                <input value="${requestScope.personal.curp}" id="curpp" type="text" class="form-control" placeholder="curp">
+                                                                <input value="${requestScope.personal.curp}" id="curpp" type="text" class="form-control" placeholder="curp" maxlength="18">
                                                             </div>
                                                             <div class="form-group" id="div-fechanacimientop">
                                                                 <label>Fecha de nacimiento*</label>
@@ -68,11 +68,11 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Municipio de nacimiento</label>
-                                                                <input value="${requestScope.personal.municipionac}" id="municipionacp" type="text" class="form-control" placeholder="municipio ncimiento">
+                                                                <input value="${requestScope.personal.municipionac}" id="municipionacp" type="text" class="form-control" placeholder="municipio ncimiento" maxlength="15">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Estado de nacimiento</label>
-                                                                <input value="${requestScope.personal.estadonac}" id="estadonacp" type="text" class="form-control" placeholder="estado nacimiento ">
+                                                                <input value="${requestScope.personal.estadonac}" id="estadonacp" type="text" class="form-control" placeholder="estado nacimiento " maxlength="15">
                                                             </div>
                                                             <label>Sexo</label>
                                                             <div class="form-group">
@@ -109,46 +109,46 @@
                                                             </div>
                                                             <div class="form-group" id="div-correop">
                                                                 <label>Correo*</label>
-                                                                <input value="${requestScope.personal.correo}" id="correop" type="email" class="form-control" placeholder="codigo postal">
+                                                                <input value="${requestScope.personal.correo}" id="correop" type="email" class="form-control" placeholder="codigo postal" maxlength="5">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group">
                                                                 <label>Teleono de casa</label>
-                                                                <input value="${requestScope.personal.telefonocasa}" id="telcasatp" type="number" class="form-control" placeholder="telefono casa">
+                                                                <input value="${requestScope.personal.telefonocasa}" id="telcasatp" type="number" class="form-control" placeholder="telefono casa" maxlength="15">
                                                             </div>
                                                             <div class="form-group" id="div-celularp">
                                                                 <label>Celular*</label>
-                                                                <input value="${requestScope.personal.celular}" id="celularp" type="number" class="form-control" placeholder="celular">
+                                                                <input value="${requestScope.personal.celular}" id="celularp" type="number" class="form-control" placeholder="celular" maxlength="10">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Nacionalidad</label>
-                                                                <input value="${requestScope.personal.nacionalidad}" id="nacionalidadp" maxlength="10" type="text" class="form-control" placeholder="nacionalidad">
+                                                                <input value="${requestScope.personal.nacionalidad}" id="nacionalidadp" maxlength="10" type="text" class="form-control" placeholder="nacionalidad" maxlength="15">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Calle del domicilio</label>
-                                                                <input value="${requestScope.personal.calledom}" id="calledomp" type="text" class="form-control" placeholder="calle">
+                                                                <input value="${requestScope.personal.calledom}" id="calledomp" type="text" class="form-control" placeholder="calle" maxlength="20">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Número del domicilio</label>
-                                                                <input value="${requestScope.personal.numerodom}" id="numerodomp" type="number" class="form-control" placeholder="numero">
+                                                                <input value="${requestScope.personal.numerodom}" id="numerodomp" type="number" class="form-control" placeholder="numero" maxlength="4">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Colonia del domicilio</label>
-                                                                <input value="${requestScope.personal.coloniadom}" id="coloniadomp" type="text" class="form-control" placeholder="colonia">
+                                                                <input value="${requestScope.personal.coloniadom}" id="coloniadomp" type="text" class="form-control" placeholder="colonia" maxlength="15">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Código postal</label>
-                                                                <input value="${requestScope.personal.codigopostal}" id="codigopostalp" type="number" class="form-control" placeholder="codigo postal">
+                                                                <input value="${requestScope.personal.codigopostal}" id="codigopostalp" type="number" class="form-control" placeholder="codigo postal" maxlength="5">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Número de seguro social</label>
-                                                                <input value="${requestScope.personal.nss}" id="nss" type="text" class="form-control" placeholder="seuro social">
+                                                                <input value="${requestScope.personal.nss}" id="nss" type="text" class="form-control" placeholder="seuro social" maxlength="1">
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label>RFC</label>
-                                                                <input value="${requestScope.personal.rfc}" id="rfc" type="text" class="form-control" placeholder="rfc">
+                                                                <input value="${requestScope.personal.rfc}" id="rfc" type="text" class="form-control" placeholder="rfc" maxlength="18">
                                                             </div>
                                                         </div>
                                                     </div>

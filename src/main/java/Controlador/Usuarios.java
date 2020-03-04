@@ -13,7 +13,7 @@ import Modelos.Usuario;
  * @author Complx
  */
 public class Usuarios {
-    public Usuario iniciarSesion(Usuario user){
+    public Usuario iniciarSesion(Usuario user) throws Exception{
         ConsultasLogin consulta = new ConsultasLogin();
         return consulta.iniciarSesion(user);
     }

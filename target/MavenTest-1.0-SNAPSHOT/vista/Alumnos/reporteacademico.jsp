@@ -193,6 +193,10 @@
                                                             </c:forEach>
                                                         </select>
                                                     </div>
+                                                    <div class="col-lg-4 p-t-20">
+                                                        <label> Fecha de entrega de la actividad</label>
+                                                       <input id="fechaentrega" name="Fechaentrega" type="date" class="form-control">
+                                                    </div>
                                                 </div>
                                                 <button type="button" id="actividadsemanal" class="btn btn-terra">Guardar</button>
                                             </form>
@@ -236,7 +240,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary guardacomportammiento" data-dismiss="modal">Cerrar</button>
-                                <button type="button" id="guardacomportammiento" class="btn btn-terra">Guardar</button>
+                                <button type="button" id="guardacomportammiento" class="btn btn-terra" data-dismiss="modal">Guardar</button>
                             </div>
                         </div>
                     </div>
@@ -278,7 +282,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary guardasemana" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="guardasemana" class="btn btn-terra">Guardar</button>
+                <button type="button" id="guardasemana" class="btn btn-terra" data-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
@@ -314,7 +318,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary guardasemana2" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="guardasemana2" class="btn btn-terra">Guardar</button>
+                <button type="button" id="guardasemana2" class="btn btn-terra" data-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>

@@ -18,7 +18,7 @@ public class ConsultasLogin {
 
     private Connection con;
 
-    public Usuario iniciarSesion(Usuario user) {
+    public Usuario iniciarSesion(Usuario user) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -37,7 +37,7 @@ public class ConsultasLogin {
                 usuario.setR_tipo(rs.getInt("r_tipo"));
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         }finally{
             try {
                 if(con != null){

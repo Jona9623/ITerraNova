@@ -17,11 +17,8 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
+                else {
+                   $("#content").html(arguments[0]);
                 grado = $("#gradodisciplinar").val();
                 grupo = $("#grupodisciplinar").val();
                 Reportes.getAlumno(grado, grupo);
@@ -35,7 +32,8 @@ var Reportes = (function () {
                 Reportes.guardarD();
                 $("#mostrarreportes").on('click', function () {
                     Reportes.mostrarReportes();
-                });
+                }); 
+                }
             });
         },
         guardarD: function () {
@@ -111,11 +109,8 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#alumnogradoD").html(arguments[0]);
+                else {
+                    $("#alumnogradoD").html(arguments[0]);
                 $("#gradodisciplinar").change(function () {
                     grado = $("#gradodisciplinar").val()
                     Reportes.getAlumno(grado, grupo)
@@ -127,6 +122,7 @@ var Reportes = (function () {
                 $("#agregafalta").on('click', function () {
                     Reportes.agregaFalta();
                 });
+                }
             });
         },
         getAlumnoAca: function (gradohonor, grupohonor) {
@@ -135,8 +131,14 @@ var Reportes = (function () {
                 GRADOHONOR: gradohonor,
                 GRUPOHONOR: grupohonor,
                 TIPOESCUELA: tipoescuela
-            }).then(function () {
-                //  $("#alumnogradoA").html(arguments[0]);
+            }).done(function (xhr, status, error) {
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                   //  $("#alumnogradoA").html(arguments[0]);
                 $("#alumnogradoAA").html(arguments[0]);
                 $("#gradohonor").change(function () {
                     gradohonor = $("#gradohonor").val();
@@ -156,7 +158,8 @@ var Reportes = (function () {
                  });
                  $("#agregacomp").on('click', function () {
                  Reportes.agregaComportamiento();
-                 });*/
+                 });*/ 
+                }
             });
         },
         getAlumnoAcaAtencion: function (gradoatencion, grupoatencion) {
@@ -165,8 +168,14 @@ var Reportes = (function () {
                 GRADOATENCION: gradoatencion,
                 GRUPOATENCION: grupoatencion,
                 TIPOESCUELA: tipoescuela
-            }).then(function () {
-                $("#alumnogradoA").html(arguments[0]);
+            }).done(function (xhr, status, error) {
+                console.log(arguments);
+                console.log(error.status);
+                console.log(error.getResponseHeader("ERROR"));
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#alumnogradoA").html(arguments[0]);
                 $("#gradoatencion").change(function () {
                     gradoatencion = $("#gradoatencion").val();
                     Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
@@ -175,6 +184,7 @@ var Reportes = (function () {
                     grupoatencion = $("#grupoatencion").val();
                     Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
                 });
+                }
             });
         },
         guardaIncidente: function (objeto, accion) {
@@ -188,11 +198,9 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-
+                else {
+                    swal("Hecho!", "Datos actualizados correctamente", "success");
+                }
             });
         },
         mostrarReportes: function () {
@@ -355,7 +363,8 @@ var Reportes = (function () {
                 "rsemana": $("#semanafiscalactividad").val(),
                 "tarea": $("#actividad").val(),
                 "rdia": $("#diaactividad").val(),
-                "rpersonal": $("#personalactividad").val()
+                "rpersonal": $("#personalactividad").val(),
+                "fechaentrega": $("#fechaentrega").val()
             }
             $.get("SReportes", {
                 ACCION: "guardaActividadSemanal",
@@ -367,8 +376,10 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else
+                else{
                     swal("Hecho!", "Datos guardados correctamente", "success");
+                    Reportes.reporteAcademico();
+            }
             });
         },
         guardaComportamiento: function () {
@@ -385,7 +396,7 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     swal("Hecho!", "Datos guardados correctamente", "success");
-                    Reportes.reporteDisciplinar();
+                    Reportes.reporteAcademico();
                 }
             });
         },
@@ -401,8 +412,10 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else
+                else{
                     swal("Hecho!", "Datos guardados correctamente", "success");
+                    Reportes.reporteAcademico();
+                }
             });
         },
         guardaSemana2: function () {
@@ -417,8 +430,10 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else
+                else{
                     swal("Hecho!", "Datos guardados correctamente", "success");
+                    Reportes.reporteAcademico();
+            }
             });
         },
         imagenReporteAca: function () {
