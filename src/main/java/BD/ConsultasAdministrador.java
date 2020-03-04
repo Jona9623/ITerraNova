@@ -410,11 +410,11 @@ public class ConsultasAdministrador {
         return personal;
     }
 
-    public void actualizaAlumno(TbAlumnos alumno, String ruta) {
+    public void actualizaAlumno(TbAlumnos alumno, String ruta) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
-            String consulta = "UPDATE `terranova`.`tb_alumnos` SET `matricula` = ?, `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `fechanacimiento` = ?, `curp` = ?, \n"
+            String consulta = "UPDATE `tb_alumnos` SET `matricula` = ?, `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `fechanacimiento` = ?, `curp` = ?, \n"
                     + "`municipionacimiento` = ?, `estadonacimiento` = ?, `nacionalidad` = ?, `sexo` = ?, `calledomicilio` = ?, `numerodomicilio` = ?, `coloniadomicilio` = ?,\n"
                     + " `codigopostal` = ?, `telefonocasa` = ?, `celularalumno` = ?, `correoalumno` = ?, `nivelcursa` = ?, `r_grado` = ?, `r_grupo` = ?,\n"
                     + " `r_area` = ?, `r_cpt` = ?, `plantelprocedencia` = ?, `nivelanterior` = ?, `gradoanterior` = ?, `turnoanterior` = ?, `municipioanterior` = ?,`foto` = ? \n"
@@ -461,7 +461,7 @@ public class ConsultasAdministrador {
                 con.commit();
             }
         } catch (Exception e) {
-            System.out.print("Error" + e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -476,11 +476,11 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void actualizaTutor(TbTutor tutor) {
+    public void actualizaTutor(TbTutor tutor) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
-            String consulta = "UPDATE `terranova`.`tb_tutor` SET `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `ocupacion` = ?, `parentesco` = ?,"
+            String consulta = "UPDATE `tb_tutor` SET `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `ocupacion` = ?, `parentesco` = ?,"
                     + " `calledomicilio` = ?, `numerodomicilio` = ?,\n"
                     + " `coloniadomicilio` = ?, `codigopostal` = ?, `telefonocasa` = ?, `celular` = ?, `correo` = ? WHERE (`idTb_Tutor` = ?)";
             pst = con.prepareStatement(consulta);
@@ -501,7 +501,7 @@ public class ConsultasAdministrador {
                 con.commit();
             }
         } catch (Exception e) {
-            System.out.print("Error" + e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -520,7 +520,7 @@ public class ConsultasAdministrador {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
-            String consulta = "UPDATE `terranova`.`tb_personal` SET `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `fechanacimiento` = ?, `curp` = ?, `municipionacimiento` = ?,\n"
+            String consulta = "UPDATE `tb_personal` SET `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `fechanacimiento` = ?, `curp` = ?, `municipionacimiento` = ?,\n"
                     + " `estadonacimiento` = ?, `nacionalidad` = ?, `sexo` = ?, `calledomicilio` = ?, `numerodomicilio` = ?, `coloniadomicilio` = ?, `codigopostal` = ?, `telefonocasa` = ?, \n"
                     + " `celular` = ?, `correo` = ?, `nss` = ?, `rfc` = ?, `nivelmaxestudios` = ?, `licenciatura` = ?, `maestria` = ?, `doctorado` = ?, `r_puesto` = ? \n"
                     + " WHERE (`idTb_Personal` = ?)";

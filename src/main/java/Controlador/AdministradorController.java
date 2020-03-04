@@ -93,12 +93,12 @@ public class AdministradorController {
         return consulta.datosAlumno(idalumno);
     }
 
-    public void actualizaTutor(TbTutor tutor) {
+    public void actualizaTutor(TbTutor tutor) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.actualizaTutor(tutor);
     }
 
-    public void actualizaAlumno(TbAlumnos alumno, String ruta) {
+    public void actualizaAlumno(TbAlumnos alumno, String ruta) throws Exception{
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.actualizaAlumno(alumno, ruta);
     }

@@ -449,8 +449,8 @@ var Reportes = (function () {
                             image.src = data;
                             console.log(data);
                             console.log(image);
-                            $("#blanko").attr('href', canvas.toDataURL("image/png"));
-                            $("#blanko").attr('download', "Image.png")
+                            var x = $("#blanko").attr('href', canvas.toDataURL("image/png"));
+                            $("#blanko").attr('download', "Image.png");
                             $("#blanko")[0].click();
                         }
                     });
