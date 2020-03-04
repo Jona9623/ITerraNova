@@ -205,33 +205,31 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-                $("#tablareporteD").DataTable({
-                    "scrollX": true
-                });
-                var id = $('#consultareporteD').find('#periodotablaD').val();
-                $('#consultareporteD').find('tr[name^="alumno-"]').hide();
-                $('#consultareporteD').find('tr[name="alumno-' + id + '"]').show();
-                $('#consultareporteD').find('#periodotablaD').change(function () {
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#tablareporteD").DataTable({
+                        "scrollX": true
+                    });
+                    var id = $('#consultareporteD').find('#periodotablaD').val();
                     $('#consultareporteD').find('tr[name^="alumno-"]').hide();
-                    $('#consultareporteD').find('tr[name="alumno-' + $(this).val() + '"]').show();
-                });
-                $(".inforeporteD").on('click', function () {
-                    alumnoreporte = $(this).parents("tr").find("td").eq(0).html();
-                    reportefecha = $(this).parents("tr").find("td").eq(1).html();
-                    hora = $(this).parents("tr").find("td").eq(3).html();
-                    Reportes.infoReporteD(alumnoreporte, reportefecha, hora);
-                });
-                $(".editarreporteD").on('click', function () {
-                    editaralumnoreporte = $(this).parents("tr").find("td").eq(0).html();
-                    editarreportefecha = $(this).parents("tr").find("td").eq(1).html();
-                    editarhora = $(this).parents("tr").find("td").eq(3).html();
-                    Reportes.editarReporteD(editaralumnoreporte, editarreportefecha, editarhora);
-                });
+                    $('#consultareporteD').find('tr[name="alumno-' + id + '"]').show();
+                    $('#consultareporteD').find('#periodotablaD').change(function () {
+                        $('#consultareporteD').find('tr[name^="alumno-"]').hide();
+                        $('#consultareporteD').find('tr[name="alumno-' + $(this).val() + '"]').show();
+                    });
+                    $(".inforeporteD").on('click', function () {
+                        alumnoreporte = $(this).parents("tr").find("td").eq(0).html();
+                        reportefecha = $(this).parents("tr").find("td").eq(1).html();
+                        hora = $(this).parents("tr").find("td").eq(3).html();
+                        Reportes.infoReporteD(alumnoreporte, reportefecha, hora);
+                    });
+                    $(".editarreporteD").on('click', function () {
+                        editaralumnoreporte = $(this).parents("tr").find("td").eq(0).html();
+                        editarreportefecha = $(this).parents("tr").find("td").eq(1).html();
+                        editarhora = $(this).parents("tr").find("td").eq(3).html();
+                        Reportes.editarReporteD(editaralumnoreporte, editarreportefecha, editarhora);
+                    });
+                }
             });
         },
         infoReporteD: function (alumnoreporte, reportefecha, hora) {
@@ -247,11 +245,9 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
+                else {
+                    $("#content").html(arguments[0]);
+                }
             });
         },
         editarReporteD: function (id, fecha, hora) {
@@ -267,15 +263,13 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-                $("#editarreporteD").on('click', function () {
-                    Reportes.guardaeditarReporteD(Reportes.datosReporteD(), "guardaeditarReporteD")
-                });
-            })
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#editarreporteD").on('click', function () {
+                        Reportes.guardaeditarReporteD(Reportes.datosReporteD(), "guardaeditarReporteD")
+                    });
+                }
+            });
         },
         guardaeditarReporteD: function (objeto, accion) {
             $.get("SReportes", {
@@ -288,12 +282,10 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos actualizados correctamente", "success");
-                Reportes.mostrarReportes();
+                else {
+                    swal("Hecho!", "Datos actualizados correctamente", "success");
+                    Reportes.mostrarReportes();
+                }
             });
         },
         reporteAcademico: function () {
@@ -306,32 +298,30 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-                gradohonor = $("#gradohonor").val();
-                grupohonor = $("#grupohonor").val();
-                gradoatencion = $("#gradoatencion").val();
-                grupoatencion = $("#grupoatencion").val();
-                Reportes.getAlumnoAca(gradohonor, grupohonor);
-                Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
-                $("#guardacomportammiento").on('click', function () {
-                    Reportes.guardaComportamiento();
-                });
-                $("#guardasemana").on('click', function () {
-                    Reportes.guardaSemana();
-                });
-                $("#guardasemana2").on('click', function () {
-                    Reportes.guardaSemana2();
-                });
-                $("#guardareporteA").on('click', function () {
-                    Reportes.guardarA();
-                });
-                $("#actividadsemanal").on('click', function () {
-                    Reportes.guardaActividadSemanal();
-                });
+                else {
+                    $("#content").html(arguments[0]);
+                    gradohonor = $("#gradohonor").val();
+                    grupohonor = $("#grupohonor").val();
+                    gradoatencion = $("#gradoatencion").val();
+                    grupoatencion = $("#grupoatencion").val();
+                    Reportes.getAlumnoAca(gradohonor, grupohonor);
+                    Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
+                    $("#guardacomportammiento").on('click', function () {
+                        Reportes.guardaComportamiento();
+                    });
+                    $("#guardasemana").on('click', function () {
+                        Reportes.guardaSemana();
+                    });
+                    $("#guardasemana2").on('click', function () {
+                        Reportes.guardaSemana2();
+                    });
+                    $("#guardareporteA").on('click', function () {
+                        Reportes.guardarA();
+                    });
+                    $("#actividadsemanal").on('click', function () {
+                        Reportes.guardaActividadSemanal();
+                    });
+                }
             });
         },
         guardarA: function () {
@@ -354,12 +344,10 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
-                Reportes.imagenReporteAca();
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Reportes.imagenReporteAca();
+                }
             });
         },
         guardaActividadSemanal: function () {
@@ -379,11 +367,8 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
+                else
+                    swal("Hecho!", "Datos guardados correctamente", "success");
             });
         },
         guardaComportamiento: function () {
@@ -398,12 +383,10 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
-                Reportes.reporteDisciplinar();
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Reportes.reporteDisciplinar();
+                }
             });
         },
         guardaSemana: function () {
@@ -418,11 +401,8 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
+                else
+                    swal("Hecho!", "Datos guardados correctamente", "success");
             });
         },
         guardaSemana2: function () {
@@ -437,11 +417,8 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
+                else
+                    swal("Hecho!", "Datos guardados correctamente", "success");
             });
         },
         imagenReporteAca: function () {
@@ -458,12 +435,12 @@ var Reportes = (function () {
                             console.log(data);
                             console.log(image);
                             $("#blanko").attr('href', canvas.toDataURL("image/png"));
-                             $("#blanko").attr('download', "Image.png")
-                             $("#blanko")[0].click();
+                            $("#blanko").attr('download', "Image.png")
+                            $("#blanko")[0].click();
                         }
                     });
-                   /* var file = dataURLtoFile(data, 'image.png');
-                    console.log(file);*/
+                    /* var file = dataURLtoFile(data, 'image.png');
+                     console.log(file);*/
 
                     /* html2canvas($(".imagen"), {
                      dpi: 192,
@@ -477,21 +454,21 @@ var Reportes = (function () {
 
             });
         },
-        
+
     }
     ;
 }());
 function dataURLtoFile(dataurl, filename) {
- 
-        var arr = dataurl.split(','),
+
+    var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), 
-            n = bstr.length, 
+            bstr = atob(arr[1]),
+            n = bstr.length,
             u8arr = new Uint8Array(n);
-            
-        while(n--){
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        
-        return new File([u8arr], filename, {type:mime});
+
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
     }
+
+    return new File([u8arr], filename, {type: mime});
+}
