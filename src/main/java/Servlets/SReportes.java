@@ -20,6 +20,7 @@ import Modelos.TbPersonal;
 import Modelos.TbReporteAcademico;
 import Modelos.TbReporteDisciplinar;
 import Modelos.TbTareaSemanal;
+import Modelos.ImagenReporteAcademico;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,9 +45,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import javax.servlet.annotation.MultipartConfig;
+import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -63,7 +67,7 @@ public class SReportes extends HttpServlet {
     AdministradorController adminC;
     ObjectMapper mapper;
     String objectJson;
-    int tipoescuelareporteD = 0;
+    int tipoescuelareporte = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -95,7 +99,7 @@ public class SReportes extends HttpServlet {
                 break;
             case "alumnoGradoGrupo":
                 try {
-                alumnoGradoGrupo(request, response);
+                    alumnoGradoGrupo(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -107,7 +111,7 @@ public class SReportes extends HttpServlet {
                 break;
             case "GUARDAR":
                 try {
-                   guardaReporteD(request, response); 
+                    guardaReporteD(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -125,7 +129,7 @@ public class SReportes extends HttpServlet {
                 break;
             case "editarReporteD":
                 try {
-                   editarReporteD(request, response); 
+                    editarReporteD(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -165,6 +169,12 @@ public class SReportes extends HttpServlet {
             case "guardaSemana":
                 try {
                     guardaSemana(request, response);
+                } catch (Exception e) {
+                }
+                break;
+            case "GuardaImagenA":
+                try {
+                    GuardaImagenA(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -220,7 +230,7 @@ public class SReportes extends HttpServlet {
         List<TbMateria> listmateria = new ArrayList<>();
         List<CtIncidente> listincidente = new ArrayList<>();
         try {
-            tipoescuelareporteD = Integer.parseInt(request.getParameter("TIPOESCUELA"));
+            tipoescuelareporte = Integer.parseInt(request.getParameter("TIPOESCUELA"));
             listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);
             listgrado = adminC.getGrado(Integer.parseInt(request.getParameter("TIPOESCUELA")));
@@ -235,12 +245,11 @@ public class SReportes extends HttpServlet {
             request.setAttribute("listincidente", listincidente);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/reportedisciplinar.jsp");
             rd.forward(request, response);
-        
+
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
-            response.sendError(204);            
-            
-            
+            response.sendError(204);
+
         }
     }
 
@@ -288,6 +297,7 @@ public class SReportes extends HttpServlet {
         List<CtGrupo> listgrupo = new ArrayList<>();
         List<CtAtencion> listatencion = new ArrayList<>();
         try {
+            tipoescuelareporte = Integer.parseInt(request.getParameter("TIPOESCUELA"));
             listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);
             listsemana = alumnoC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
@@ -405,7 +415,7 @@ public class SReportes extends HttpServlet {
             String foto = (String.valueOf(request.getParameter("Archivo")));
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
-                System.out.println("OTRA RUTA" +applicationPath);
+                System.out.println("OTRA RUTA" + applicationPath);
                 String uploadPath = "/home/escape9/sistema.iterra.edu.mx/reportes"; //applicationPath + File.separator + "archivos";
                 //String uploadPath = "/home/escape9/";
                 File fileUploadDirectory = new File(uploadPath);
@@ -433,7 +443,7 @@ public class SReportes extends HttpServlet {
             reporteD.setRpersonal(Integer.parseInt(request.getParameter("Personal")));
             reporteD.setLugar(String.valueOf(request.getParameter("Lugarincidente")));
             reporteD.setDescripcion(String.valueOf(request.getParameter("Descripcion")));
-            alumnoC.guardaReporteD(reporteD, ruta, status, tipoescuelareporteD);
+            alumnoC.guardaReporteD(reporteD, ruta, status, tipoescuelareporte);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -459,7 +469,7 @@ public class SReportes extends HttpServlet {
         }
     }
 
-    private void infoReporteD(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    private void infoReporteD(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumnoC = new AlumnosController();
         TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
         try {
@@ -591,6 +601,51 @@ public class SReportes extends HttpServlet {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
+    }
+
+    private void GuardaImagenA(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        alumnoC = new AlumnosController();
+        ImagenReporteAcademico datos = new ImagenReporteAcademico();
+        String base64 = String.valueOf(request.getParameter("inputa"));
+        String[] strings = base64.split(",");
+        String extension = null;
+        switch (strings[0]) {
+            case "data:image/jpeg;base64":
+                extension = "jpeg";
+                break;
+            case "data:image/png;base64":
+                extension = "png";
+                break;
+            case "data:image/jpg;base64":
+                extension = "jpg";
+                break;
+        }
+        try {
+            datos = alumnoC.datosGuardaImagen(tipoescuelareporte);
+            byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
+            //String path = "C:/Users/Complx/Desktop/test_image." + extension;
+            String path = "/home/escape9/sistema.iterra.edu.mx/reportes";
+            //String path= "C:\\Users\\Complx\\Desktop\\Agosto 2019-Diciembre 2019\\Lunes 15 de Sep - Viernes 19 de Sep\\Diana IvetteMontejoArroyo\\Historia\\imagen2.png";
+            String path1 = "/"+datos.getPeriodo()+"/"+datos.getSemanafiscal()+"/"+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+"/"+datos.getNombremateria()+"/imagen3."+extension;
+            String realpath = path.concat(path1);
+            System.out.println(realpath);
+            File file = new File(realpath);
+            if (!file.exists()) {
+                    file.mkdirs();
+                }
+            try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
+                output.write(data);
+            } catch (Exception e) {
+                System.out.println(e);
+                response.addHeader("ERROR", e.toString());
+                response.sendError(204);
+
+            }
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+
     }
 
 }

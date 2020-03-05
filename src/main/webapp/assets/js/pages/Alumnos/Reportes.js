@@ -441,19 +441,22 @@ var Reportes = (function () {
                 ACCION: "imagenReporteAca"
             }).then(function () {
                 $("#content").html(arguments[0]);
-                $("#guardarimagen").on('click', function () {
                     html2canvas([document.getElementById('imagen')], {
                         onrendered: function (canvas) {
-                            var data = canvas.toDataURL('image/png');
+                            alert("entra");
+                            var data = canvas.toDataURL();
                             var image = new Image();
                             image.src = data;
                             console.log(data);
-                            console.log(image);
-                            var x = $("#blanko").attr('href', canvas.toDataURL("image/png"));
-                            $("#blanko").attr('download', "Image.png");
+                             var x = $("#inputA").val(data);
+                           // var x = document.getElementById('inputA').value(data);
+                            console.log(x);
+                            $("#blanko").attr('href', canvas.toDataURL("image/png"));
+                            //$("#blanko").attr('download', "Image.png");
                             $("#blanko")[0].click();
                         }
                     });
+                    Reportes.formReporteA();
                     /* var file = dataURLtoFile(data, 'image.png');
                      console.log(file);*/
 
@@ -465,8 +468,12 @@ var Reportes = (function () {
                      $("#blanko")[0].click();
                      }
                      })*/
-                })
 
+            });
+        },
+        formReporteA: function(){
+            $('form[name="formaReporteA"]').ajaxForm(function () {
+                //swal("Hecho!", "Datos guardados correctamente", "success");
             });
         },
 

@@ -13,6 +13,7 @@ import Modelos.TbMateria;
 import Modelos.Alumno;
 import Modelos.CtAtencion;
 import Modelos.CtSemanaFiscal;
+import Modelos.ImagenReporteAcademico;
 import Modelos.TbReporteAcademico;
 import Modelos.TbReporteDisciplinar;
 import Modelos.TbTareaSemanal;
@@ -164,6 +165,11 @@ public class AlumnosController {
     public void guardaSemana(CtSemanaFiscal semana, int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardaSemana(semana, tipoescuela);
+    }
+
+    public ImagenReporteAcademico datosGuardaImagen(int tipoescuela) throws Exception {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.datosGuardaImagen(tipoescuela);
     }
 
 }

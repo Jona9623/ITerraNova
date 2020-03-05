@@ -11,6 +11,7 @@ import Modelos.CtIncidente;
 import Modelos.CtPeriodoEscolar;
 import Modelos.CtPuesto;
 import Modelos.CtSemanaFiscal;
+import Modelos.ImagenReporteAcademico;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
 import Modelos.TbReporteAcademico;
@@ -632,8 +633,8 @@ public class ConsultasAlumno {
             pst.setInt(3, tarea.getRdia());
             pst.setInt(4, tarea.getRpersonal());
             pst.setString(5, tarea.getFechaentrega());
-            pst.setInt(6,1);
-            pst.setInt(7,tipoescuela);
+            pst.setInt(6, 1);
+            pst.setInt(7, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -671,8 +672,8 @@ public class ConsultasAlumno {
             pst.setInt(5, reporteA.getRalumnoatencion());
             pst.setInt(6, reporteA.getRatencion());
             pst.setInt(7, reporteA.getRperiodo());
-            pst.setInt(8,1);
-            pst.setInt(9,tipoescuela);
+            pst.setInt(8, 1);
+            pst.setInt(9, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -757,6 +758,50 @@ public class ConsultasAlumno {
                 System.out.println(e);
             }
         }
+    }
+
+    public ImagenReporteAcademico datosGuardaImagen(int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ImagenReporteAcademico datosA = new ImagenReporteAcademico();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "SELECT tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno, ct_datosmateria.nombrecorto, ct_periodoescolar.nombre, ct_semanafiscal.nombre from tb_reporteacademico inner join tb_personal\n"
+                    + "on tb_reporteacademico.r_personal = tb_personal.idTb_Personal inner join\n"
+                    + "ct_semanafiscal on tb_reporteacademico.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join\n"
+                    + "ct_periodoescolar on tb_reporteacademico.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join\n"
+                    + "tb_materia on tb_reporteacademico.r_materia = tb_materia.idTb_Materia inner join\n"
+                    + "ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where tb_reporteacademico.status = 1 and tb_reporteacademico.tipoescuela = ? order by tb_reporteacademico.idTb_ReporteAcademico desc limit 1";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                datosA.setNombreP(rs.getString("tb_personal.nombre"));
+                datosA.setApellidopP(rs.getString("tb_personal.apellidopaterno"));
+                datosA.setApellidomP(rs.getString("tb_personal.apellidomaterno"));
+                datosA.setNombremateria(rs.getString("ct_datosmateria.nombrecorto"));
+                datosA.setPeriodo(rs.getString("ct_periodoescolar.nombre"));
+                datosA.setSemanafiscal(rs.getString("ct_semanafiscal.nombre"));
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return datosA;
     }
 
 }

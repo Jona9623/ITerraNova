@@ -4,6 +4,7 @@ Modelos\TbAlumnos.class
 Servlets\SAdminpersonal.class
 BD\ConsultasAlumno.class
 Modelos\Usuario.class
+Modelos\ImagenReporteAcademico.class
 Servlets\SAdminalumno.class
 Modelos\Alumno.class
 Modelos\CtDatosMateria.class
