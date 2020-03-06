@@ -172,4 +172,14 @@ public class AlumnosController {
         return consulta.datosGuardaImagen(tipoescuela);
     }
 
+    public TbReporteAcademico datosReporteA(int tipoescuelareporte)  throws Exception{
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.datosReporteA(tipoescuelareporte);
+    }
+
+    public TbTareaSemanal datosTareaSemanal(int tipoescuelareporte)throws Exception{
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.datosTareaSemanal(tipoescuelareporte);
+    }
+
 }

@@ -16,6 +16,16 @@ public class ImagenReporteAcademico {
     private String nombremateria;
     private String periodo;
     private String semanafiscal;
+    private String actual;
+
+    public String getActual() {
+        return actual;
+    }
+
+    public void setActual(String actual) {
+        this.actual = actual;
+    }
+    
 
     public String getNombreP() {
         return nombreP;

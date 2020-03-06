@@ -15,11 +15,74 @@ public class TbReporteAcademico {
     private int rmateria;
     private int rsemana;
     private int ralumnohonor;
+    private String nombrehonor;
+    private String apellidophonor;
+    private String apellidomhonor;
     private int ralumnoatencion;
+    private String nombreatencion;
+    private String apellidopatencion;
+    private String apellidomatencion;
     private int ratencion;
+    private String atencion;
     private int rperiodo;
     private int status;
     private int tipoescuela;
+
+    public String getNombrehonor() {
+        return nombrehonor;
+    }
+
+    public void setNombrehonor(String nombrehonor) {
+        this.nombrehonor = nombrehonor;
+    }
+
+    public String getApellidophonor() {
+        return apellidophonor;
+    }
+
+    public void setApellidophonor(String apellidophonor) {
+        this.apellidophonor = apellidophonor;
+    }
+
+    public String getApellidomhonor() {
+        return apellidomhonor;
+    }
+
+    public void setApellidomhonor(String apellidomhonor) {
+        this.apellidomhonor = apellidomhonor;
+    }
+
+    public String getNombreatencion() {
+        return nombreatencion;
+    }
+
+    public void setNombreatencion(String nombreatencion) {
+        this.nombreatencion = nombreatencion;
+    }
+
+    public String getApellidopatencion() {
+        return apellidopatencion;
+    }
+
+    public void setApellidopatencion(String apellidopatencion) {
+        this.apellidopatencion = apellidopatencion;
+    }
+
+    public String getApellidomatencion() {
+        return apellidomatencion;
+    }
+
+    public void setApellidomatencion(String apellidomatencion) {
+        this.apellidomatencion = apellidomatencion;
+    }
+
+    public String getAtencion() {
+        return atencion;
+    }
+
+    public void setAtencion(String atencion) {
+        this.atencion = atencion;
+    }
 
     public int getRperiodo() {
         return rperiodo;

@@ -161,6 +161,16 @@
                                 </div>
                                 <div class="card-body " id="bar-parent2">
                                     <div class="row">
+                                      <div class="col-lg-4 p-t-20">
+                                            <label >Seleccione Periodo</label>
+                                            <select id="periodoactividad" name="periodoactividad" class="custom-select">
+                                                <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
+                                                    <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>  
+                                    </div>
+                                    <div class="row">
                                         <div class="col-lg-4 p-t-20">
                                             <label >Seleccione Semana fiscal</label>
                                             <select id="semanafiscalactividad" name="semanafiscal" class="custom-select">
@@ -174,7 +184,7 @@
                                                 <div class="card-body row">
                                                     <div class="col-lg-4 p-t-20"> 
                                                         <div class="form-group">
-                                                            <label >Seleccione el dia</label>
+                                                            <label >Seleccione el dia actual</label>
                                                             <select id="diaactividad" name="semanafiscal" class="custom-select">
                                                                 <option value="1"> Lunes </option>
                                                                 <option value="2"> Martes </option>

@@ -15,8 +15,8 @@
             <img alt="" src="assets/img/warning.png" style="width: 400px; height: 400px;">
         </div>
         <div class="col-xl-12 center"> <br> <br>
-            Alumnos que requieren atencion: <br>
-            Jonathan Trujillo Capetillo
+            Alumnos que requieren atencion debido al siguiente problema:<strong> ${requestScope.reporteA.atencion} </strong> <br>
+            ${requestScope.reporteA.nombreatencion} ${requestScope.reporteA.apellidopatencion} ${requestScope.reporteA.apellidomatencion}
         </div><br> <br>
         <div class="col-xl-12"></div>
         <div class="col-xl-12"></div>
@@ -27,9 +27,9 @@
         </div>
         <div class="col-xl-12 center">
             Alumnos que sobresalieron esta semana: <br>
-            Melissa Guadalupe Perez Cabrera
+            ${requestScope.reporteA.nombrehonor} ${requestScope.reporteA.apellidophonor} ${requestScope.reporteA.apellidomhonor}
         </div>
-        <button id="guardarimagen" type="submit">button</button>
+        <button id="guardarimagen" type="submit">Generar Imagen</button>
         <a href="" id="blanko"></a>
     </div>
 </form>

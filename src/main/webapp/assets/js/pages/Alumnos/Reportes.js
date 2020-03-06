@@ -360,6 +360,7 @@ var Reportes = (function () {
         },
         guardaActividadSemanal: function () {
             var actividad = {
+                "rperiodo": $("#periodoactividad").val(),
                 "rsemana": $("#semanafiscalactividad").val(),
                 "tarea": $("#actividad").val(),
                 "rdia": $("#diaactividad").val(),
@@ -378,7 +379,7 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else{
                     swal("Hecho!", "Datos guardados correctamente", "success");
-                    Reportes.reporteAcademico();
+                    Reportes.imagenReporteActividad();
             }
             });
         },
@@ -439,8 +440,12 @@ var Reportes = (function () {
         imagenReporteAca: function () {
             $.get("SReportes", {
                 ACCION: "imagenReporteAca"
-            }).then(function () {
-                $("#content").html(arguments[0]);
+            }).done(function (xhr,status,error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                   $("#content").html(arguments[0]);
+                $("#guardarimagen").hide();
                     html2canvas([document.getElementById('imagen')], {
                         onrendered: function (canvas) {
                             alert("entra");
@@ -456,26 +461,58 @@ var Reportes = (function () {
                             $("#blanko")[0].click();
                         }
                     });
-                    Reportes.formReporteA();
-                    /* var file = dataURLtoFile(data, 'image.png');
-                     console.log(file);*/
-
-                    /* html2canvas($(".imagen"), {
-                     dpi: 192,
-                     onrendered: function (canvas) {
-                     $("#blanko").attr('href', canvas.toDataURL("image/png"));
-                     $("#blanko").attr('download', "Image.png")
-                     $("#blanko")[0].click();
-                     }
-                     })*/
-
+                    $("#guardarimagen").show();
+                    Reportes.formReporteA(); 
+                }
+            });
+        },
+        imagenReporteActividad: function(){
+            $.get("SReportes", {
+                ACCION: "imagenReporteActividad"
+            }).done(function (xhr,status,error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                   $("#content").html(arguments[0]);
+                $("#guardarimagen").hide();
+                    html2canvas([document.getElementById('imagenAc')], {
+                        onrendered: function (canvas) {
+                            var data = canvas.toDataURL();
+                            var image = new Image();
+                            image.src = data;
+                            console.log(data);
+                             var x = $("#inputB").val(data);
+                           // var x = document.getElementById('inputA').value(data);
+                            console.log(x);
+                            $("#blank").attr('href', canvas.toDataURL("image/png"));
+                            //$("#blanko").attr('download', "Image.png");
+                            $("#blank")[0].click();
+                        }
+                    });
+                    $("#guardarimagen").show();
+                    Reportes.formImagenActividad(); 
+                }
             });
         },
         formReporteA: function(){
             $('form[name="formaReporteA"]').ajaxForm(function () {
-                //swal("Hecho!", "Datos guardados correctamente", "success");
+                
+            }).done(function(xhr,status,error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    swal("Hecho!", "Imagen guardada correctamente", "success");
             });
         },
+        formImagenActividad: function(){
+            $('form[name="formActividad"]').ajaxForm(function () {
+            }).done(function(xhr,status,error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    swal("Hecho!", "Imagen guardada correctamente", "success");
+            });
+        }
 
     }
     ;

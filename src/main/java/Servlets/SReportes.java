@@ -45,10 +45,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.OutputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.annotation.MultipartConfig;
 import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.fileupload.FileItem;
@@ -175,6 +178,18 @@ public class SReportes extends HttpServlet {
             case "GuardaImagenA":
                 try {
                     GuardaImagenA(request, response);
+                } catch (Exception e) {
+                }
+                break;
+            case "imagenReporteActividad":
+                try {
+                    imagenReporteActividad(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "GuardaImagenActividad":
+                try {
+                    GuardaImagenActividad(request,response);
                 } catch (Exception e) {
                 }
                 break;
@@ -565,13 +580,18 @@ public class SReportes extends HttpServlet {
         }
     }
 
-    private void imagenReporteAca(HttpServletRequest request, HttpServletResponse response) {
+    private void imagenReporteAca(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        alumnoC = new AlumnosController();
+        TbReporteAcademico reporteA = new TbReporteAcademico();
         try {
+            reporteA = alumnoC.datosReporteA(tipoescuelareporte);
+            request.setAttribute("reporteA", reporteA);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/imagenreporteaca.jsp");
             rd.forward(request, response);
 
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
@@ -609,6 +629,7 @@ public class SReportes extends HttpServlet {
         String base64 = String.valueOf(request.getParameter("inputa"));
         String[] strings = base64.split(",");
         String extension = null;
+        Date date = new Date();
         switch (strings[0]) {
             case "data:image/jpeg;base64":
                 extension = "jpeg";
@@ -621,18 +642,19 @@ public class SReportes extends HttpServlet {
                 break;
         }
         try {
+            DateFormat horafecha = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+            String actual = horafecha.format(date);
+            actual = actual.replace("/", "-");
+            actual = actual.replace(" ", "");
             datos = alumnoC.datosGuardaImagen(tipoescuelareporte);
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-            //String path = "C:/Users/Complx/Desktop/test_image." + extension;
-            String path = "/home/escape9/sistema.iterra.edu.mx/reportes";
+            String path = "C:\\Users\\Complx\\Desktop\\"+datos.getPeriodo()+datos.getSemanafiscal()+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+datos.getNombremateria()+actual+".png";
+            //String path = "/home/escape9/sistema.iterra.edu.mx/reportes";
             //String path= "C:\\Users\\Complx\\Desktop\\Agosto 2019-Diciembre 2019\\Lunes 15 de Sep - Viernes 19 de Sep\\Diana IvetteMontejoArroyo\\Historia\\imagen2.png";
-            String path1 = "/"+datos.getPeriodo()+"/"+datos.getSemanafiscal()+"/"+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+"/"+datos.getNombremateria()+"/imagen3."+extension;
-            String realpath = path.concat(path1);
-            System.out.println(realpath);
-            File file = new File(realpath);
-            if (!file.exists()) {
-                    file.mkdirs();
-                }
+           // String path1 = datos.getPeriodo()+datos.getSemanafiscal()+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+datos.getNombremateria();
+            //String realpath = path.concat(path1);
+            System.out.println(path);
+            File file = new File(path);
             try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
                 output.write(data);
             } catch (Exception e) {
@@ -646,6 +668,51 @@ public class SReportes extends HttpServlet {
             response.sendError(204);
         }
 
+    }
+
+    private void imagenReporteActividad(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        alumnoC = new AlumnosController();
+        TbTareaSemanal tarea = new TbTareaSemanal();
+        try {
+            tarea = alumnoC.datosTareaSemanal(tipoescuelareporte);
+            request.setAttribute("tarea", tarea);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/imagentareasemanal.jsp");
+            rd.forward(request, response);
+
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+
+    private void GuardaImagenActividad(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        alumnoC = new AlumnosController();
+        ImagenReporteAcademico datos = new ImagenReporteAcademico();
+        String base64 = String.valueOf(request.getParameter("inputb"));
+        Date date = new Date();
+        String[] strings = base64.split(",");
+        try {
+            DateFormat horafecha = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+            String actual = horafecha.format(date);
+            actual = actual.replace("/", "-");
+            datos = alumnoC.datosGuardaImagen(tipoescuelareporte);
+            datos.setActual(actual);
+            byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
+            String path = "C:\\Users\\Complx\\Desktop\\"+datos.getPeriodo()+datos.getSemanafiscal()+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+datos.getActual()+".png";
+            System.out.println(path);
+            File file = new File(path);
+            try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
+                output.write(data);
+            } catch (Exception e) {
+                System.out.println(e);
+                response.addHeader("ERROR", e.toString());
+                response.sendError(204);
+
+            }
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
     }
 
 }
