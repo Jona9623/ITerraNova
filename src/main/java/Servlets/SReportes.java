@@ -71,6 +71,9 @@ public class SReportes extends HttpServlet {
     ObjectMapper mapper;
     String objectJson;
     int tipoescuelareporte = 0;
+    private String imagenAcademico;
+    private String imagenTarea;
+    private String actual;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -183,13 +186,19 @@ public class SReportes extends HttpServlet {
                 break;
             case "imagenReporteActividad":
                 try {
-                    imagenReporteActividad(request,response);
+                    imagenReporteActividad(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "GuardaImagenActividad":
                 try {
-                    GuardaImagenActividad(request,response);
+                    GuardaImagenActividad(request, response);
+                } catch (Exception e) {
+                }
+                break;
+            case "mostrarReportesAca":
+                try {
+                    mostrarReportesAca(request,response);
                 } catch (Exception e) {
                 }
                 break;
@@ -554,11 +563,17 @@ public class SReportes extends HttpServlet {
 
     private void guardaActividadSemanal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumnoC = new AlumnosController();
+        Date date = new Date();
         TbTareaSemanal tarea = new TbTareaSemanal();
         mapper = new ObjectMapper();
         objectJson = request.getParameter("OBJETO");
+        DateFormat horafecha = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        actual = horafecha.format(date);
+        actual = actual.replace("/", "-");
+        actual = actual.replace(":", "-");
         try {
             tarea = mapper.readValue(objectJson, TbTareaSemanal.class);
+            imagenTarea = tarea.getNombreimagen();
             alumnoC.guardaActividadSemanal(tarea, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
@@ -568,11 +583,17 @@ public class SReportes extends HttpServlet {
 
     private void guardaReporteAcademico(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TbReporteAcademico reporteA = new TbReporteAcademico();
+        Date date = new Date();
         alumnoC = new AlumnosController();
         mapper = new ObjectMapper();
         objectJson = request.getParameter("OBJETO");
+        DateFormat horafecha = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        actual = horafecha.format(date);
+        actual = actual.replace("/", "-");
+        actual = actual.replace(":", "-");
         try {
             reporteA = mapper.readValue(objectJson, TbReporteAcademico.class);
+            imagenAcademico = reporteA.getNombreimagen();
             alumnoC.guardaReporteAcademico(reporteA, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
@@ -629,7 +650,6 @@ public class SReportes extends HttpServlet {
         String base64 = String.valueOf(request.getParameter("inputa"));
         String[] strings = base64.split(",");
         String extension = null;
-        Date date = new Date();
         switch (strings[0]) {
             case "data:image/jpeg;base64":
                 extension = "jpeg";
@@ -642,16 +662,13 @@ public class SReportes extends HttpServlet {
                 break;
         }
         try {
-            DateFormat horafecha = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-            String actual = horafecha.format(date);
-            actual = actual.replace("/", "-");
-            actual = actual.replace(" ", "");
             datos = alumnoC.datosGuardaImagen(tipoescuelareporte);
+            System.out.println(actual);
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-            String path = "C:\\Users\\Complx\\Desktop\\"+datos.getPeriodo()+datos.getSemanafiscal()+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+datos.getNombremateria()+actual+".png";
+            String path = "/home/escape9/public_html/centro/reportes/cuadrohonor_cuadroatencion/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP() + datos.getNombremateria()+".png";
             //String path = "/home/escape9/sistema.iterra.edu.mx/reportes";
             //String path= "C:\\Users\\Complx\\Desktop\\Agosto 2019-Diciembre 2019\\Lunes 15 de Sep - Viernes 19 de Sep\\Diana IvetteMontejoArroyo\\Historia\\imagen2.png";
-           // String path1 = datos.getPeriodo()+datos.getSemanafiscal()+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+datos.getNombremateria();
+            // String path1 = datos.getPeriodo()+datos.getSemanafiscal()+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+datos.getNombremateria();
             //String realpath = path.concat(path1);
             System.out.println(path);
             File file = new File(path);
@@ -689,16 +706,12 @@ public class SReportes extends HttpServlet {
         alumnoC = new AlumnosController();
         ImagenReporteAcademico datos = new ImagenReporteAcademico();
         String base64 = String.valueOf(request.getParameter("inputb"));
-        Date date = new Date();
         String[] strings = base64.split(",");
         try {
-            DateFormat horafecha = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-            String actual = horafecha.format(date);
-            actual = actual.replace("/", "-");
             datos = alumnoC.datosGuardaImagen(tipoescuelareporte);
-            datos.setActual(actual);
+            System.out.println(actual);
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-            String path = "C:\\Users\\Complx\\Desktop\\"+datos.getPeriodo()+datos.getSemanafiscal()+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+datos.getActual()+".png";
+            String path = "/home/escape9/public_html/centro/reportes/actividad_semanal/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP()+".png";
             System.out.println(path);
             File file = new File(path);
             try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
@@ -713,6 +726,24 @@ public class SReportes extends HttpServlet {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
+    }
+
+    private void mostrarReportesAca(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        alumnoC = new AlumnosController();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List<TbReporteAcademico> alumnosacademico = new ArrayList<>();
+        try {
+            listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            alumnosacademico = alumnoC.getAlumnosReporteA(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("alumnosacademico", alumnosacademico);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablareportesAca.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+        
     }
 
 }

@@ -18,21 +18,21 @@ var Reportes = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
-                   $("#content").html(arguments[0]);
-                grado = $("#gradodisciplinar").val();
-                grupo = $("#grupodisciplinar").val();
-                Reportes.getAlumno(grado, grupo);
-                $("#agregafalta").on('click', function () {
+                    $("#content").html(arguments[0]);
+                    grado = $("#gradodisciplinar").val();
+                    grupo = $("#grupodisciplinar").val();
+                    Reportes.getAlumno(grado, grupo);
+                    $("#agregafalta").on('click', function () {
 
-                    Reportes.agregaFalta();
-                });
-                $("#guardaincidente").on('click', function () {
-                    Reportes.guardaIncidente(Reportes.datosIncidente(), "guardaIncidente");
-                });
-                Reportes.guardarD();
-                $("#mostrarreportes").on('click', function () {
-                    Reportes.mostrarReportes();
-                }); 
+                        Reportes.agregaFalta();
+                    });
+                    $("#guardaincidente").on('click', function () {
+                        Reportes.guardaIncidente(Reportes.datosIncidente(), "guardaIncidente");
+                    });
+                    Reportes.guardarD();
+                    $("#mostrarreportes").on('click', function () {
+                        Reportes.mostrarReportes();
+                    });
                 }
             });
         },
@@ -111,17 +111,17 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#alumnogradoD").html(arguments[0]);
-                $("#gradodisciplinar").change(function () {
-                    grado = $("#gradodisciplinar").val()
-                    Reportes.getAlumno(grado, grupo)
-                }),
-                        $("#grupodisciplinar").change(function () {
-                    grupo = $("#grupodisciplinar").val();
-                    Reportes.getAlumno(grado, grupo);
-                });
-                $("#agregafalta").on('click', function () {
-                    Reportes.agregaFalta();
-                });
+                    $("#gradodisciplinar").change(function () {
+                        grado = $("#gradodisciplinar").val()
+                        Reportes.getAlumno(grado, grupo)
+                    }),
+                            $("#grupodisciplinar").change(function () {
+                        grupo = $("#grupodisciplinar").val();
+                        Reportes.getAlumno(grado, grupo);
+                    });
+                    $("#agregafalta").on('click', function () {
+                        Reportes.agregaFalta();
+                    });
                 }
             });
         },
@@ -138,27 +138,27 @@ var Reportes = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
-                   //  $("#alumnogradoA").html(arguments[0]);
-                $("#alumnogradoAA").html(arguments[0]);
-                $("#gradohonor").change(function () {
-                    gradohonor = $("#gradohonor").val();
-                    Reportes.getAlumnoAca(gradohonor, grupohonor)
-                }),
-                        $("#grupohonor").change(function () {
-                    grupohonor = $("#grupohonor").val();
-                    Reportes.getAlumnoAca(gradohonor, grupohonor)
-                })
-                /* $("#gradoatencion").change(function () {
-                 gradoatencion = $("#gradoatencion").val();
-                 Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
-                 }),
-                 $("#grupoatencion").change(function () {
-                 grupoatencion = $("#grupoatencion").val();
-                 Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
-                 });
-                 $("#agregacomp").on('click', function () {
-                 Reportes.agregaComportamiento();
-                 });*/ 
+                    //  $("#alumnogradoA").html(arguments[0]);
+                    $("#alumnogradoAA").html(arguments[0]);
+                    $("#gradohonor").change(function () {
+                        gradohonor = $("#gradohonor").val();
+                        Reportes.getAlumnoAca(gradohonor, grupohonor)
+                    }),
+                            $("#grupohonor").change(function () {
+                        grupohonor = $("#grupohonor").val();
+                        Reportes.getAlumnoAca(gradohonor, grupohonor)
+                    })
+                    /* $("#gradoatencion").change(function () {
+                     gradoatencion = $("#gradoatencion").val();
+                     Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
+                     }),
+                     $("#grupoatencion").change(function () {
+                     grupoatencion = $("#grupoatencion").val();
+                     Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
+                     });
+                     $("#agregacomp").on('click', function () {
+                     Reportes.agregaComportamiento();
+                     });*/
                 }
             });
         },
@@ -176,14 +176,14 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#alumnogradoA").html(arguments[0]);
-                $("#gradoatencion").change(function () {
-                    gradoatencion = $("#gradoatencion").val();
-                    Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
-                }),
-                        $("#grupoatencion").change(function () {
-                    grupoatencion = $("#grupoatencion").val();
-                    Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
-                });
+                    $("#gradoatencion").change(function () {
+                        gradoatencion = $("#gradoatencion").val();
+                        Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
+                    }),
+                            $("#grupoatencion").change(function () {
+                        grupoatencion = $("#grupoatencion").val();
+                        Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
+                    });
                 }
             });
         },
@@ -308,6 +308,9 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#content").html(arguments[0]);
+                    $("#mostrarreportesaca").on('click', function () {
+                        Reportes.mostrarReportesAcademicos();
+                    });
                     gradohonor = $("#gradohonor").val();
                     grupohonor = $("#grupohonor").val();
                     gradoatencion = $("#gradoatencion").val();
@@ -332,6 +335,29 @@ var Reportes = (function () {
                 }
             });
         },
+        mostrarReportesAcademicos: function () {
+            $.get("SReportes", {
+                ACCION: "mostrarReportesAca",
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#tablareporteA").DataTable({
+                        "scrollX": true
+                    });
+                    var id = $('#consultareporteA').find('#periodotablaA').val();
+                    $('#consultareporteA').find('tr[name^="alumno-"]').hide();
+                    $('#consultareporteA').find('tr[name="alumno-' + id + '"]').show();
+                    $('#consultareporteA').find('#periodotablaA').change(function () {
+                        $('#consultareporteA').find('tr[name^="alumno-"]').hide();
+                        $('#consultareporteA').find('tr[name="alumno-' + $(this).val() + '"]').show();
+                    });
+                }
+
+            });
+        },
         guardarA: function () {
             var reporteA = {
                 "rpersonal": $("#personalreporteA").val(),
@@ -340,7 +366,8 @@ var Reportes = (function () {
                 "ralumnohonor": $("#alumnohonor").val(),
                 "ralumnoatencion": $("#alumnoatencion").val(),
                 "ratencion": $("#comportamiento").val(),
-                "rperiodo": $("#periodoA").val()
+                "rperiodo": $("#periodoA").val(),
+                "nombreimagen": $("#nombrearchivob").val()
             }
             $.get("SReportes", {
                 ACCION: "guardaReporteAcademico",
@@ -365,7 +392,8 @@ var Reportes = (function () {
                 "tarea": $("#actividad").val(),
                 "rdia": $("#diaactividad").val(),
                 "rpersonal": $("#personalactividad").val(),
-                "fechaentrega": $("#fechaentrega").val()
+                "fechaentrega": $("#fechaentrega").val(),
+                "nombreimagen": $("#nombrearchivoa").val()
             }
             $.get("SReportes", {
                 ACCION: "guardaActividadSemanal",
@@ -377,10 +405,10 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else{
+                else {
                     swal("Hecho!", "Datos guardados correctamente", "success");
                     Reportes.imagenReporteActividad();
-            }
+                }
             });
         },
         guardaComportamiento: function () {
@@ -413,7 +441,7 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else{
+                else {
                     swal("Hecho!", "Datos guardados correctamente", "success");
                     Reportes.reporteAcademico();
                 }
@@ -431,21 +459,21 @@ var Reportes = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else{
+                else {
                     swal("Hecho!", "Datos guardados correctamente", "success");
                     Reportes.reporteAcademico();
-            }
+                }
             });
         },
         imagenReporteAca: function () {
             $.get("SReportes", {
                 ACCION: "imagenReporteAca"
-            }).done(function (xhr,status,error){
+            }).done(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
-                   $("#content").html(arguments[0]);
-                $("#guardarimagen").hide();
+                    $("#content").html(arguments[0]);
+                    $("#guardarimagen").hide();
                     html2canvas([document.getElementById('imagen')], {
                         onrendered: function (canvas) {
                             alert("entra");
@@ -453,8 +481,8 @@ var Reportes = (function () {
                             var image = new Image();
                             image.src = data;
                             console.log(data);
-                             var x = $("#inputA").val(data);
-                           // var x = document.getElementById('inputA').value(data);
+                            var x = $("#inputA").val(data);
+                            // var x = document.getElementById('inputA').value(data);
                             console.log(x);
                             $("#blanko").attr('href', canvas.toDataURL("image/png"));
                             //$("#blanko").attr('download', "Image.png");
@@ -462,27 +490,27 @@ var Reportes = (function () {
                         }
                     });
                     $("#guardarimagen").show();
-                    Reportes.formReporteA(); 
+                    Reportes.formReporteA();
                 }
             });
         },
-        imagenReporteActividad: function(){
+        imagenReporteActividad: function () {
             $.get("SReportes", {
                 ACCION: "imagenReporteActividad"
-            }).done(function (xhr,status,error){
+            }).done(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
-                   $("#content").html(arguments[0]);
-                $("#guardarimagen").hide();
+                    $("#content").html(arguments[0]);
+                    $("#guardarimagen").hide();
                     html2canvas([document.getElementById('imagenAc')], {
                         onrendered: function (canvas) {
                             var data = canvas.toDataURL();
                             var image = new Image();
                             image.src = data;
                             console.log(data);
-                             var x = $("#inputB").val(data);
-                           // var x = document.getElementById('inputA').value(data);
+                            var x = $("#inputB").val(data);
+                            // var x = document.getElementById('inputA').value(data);
                             console.log(x);
                             $("#blank").attr('href', canvas.toDataURL("image/png"));
                             //$("#blanko").attr('download', "Image.png");
@@ -490,23 +518,23 @@ var Reportes = (function () {
                         }
                     });
                     $("#guardarimagen").show();
-                    Reportes.formImagenActividad(); 
+                    Reportes.formImagenActividad();
                 }
             });
         },
-        formReporteA: function(){
+        formReporteA: function () {
             $('form[name="formaReporteA"]').ajaxForm(function () {
-                
-            }).done(function(xhr,status,error){
+
+            }).done(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else
                     swal("Hecho!", "Imagen guardada correctamente", "success");
             });
         },
-        formImagenActividad: function(){
+        formImagenActividad: function () {
             $('form[name="formActividad"]').ajaxForm(function () {
-            }).done(function(xhr,status,error){
+            }).done(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else

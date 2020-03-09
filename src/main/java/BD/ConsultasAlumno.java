@@ -892,4 +892,61 @@ public class ConsultasAlumno {
         return tarea;
     }
 
+    public List<TbReporteAcademico> getAlumnosReporteA(int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbReporteAcademico> alumnosacademico = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select tb_reporteacademico.idTb_ReporteAcademico, tb_personal.nombre, tb_personal.apellidopaterno,tb_personal.apellidomaterno,ct_semanafiscal.nombre,ct_periodoescolar.idCt_PeriodoEscolar, ct_datosmateria.nombrecorto, tb1.nombre,tb1.apellidopaterno,tb1.apellidomaterno,\n"
+                    + "tb2.nombre,tb2.apellidopaterno,tb2.apellidomaterno, ct_atencion.nombre from tb_reporteacademico inner join tb_personal on tb_reporteacademico.r_personal = tb_personal.idTb_Personal inner join\n"
+                    + "ct_semanafiscal on tb_reporteacademico.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join\n"
+                    + "ct_atencion on tb_reporteacademico.r_atencion = ct_atencion.idCt_atencion inner join\n"
+                    +"ct_periodoescolar on tb_reporteacademico.r_periodo = ct_periodoescolar.idct_periodoescolar inner join\n"
+                    + "tb_alumnos as tb1 on tb_reporteacademico.r_alumnohonor = tb1.idTb_Alumnos inner join\n"
+                    + "tb_alumnos as tb2 on tb_reporteacademico.r_alumnoatencion = tb2.idTb_Alumnos inner join\n"
+                    + "tb_materia on tb_reporteacademico.r_materia = tb_materia.idTb_Materia inner join\n"
+                    + "ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where tb_reporteacademico.status = 1 and tb_reporteacademico.tipoescuela = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TbReporteAcademico reporteA = new TbReporteAcademico();
+                reporteA.setIdtbreporte(rs.getInt("tb_reporteacademico.idTb_ReporteAcademico"));
+                reporteA.setNombrepersonal(rs.getString("tb_personal.nombre"));
+                reporteA.setApellidoppersonal(rs.getString("tb_personal.apellidopaterno"));
+                reporteA.setApellidompersonal(rs.getString("tb_personal.apellidomaterno"));
+                reporteA.setSemana(rs.getString("ct_semanafiscal.nombre"));
+                reporteA.setNombrehonor(rs.getString("tb1.nombre"));
+                reporteA.setApellidophonor(rs.getString("tb1.apellidopaterno"));
+                reporteA.setApellidomhonor(rs.getString("tb1.apellidomaterno"));
+                reporteA.setNombreatencion(rs.getString("tb2.nombre"));
+                reporteA.setApellidopatencion(rs.getString("tb2.apellidopaterno"));
+                reporteA.setApellidomatencion(rs.getString("tb2.apellidomaterno"));
+                reporteA.setAtencion(rs.getString("ct_atencion.nombre"));
+                reporteA.setRperiodo(rs.getInt("ct_periodoescolar.idCt_PeriodoEscolar"));
+                reporteA.setMateria(rs.getString("ct_datosmateria.nombrecorto"));
+                alumnosacademico.add(reporteA);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return alumnosacademico;
+    }
+
 }

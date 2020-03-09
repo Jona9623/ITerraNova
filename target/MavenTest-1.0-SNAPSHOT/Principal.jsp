@@ -6,17 +6,17 @@ and open the template in the editor.
 -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%  
-    int x=0;
+<%
+    int x = 0;
     int id_sesion;
-    HttpSession objsesion= request.getSession(false);
+    HttpSession objsesion = request.getSession(false);
     String usuario = (String) objsesion.getAttribute("user");
-    if(usuario==null){
-       response.sendRedirect("Login.jsp");
-    }else{
-     x = (int)objsesion.getAttribute("tipo");       
-     id_sesion = (int) objsesion.getAttribute("id");
-    }   
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+    } else {
+        x = (int) objsesion.getAttribute("tipo");
+        id_sesion = (int) objsesion.getAttribute("id");
+    }
 %>
 
 <html>
@@ -64,19 +64,34 @@ and open the template in the editor.
         <!-- favicon -->
         <link rel="shortcut icon" href="assets/img/LogoIT.png" />
     </head>
-    <body>
+    <body style="background-color:#5f2f4d ">
+ <!--      <div class="container-a2">
+		<ul class="caption-style-2">
+                    <div> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></div>
+			<li>
+                            <a id="secundaria" href="indexpre.jsp" style="margin-top: 12.9px;">
+                                <img class="d-block w-100 img-responsive" src="assets/img/LogoSecundaria.png" alt="">
+                                </a>
+			</li>
+			<li>
+                            <a id="preparatoria" href="indexpre.jsp" style="margin-top:12.9px;">
+                                <img class="d-block w-100 img-responsive" src="assets/img/LogoPreparatoria.png" alt="">
+                                </a>
+			</li>
+		</ul>
+	</div> -->
         <div class="row">
-            <div class="col-lg-12 col-md-12 margen containerMargin" id="inicio">
+            <div class="col-lg-12 col-md-12 margen containerMargin">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4"></div>
-                    <div class=" col-lg-2 col-md-4 col-sm-4">
-                        <a id="secundaria" href="indexpre.jsp" style="margin-top: 12.9px;" class="btn btn-terra2">Secundaria</a>
+                    <div class="col-xl-2 col-lg-4 col-md-4"></div>
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 view overlay">
+                        <a id="secundaria" href="indexpre.jsp" style="margin-top: 12.9px;"><img class="d-block w-100 img-responsive" src="assets/img/LogoSecundaria.png" alt=""></a>
                     </div> <br>
-                    <div class="col-lg-2 col-md-4 col-sm-4">
-                        <a id="preparatoria" href="indexpre.jsp" style="margin-top:12.9px; " class="btn btn-terra2">Preparatoria</a> 
+                    <div class="col-xl-2 col-lg-2 col-md-4"></div>
+                    <div class=" col-xl-2 col-lg-2 col-md-4 col-sm-4 view overlay">
+                        <a id="preparatoria" href="indexpre.jsp" style="margin-top:12.9px;"><img class="d-block w-100 img-responsive" src="assets/img/LogoPreparatoria.png" alt=""></a>
                     </div>
-
-                    <div class="col-lg-4 col-md-4"></div>
+                    <div class="col-xl-2 col-lg-2 col-md-4"></div>
                 </div>
             </div>
         </div>
@@ -87,7 +102,7 @@ and open the template in the editor.
         <script type="text/javascript" src="assets/js/pages/Administrador/Alumnos.js"></script>
         <script type="text/javascript" src="assets/js/pages/Administrador/Personal.js"></script>
         <script type="text/javascript" src="assets/js/pages/Administrador/Administrador.js"></script>
-        
+
         <script src="assets/plugins/jquery/jquery.min.js" ></script>
         <script src="assets/plugins/popper/popper.min.js" ></script>
         <script src="assets/plugins/jquery-blockui/jquery.blockui.min.js" ></script>

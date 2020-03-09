@@ -182,4 +182,9 @@ public class AlumnosController {
         return consulta.datosTareaSemanal(tipoescuelareporte);
     }
 
+    public List<TbReporteAcademico> getAlumnosReporteA(int tipoescuela) throws Exception{
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getAlumnosReporteA(tipoescuela);
+    }
+
 }

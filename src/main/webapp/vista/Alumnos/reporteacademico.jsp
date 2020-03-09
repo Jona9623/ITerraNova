@@ -30,6 +30,17 @@
 <div class="profile-content">
     <div class="row">
         <div class="col-md-12 col-sm-12">
+            <div style="text-align: right">
+                <a id="mostrarreportesaca" type="button" class="btn btn-terra float-rt">Mostrar cuadro de honor/atencion</a>
+            </div>
+            <div ><br></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div style="text-align: right">
+                        <a id="mostraractividades" type="button" class="btn btn-terra float-rt">Mostrar actividades semanales</a>
+                    </div>  
+                </div>
+            </div>
             <div class="">
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -161,7 +172,7 @@
                                 </div>
                                 <div class="card-body " id="bar-parent2">
                                     <div class="row">
-                                      <div class="col-lg-4 p-t-20">
+                                        <div class="col-lg-4 p-t-20">
                                             <label >Seleccione Periodo</label>
                                             <select id="periodoactividad" name="periodoactividad" class="custom-select">
                                                 <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
@@ -184,7 +195,7 @@
                                                 <div class="card-body row">
                                                     <div class="col-lg-4 p-t-20"> 
                                                         <div class="form-group">
-                                                            <label >Seleccione el dia actual</label>
+                                                            <label>Seleccione el dia actual</label>
                                                             <select id="diaactividad" name="semanafiscal" class="custom-select">
                                                                 <option value="1"> Lunes </option>
                                                                 <option value="2"> Martes </option>
@@ -205,7 +216,7 @@
                                                     </div>
                                                     <div class="col-lg-4 p-t-20">
                                                         <label> Fecha de entrega de la actividad</label>
-                                                       <input id="fechaentrega" name="Fechaentrega" type="date" class="form-control">
+                                                        <input id="fechaentrega" name="Fechaentrega" type="date" class="form-control">
                                                     </div>
                                                 </div>
                                                 <button type="button" id="actividadsemanal" class="btn btn-terra">Guardar</button>

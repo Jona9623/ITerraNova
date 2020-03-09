@@ -23,6 +23,15 @@ public class TbTareaSemanal {
     private String fechaentrega;
     private int status;
     private int tipoescuela;
+    private String nombreimagen;
+
+    public String getNombreimagen() {
+        return nombreimagen;
+    }
+
+    public void setNombreimagen(String nombreimagen) {
+        this.nombreimagen = nombreimagen;
+    }
 
     public String getApellidop() {
         return apellidop;

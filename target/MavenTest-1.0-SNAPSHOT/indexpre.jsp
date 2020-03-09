@@ -150,21 +150,6 @@
                                     </ul>
                                 </li>
                                 <% } %>
-                                <li class="nav-item start ">
-                                    <a href="#" class="nav-link nav-toggle">
-                                        <i class="material-icons">label</i>
-                                        <span id="opcion2" class="title">Opcion 2</span>
-                                        <span class="arrow"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li class="nav-item ">
-                                            <a id="subopcion2" class="nav-link ">
-                                                <span class="title">Sub opcion</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-
-                                </li>
                                 <% if (x == 3 || x == 4 || x == 5) { %>
                                 <li class="nav-item start">
                                     <a href="#" class="nav-link nav-toggle">

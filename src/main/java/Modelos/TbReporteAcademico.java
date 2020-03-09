@@ -12,8 +12,13 @@ package Modelos;
 public class TbReporteAcademico {
     private int idtbreporte;
     private int rpersonal;
+    private String nombrepersonal;
+    private String apellidoppersonal;
+    private String apellidompersonal;
     private int rmateria;
+    private String materia;
     private int rsemana;
+    private String semana;
     private int ralumnohonor;
     private String nombrehonor;
     private String apellidophonor;
@@ -27,6 +32,55 @@ public class TbReporteAcademico {
     private int rperiodo;
     private int status;
     private int tipoescuela;
+    private String nombreimagen;
+
+    public String getMateria() {
+        return materia;
+    }
+
+    public void setMateria(String materia) {
+        this.materia = materia;
+    }
+
+    public String getSemana() {
+        return semana;
+    }
+
+    public void setSemana(String semana) {
+        this.semana = semana;
+    }
+
+    public String getNombrepersonal() {
+        return nombrepersonal;
+    }
+
+    public void setNombrepersonal(String nombrepersonal) {
+        this.nombrepersonal = nombrepersonal;
+    }
+
+    public String getApellidoppersonal() {
+        return apellidoppersonal;
+    }
+
+    public void setApellidoppersonal(String apellidoppersonal) {
+        this.apellidoppersonal = apellidoppersonal;
+    }
+
+    public String getApellidompersonal() {
+        return apellidompersonal;
+    }
+
+    public void setApellidompersonal(String apellidompersonal) {
+        this.apellidompersonal = apellidompersonal;
+    }
+
+    public String getNombreimagen() {
+        return nombreimagen;
+    }
+
+    public void setNombreimagen(String nombreimagen) {
+        this.nombreimagen = nombreimagen;
+    }
 
     public String getNombrehonor() {
         return nombrehonor;
