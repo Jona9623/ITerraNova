@@ -75,14 +75,10 @@
                                     <i class="fa fa-angle-down"></i>
                                 </button>
                                 <ul class="dropdown-menu pull-left" role="menu">
-                                    <li> 
-                                        <% if (x == 1 || x == 3 || x == 5) { %>
-                                        <a  href="javascript:;" class="inforeporteD">
-                                            <i id="inforeporteD" class="icon-arrow-right"></i> Toda la información </a>
-                                        <% } %>
+                                    <li>
                                         <% if (x == 3 || x == 5) { %>
-                                        <a  href="javascript:;" class="editarreporteD">
-                                            <i id="editarreporteD" class="icon-pencil"></i>Editar reporte</a>
+                                        <a  href="javascript:;" class="eliminarreporteA">
+                                            <i id="editarreporteD" class="icon-pencil"></i>Eliminar</a>
                                         <% } %>   
                                     </li>
                                 </ul>

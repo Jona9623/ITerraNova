@@ -7,6 +7,7 @@ $('#secundaria').on('click', function () {
 })
 $(document).ready(function () {
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
+    //alert(tipoescuela);
     $("#reportedis").on('click', function () {
         Reportes.reporteDisciplinar();
     }),

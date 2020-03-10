@@ -237,7 +237,33 @@ var Reportes = (function () {
                         editarhora = $(this).parents("tr").find("td").eq(3).html();
                         Reportes.editarReporteD(editaralumnoreporte, editarreportefecha, editarhora);
                     });
+                    $(".eliminarreporteD").on('click', function () {
+                        eliminarreporteD = $(this).parents("tr").find("td").eq(4).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Reportes.eliminarReporteD(eliminarreporteD);
+                        });
+                    });
                 }
+            });
+        },
+        eliminarReporteD: function (id) {
+            $.get("SReportes", {
+                ACCION: "eliminarReporteD",
+                ID: id
+            }).done(function (hxr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Reportes.mostrarReportes();
             });
         },
         infoReporteD: function (alumnoreporte, reportefecha, hora) {
@@ -311,6 +337,9 @@ var Reportes = (function () {
                     $("#mostrarreportesaca").on('click', function () {
                         Reportes.mostrarReportesAcademicos();
                     });
+                    $("#mostraractividades").on('click', function () {
+                        Reportes.mostrarActividades();
+                    });
                     gradohonor = $("#gradohonor").val();
                     grupohonor = $("#grupohonor").val();
                     gradoatencion = $("#gradoatencion").val();
@@ -354,8 +383,81 @@ var Reportes = (function () {
                         $('#consultareporteA').find('tr[name^="alumno-"]').hide();
                         $('#consultareporteA').find('tr[name="alumno-' + $(this).val() + '"]').show();
                     });
+                    $(".eliminarreporteA").on('click', function () {
+                        eliminarreporteA = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Reportes.eliminarReporteA(eliminarreporteA);
+                        });
+                    });
                 }
 
+            });
+        },
+        eliminarReporteA: function (id) {
+            $.get("SReportes", {
+                ACCION: "eliminarReporteA",
+                ID: id,
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Reportes.mostrarReportesAcademicos();
+            });
+        },
+        mostrarActividades: function () {
+            $.get("SReportes", {
+                ACCION: "mostrarActividades",
+                TIPOESCUELA: tipoescuela
+            }).done(function (hxr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    $("#tablaActividades").DataTable({
+                        "scrollX": true
+                    });
+                    var id = $('#consultareporteAc').find('#periodotablaAc').val();
+                    $('#consultareporteAc').find('tr[name^="alumno-"]').hide();
+                    $('#consultareporteAc').find('tr[name="alumno-' + id + '"]').show();
+                    $('#consultareporteAc').find('#periodotablaAc').change(function () {
+                        $('#consultareporteAc').find('tr[name^="alumno-"]').hide();
+                        $('#consultareporteAc').find('tr[name="alumno-' + $(this).val() + '"]').show();
+                    });
+                    $(".eliminartarea").on('click', function () {
+                        eliminartarea = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Reportes.eliminarTarea(eliminartarea);
+                        });
+                    })
+                }
+            });
+        }, eliminarTarea: function (id) {
+            $.get("SReportes", {
+                ACCION: "eliminarTarea",
+                ID: id
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Reportes.mostrarActividades();
             });
         },
         guardarA: function () {
@@ -524,21 +626,12 @@ var Reportes = (function () {
         },
         formReporteA: function () {
             $('form[name="formaReporteA"]').ajaxForm(function () {
-
-            }).done(function (xhr, status, error) {
-                if (error.status != 200)
-                    swal(error.getResponseHeader("ERROR"), "", "warning");
-                else
-                    swal("Hecho!", "Imagen guardada correctamente", "success");
+                swal("Hecho!", "Imagen guardada correctamente", "success");
             });
         },
         formImagenActividad: function () {
             $('form[name="formActividad"]').ajaxForm(function () {
-            }).done(function (xhr, status, error) {
-                if (error.status != 200)
-                    swal(error.getResponseHeader("ERROR"), "", "warning");
-                else
-                    swal("Hecho!", "Imagen guardada correctamente", "success");
+                swal("Hecho!", "Imagen guardada correctamente", "success");
             });
         }
 

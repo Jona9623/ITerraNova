@@ -74,6 +74,7 @@ public class SReportes extends HttpServlet {
     private String imagenAcademico;
     private String imagenTarea;
     private String actual;
+    int var = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -202,6 +203,29 @@ public class SReportes extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
+            case "mostrarActividades":
+                try {
+                    mostrarActividades(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "eliminarTarea":
+                try {
+                    eliminarTarea(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "eliminarReporteA":
+                try {
+                    eliminarReporteA(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "eliminarReporteD":
+                try {
+                    eliminarReporteD(request,response);
+                } catch (Exception e) {
+                }
         }
     }
 
@@ -440,7 +464,7 @@ public class SReportes extends HttpServlet {
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
                 System.out.println("OTRA RUTA" + applicationPath);
-                String uploadPath = "/home/escape9/sistema.iterra.edu.mx/reportes"; //applicationPath + File.separator + "archivos";
+                String uploadPath = "/home/escape9/sistema.iterra.edu.mx/reporte_disciplinar"; //applicationPath + File.separator + "archivos";
                 //String uploadPath = "/home/escape9/";
                 File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
@@ -449,7 +473,7 @@ public class SReportes extends HttpServlet {
                 Part part = request.getPart("Archivo");
                 String nombrearchivo = extractFileName(part);
                 //ruta = applicationPath + uploadPath + File.separator + nombrearchivo;
-                ruta = uploadPath + File.separator + nombrearchivo;
+                ruta = uploadPath + "/" + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
@@ -607,6 +631,7 @@ public class SReportes extends HttpServlet {
         try {
             reporteA = alumnoC.datosReporteA(tipoescuelareporte);
             request.setAttribute("reporteA", reporteA);
+            request.setAttribute("var", var);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/imagenreporteaca.jsp");
             rd.forward(request, response);
 
@@ -662,14 +687,12 @@ public class SReportes extends HttpServlet {
                 break;
         }
         try {
+            String applicationPath = getServletContext().getRealPath("");
             datos = alumnoC.datosGuardaImagen(tipoescuelareporte);
             System.out.println(actual);
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-            String path = "/home/escape9/public_html/centro/reportes/cuadrohonor_cuadroatencion/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP() + datos.getNombremateria()+".png";
-            //String path = "/home/escape9/sistema.iterra.edu.mx/reportes";
-            //String path= "C:\\Users\\Complx\\Desktop\\Agosto 2019-Diciembre 2019\\Lunes 15 de Sep - Viernes 19 de Sep\\Diana IvetteMontejoArroyo\\Historia\\imagen2.png";
-            // String path1 = datos.getPeriodo()+datos.getSemanafiscal()+datos.getNombreP()+datos.getApellidopP()+datos.getApellidomP()+datos.getNombremateria();
-            //String realpath = path.concat(path1);
+            String path = "assets/img/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP() + datos.getNombremateria()+".png";
+            path = applicationPath + path;
             System.out.println(path);
             File file = new File(path);
             try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
@@ -708,10 +731,12 @@ public class SReportes extends HttpServlet {
         String base64 = String.valueOf(request.getParameter("inputb"));
         String[] strings = base64.split(",");
         try {
+            String applicationPath = getServletContext().getRealPath("");
             datos = alumnoC.datosGuardaImagen(tipoescuelareporte);
             System.out.println(actual);
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-            String path = "/home/escape9/public_html/centro/reportes/actividad_semanal/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP()+".png";
+            String path = "assets/img/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP()+".png";
+            path = applicationPath + path;
             System.out.println(path);
             File file = new File(path);
             try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
@@ -744,6 +769,53 @@ public class SReportes extends HttpServlet {
             response.sendError(204);
         }
         
+    }
+
+    private void mostrarActividades(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        alumnoC = new AlumnosController();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List<TbTareaSemanal> listtareas = new ArrayList<>();
+        try {
+            listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            listtareas = alumnoC.getTareas(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listtareas", listtareas);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablatareasemanal.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+
+    private void eliminarTarea(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        alumnoC = new AlumnosController();
+        try {
+            alumnoC.eliminarTarea(Integer.parseInt(request.getParameter("ID")));
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+
+    private void eliminarReporteA(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        alumnoC = new AlumnosController();
+        try {
+            alumnoC.eliminarReporteA(Integer.parseInt(request.getParameter("ID")));
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+
+    private void eliminarReporteD(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        alumnoC = new AlumnosController();
+        try {
+            alumnoC.eliminarReporteD(Integer.parseInt(request.getParameter("ID")));
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
     }
 
 }

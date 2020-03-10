@@ -53,6 +53,7 @@
                     <th style="display: none"></th>
                     <th style="display: none"></th>
                     <th style="display: none"></th>
+                    <th style="display: none"></th>
                     <th class="center">Alumno</th>
                     <th class="center">Grado y Grupo</th>
                     <th class="center">Tipo de incidente</th>
@@ -68,6 +69,7 @@
                         <td class="center" style="display: none">${alumnosdisciplinar.fecha}</td>
                         <td class="center" style="display: none">${alumnosdisciplinar.rperiodo}</td>
                         <td class="center" style="display: none">${alumnosdisciplinar.hora}</td>
+                        <td class="center" style="display: none">${alumnosdisciplinar.idtbreporte}</td>
                         <td class="center">${alumnosdisciplinar.alumno} ${alumnosdisciplinar.alumnoapep}</td>
                         <td class="center">${alumnosdisciplinar.grado} ${alumnosdisciplinar.grupo}</td>
                         <td class="center">${alumnosdisciplinar.tipoincidente}</td>
@@ -87,7 +89,11 @@
                                         <% if (x == 3 || x == 5) { %>
                                         <a  href="javascript:;" class="editarreporteD">
                                             <i id="editarreporteD" class="icon-pencil"></i>Editar reporte</a>
-                                        <% } %>   
+                                        <% } %> 
+                                        <% if (x == 3 || x == 5) { %>
+                                        <a  href="javascript:;" class="eliminarreporteD">
+                                            <i id="eliminarreporteD" class="icon-trash"></i>Eliminar</a>
+                                        <% } %> 
                                     </li>
                                 </ul>
                             </div>

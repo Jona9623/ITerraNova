@@ -187,4 +187,24 @@ public class AlumnosController {
         return consulta.getAlumnosReporteA(tipoescuela);
     }
 
+    public List<TbTareaSemanal> getTareas(int tipoescuela) throws Exception {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getTareas(tipoescuela);
+    }
+
+    public void eliminarTarea(int id) throws Exception{
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.eliminarTarea(id);
+    }
+
+    public void eliminarReporteA(int id) throws Exception{
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.eliminarReporteA(id);
+    }
+
+    public void eliminarReporteD(int id) throws Exception{
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.eliminarReporteD(id);
+    }
+
 }

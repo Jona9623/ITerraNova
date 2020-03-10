@@ -12,6 +12,7 @@ package Modelos;
 public class TbTareaSemanal {
     private int idtbtarea;
     private int rsemana;
+    private String semana;
     private int rperiodo;
     private String tarea;
     private int rdia;
@@ -24,6 +25,14 @@ public class TbTareaSemanal {
     private int status;
     private int tipoescuela;
     private String nombreimagen;
+
+    public String getSemana() {
+        return semana;
+    }
+
+    public void setSemana(String semana) {
+        this.semana = semana;
+    }
 
     public String getNombreimagen() {
         return nombreimagen;

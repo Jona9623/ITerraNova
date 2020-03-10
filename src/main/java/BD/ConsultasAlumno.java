@@ -626,10 +626,10 @@ public class ConsultasAlumno {
         PreparedStatement pst = null;
         try {
             con.setAutoCommit(false);
-            String consulta = "insert into tb_tareasemanal (r_periodo,r_semanafiscal,tarea,r_dia,r_personal,fechaentrega,status,tipoescuela) values(?,?,?,?,?,?,?,?)";
+            String consulta = "insert into tb_tareasemanal (r_semanafiscal,r_periodo,tarea,r_dia,r_personal,fechaentrega,status,tipoescuela) values(?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(consulta);
-            pst.setInt(1, tarea.getRperiodo());
-            pst.setInt(2, tarea.getRsemana());
+            pst.setInt(1, tarea.getRsemana());
+            pst.setInt(2, tarea.getRperiodo());
             pst.setString(3, tarea.getTarea());
             pst.setInt(4, tarea.getRdia());
             pst.setInt(5, tarea.getRpersonal());
@@ -903,7 +903,7 @@ public class ConsultasAlumno {
                     + "tb2.nombre,tb2.apellidopaterno,tb2.apellidomaterno, ct_atencion.nombre from tb_reporteacademico inner join tb_personal on tb_reporteacademico.r_personal = tb_personal.idTb_Personal inner join\n"
                     + "ct_semanafiscal on tb_reporteacademico.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join\n"
                     + "ct_atencion on tb_reporteacademico.r_atencion = ct_atencion.idCt_atencion inner join\n"
-                    +"ct_periodoescolar on tb_reporteacademico.r_periodo = ct_periodoescolar.idct_periodoescolar inner join\n"
+                    + "ct_periodoescolar on tb_reporteacademico.r_periodo = ct_periodoescolar.idct_periodoescolar inner join\n"
                     + "tb_alumnos as tb1 on tb_reporteacademico.r_alumnohonor = tb1.idTb_Alumnos inner join\n"
                     + "tb_alumnos as tb2 on tb_reporteacademico.r_alumnoatencion = tb2.idTb_Alumnos inner join\n"
                     + "tb_materia on tb_reporteacademico.r_materia = tb_materia.idTb_Materia inner join\n"
@@ -947,6 +947,142 @@ public class ConsultasAlumno {
             }
         }
         return alumnosacademico;
+    }
+
+    public List<TbTareaSemanal> getTareas(int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbTareaSemanal> listtareas = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select  tb_tareasemanal.idTb_TareaSemanal,tb_personal.nombre,tb_personal.apellidopaterno,tb_personal.apellidomaterno, ct_periodoescolar.idCt_PeriodoEscolar, "
+                    + "ct_dia.Nombre, tb_tareasemanal.fechaentrega, tb_tareasemanal.tarea, ct_semanafiscal.nombre from\n"
+                    + "tb_tareasemanal inner join tb_personal on tb_tareasemanal.r_personal = tb_personal.idTb_Personal inner join\n"
+                    + "ct_periodoescolar on tb_tareasemanal.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join\n"
+                    + "ct_dia on tb_tareasemanal.r_dia = ct_dia.idCt_Dia inner join\n"
+                    + "ct_semanafiscal on tb_tareasemanal.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal where tb_tareasemanal.status = 1 and tb_tareasemanal.tipoescuela = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TbTareaSemanal tarea = new TbTareaSemanal();
+                tarea.setIdtbtarea(rs.getInt("tb_tareasemanal.idTb_TareaSemanal"));
+                tarea.setPersonal(rs.getString("tb_personal.nombre"));
+                tarea.setApellidop(rs.getString("tb_personal.apellidopaterno"));
+                tarea.setApellidom(rs.getString("tb_personal.apellidomaterno"));
+                tarea.setRperiodo(rs.getInt("ct_periodoescolar.idCt_PeriodoEscolar"));
+                tarea.setDia(rs.getString("ct_dia.Nombre"));
+                tarea.setSemana(rs.getString("ct_semanafiscal.nombre"));
+                tarea.setFechaentrega(rs.getString("tb_tareasemanal.fechaentrega"));
+                tarea.setTarea(rs.getString("tb_tareasemanal.tarea"));
+                listtareas.add(tarea);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listtareas;
+    }
+
+    public void eliminarTarea(int id) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "update `tb_tareasemanal` set `status` = 2 where `idTb_TareaSemanal` = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, id);
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al eliminar");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void eliminarReporteA(int id) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "update `tb_reporteacademico` set `status` = 2 where `idTb_ReporteAcademico` = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, id);
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al eliminar");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void eliminarReporteD(int id) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "update `tb_reportedisciplinar` set `status` = 2 where `idTb_ReporteDisciplinar` = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, id);
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al eliminar");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
 }
