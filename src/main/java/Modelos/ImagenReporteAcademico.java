@@ -13,10 +13,19 @@ public class ImagenReporteAcademico {
     private String nombreP;
     private String apellidopP;
     private String apellidomP;
+    private String correo;
     private String nombremateria;
     private String periodo;
     private String semanafiscal;
     private String actual;
+    
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
     public String getActual() {
         return actual;

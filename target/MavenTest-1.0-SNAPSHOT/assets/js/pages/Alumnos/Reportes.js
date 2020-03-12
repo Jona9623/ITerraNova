@@ -359,7 +359,10 @@ var Reportes = (function () {
                         Reportes.guardarA();
                     });
                     $("#actividadsemanal").on('click', function () {
-                        Reportes.guardaActividadSemanal();
+                        if (validacionActividadSemanal())
+                            Reportes.guardaActividadSemanal();
+                        else
+                            swal("Faltan campos requeridos","","warning");
                     });
                 }
             });
@@ -638,6 +641,18 @@ var Reportes = (function () {
     }
     ;
 }());
+function validacionActividadSemanal(){
+    var valido = true;
+    if ($("#fechaentrega").val().trim() == "") {
+        $("#div-fechaentrega").addClass("has-error");
+        valido = false;
+    }
+    if ($("#actividad").val().trim() == "") {
+        $("#div-actividad").addClass("has-error");
+        valido = false;
+    }
+    return valido;
+}
 function dataURLtoFile(dataurl, filename) {
 
     var arr = dataurl.split(','),

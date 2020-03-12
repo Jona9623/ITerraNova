@@ -109,7 +109,7 @@
                                                             </div>
                                                             <div class="form-group" id="div-correop">
                                                                 <label>Correo*</label>
-                                                                <input value="${requestScope.personal.correo}" id="correop" type="email" class="form-control" placeholder="codigo postal" maxlength="5">
+                                                                <input value="${requestScope.personal.correo}" id="correop" type="email" class="form-control" placeholder="codigo postal" maxlength="50">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">

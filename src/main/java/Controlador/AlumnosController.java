@@ -14,6 +14,7 @@ import Modelos.Alumno;
 import Modelos.CtAtencion;
 import Modelos.CtSemanaFiscal;
 import Modelos.ImagenReporteAcademico;
+import Modelos.ImagenReporteAcademicoTarea;
 import Modelos.TbReporteAcademico;
 import Modelos.TbReporteDisciplinar;
 import Modelos.TbTareaSemanal;
@@ -171,6 +172,11 @@ public class AlumnosController {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.datosGuardaImagen(tipoescuela);
     }
+    
+    public ImagenReporteAcademicoTarea datosGuardaImagenActividad(int tipoescuela) throws Exception{
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.datosGuardaImagenTarea(tipoescuela);
+    }
 
     public TbReporteAcademico datosReporteA(int tipoescuelareporte)  throws Exception{
         ConsultasAlumno consulta = new ConsultasAlumno();
@@ -207,4 +213,65 @@ public class AlumnosController {
         consulta.eliminarReporteD(id);
     }
 
+    public void correoPersonalImagen(String correo, String url) throws Exception {
+        String usuario = "pruebas.iterranova@gmail.com";
+        String contrasena = "excelencia";
+
+        try {
+            Properties pro = System.getProperties();
+            pro.put("mail.smtp.host", "smtp.gmail.com");
+            pro.put("mail.smtp.port", "587");
+            pro.put("mail.smtp.auth", "true");
+            pro.put("mail.smtp.starttls.enable", "true");
+
+            Session sesion = Session.getDefaultInstance(pro);
+
+            Message mensaje = new MimeMessage(sesion);
+            mensaje.setFrom(new InternetAddress(usuario));
+            mensaje.setRecipient(Message.RecipientType.TO, new InternetAddress(correo));
+            mensaje.setSubject("URL Imagen Reporte Academico");
+            mensaje.setText("La direccion a continuación debera guardarla y agregarla a la pagina de iterra.edu.mx para que posteriormente se anexe la imagen dentro"
+                    + "del portal, el URL es el siguiente:\n"
+                    + url);
+            Transport t = sesion.getTransport("smtp");
+            t.connect(usuario, contrasena);
+            t.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
+            t.close();
+
+        } catch (Exception e) {
+            throw e;
+        }
+        
+    }
+
+    public void correoPersonalImagenTarea(String correo, String url) throws Exception {
+        String usuario = "pruebas.iterranova@gmail.com";
+        String contrasena = "excelencia";
+
+        try {
+            Properties pro = System.getProperties();
+            pro.put("mail.smtp.host", "smtp.gmail.com");
+            pro.put("mail.smtp.port", "587");
+            pro.put("mail.smtp.auth", "true");
+            pro.put("mail.smtp.starttls.enable", "true");
+
+            Session sesion = Session.getDefaultInstance(pro);
+
+            Message mensaje = new MimeMessage(sesion);
+            mensaje.setFrom(new InternetAddress(usuario));
+            mensaje.setRecipient(Message.RecipientType.TO, new InternetAddress(correo));
+            mensaje.setSubject("URL Imagen Tarea Semanal");
+            mensaje.setText("La direccion a continuación debera guardarla y agregarla a la pagina de iterra.edu.mx para que posteriormente se anexe la imagen dentro"
+                    + "del portal, el URL es el siguiente:\n"
+                    + url);
+            Transport t = sesion.getTransport("smtp");
+            t.connect(usuario, contrasena);
+            t.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
+            t.close();
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
 }

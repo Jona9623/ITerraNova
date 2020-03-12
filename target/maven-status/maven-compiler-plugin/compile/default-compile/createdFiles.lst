@@ -39,3 +39,4 @@ BD\Conexion.class
 Modelos\TbTareaSemanal.class
 Servlets\SAdministrador.class
 Modelos\CtAreaalumno.class
+Modelos\ImagenReporteAcademicoTarea.class

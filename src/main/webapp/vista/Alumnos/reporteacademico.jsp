@@ -204,7 +204,10 @@
                                                                 <option value="5"> Viernes </option>
                                                             </select>
                                                         </div>
-                                                        <textarea id="actividad" class="form-control" rows="5" placeholder="Describa la actividad..."></textarea>
+                                                        <div class="form-group" id="div-actividad">
+                                                            <label> Descripción de la actividad*</label>
+                                                            <textarea id="actividad" class="form-control" rows="5" placeholder="Describa la actividad..."></textarea>
+                                                        </div>
                                                     </div>
                                                     <div class="col-lg-4 p-t-20">
                                                         <label >Maestro que asigna actividad</label>
@@ -215,8 +218,10 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-4 p-t-20">
-                                                        <label> Fecha de entrega de la actividad</label>
-                                                        <input id="fechaentrega" name="Fechaentrega" type="date" class="form-control">
+                                                        <div class="form-group" id="div-fechaentrega">
+                                                            <label> Fecha de entrega de la actividad*</label>
+                                                            <input id="fechaentrega" name="Fechaentrega" type="date" class="form-control">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <button type="button" id="actividadsemanal" class="btn btn-terra">Guardar</button>

@@ -21,6 +21,7 @@ import Modelos.TbReporteAcademico;
 import Modelos.TbReporteDisciplinar;
 import Modelos.TbTareaSemanal;
 import Modelos.ImagenReporteAcademico;
+import Modelos.ImagenReporteAcademicoTarea;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -692,11 +693,14 @@ public class SReportes extends HttpServlet {
             System.out.println(actual);
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
             String path = "assets/img/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP() + datos.getNombremateria()+".png";
+            path = path.replace(" ", "");
+            String url = "https://sistema.iterra.edu.mx/"+path;
             path = applicationPath + path;
             System.out.println(path);
             File file = new File(path);
             try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
                 output.write(data);
+                alumnoC.correoPersonalImagen(datos.getCorreo(),url);
             } catch (Exception e) {
                 System.out.println(e);
                 response.addHeader("ERROR", e.toString());
@@ -727,20 +731,23 @@ public class SReportes extends HttpServlet {
 
     private void GuardaImagenActividad(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumnoC = new AlumnosController();
-        ImagenReporteAcademico datos = new ImagenReporteAcademico();
+        ImagenReporteAcademicoTarea datos = new ImagenReporteAcademicoTarea();
         String base64 = String.valueOf(request.getParameter("inputb"));
         String[] strings = base64.split(",");
         try {
             String applicationPath = getServletContext().getRealPath("");
-            datos = alumnoC.datosGuardaImagen(tipoescuelareporte);
+            datos = alumnoC.datosGuardaImagenActividad(tipoescuelareporte);
             System.out.println(actual);
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
             String path = "assets/img/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP()+".png";
+            path = path.replace(" ", "");
+            String url = "https://sistema.iterra.edu.mx/"+path;
             path = applicationPath + path;
             System.out.println(path);
             File file = new File(path);
             try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
                 output.write(data);
+                alumnoC.correoPersonalImagenTarea(datos.getCorreo(), url);
             } catch (Exception e) {
                 System.out.println(e);
                 response.addHeader("ERROR", e.toString());

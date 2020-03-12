@@ -12,6 +12,7 @@ import Modelos.CtPeriodoEscolar;
 import Modelos.CtPuesto;
 import Modelos.CtSemanaFiscal;
 import Modelos.ImagenReporteAcademico;
+import Modelos.ImagenReporteAcademicoTarea;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
 import Modelos.TbReporteAcademico;
@@ -768,7 +769,7 @@ public class ConsultasAlumno {
         ImagenReporteAcademico datosA = new ImagenReporteAcademico();
         try {
             con.setAutoCommit(false);
-            String consulta = "SELECT tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno, ct_datosmateria.nombrecorto, ct_periodoescolar.nombre, ct_semanafiscal.nombre from tb_reporteacademico inner join tb_personal\n"
+            String consulta = "SELECT tb_personal.correo, tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno, ct_datosmateria.nombrecorto, ct_periodoescolar.nombre, ct_semanafiscal.nombre from tb_reporteacademico inner join tb_personal\n"
                     + "on tb_reporteacademico.r_personal = tb_personal.idTb_Personal inner join\n"
                     + "ct_semanafiscal on tb_reporteacademico.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join\n"
                     + "ct_periodoescolar on tb_reporteacademico.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join\n"
@@ -784,6 +785,7 @@ public class ConsultasAlumno {
                 datosA.setNombremateria(rs.getString("ct_datosmateria.nombrecorto"));
                 datosA.setPeriodo(rs.getString("ct_periodoescolar.nombre"));
                 datosA.setSemanafiscal(rs.getString("ct_semanafiscal.nombre"));
+                datosA.setCorreo(rs.getString("tb_personal.correo"));
             }
         } catch (Exception e) {
             throw e;
@@ -803,6 +805,48 @@ public class ConsultasAlumno {
             }
         }
         return datosA;
+    }
+
+    public ImagenReporteAcademicoTarea datosGuardaImagenTarea(int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ImagenReporteAcademicoTarea datosTarea = new ImagenReporteAcademicoTarea();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select tb_tareasemanal.idTb_TareaSemanal, ct_periodoescolar.nombre, ct_semanafiscal.nombre, tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno, tb_personal.correo from tb_tareasemanal\n"
+                    + "inner join ct_periodoescolar on tb_tareasemanal.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join\n"
+                    + "ct_semanafiscal on tb_tareasemanal.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join\n"
+                    + "tb_personal on tb_tareasemanal.r_personal = tb_personal.idTb_Personal where tb_tareasemanal.status = 1 and tb_tareasemanal.tipoescuela = ? order by tb_tareasemanal.idTb_TareaSemanal desc limit 1;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                datosTarea.setNombreP(rs.getString("tb_personal.nombre"));
+                datosTarea.setApellidopP(rs.getString("tb_personal.apellidopaterno"));
+                datosTarea.setApellidomP(rs.getString("tb_personal.apellidomaterno"));
+                datosTarea.setPeriodo(rs.getString("ct_periodoescolar.nombre"));
+                datosTarea.setSemanafiscal(rs.getString("ct_semanafiscal.nombre"));
+                datosTarea.setCorreo(rs.getString("tb_personal.correo"));
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return datosTarea;
     }
 
     public TbReporteAcademico datosReporteA(int tipoescuelareporte) throws Exception {
