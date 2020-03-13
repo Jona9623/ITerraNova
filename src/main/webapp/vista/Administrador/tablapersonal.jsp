@@ -59,21 +59,16 @@
                             </button>
                             <ul class="dropdown-menu pull-left" role="menu">
                                 <li>
+                                    <a href="javascript:;" class="infopersonal">
+                                        <i id="infopersonal" class="icon-user"></i>Mas info</a>
+                                </li>
+                                <li>
                                     <a href="javascript:;" class="editarpe">
                                         <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;" class="aliminarpe">
                                         <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <i class="icon-user"></i> otra opcion</a>
-                                </li>
-                                <li class="divider"> </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <i class="icon-flag"></i> otra opcion </a>
                                 </li>
                             </ul>
                         </div>

@@ -5,72 +5,88 @@ var Adminpersonal = (function () {
             $.get("SAdminpersonal", {
                 ACCION: "MuestraAgregaPersonal",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
-                   $('#content').html(arguments[0]);
-                $('#tablapersonal').DataTable({
-                    "scrollX": true
-                });
-                Adminpersonal.importarPersonal();
-                $('#btnaregarP').on('click', function () {
-                    Adminpersonal.agregaPersonal();
-                }),
-                        $('.editarpe').on('click', function () {
-                    idpersonal = $(this).parents("tr").find("td").eq(0).html();
-                    Adminpersonal.editarPersonal(idpersonal);
-                }),
-                        $(".aliminarpe").on('click', function () {
-                    idpersonal = $(this).parents("tr").find("td").eq(0).html();
-                    swal({
-                        title: "Estas seguro?",
-                        text: "Se eliminara el registro",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Confirmar",
-                        closeOnConfirm: false
-                    }, function () {
-                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
-                        Adminpersonal.eliminarPersonal(idpersonal);
+                    $('#content').html(arguments[0]);
+                    $('#tablapersonal').DataTable({
+                        "scrollX": true
                     });
+                    Adminpersonal.importarPersonal();
+                    $('#btnaregarP').on('click', function () {
+                        Adminpersonal.agregaPersonal();
+                    });
+                    $(".infopersonal").on('click',function(){
+                        idpersonal = $(this).parents("tr").find("td").eq(0).html();
+                        Adminpersonal.infoPersonal(idpersonal);
+                    })
+                    $('.editarpe').on('click', function () {
+                        idpersonal = $(this).parents("tr").find("td").eq(0).html();
+                        Adminpersonal.editarPersonal(idpersonal);
+                    });
+                    $(".aliminarpe").on('click', function () {
+                        idpersonal = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Adminpersonal.eliminarPersonal(idpersonal);
+                        });
 
-                }); 
+                    });
                 }
             });
-            $("#actualizaTablaP").on('click',function(){
+            $("#actualizaTablaP").on('click', function () {
                 Adminpersonal.tablaPersonal();
             })
         },
-        importarPersonal: function(){
-          $('form[name="importarpersonal"]').ajaxForm(function () {
+        importarPersonal: function () {
+            $('form[name="importarpersonal"]').ajaxForm(function () {
                 swal("Hecho!", "Datos importados correctamente", "success");
-            });  
+            });
         },
         formulariospe: function (argumento) {
             $('#content').html(argumento);
             $('#guardapersonal').on('click', function () {
                 if (validacionPersonal()) {
                     Adminpersonal.guardaPersonal(Adminpersonal.datosPersonal(), 'GuardaPersonal');
-                }else
-                    swal("Faltan campos requeridos","","warning");
+                } else
+                    swal("Faltan campos requeridos", "", "warning");
             });
+        },
+        infoPersonal: function(idperosnal){
+          $.get("SAdminpersonal",{
+              ACCION: "infoPersonal",
+              IDPERSONAL: idperosnal
+          }).done(function(xhr,status,error){
+              if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                }
+          });  
         },
         editarPersonal: function (idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "editarPersonal",
                 IDPERSONAL: idpersonal,
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     Adminpersonal.formulariospe(arguments[0]);
                 }
@@ -80,23 +96,23 @@ var Adminpersonal = (function () {
             $.get("SAdminpersonal", {
                 ACCION: "eliminarPersonal",
                 IDPERSONAL: idpersonal
-            }).done(function(hxr,status,error){
+            }).done(function (hxr, status, error) {
                 if (error.status != 200)
-                   swal(error.getResponseHeader("ERROR"),"","warning");
-               else
-                   Adminpersonal.tablaPersonal();
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    Adminpersonal.tablaPersonal();
             });
         },
         agregaPersonal: function () {
             $.get("SAdminpersonal", {
                 ACCION: "AgregaPersonal",
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
                 else
                     Adminpersonal.formulariospe(arguments[0]);
             });
@@ -106,15 +122,15 @@ var Adminpersonal = (function () {
                 ACCION: accion,
                 PERSONAL: JSON.stringify(objeto),
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr, status, error){
+            }).done(function (xhr, status, error) {
                 console.log(arguments);
                 console.log(error.status);
                 console.log(error.getResponseHeader("ERROR"));
-                if(error.status != 200)
-                    swal(error.getResponseHeader("ERROR"),"","warning");
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
-                   swal("Hecho!", "Datos guardados correctamente", "success");
-                Adminpersonal.tablaPersonal(); 
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Adminpersonal.tablaPersonal();
                 }
             });
         },

@@ -12,50 +12,68 @@ var Adminalumno = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else{
-                  $('#content').html(arguments[0]);
-                $("#tablaalumnos").DataTable({
-                    "scrollX": true
-                });
-                /*$("#importaAlumno").on('click',function(){
-                 $.get("SAdminalumno",{
-                 ACCION: "importaAlumno"
-                 }).then(function(){
-                 Adminalumno.tablaAlumnos(); 
-                 }); 
-                 });*/
-                    Adminalumno.importaAlumno();
-                $('#btnagregaA').on('click', function () {
-                    Adminalumno.agregaAlumno();
-                }),
-                        $('.editaralu').on('click', function () {
-                    idalumno = $(this).parents("tr").find("td").eq(0).html();
-                    idtutor = $(this).parents("tr").find("td").eq(1).html();
-                    Adminalumno.editarAlumno(idalumno, idtutor);
-                }),
-                        $(".aliminaralu").on('click', function () {
-                    idalumno = $(this).parents("tr").find("td").eq(0).html();
-                    swal({
-                        title: "Estas seguro?",
-                        text: "Se eliminara el registro",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Confirmar",
-                        closeOnConfirm: false
-                    }, function () {
-                        swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
-                        Adminalumno.eliminarAlumno(idalumno);
+                else {
+                    $('#content').html(arguments[0]);
+                    $("#tablaalumnos").DataTable({
+                        "scrollX": true
                     });
+                    /*$("#importaAlumno").on('click',function(){
+                     $.get("SAdminalumno",{
+                     ACCION: "importaAlumno"
+                     }).then(function(){
+                     Adminalumno.tablaAlumnos(); 
+                     }); 
+                     });*/
+                    Adminalumno.importaAlumno();
+                    $('#btnagregaA').on('click', function () {
+                        Adminalumno.agregaAlumno();
+                    });
+                    $(".infoalumno").on('click',function(){
+                        idalumno = $(this).parents("tr").find("td").eq(0).html();
+                        idtutor = $(this).parents("tr").find("td").eq(1).html();
+                        Adminalumno.infoAlumno(idalumno,idtutor);
+                    })
+                    $('.editaralu').on('click', function () {
+                        idalumno = $(this).parents("tr").find("td").eq(0).html();
+                        idtutor = $(this).parents("tr").find("td").eq(1).html();
+                        Adminalumno.editarAlumno(idalumno, idtutor);
+                    });
+                    $(".aliminaralu").on('click', function () {
+                        idalumno = $(this).parents("tr").find("td").eq(0).html();
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se eliminara el registro",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("Eliminado exitosamente!", "Click en el bot\u00F3n!", "success");
+                            Adminalumno.eliminarAlumno(idalumno);
+                        });
 
-                });  
+                    });
                 }
             });
-            $("#actualizaTablaA").on('click',function(){
-               Adminalumno.tablaAlumnos(); 
+            $("#actualizaTablaA").on('click', function () {
+                Adminalumno.tablaAlumnos();
             });
         },
-        importaAlumno: function(){
+        infoAlumno: function(idalumno,idtutor){
+            $.get("SAdminalumno",{
+                ACCION: "infoAlumno",
+                IDALUMNO: idalumno,
+                IDTUTOR: idtutor
+            }).done(function(hxr,status,error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                }
+            })
+        },
+        importaAlumno: function () {
             $('form[name="importaralumno"]').ajaxForm(function () {
                 swal("Hecho!", "Datos importados correctamente", "success");
             });
@@ -96,7 +114,7 @@ var Adminalumno = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
-                   Adminalumno.formularios(arguments[0]); 
+                    Adminalumno.formularios(arguments[0]);
                 }
             });
         },
@@ -104,8 +122,8 @@ var Adminalumno = (function () {
             $.get("SAdminalumno", {
                 ACCION: "eliminarAlumno",
                 IDALUMNO: idalumno
-            }).done(function(xhr,status,error){
-                if(error.status != 200)
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else
                     Adminalumno.tablaAlumnos();
@@ -121,7 +139,7 @@ var Adminalumno = (function () {
                 console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else 
+                else
                     Adminalumno.formularios(arguments[0]);
             });
         },
@@ -174,6 +192,30 @@ var Adminalumno = (function () {
                 "telefonocasa": $("#telcasat").val(),
                 "celular": $("#celulart").val(),
                 "correo": $("#correot").val(),
+                "nombre2": $("#nombret2").val(),
+                "apellidop2": $("#apellidopt2").val(),
+                "apellidom2": $("#apellidomt2").val(),
+                "ocupacion2": $("#ocupacion2").val(),
+                "parentesco2": $("#parentesco2").val(),
+                "calledom2": $("#calledomt2").val(),
+                "numerodom2": $("#numerodomt2").val(),
+                "coloniadom2": $("#coloniadomt2").val(),
+                "codigopostal2": $("#codigopostalt2").val(),
+                "telefonocasa2": $("#telcasat2").val(),
+                "celular2": $("#celulart2").val(),
+                "correo2": $("#correot2").val(),
+                "nombre3": $("#nombret3").val(),
+                "apellidop3": $("#apellidopt3").val(),
+                "apellidom3": $("#apellidomt3").val(),
+                "ocupacion3": $("#ocupacion3").val(),
+                "parentesco3": $("#parentesco3").val(),
+                "calledom3": $("#calledomt3").val(),
+                "numerodom3": $("#numerodomt3").val(),
+                "coloniadom3": $("#coloniadomt3").val(),
+                "codigopostal3": $("#codigopostalt3").val(),
+                "telefonocasa3": $("#telcasat3").val(),
+                "celular3": $("#celulart3").val(),
+                "correo3": $("#correot3").val(),
                 "status": 1,
                 "tipoescuela": 1
             }

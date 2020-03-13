@@ -59,7 +59,7 @@
                                                             <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
                                                         </c:forEach>
                                                     </select>
-                                                </div><a class="clic" data-toggle="modal" data-target="#exampleModalCenter1">Clic aqui para agregar una nueva semana fiscal</a>
+                                                </div>
                                                 <form>
                                                     <div class="card-body row">
                                                         <div class="col-lg-4 p-t-20">
@@ -188,7 +188,7 @@
                                                 <c:forEach items="${requestScope.listsemana}" var="listsemana">
                                                     <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
                                                 </c:forEach>
-                                            </select> <a class="clic" data-toggle="modal" data-target="#exampleModalCenter2">Clic aqui para agregar una nueva semana fiscal</a>
+                                            </select>
                                         </div>
                                         <div class="col-md-12 col-sm-12">
                                             <form>
@@ -273,79 +273,5 @@
                 </div>
             </div>
         </div>           
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
-                        <header>Agregar semana fiscal</header>
-                    </div></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="">
-                            <form class="">
-                                <div class="card-body row">
-                                    <div class="col-lg-10 p-t-20"> 
-                                        <div class="form-group">
-                                            <label>Semana fiscal</label>
-                                            <input type="text" id="semana" class="form-control" placeholder="Ej: lunes 15 sep- viernes 25 sep">
-                                        </div>
-                                    </div><br>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary guardasemana" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="guardasemana" class="btn btn-terra" data-dismiss="modal">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
-                        <header>Agregar semana fiscal</header>
-                    </div></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="">
-                            <form class="">
-                                <div class="card-body row">
-                                    <div class="col-lg-10 p-t-20"> 
-                                        <div class="form-group">
-                                            <label>Semana fiscal</label>
-                                            <input type="text" id="semana2" class="form-control" placeholder="Ej: lunes 15 sep- viernes 25 sep">
-                                        </div>
-                                    </div><br>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary guardasemana2" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="guardasemana2" class="btn btn-terra" data-dismiss="modal">Guardar</button>
-            </div>
-        </div>
     </div>
 </div>

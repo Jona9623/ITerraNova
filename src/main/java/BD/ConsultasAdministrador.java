@@ -131,7 +131,9 @@ public class ConsultasAdministrador {
         try {
             con.setAutoCommit(false);
             String consulta = "insert into tb_tutor (nombre,apellidopaterno,apellidomaterno,ocupacion,parentesco,calledomicilio,numerodomicilio,\n"
-                    + "coloniadomicilio,codigopostal,telefonocasa,celular,correo,status,tipoescuela) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "coloniadomicilio,codigopostal,telefonocasa,celular,correo, nombre2,apellidopaterno2,apellidomaterno2,ocupacion2,parentesco2,calledomicilio2,numerodomicilio2,\n"
+                    + "coloniadomicilio2,codigopostal2,telefonocasa2,celular2,correo2, nombre3,apellidopaterno3,apellidomaterno3,ocupacion3,parentesco3,calledomicilio3,numerodomicilio3,\n"
+                    + "coloniadomicilio3,codigopostal3,telefonocasa3,celular3,correo3,  status,tipoescuela) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(consulta);
             pst.setString(1, tutor.getNombre());
             pst.setString(2, tutor.getApellidop());
@@ -145,8 +147,32 @@ public class ConsultasAdministrador {
             pst.setString(10, tutor.getTelefonocasa());
             pst.setString(11, tutor.getCelular());
             pst.setString(12, tutor.getCorreo());
-            pst.setInt(13, 1);
-            pst.setInt(14, tipoescuela);
+            pst.setString(13, tutor.getNombre2());
+            pst.setString(14, tutor.getApellidop2());
+            pst.setString(15, tutor.getApellidom2());
+            pst.setString(16, tutor.getOcupacion2());
+            pst.setString(17, tutor.getParentesco2());
+            pst.setString(18, tutor.getCalledom2());
+            pst.setInt(19, tutor.getNumerodom2());
+            pst.setString(20, tutor.getColoniadom2());
+            pst.setInt(21, tutor.getCodigopostal2());
+            pst.setString(22, tutor.getTelefonocasa2());
+            pst.setString(23, tutor.getCelular2());
+            pst.setString(24, tutor.getCorreo2());
+            pst.setString(25, tutor.getNombre3());
+            pst.setString(26, tutor.getApellidop3());
+            pst.setString(27, tutor.getApellidom3());
+            pst.setString(28, tutor.getOcupacion3());
+            pst.setString(29, tutor.getParentesco3());
+            pst.setString(30, tutor.getCalledom3());
+            pst.setInt(31, tutor.getNumerodom3());
+            pst.setString(32, tutor.getColoniadom3());
+            pst.setInt(33, tutor.getCodigopostal3());
+            pst.setString(34, tutor.getTelefonocasa3());
+            pst.setString(35, tutor.getCelular3());
+            pst.setString(36, tutor.getCorreo3());
+            pst.setInt(37, 1);
+            pst.setInt(38, tipoescuela);
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -254,40 +280,47 @@ public class ConsultasAdministrador {
         ResultSet rs = null;
         TbAlumnos alumno = new TbAlumnos();
         try {
-            String consulta = "select * from tb_alumnos where idTb_Alumnos = ?";
+            String consulta = "select * from tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado\n"
+                    + "inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo\n"
+                    + "left join ct_areaalumno on tb_alumnos.r_area = ct_areaalumno.idCt_AreaAlumno\n"
+                    + "left join ct_cptalumno on tb_alumnos.r_cpt = ct_cptalumno.idCt_CptAlumno where idTb_Alumnos = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, id);
             rs = pst.executeQuery();
             while (rs.next()) {
-                alumno.setIdtbalumnos(rs.getInt("idTb_Alumnos"));
-                alumno.setMatricula(rs.getString("matricula"));
-                alumno.setNombre(rs.getString("nombre"));
-                alumno.setApellidop(rs.getString("apellidopaterno"));
-                alumno.setApellidom(rs.getString("apellidomaterno"));
-                alumno.setFechanacimiento(rs.getString("fechanacimiento"));
-                alumno.setCurp(rs.getString("curp"));
-                alumno.setMunicipiona(rs.getString("municipionacimiento"));
-                alumno.setEstadona(rs.getString("estadonacimiento"));
-                alumno.setNacionalidad(rs.getString("nacionalidad"));
-                alumno.setSexo(rs.getBoolean("sexo"));
-                alumno.setCalledom(rs.getString("calledomicilio"));
-                alumno.setNumerodom(rs.getInt("numerodomicilio"));
-                alumno.setColoniadom(rs.getString("coloniadomicilio"));
-                alumno.setCodigopostal(rs.getInt("codigopostal"));
-                alumno.setTelefonocasa(rs.getString("telefonocasa"));
-                alumno.setCelular(rs.getString("celularalumno"));
-                alumno.setCorreo(rs.getString("correoalumno"));
+                alumno.setIdtbalumnos(rs.getInt("tb_alumnos.idTb_Alumnos"));
+                alumno.setMatricula(rs.getString("tb_alumnos.matricula"));
+                alumno.setNombre(rs.getString("tb_alumnos.nombre"));
+                alumno.setApellidop(rs.getString("tb_alumnos.apellidopaterno"));
+                alumno.setApellidom(rs.getString("tb_alumnos.apellidomaterno"));
+                alumno.setFechanacimiento(rs.getString("tb_alumnos.fechanacimiento"));
+                alumno.setCurp(rs.getString("tb_alumnos.curp"));
+                alumno.setMunicipiona(rs.getString("tb_alumnos.municipionacimiento"));
+                alumno.setEstadona(rs.getString("tb_alumnos.estadonacimiento"));
+                alumno.setNacionalidad(rs.getString("tb_alumnos.nacionalidad"));
+                alumno.setSexo(rs.getBoolean("tb_alumnos.sexo"));
+                alumno.setCalledom(rs.getString("tb_alumnos.calledomicilio"));
+                alumno.setNumerodom(rs.getInt("tb_alumnos.numerodomicilio"));
+                alumno.setColoniadom(rs.getString("tb_alumnos.coloniadomicilio"));
+                alumno.setCodigopostal(rs.getInt("tb_alumnos.codigopostal"));
+                alumno.setTelefonocasa(rs.getString("tb_alumnos.telefonocasa"));
+                alumno.setCelular(rs.getString("tb_alumnos.celularalumno"));
+                alumno.setCorreo(rs.getString("tb_alumnos.correoalumno"));
                 alumno.setNivelcursa(rs.getString("nivelcursa"));
-                alumno.setRgrado(rs.getInt("r_grado"));
-                alumno.setRgrupo(rs.getInt("r_grupo"));
-                alumno.setRarea(rs.getInt("r_area"));
-                alumno.setRcpt(rs.getInt("r_cpt"));
-                alumno.setPlantelproce(rs.getString("plantelprocedencia"));
-                alumno.setNivelanterior(rs.getInt("nivelanterior"));
-                alumno.setGradoanterior(rs.getInt("gradoanterior"));
-                alumno.setTurnoanterior(rs.getInt("turnoanterior"));
-                alumno.setMunicipioante(rs.getString("municipioanterior"));
-                alumno.setFoto(rs.getString("foto"));
+                alumno.setRgrado(rs.getInt("tb_alumnos.r_grado"));
+                alumno.setRgrupo(rs.getInt("tb_alumnos.r_grupo"));
+                alumno.setRarea(rs.getInt("tb_alumnos.r_area"));
+                alumno.setRcpt(rs.getInt("tb_alumnos.r_cpt"));
+                alumno.setPlantelproce(rs.getString("tb_alumnos.plantelprocedencia"));
+                alumno.setNivelanterior(rs.getInt("tb_alumnos.nivelanterior"));
+                alumno.setGradoanterior(rs.getInt("tb_alumnos.gradoanterior"));
+                alumno.setTurnoanterior(rs.getInt("tb_alumnos.turnoanterior"));
+                alumno.setMunicipioante(rs.getString("tb_alumnos.municipioanterior"));
+                alumno.setFoto(rs.getString("tb_alumnos.foto"));
+                alumno.setGrado(rs.getString("ct_grado.nombre"));
+                alumno.setGrupo(rs.getString("ct_grupo.nombre"));
+                alumno.setArea(rs.getString("ct_areaalumno.nombre"));
+                alumno.setCpt(rs.getString("ct_cptalumno.nombre"));
             }
         } catch (Exception e) {
             throw e;
@@ -333,6 +366,30 @@ public class ConsultasAdministrador {
                 tutor.setTelefonocasa(rs.getString("telefonocasa"));
                 tutor.setCelular(rs.getString("celular"));
                 tutor.setCorreo(rs.getString("correo"));
+                tutor.setNombre2(rs.getString("nombre2"));
+                tutor.setApellidop2(rs.getString("apellidopaterno2"));
+                tutor.setApellidom2(rs.getString("apellidomaterno2"));
+                tutor.setOcupacion2(rs.getString("ocupacion2"));
+                tutor.setParentesco2(rs.getString("parentesco2"));
+                tutor.setCalledom2(rs.getString("calledomicilio2"));
+                tutor.setNumerodom2(rs.getInt("numerodomicilio2"));
+                tutor.setColoniadom2(rs.getString("coloniadomicilio2"));
+                tutor.setCodigopostal2(rs.getInt("codigopostal2"));
+                tutor.setTelefonocasa2(rs.getString("telefonocasa2"));
+                tutor.setCelular2(rs.getString("celular2"));
+                tutor.setCorreo2(rs.getString("correo2"));
+                tutor.setNombre3(rs.getString("nombre3"));
+                tutor.setApellidop3(rs.getString("apellidopaterno3"));
+                tutor.setApellidom3(rs.getString("apellidomaterno3"));
+                tutor.setOcupacion3(rs.getString("ocupacion3"));
+                tutor.setParentesco3(rs.getString("parentesco3"));
+                tutor.setCalledom3(rs.getString("calledomicilio3"));
+                tutor.setNumerodom3(rs.getInt("numerodomicilio3"));
+                tutor.setColoniadom3(rs.getString("coloniadomicilio3"));
+                tutor.setCodigopostal3(rs.getInt("codigopostal3"));
+                tutor.setTelefonocasa3(rs.getString("telefonocasa3"));
+                tutor.setCelular3(rs.getString("celular3"));
+                tutor.setCorreo3(rs.getString("correo3"));
             }
         } catch (Exception e) {
             throw e;
@@ -360,35 +417,36 @@ public class ConsultasAdministrador {
         ResultSet rs = null;
         TbPersonal personal = new TbPersonal();
         try {
-            String consulta = "select * from tb_personal where idTb_Personal = ?";
+            String consulta = "select * from tb_personal inner join ct_puesto on tb_personal.r_puesto = ct_puesto.idCt_Puesto where idTb_Personal = ?";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, idpersonal);
             rs = pst.executeQuery();
             while (rs.next()) {
-                personal.setIdtbpersonal(rs.getInt("idTb_Personal"));
-                personal.setNombre(rs.getString("nombre"));
-                personal.setApellidop(rs.getString("apellidopaterno"));
-                personal.setApellidom(rs.getString("apellidomaterno"));
-                personal.setFechanacimiento(rs.getString("fechanacimiento"));
-                personal.setCurp(rs.getString("curp"));
-                personal.setMunicipionac(rs.getString("municipionacimiento"));
-                personal.setEstadonac(rs.getString("estadonacimiento"));
-                personal.setNacionalidad(rs.getString("nacionalidad"));
-                personal.setSexo(rs.getBoolean("sexo"));
-                personal.setCalledom(rs.getString("calledomicilio"));
-                personal.setNumerodom(rs.getInt("numerodomicilio"));
-                personal.setColoniadom(rs.getString("coloniadomicilio"));
-                personal.setCodigopostal(rs.getInt("codigopostal"));
-                personal.setTelefonocasa(rs.getString("telefonocasa"));
-                personal.setCelular(rs.getString("celular"));
-                personal.setCorreo(rs.getString("correo"));
-                personal.setNss(rs.getString("nss"));
-                personal.setRfc(rs.getString("rfc"));
-                personal.setNivelestudios(rs.getString("nivelmaxestudios"));
-                personal.setLicenciatura(rs.getString("licenciatura"));
-                personal.setMaestria(rs.getString("maestria"));
-                personal.setDoctorado(rs.getString("doctorado"));
-                personal.setRpuesto(rs.getInt("r_puesto"));
+                personal.setIdtbpersonal(rs.getInt("tb_personal.idTb_Personal"));
+                personal.setNombre(rs.getString("tb_personal.nombre"));
+                personal.setApellidop(rs.getString("tb_personal.apellidopaterno"));
+                personal.setApellidom(rs.getString("tb_personal.apellidomaterno"));
+                personal.setFechanacimiento(rs.getString("tb_personal.fechanacimiento"));
+                personal.setCurp(rs.getString("tb_personal.curp"));
+                personal.setMunicipionac(rs.getString("tb_personal.municipionacimiento"));
+                personal.setEstadonac(rs.getString("tb_personal.estadonacimiento"));
+                personal.setNacionalidad(rs.getString("tb_personal.nacionalidad"));
+                personal.setSexo(rs.getBoolean("tb_personal.sexo"));
+                personal.setCalledom(rs.getString("tb_personal.calledomicilio"));
+                personal.setNumerodom(rs.getInt("tb_personal.numerodomicilio"));
+                personal.setColoniadom(rs.getString("tb_personal.coloniadomicilio"));
+                personal.setCodigopostal(rs.getInt("tb_personal.codigopostal"));
+                personal.setTelefonocasa(rs.getString("tb_personal.telefonocasa"));
+                personal.setCelular(rs.getString("tb_personal.celular"));
+                personal.setCorreo(rs.getString("tb_personal.correo"));
+                personal.setNss(rs.getString("tb_personal.nss"));
+                personal.setRfc(rs.getString("tb_personal.rfc"));
+                personal.setNivelestudios(rs.getString("tb_personal.nivelmaxestudios"));
+                personal.setLicenciatura(rs.getString("tb_personal.licenciatura"));
+                personal.setMaestria(rs.getString("tb_personal.maestria"));
+                personal.setDoctorado(rs.getString("tb_personal.doctorado"));
+                personal.setRpuesto(rs.getInt("tb_personal.r_puesto"));
+                personal.setPuesto(rs.getString("ct_puesto.nombre"));
             }
         } catch (Exception e) {
             throw e;
@@ -482,7 +540,12 @@ public class ConsultasAdministrador {
         try {
             String consulta = "UPDATE `tb_tutor` SET `nombre` = ?, `apellidopaterno` = ?, `apellidomaterno` = ?, `ocupacion` = ?, `parentesco` = ?,"
                     + " `calledomicilio` = ?, `numerodomicilio` = ?,\n"
-                    + " `coloniadomicilio` = ?, `codigopostal` = ?, `telefonocasa` = ?, `celular` = ?, `correo` = ? WHERE (`idTb_Tutor` = ?)";
+                    + " `coloniadomicilio` = ?, `codigopostal` = ?, `telefonocasa` = ?, `celular` = ?, `correo` = ?, `nombre2` = ?, `apellidopaterno2` = ?, `apellidomaterno2` = ?, `ocupacion2` = ?, `parentesco2` = ?,"
+                    + " `calledomicilio2` = ?, `numerodomicilio2` = ?,\n"
+                    + " `coloniadomicilio2` = ?, `codigopostal2` = ?, `telefonocasa2` = ?, `celular2` = ?, `correo2` = ?, `nombre3` = ?, `apellidopaterno3` = ?, `apellidomaterno3` = ?, `ocupacion3` = ?, `parentesco3` = ?,"
+                    + " `calledomicilio3` = ?, `numerodomicilio3` = ?,\n"
+                    + " `coloniadomicilio3` = ?, `codigopostal3` = ?, `telefonocasa3` = ?, `celular3` = ?, `correo3` = ? "
+                    + " WHERE (`idTb_Tutor` = ?)";
             pst = con.prepareStatement(consulta);
             pst.setString(1, tutor.getNombre());
             pst.setString(2, tutor.getApellidop());
@@ -496,7 +559,31 @@ public class ConsultasAdministrador {
             pst.setString(10, tutor.getTelefonocasa());
             pst.setString(11, tutor.getCelular());
             pst.setString(12, tutor.getCorreo());
-            pst.setInt(13, tutor.getIdtbtutor());
+            pst.setString(13, tutor.getNombre2());
+            pst.setString(14, tutor.getApellidop2());
+            pst.setString(15, tutor.getApellidom2());
+            pst.setString(16, tutor.getOcupacion2());
+            pst.setString(17, tutor.getParentesco2());
+            pst.setString(18, tutor.getCalledom2());
+            pst.setInt(19, tutor.getNumerodom2());
+            pst.setString(20, tutor.getColoniadom2());
+            pst.setInt(21, tutor.getCodigopostal2());
+            pst.setString(22, tutor.getTelefonocasa2());
+            pst.setString(23, tutor.getCelular2());
+            pst.setString(24, tutor.getCorreo2());
+            pst.setString(25, tutor.getNombre3());
+            pst.setString(26, tutor.getApellidop3());
+            pst.setString(27, tutor.getApellidom3());
+            pst.setString(28, tutor.getOcupacion3());
+            pst.setString(29, tutor.getParentesco3());
+            pst.setString(30, tutor.getCalledom3());
+            pst.setInt(31, tutor.getNumerodom3());
+            pst.setString(32, tutor.getColoniadom3());
+            pst.setInt(33, tutor.getCodigopostal3());
+            pst.setString(34, tutor.getTelefonocasa3());
+            pst.setString(35, tutor.getCelular3());
+            pst.setString(36, tutor.getCorreo3());
+            pst.setInt(37, tutor.getIdtbtutor());
             if (pst.executeUpdate() == 1) {
                 con.commit();
             }
@@ -1075,7 +1162,7 @@ public class ConsultasAdministrador {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-           throw e;
+            throw e;
         } finally {
             try {
                 if (con != null) {

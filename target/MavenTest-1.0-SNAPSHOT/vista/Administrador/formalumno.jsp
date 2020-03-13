@@ -14,6 +14,7 @@
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="indexpre.jsp">Inicio</a>&nbsp;<i class="fa fa-angle-right"></i>
+                &nbsp;<a class="parent-item" href="javascript:Adminalumno.tablaAlumnos();">Tabla Alumnos</a>&nbsp;<i class="fa fa-angle-right"></i>
             </li>
             <li class="active">Formulario Alumno</li>
         </ol>
@@ -23,7 +24,9 @@
     <div class="p-rl-20">
         <ul class="nav customtab nav-tabs" role="tablist">
             <li class="nav-item"><a href="#tab1" class="nav-link active show" data-toggle="tab">Tutor</a></li>
-            <li class="nav-item"><a href="#tab2" class="nav-link" data-toggle="tab">Datos Alumno</a></li>
+            <li class="nav-item"><a href="#tab2" class="nav-link" data-toggle="tab">Tutor 2</a></li>
+            <li class="nav-item"><a href="#tab3" class="nav-link" data-toggle="tab">Tutor 3</a></li>
+            <li class="nav-item"><a href="#tab4" class="nav-link" data-toggle="tab">Datos Alumno</a></li>
         </ul>
     </div>
 </div>
@@ -98,6 +101,149 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <strong type="text" >Pasar a siguiente pestaña</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="tab2">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="card-body " id="bar-parent2">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="">
+                                                <div class="card-body row">
+                                                    <div class="col-md-6 col-sm-6" idDatos="${requestScope.TbAlumnos.idtbalumnos}">
+                                                        <input id="idalumno" type="hidden" value="${requestScope.alumno.idtbalumnos}">
+                                                        <input id="idtutor" type="hidden" value="${requestScope.tutor.idtbtutor}">
+                                                        <div class="form-group" id="div-nombret">
+                                                            <label>Nombre(s)</label>
+                                                            <input id="nombret2" value="${requestScope.tutor.nombre2}" type="text" class="form-control" placeholder="nombre" maxlength="35">
+                                                        </div>
+                                                        <div class="form-group" id="div-apellidopt">
+                                                            <label>Apellido Paterno</label>
+                                                            <input  id="apellidopt2" value="${requestScope.tutor.apellidop2}" type="text" class="form-control" placeholder="apellido paterno" maxlength="15">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Apellido Materno</label>
+                                                            <input id="apellidomt2" value="${requestScope.tutor.apellidom2}" type="text" class="form-control" placeholder="apellido materno" maxlength="15">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Ocupacion</label>
+                                                            <input id="ocupacion2" value="${requestScope.tutor.ocupacion2}" type="text" class="form-control" placeholder="ocupacion" maxlength="20">
+                                                        </div>
+                                                        <div class="form-group" id="div-parentesco">
+                                                            <label>Parentesco</label>
+                                                            <input id="parentesco2" value="${requestScope.tutor.parentesco2}" type="text" class="form-control" placeholder="parentesco" maxlength="15">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Teléfono casa</label>
+                                                            <input id="telcasat2" value="${requestScope.tutor.telefonocasa2}" type="number" class="form-control" placeholder="telefono casa" maxlength="15">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <div class="form-group" id="div-celular">
+                                                            <label>Celular</label>
+                                                            <input id="celulart2" value="${requestScope.tutor.celular2}" type="tel" class="form-control" placeholder="celular" max="10">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Correo</label>
+                                                            <input id="correot2" value="${requestScope.tutor.correo2}" type="email" class="form-control" placeholder="correo" maxlength="50">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Calle del domicilio</label>
+                                                            <input id="calledomt2" value="${requestScope.tutor.calledom2}" type="text" class="form-control" placeholder="calle" maxlength="20">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Número del domicilio</label>
+                                                            <input id="numerodomt2" value="${requestScope.tutor.numerodom2}" type="number" class="form-control" placeholder="numero"maxlength="4">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Colonia del domicilio</label>
+                                                            <input id="coloniadomt2" value="${requestScope.tutor.coloniadom2}" type="text" class="form-control" placeholder="colonia" maxlength="15">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Código postal</label>
+                                                            <input id="codigopostalt2" value="${requestScope.tutor.codigopostal2}" type="number" class="form-control" placeholder="codigo postal" maxlength="5">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                        <strong type="text" >Pasar a siguiente pestaña</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab3">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="card-body " id="bar-parent2">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="">
+                                                <div class="card-body row">
+                                                    <div class="col-md-6 col-sm-6" idDatos="${requestScope.TbAlumnos.idtbalumnos}">
+                                                        <input id="idalumno" type="hidden" value="${requestScope.alumno.idtbalumnos}">
+                                                        <input id="idtutor" type="hidden" value="${requestScope.tutor.idtbtutor}">
+                                                        <div class="form-group" id="div-nombret">
+                                                            <label>Nombre(s)</label>
+                                                            <input id="nombret3" value="${requestScope.tutor.nombre3}" type="text" class="form-control" placeholder="nombre" maxlength="35">
+                                                        </div>
+                                                        <div class="form-group" id="div-apellidopt">
+                                                            <label>Apellido Paterno</label>
+                                                            <input  id="apellidopt3" value="${requestScope.tutor.apellidop3}" type="text" class="form-control" placeholder="apellido paterno" maxlength="15">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Apellido Materno</label>
+                                                            <input id="apellidomt3" value="${requestScope.tutor.apellidom3}" type="text" class="form-control" placeholder="apellido materno" maxlength="15">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Ocupacion</label>
+                                                            <input id="ocupacion3" value="${requestScope.tutor.ocupacion3}" type="text" class="form-control" placeholder="ocupacion" maxlength="20">
+                                                        </div>
+                                                        <div class="form-group" id="div-parentesco">
+                                                            <label>Parentesco</label>
+                                                            <input id="parentesco3" value="${requestScope.tutor.parentesco3}" type="text" class="form-control" placeholder="parentesco" maxlength="10">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Teléfono casa</label>
+                                                            <input id="telcasat3" value="${requestScope.tutor.telefonocasa3}" type="number" class="form-control" placeholder="telefono casa" maxlength="15">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <div class="form-group" id="div-celular">
+                                                            <label>Celular</label>
+                                                            <input id="celulart3" value="${requestScope.tutor.celular3}" type="tel" class="form-control" placeholder="celular" max="10">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Correo</label>
+                                                            <input id="correot3" value="${requestScope.tutor.correo3}" type="email" class="form-control" placeholder="correo" maxlength="50">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Calle del domicilio</label>
+                                                            <input id="calledomt3" value="${requestScope.tutor.calledom3}" type="text" class="form-control" placeholder="calle" maxlength="20">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Número del domicilio</label>
+                                                            <input id="numerodomt3" value="${requestScope.tutor.numerodom3}" type="number" class="form-control" placeholder="numero"maxlength="4">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Colonia del domicilio</label>
+                                                            <input id="coloniadomt3" value="${requestScope.tutor.coloniadom3}" type="text" class="form-control" placeholder="colonia" maxlength="15">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Código postal</label>
+                                                            <input id="codigopostalt3" value="${requestScope.tutor.codigopostal3}" type="number" class="form-control" placeholder="codigo postal" maxlength="5">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <button id="guardatutor" type="button" class="btn btn-terra">Guardar</button>
                                             </div>
                                         </div>
@@ -106,7 +252,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="tab2">
+
+                    <div class="tab-pane" id="tab4">
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="card-body " id="bar-parent2">

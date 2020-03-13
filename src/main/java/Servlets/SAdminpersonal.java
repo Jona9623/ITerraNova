@@ -65,6 +65,12 @@ public class SAdminpersonal extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
+            case "infoPersonal":
+                try {
+                    infoPersonal(request,response);
+                } catch (Exception e) {
+                }
+                break;
             case "editarPersonal":
                 try {
                     editarPersonal(request, response);
@@ -130,6 +136,20 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listpersonal", listpersonal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablapersonal.jsp");
             rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    
+    private void infoPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        adminC = new AdministradorController();
+        TbPersonal personal = new TbPersonal();
+        try {
+           personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("IDPERSONAL")));
+            request.setAttribute("personal", personal);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/infopersonal.jsp");
+            rd.forward(request, response); 
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);

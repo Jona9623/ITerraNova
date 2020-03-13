@@ -80,6 +80,9 @@ $(document).ready(function () {
                 swal("Hecho!", "Datos guardados correctamente", "success");
         });
     });
+    $("#guardasemana").on('click', function () {
+        Reportes.guardaSemana();
+    });
     /*$('#amgradogrupo').on('click',function(){
      Admin.tablaGradoGrupo();
      });*/

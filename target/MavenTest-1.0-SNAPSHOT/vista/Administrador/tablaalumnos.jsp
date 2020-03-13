@@ -67,16 +67,16 @@
                             </button>
                             <ul class="dropdown-menu pull-left" role="menu">
                                 <li>
+                                    <a href="javascript:;" class="infoalumno">
+                                        <i id="infoalumno" class="icon-plus"></i>Mostrar toda la información</a>
+                                </li>
+                                <li>
                                     <a href="javascript:;" class="editaralu">
                                         <i id="editaralu" class="icon-pencil"></i> Editar </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;" class="aliminaralu">
                                         <i id="eliminaralu" class="icon-trash"></i> Eliminar </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <i class="icon-user"></i> otra opcion</a>
                                 </li>
                                 <li class="divider"> </li>
                                 <li>

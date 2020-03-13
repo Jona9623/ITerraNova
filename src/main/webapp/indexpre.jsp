@@ -160,57 +160,62 @@
                                     <ul class="sub-menu">
                                         <li class="nav-item">
                                             <a id="amalumnos" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Alumnos</span>
+                                                <span class="title"> <strong>Mostrar/Agregar Alumnos</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="ampersonal" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Personal</span>
+                                                <span class="title"><strong>Mostrar/Agregar Personal</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="ampuesto" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Puesto</span>
+                                                <span class="title"><strong>Mostrar/Agregar Puesto</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="amperiodo" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Periodo escolar</span>
+                                                <span class="title"><strong>Mostrar/Agregar Periodo escolar</strong></span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="amsemana" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter1">
+                                                <span class="title"><strong>Agregar Semana Fiscal</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="amarea" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Área de alumno</span>
+                                                <span class="title"><strong>Mostrar/Agregar Área de alumno</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="amcpt" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Capacitacion para el Trabajo alumno</span>
+                                                <span class="title"><strong>Mostrar/Agregar Capacitacion para el Trabajo alumno</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="amgrado" class="nav-link " data-toggle="modal" data-target="#modalGrado">
-                                                <span class="title">Agregar Grado</span>
+                                                <span class="title"><strong>Agregar Grado</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="amgrupo" class="nav-link " data-toggle="modal" data-target="#modalGrupo">
-                                                <span class="title">Agregar Grupo</span>
+                                                <span class="title"><strong>Agregar Grupo</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="amtipocalificacion" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar Tipo calificacion</span>
+                                                <span class="title"><strong>Mostrar/Agregar Tipo calificacion</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="amnombrematerias" class="nav-link " data-toggle="modal" data-target="#modalNombreMateria">
-                                                <span class="title">Agregar Nombres de materias</span>
+                                                <span class="title"><strong>Agregar Nombres de materias</strong></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="amasignacionmaterias" class="nav-link ">
-                                                <span class="title">Mostrar/Agregar/Asignacion Materias</span>
+                                                <span class="title"><strong>Asignacion de Materias</strong></span>
                                             </a>
                                         </li>
                                     </ul>
@@ -229,13 +234,25 @@
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img class="d-block w-100 img-responsive" src="assets/img/LogoT.jpg" style="width: 100%" alt="First slide">
+                                        <img class="d-block w-100 img-responsive" src="assets/img/Slider1.jpg" style="width: 100%" alt="First slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Planteles</h5>
+                                            <p>Entorno óptimo para tu desrrollo</p>
+                                        </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100 img-responsive" src="assets/img/LOGO_T.jpg" style="width: 100%" alt="Second slide">
+                                        <img class="d-block w-100 img-responsive" src="assets/img/Slider2.jpg" style="width: 100%" alt="Second slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Nosotros</h5>
+                                            <p>Modelo educativo inovador</p>
+                                        </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100 img-responsive" src="assets/img/Banner.jpg" style="width: 100%" alt="Third slide">
+                                        <img class="d-block w-100 img-responsive" src="assets/img/slider3.jpg" style="width: 100%" alt="Third slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Nosotros</h5>
+                                            <p>Potenciando tus habilidades</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -333,6 +350,43 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><div class="card-head">
+                                <header>Agregar semana fiscal</header>
+                            </div></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="">
+                                    <form class="">
+                                        <div class="card-body row">
+                                            <div class="col-lg-10 p-t-20"> 
+                                                <div class="form-group">
+                                                    <label>Semana fiscal</label>
+                                                    <input type="text" id="semana" class="form-control" placeholder="Ej: lunes 15 sep- viernes 25 sep">
+                                                </div>
+                                            </div><br>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary guardasemana" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="guardasemana" class="btn btn-terra" data-dismiss="modal">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="modalNombreMateria" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -374,7 +428,7 @@
             </div>
         </div>
         <% } %>
-        <% if (x == 5){%>
+        <% if (x == 5) {%>
         <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -416,7 +470,7 @@
                 </div>
             </div>
         </div>
-        <% } %>
+        <% }%>
         <!-- start js include path -->
         <script src="assets/plugins/jquery/jquery.min.js" ></script>
         <script src="assets/plugins/popper/popper.min.js" ></script>

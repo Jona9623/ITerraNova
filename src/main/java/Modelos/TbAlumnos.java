@@ -33,6 +33,7 @@ public class TbAlumnos {
     private String correo;
     private String nivelcursa;
     private int rgrado;
+    private String grado;
     private int rgrupo;
     private String grupo;
     private int rarea;
@@ -47,6 +48,14 @@ public class TbAlumnos {
     private int rtutor;
     private String tutor;
     private String foto;
+
+    public String getGrado() {
+        return grado;
+    }
+
+    public void setGrado(String grado) {
+        this.grado = grado;
+    }
 
     public String getFoto() {
         return foto;

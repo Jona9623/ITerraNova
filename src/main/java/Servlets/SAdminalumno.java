@@ -67,6 +67,12 @@ public class SAdminalumno extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
+            case "infoAlumno":
+                try {
+                    infoAlumno(request,response);
+                } catch (Exception e) {
+                }
+                break;
             case "editarAlumno":
                 try {
                     editarAlumno(request, response);
@@ -153,6 +159,22 @@ public class SAdminalumno extends HttpServlet {
             listalumnos = adminC.getAlumnos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumnos", listalumnos);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablaalumnos.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    private void infoAlumno(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        adminC = new AdministradorController();
+        TbAlumnos alumno = new TbAlumnos();
+        TbTutor tutor = new TbTutor();
+        try {
+            tutor = adminC.datosTutor(Integer.parseInt(request.getParameter("IDTUTOR")));
+            request.setAttribute("tutor", tutor);
+            alumno = adminC.datosAlumno(Integer.parseInt(request.getParameter("IDALUMNO")));
+            request.setAttribute("alumno", alumno);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/infoalumno.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
@@ -259,7 +281,7 @@ public class SAdminalumno extends HttpServlet {
                 }
                 Part part = request.getPart("fotoAlumno");
                 String nombrearchivo = extractFileName(part);
-                ruta = uploadPath + "/" + nombrearchivo;
+                ruta = uploadPath + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }

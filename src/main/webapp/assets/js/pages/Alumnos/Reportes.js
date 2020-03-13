@@ -349,12 +349,6 @@ var Reportes = (function () {
                     $("#guardacomportammiento").on('click', function () {
                         Reportes.guardaComportamiento();
                     });
-                    $("#guardasemana").on('click', function () {
-                        Reportes.guardaSemana();
-                    });
-                    $("#guardasemana2").on('click', function () {
-                        Reportes.guardaSemana2();
-                    });
                     $("#guardareporteA").on('click', function () {
                         Reportes.guardarA();
                     });
@@ -566,7 +560,6 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     swal("Hecho!", "Datos guardados correctamente", "success");
-                    Reportes.reporteAcademico();
                 }
             });
         },
