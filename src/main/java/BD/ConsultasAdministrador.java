@@ -243,7 +243,7 @@ public class ConsultasAdministrador {
                 pst.setString(22, null);
             }
             pst.setString(23, alumno.getPlantelproce());
-            pst.setInt(24, alumno.getNivelanterior());
+            pst.setString(24, alumno.getNivelanterior());
             pst.setInt(25, alumno.getGradoanterior());
             pst.setInt(26, alumno.getTurnoanterior());
             pst.setString(27, alumno.getMunicipioante());
@@ -312,7 +312,7 @@ public class ConsultasAdministrador {
                 alumno.setRarea(rs.getInt("tb_alumnos.r_area"));
                 alumno.setRcpt(rs.getInt("tb_alumnos.r_cpt"));
                 alumno.setPlantelproce(rs.getString("tb_alumnos.plantelprocedencia"));
-                alumno.setNivelanterior(rs.getInt("tb_alumnos.nivelanterior"));
+                alumno.setNivelanterior(rs.getString("tb_alumnos.nivelanterior"));
                 alumno.setGradoanterior(rs.getInt("tb_alumnos.gradoanterior"));
                 alumno.setTurnoanterior(rs.getInt("tb_alumnos.turnoanterior"));
                 alumno.setMunicipioante(rs.getString("tb_alumnos.municipioanterior"));
@@ -509,7 +509,7 @@ public class ConsultasAdministrador {
                 pst.setString(22, null);
             }
             pst.setString(23, alumno.getPlantelproce());
-            pst.setInt(24, alumno.getNivelanterior());
+            pst.setString(24, alumno.getNivelanterior());
             pst.setInt(25, alumno.getGradoanterior());
             pst.setInt(26, alumno.getTurnoanterior());
             pst.setString(27, alumno.getMunicipioante());
@@ -1806,7 +1806,10 @@ public class ConsultasAdministrador {
                 pst.setString(1, item.getMatricula());
                 pst.setString(2, item.getNombre());
                 pst.setString(3, item.getApellidop());
-                pst.setString(4, item.getApellidom());
+                if(item.getApellidom() == "0")
+                    pst.setString(4, null);
+                else
+                    pst.setString(4, item.getApellidom());
                 pst.setString(5, item.getFechanacimiento());
                 pst.setString(6, item.getCurp());
                 pst.setString(7, item.getMunicipiona());
@@ -1834,7 +1837,7 @@ public class ConsultasAdministrador {
                     pst.setString(22, null);
                 }
                 pst.setString(23, item.getPlantelproce());
-                pst.setInt(24, item.getNivelanterior());
+                pst.setString(24, item.getNivelanterior());
                 pst.setInt(25, item.getGradoanterior());
                 pst.setInt(26, item.getTurnoanterior());
                 pst.setString(27, item.getMunicipioante());
@@ -1874,7 +1877,9 @@ public class ConsultasAdministrador {
             for (TbTutor item : listtutor) {
                 con.setAutoCommit(false);
                 String consulta = "insert into tb_tutor (nombre,apellidopaterno,apellidomaterno,ocupacion,parentesco,calledomicilio,numerodomicilio,\n"
-                        + "coloniadomicilio,codigopostal,telefonocasa,celular,correo,status,tipoescuela) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + "coloniadomicilio,codigopostal,telefonocasa,celular,correo,nombre2,apellidopaterno2,apellidomaterno2,ocupacion2,parentesco2,calledomicilio2,numerodomicilio2,\n"
+                        + "coloniadomicilio2,codigopostal2,telefonocasa2,celular2,correo2, nombre3,apellidopaterno3,apellidomaterno3,ocupacion3,parentesco3,calledomicilio3,numerodomicilio3,\n"
+                        + "coloniadomicilio3,codigopostal3,telefonocasa3,celular3,correo3, status,tipoescuela) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 pst = con.prepareStatement(consulta);
                 pst.setString(1, item.getNombre());
                 pst.setString(2, item.getApellidop());
@@ -1888,8 +1893,32 @@ public class ConsultasAdministrador {
                 pst.setString(10, item.getTelefonocasa());
                 pst.setString(11, item.getCelular());
                 pst.setString(12, item.getCorreo());
-                pst.setInt(13, 1);
-                pst.setInt(14, item.getTipoescuela());
+                pst.setString(13, item.getNombre());
+                pst.setString(14, item.getApellidop());
+                pst.setString(15, item.getApellidom());
+                pst.setString(16, item.getOcupacion());
+                pst.setString(17, item.getParentesco());
+                pst.setString(18, item.getCalledom());
+                pst.setInt(19, item.getNumerodom());
+                pst.setString(20, item.getColoniadom());
+                pst.setInt(21, item.getCodigopostal());
+                pst.setString(22, item.getTelefonocasa());
+                pst.setString(23, item.getCelular());
+                pst.setString(24, item.getCorreo());
+                pst.setString(25, item.getNombre());
+                pst.setString(26, item.getApellidop());
+                pst.setString(27, item.getApellidom());
+                pst.setString(28, item.getOcupacion());
+                pst.setString(29, item.getParentesco());
+                pst.setString(30, item.getCalledom());
+                pst.setInt(31, item.getNumerodom());
+                pst.setString(32, item.getColoniadom());
+                pst.setInt(33, item.getCodigopostal());
+                pst.setString(34, item.getTelefonocasa());
+                pst.setString(35, item.getCelular());
+                pst.setString(36, item.getCorreo());
+                pst.setInt(37, 1);
+                pst.setInt(38, item.getTipoescuela());
 
                 if (pst.executeUpdate() == 1) {
                     con.commit();

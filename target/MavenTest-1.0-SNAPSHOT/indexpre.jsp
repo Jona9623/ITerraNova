@@ -63,6 +63,8 @@
     </head>
     <!-- END HEAD -->
     <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-terra1 white-sidebar-color logo-white">
+        <img src="assets/img/">
+        
         <div class="page-wrapper">
             <!-- start header -->
             <div class="page-header navbar navbar-fixed-top">

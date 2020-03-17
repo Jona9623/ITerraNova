@@ -32,6 +32,7 @@ public class SAdminpersonal extends HttpServlet {
     AdministradorController adminC;
     public String objectJson;
     public ObjectMapper mapper;
+    int tipoescuela = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -132,6 +133,7 @@ public class SAdminpersonal extends HttpServlet {
         adminC = new AdministradorController();
         List<TbPersonal> listpersonal = new ArrayList<>();
         try {
+            tipoescuela = Integer.parseInt(request.getParameter("TIPOESCUELA"));
             listpersonal = adminC.getPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listpersonal", listpersonal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/tablapersonal.jsp");
@@ -236,7 +238,7 @@ public class SAdminpersonal extends HttpServlet {
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
-            listpersonal = adminC.exportaPersonal(ruta);
+            listpersonal = adminC.exportaPersonal(ruta,tipoescuela);
             //adminC.guardaImportaPersonal(listpersonal);
             String f = null;
         } catch (Exception e) {

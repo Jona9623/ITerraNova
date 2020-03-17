@@ -41,7 +41,7 @@ public class TbAlumnos {
     private int rcpt;
     private String cpt;
     private String plantelproce;
-    private int nivelanterior;
+    private String nivelanterior;
     private int gradoanterior;
     private int turnoanterior;
     private String municipioante;
@@ -293,11 +293,11 @@ public class TbAlumnos {
         this.plantelproce = plantelproce;
     }
 
-    public int getNivelanterior() {
+    public String getNivelanterior() {
         return nivelanterior;
     }
 
-    public void setNivelanterior(int nivelanterior) {
+    public void setNivelanterior(String nivelanterior) {
         this.nivelanterior = nivelanterior;
     }
 

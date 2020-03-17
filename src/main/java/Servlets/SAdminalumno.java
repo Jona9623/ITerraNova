@@ -308,7 +308,7 @@ public class SAdminalumno extends HttpServlet {
             alumno.setRarea(Integer.parseInt(request.getParameter("area")));
             alumno.setRcpt(Integer.parseInt(request.getParameter("cpt")));
             alumno.setPlantelproce(String.valueOf(request.getParameter("plantelproce")));
-            alumno.setNivelanterior(Integer.parseInt(request.getParameter("nivelanterior")));
+            alumno.setNivelanterior(String.valueOf(request.getParameter("nivelanterior")));
             alumno.setTurnoanterior(Integer.parseInt(request.getParameter("turnoanterior")));
             alumno.setGradoanterior(Integer.parseInt(request.getParameter("gradoanterior")));
             alumno.setPlantelproce(String.valueOf(request.getParameter("plantelanterior")));
@@ -356,8 +356,8 @@ public class SAdminalumno extends HttpServlet {
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
-            listalumnos = adminC.exportaAlumnos(ruta);
-            // adminC.guardaImportaAlumnos(listalumnos);
+            listalumnos = adminC.exportaAlumnos(ruta,tipoescuelaAlumno);
+             //adminC.guardaImportaAlumnos(listalumnos);
             String f = null;
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
@@ -384,7 +384,7 @@ public class SAdminalumno extends HttpServlet {
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
-            listtutor = adminC.exportaTutor(ruta);
+            listtutor = adminC.exportaTutor(ruta,tipoescuelaAlumno);
             //adminC.guardaImportaTutor(listtutor);
             String f = null;
         } catch (Exception e) {
