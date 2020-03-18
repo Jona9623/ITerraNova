@@ -98,19 +98,13 @@ public class AlumnosController {
     }
 
     private static void enviarCorreo(String correotutor, String asunto, String cuerpo) throws Exception {
-        String usuario = "pruebas.iterranova@gmail.com";
-        String contrasena = "excelencia";
+        String usuario = "sistema@iterra.edu.mx";
+        String contrasena = "guanabana2035";
 
         try {
             Properties pro = System.getProperties();
-            /* Session sesion = Session.getDefaultInstance(pro);
-            MimeMessage mensaje = new MimeMessage(sesion);
-            mensaje.setFrom(new InternetAddress(usuario));
-            mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(para));
-            mensaje.setSubject("ESTE ES EL ASUNTO");
-            mensaje.setText("ESTE ES EL CUERPO DEL MENSAJE");
-            Transport.send(mensaje);*/
-            pro.put("mail.smtp.host", "smtp.gmail.com");
+            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
+           // pro.put("mail.smtp.socketFactory.port", "587");
             pro.put("mail.smtp.port", "587");
             pro.put("mail.smtp.auth", "true");
             pro.put("mail.smtp.starttls.enable", "true");
@@ -126,11 +120,38 @@ public class AlumnosController {
             t.connect(usuario, contrasena);
             t.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
             t.close();
+            enviacorreoSistema(usuario,contrasena,asunto,cuerpo);
 
         } catch (Exception e) {
             throw e;
         }
 
+    }
+    
+    private static void enviacorreoSistema(String usuario, String contrasena, String asunto, String cuerpo) throws Exception {
+        try {
+            Properties pro = System.getProperties();
+            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
+            pro.put("mail.smtp.socketFactory.port", "587");
+            pro.put("mail.smtp.port", "587");
+            pro.put("mail.smtp.auth", "true");
+            pro.put("mail.smtp.starttls.enable", "true");
+
+            Session sesion = Session.getDefaultInstance(pro);
+
+            Message mensaje = new MimeMessage(sesion);
+            mensaje.setFrom(new InternetAddress(usuario));
+            mensaje.setRecipient(Message.RecipientType.TO, new InternetAddress(usuario));
+            mensaje.setSubject(asunto);
+            mensaje.setText(cuerpo);
+            Transport t = sesion.getTransport("smtp");
+            t.connect(usuario, contrasena);
+            t.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
+            t.close();
+
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void guardareditarReporteD(TbReporteDisciplinar reporteD) throws Exception {
@@ -214,12 +235,15 @@ public class AlumnosController {
     }
 
     public void correoPersonalImagen(String correo, String url) throws Exception {
-        String usuario = "pruebas.iterranova@gmail.com";
-        String contrasena = "excelencia";
+        String usuario = "sistema@iterra.edu.mx";
+        String contrasena = "guanabana2035";
+        String asunto = "URL Imagen Reporte Academico";
+        String cuerpo = "La direccion a continuación debera guardarla y agregarla a la pagina de iterra.edu.mx para que posteriormente se anexe la imagen dentro"
+                    + "del portal, el URL es el siguiente:\n";
 
         try {
             Properties pro = System.getProperties();
-            pro.put("mail.smtp.host", "smtp.gmail.com");
+            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
             pro.put("mail.smtp.port", "587");
             pro.put("mail.smtp.auth", "true");
             pro.put("mail.smtp.starttls.enable", "true");
@@ -229,14 +253,13 @@ public class AlumnosController {
             Message mensaje = new MimeMessage(sesion);
             mensaje.setFrom(new InternetAddress(usuario));
             mensaje.setRecipient(Message.RecipientType.TO, new InternetAddress(correo));
-            mensaje.setSubject("URL Imagen Reporte Academico");
-            mensaje.setText("La direccion a continuación debera guardarla y agregarla a la pagina de iterra.edu.mx para que posteriormente se anexe la imagen dentro"
-                    + "del portal, el URL es el siguiente:\n"
-                    + url);
+            mensaje.setSubject(asunto);
+            mensaje.setText(cuerpo + url);
             Transport t = sesion.getTransport("smtp");
             t.connect(usuario, contrasena);
             t.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
             t.close();
+            enviacorreoSistema(usuario, contrasena, asunto, cuerpo);
 
         } catch (Exception e) {
             throw e;
@@ -245,12 +268,15 @@ public class AlumnosController {
     }
 
     public void correoPersonalImagenTarea(String correo, String url) throws Exception {
-        String usuario = "pruebas.iterranova@gmail.com";
-        String contrasena = "excelencia";
+        String usuario = "sistema@iterra.edu.mx";
+        String contrasena = "guanabana2035";
+        String asunto = "URL Imagen Tarea Semanal";
+        String cuerpo = "La direccion a continuación debera guardarla y agregarla a la pagina de iterra.edu.mx para que posteriormente se anexe la imagen dentro"
+                    + "del portal, el URL es el siguiente:\n";
 
         try {
             Properties pro = System.getProperties();
-            pro.put("mail.smtp.host", "smtp.gmail.com");
+            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
             pro.put("mail.smtp.port", "587");
             pro.put("mail.smtp.auth", "true");
             pro.put("mail.smtp.starttls.enable", "true");
@@ -260,14 +286,13 @@ public class AlumnosController {
             Message mensaje = new MimeMessage(sesion);
             mensaje.setFrom(new InternetAddress(usuario));
             mensaje.setRecipient(Message.RecipientType.TO, new InternetAddress(correo));
-            mensaje.setSubject("URL Imagen Tarea Semanal");
-            mensaje.setText("La direccion a continuación debera guardarla y agregarla a la pagina de iterra.edu.mx para que posteriormente se anexe la imagen dentro"
-                    + "del portal, el URL es el siguiente:\n"
-                    + url);
+            mensaje.setSubject(asunto);
+            mensaje.setText(cuerpo + url);
             Transport t = sesion.getTransport("smtp");
             t.connect(usuario, contrasena);
             t.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
             t.close();
+            enviacorreoSistema(usuario, contrasena, asunto, cuerpo);
 
         } catch (Exception e) {
             throw e;

@@ -28,10 +28,10 @@ var Adminalumno = (function () {
                     $('#btnagregaA').on('click', function () {
                         Adminalumno.agregaAlumno();
                     });
-                    $(".infoalumno").on('click',function(){
+                    $(".infoalumno").on('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         idtutor = $(this).parents("tr").find("td").eq(1).html();
-                        Adminalumno.infoAlumno(idalumno,idtutor);
+                        Adminalumno.infoAlumno(idalumno, idtutor);
                     })
                     $('.editaralu').on('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
@@ -60,12 +60,12 @@ var Adminalumno = (function () {
                 Adminalumno.tablaAlumnos();
             });
         },
-        infoAlumno: function(idalumno,idtutor){
-            $.get("SAdminalumno",{
+        infoAlumno: function (idalumno, idtutor) {
+            $.get("SAdminalumno", {
                 ACCION: "infoAlumno",
                 IDALUMNO: idalumno,
                 IDTUTOR: idtutor
-            }).done(function(hxr,status,error){
+            }).done(function (hxr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
@@ -74,8 +74,11 @@ var Adminalumno = (function () {
             })
         },
         importaAlumno: function () {
-            $('form[name="importaralumno"]').ajaxForm(function () {
-                swal("Hecho!", "Datos importados correctamente", "success");
+            $('form[name="importaralumno"]').ajaxForm(function (xhr,status,error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    swal("Hecho!", "Datos importados correctamente", "success");
             });
         },
         formularios: function (argumento) {
@@ -96,9 +99,13 @@ var Adminalumno = (function () {
              });*/
         },
         guardarAlumno: function () {
-            $('form[name="formAlumno"]').ajaxForm(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
-                Adminalumno.tablaAlumnos();
+            $('form[name="formAlumno"]').ajaxForm(function (xhr,status,error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Adminalumno.tablaAlumnos();
+                }
             });
         },
         editarAlumno: function (idalumno, idtutor) {

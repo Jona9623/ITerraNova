@@ -37,9 +37,13 @@ var Reportes = (function () {
             });
         },
         guardarD: function () {
-            $('form[name="formreporteD"]').ajaxForm(function () {
-                swal("Hecho!", "Datos guardados correctamente", "success");
-                Reportes.reporteDisciplinar();
+            $('form[name="formreporteD"]').ajaxForm(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Reportes.reporteDisciplinar();
+                }
             });
         },
         datosIncidente: function () {
@@ -70,33 +74,6 @@ var Reportes = (function () {
             }
             return reporteD;
         },
-        /*       guardaReporteD: function (objeto, accion) {
-         var form = $("#fileinfo")[0];
-         var data = new FormData(form);
-         $.ajax({
-         type: 'POST',
-         enctype: 'multipart/form-data',
-         url: "SReportes/guardaReporteD",
-         data: data,
-         processData: false,
-         contentType: false,
-         cahce: false,
-         dataType: 'json',
-         success: function (e) {
-         alert("succes");
-         },
-         error: function (e) {
-         alert("error");
-         }
-         })
-         $.get("SReportes", {
-         ACCION: accion,
-         REPORTE: JSON.stringify(objeto)
-         }).then(function () {
-         swal("Hecho!", "Datos guardados correctamente", "success");
-         Reportes.reporteDisciplinar();
-         });
-         },*/
         getAlumno: function (grado, grupo) {
             $.get("SReportes", {
                 ACCION: "alumnoGradoGrupo",
@@ -356,7 +333,7 @@ var Reportes = (function () {
                         if (validacionActividadSemanal())
                             Reportes.guardaActividadSemanal();
                         else
-                            swal("Faltan campos requeridos","","warning");
+                            swal("Faltan campos requeridos", "", "warning");
                     });
                 }
             });
@@ -621,20 +598,26 @@ var Reportes = (function () {
             });
         },
         formReporteA: function () {
-            $('form[name="formaReporteA"]').ajaxForm(function () {
-                swal("Hecho!", "Imagen guardada correctamente", "success");
+            $('form[name="formaReporteA"]').ajaxForm(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    swal("Hecho!", "Imagen guardada correctamente", "success");
             });
         },
-        formImagenActividad: function () {
-            $('form[name="formActividad"]').ajaxForm(function () {
-                swal("Hecho!", "Imagen guardada correctamente", "success");
+        formImagenActividad: function (xhr, status, error) {
+            $('form[name="formActividad"]').ajaxForm(function (xhr,status,error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    swal("Hecho!", "Imagen guardada correctamente", "success");
             });
         }
 
     }
     ;
 }());
-function validacionActividadSemanal(){
+function validacionActividadSemanal() {
     var valido = true;
     if ($("#fechaentrega").val().trim() == "") {
         $("#div-fechaentrega").addClass("has-error");

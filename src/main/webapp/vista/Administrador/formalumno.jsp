@@ -359,7 +359,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Número del domicilio</label>
-                                                                <input id="numerodoma" name="numerodoma" value="${requestScope.alumno.numerodom}" type="number" class="form-control" placeholder="numero domicilio" maxlength="4">
+                                                                <input id="numerodoma" name="numerodoma" <c:if test="${requestScope.alumno.numerodom == null}"> value="0"</c:if> <c:if test="${requestScope.alumno.numerodom != null}"> value="${requestScope.alumno.numerodom}"</c:if> type="number" class="form-control" placeholder="numero domicilio" maxlength="4">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Colonia del domicilio</label>
@@ -367,7 +367,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Código postal</label>
-                                                                <input id="codigopostala" name="codigopostala" value="${requestScope.alumno.codigopostal}" type="number" class="form-control" placeholder="codigo postal" maxlength="5">
+                                                                <input id="codigopostala" name="codigopostala" <c:if test="${requestScope.alumno.codigopostal == null}"> value="0"</c:if> <c:if test="${requestScope.alumno.codigopostal != null}">value="${requestScope.alumno.codigopostal}"</c:if> type="number" class="form-control" placeholder="codigo postal" maxlength="5">
                                                             </div>
                                                             <div class="form-group" id="div-nivela">
                                                                 <label>Nivel que cursa*</label>
@@ -435,7 +435,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Grado cursado anteriormente</label>
-                                                                <input id="gradoanterior" name="gradoanterior" value="${requestScope.alumno.gradoanterior}" type="number" class="form-control" placeholder="grado anterior" maxlength="1">
+                                                                <input id="gradoanterior" name="gradoanterior" <c:if test="${requestScope.alumno.gradoanterior == null}"> value="0"</c:if> <c:if test="${requestScope.alumno.gradoanterior != null}">value="${requestScope.alumno.gradoanterior}"</c:if> type="number" class="form-control" placeholder="grado anterior" maxlength="1">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label >Turno cursado anteriormente</label>

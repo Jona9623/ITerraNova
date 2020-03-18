@@ -128,6 +128,7 @@ public class ConsultasAdministrador {
     public void guardaTutor(TbTutor tutor, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
+        PreparedStatement pst2 = null;
         try {
             con.setAutoCommit(false);
             String consulta = "insert into tb_tutor (nombre,apellidopaterno,apellidomaterno,ocupacion,parentesco,calledomicilio,numerodomicilio,\n"
@@ -176,6 +177,12 @@ public class ConsultasAdministrador {
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
+                String sql2 = "update tb_tutor set tb_tutor.matricula = 10000 + tb_tutor.idTb_Tutor;";
+                pst2 = con.prepareStatement(sql2);
+                if(pst2.executeUpdate() > 0)
+                    con.commit();
+                else
+                    System.out.println("No se pudo guardar");
             } else {
                 System.out.println("Error al guardar");
             }
@@ -198,6 +205,8 @@ public class ConsultasAdministrador {
     public void guardaAlumno(TbAlumnos alumno, int tipoescuela, String ruta) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
+        PreparedStatement pst2 = null;
+        ResultSet rs2 = null;
         int id = 0;
         try {
             con.setAutoCommit(false);
@@ -254,6 +263,12 @@ public class ConsultasAdministrador {
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
+                String sql2 = "update tb_alumnos set tb_alumnos.matricula = 10000 + tb_alumnos.idTb_Alumnos;";
+                pst2 = con.prepareStatement(sql2);
+                if(pst2.executeUpdate() > 0)
+                    con.commit();
+                else
+                    System.out.println("No se pudo guardar");
             } else {
                 System.out.println("Error al guardar");
             }
@@ -716,6 +731,7 @@ public class ConsultasAdministrador {
     public void guardaPersonal(TbPersonal personal, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
+        PreparedStatement pst2 = null;
         try {
             con.setAutoCommit(false);
             String consulta = "insert into tb_personal (nombre,apellidopaterno,apellidomaterno,fechanacimiento,curp,municipionacimiento,estadonacimiento,nacionalidad,sexo,calledomicilio,"
@@ -750,6 +766,13 @@ public class ConsultasAdministrador {
 
             if (pst.executeUpdate() == 1) {
                 con.commit();
+                String sql2 = "update tb_personal set tb_personal.matricula = 10000 + tb_personal.idTb_Personal;";
+                pst2 = con.prepareStatement(sql2);
+                if(pst2.executeUpdate() > 0)
+                    con.commit();
+                else
+                    System.out.println("No se pudo guardar");
+                
             } else {
                 System.out.println("Error al guardar");
             }

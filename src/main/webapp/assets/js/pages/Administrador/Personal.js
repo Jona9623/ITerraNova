@@ -20,7 +20,7 @@ var Adminpersonal = (function () {
                     $('#btnaregarP').on('click', function () {
                         Adminpersonal.agregaPersonal();
                     });
-                    $(".infopersonal").on('click',function(){
+                    $(".infopersonal").on('click', function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.infoPersonal(idpersonal);
                     })
@@ -51,8 +51,11 @@ var Adminpersonal = (function () {
             })
         },
         importarPersonal: function () {
-            $('form[name="importarpersonal"]').ajaxForm(function () {
-                swal("Hecho!", "Datos importados correctamente", "success");
+            $('form[name="importarpersonal"]').ajaxForm(function (xhr,status,error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    swal("Hecho!", "Datos importados correctamente", "success");
             });
         },
         formulariospe: function (argumento) {
@@ -64,17 +67,17 @@ var Adminpersonal = (function () {
                     swal("Faltan campos requeridos", "", "warning");
             });
         },
-        infoPersonal: function(idperosnal){
-          $.get("SAdminpersonal",{
-              ACCION: "infoPersonal",
-              IDPERSONAL: idperosnal
-          }).done(function(xhr,status,error){
-              if (error.status != 200)
+        infoPersonal: function (idperosnal) {
+            $.get("SAdminpersonal", {
+                ACCION: "infoPersonal",
+                IDPERSONAL: idperosnal
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#content").html(arguments[0]);
                 }
-          });  
+            });
         },
         editarPersonal: function (idpersonal) {
             $.get("SAdminpersonal", {

@@ -312,7 +312,6 @@ public class SAdminalumno extends HttpServlet {
             alumno.setTurnoanterior(Integer.parseInt(request.getParameter("turnoanterior")));
             alumno.setGradoanterior(Integer.parseInt(request.getParameter("gradoanterior")));
             alumno.setPlantelproce(String.valueOf(request.getParameter("plantelanterior")));
-            // alumno = mapper.readValue(objectJson, TbAlumnos.class);
             if (alumno.getIdtbalumnos() > 0) {
                 adminC.actualizaAlumno(alumno, ruta);
             } else {

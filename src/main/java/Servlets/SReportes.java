@@ -612,10 +612,6 @@ public class SReportes extends HttpServlet {
         alumnoC = new AlumnosController();
         mapper = new ObjectMapper();
         objectJson = request.getParameter("OBJETO");
-        DateFormat horafecha = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-        actual = horafecha.format(date);
-        actual = actual.replace("/", "-");
-        actual = actual.replace(":", "-");
         try {
             reporteA = mapper.readValue(objectJson, TbReporteAcademico.class);
             imagenAcademico = reporteA.getNombreimagen();
