@@ -159,6 +159,18 @@ public class SReportes extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
+            case "guardarHonor":
+                try {
+                    guardarHonor(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "guardarAtencion":
+                try {
+                    guardarAtencion(request,response);
+                } catch (Exception e) {
+                }
+                break;
             case "guardaActividadSemanal":
                 try {
                     guardaActividadSemanal(request, response);
@@ -369,7 +381,7 @@ public class SReportes extends HttpServlet {
         }
     }
 
-    private void alumnoGradoGrupoAca(HttpServletRequest request, HttpServletResponse response) {
+    private void alumnoGradoGrupoAca(HttpServletRequest request, HttpServletResponse response) throws IOException {
         alumnoC = new AlumnosController();
         adminC = new AdministradorController();
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
@@ -403,11 +415,12 @@ public class SReportes extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/alumnosgradogrupo.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
-    private void alumnoGradoGrupoAcaAtencion(HttpServletRequest request, HttpServletResponse response) {
+    private void alumnoGradoGrupoAcaAtencion(HttpServletRequest request, HttpServletResponse response) throws IOException {
         alumnoC = new AlumnosController();
         adminC = new AdministradorController();
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
@@ -434,12 +447,13 @@ public class SReportes extends HttpServlet {
             request.setAttribute("listgrupo", listgrupo);
             listatencion = alumnoC.getAtencion(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listatencion", listatencion);
-            listalumnoA = alumnoC.getAlumnos(Integer.parseInt(request.getParameter("GRADOATENCION")), Integer.parseInt(request.getParameter("GRUPOATENCION")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listalumnoA = alumnoC.getAlumnosAtencion(Integer.parseInt(request.getParameter("GRADOATENCION")), Integer.parseInt(request.getParameter("GRUPOATENCION")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumnoA", listalumnoA);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/alumnogradogrupoatencion.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 
@@ -588,14 +602,9 @@ public class SReportes extends HttpServlet {
 
     private void guardaActividadSemanal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumnoC = new AlumnosController();
-        Date date = new Date();
         TbTareaSemanal tarea = new TbTareaSemanal();
         mapper = new ObjectMapper();
         objectJson = request.getParameter("OBJETO");
-        DateFormat horafecha = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-        actual = horafecha.format(date);
-        actual = actual.replace("/", "-");
-        actual = actual.replace(":", "-");
         try {
             tarea = mapper.readValue(objectJson, TbTareaSemanal.class);
             imagenTarea = tarea.getNombreimagen();
@@ -608,7 +617,6 @@ public class SReportes extends HttpServlet {
 
     private void guardaReporteAcademico(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TbReporteAcademico reporteA = new TbReporteAcademico();
-        Date date = new Date();
         alumnoC = new AlumnosController();
         mapper = new ObjectMapper();
         objectJson = request.getParameter("OBJETO");
@@ -616,6 +624,35 @@ public class SReportes extends HttpServlet {
             reporteA = mapper.readValue(objectJson, TbReporteAcademico.class);
             imagenAcademico = reporteA.getNombreimagen();
             alumnoC.guardaReporteAcademico(reporteA, Integer.parseInt(request.getParameter("TIPOESCUELA")));
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    
+    private void guardarHonor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        TbReporteAcademico reporteA = new TbReporteAcademico();
+        alumnoC = new AlumnosController();
+        mapper = new ObjectMapper();
+        objectJson = request.getParameter("OBJETO");
+        try {
+            reporteA = mapper.readValue(objectJson, TbReporteAcademico.class);
+            alumnoC.guardaReporteAcademico(reporteA, Integer.parseInt(request.getParameter("TIPOESCUELA")));
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    
+    private void guardarAtencion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        TbReporteAcademico reporteA = new TbReporteAcademico();
+        alumnoC = new AlumnosController();
+        mapper = new ObjectMapper();
+        objectJson = request.getParameter("OBJETO");
+        try {
+            reporteA = mapper.readValue(objectJson, TbReporteAcademico.class);
+            imagenAcademico = reporteA.getNombreimagen();
+            alumnoC.guardarAtencion(reporteA);
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);

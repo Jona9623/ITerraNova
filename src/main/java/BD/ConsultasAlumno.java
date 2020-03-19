@@ -197,6 +197,48 @@ public class ConsultasAlumno {
         }
         return listalumno;
     }
+    
+    public List<Alumno> getAlumnosAtencion(int grado, int grupo, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<Alumno> listalumno = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select * from tb_alumnos where r_grado = ? and r_grupo = ? and tipoescuela = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, grado);
+            pst.setInt(2, grupo);
+            pst.setInt(3, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Alumno alumno = new Alumno();
+                alumno.setId(rs.getInt("idTb_Alumnos"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellidop(rs.getString("apellidopaterno"));
+                alumno.setApellidom(rs.getString("apellidomaterno"));
+                listalumno.add(alumno);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listalumno;
+    }
 
     public void guardaIincidente(CtIncidente incidente, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -697,6 +739,37 @@ public class ConsultasAlumno {
             }
         }
     }
+    
+    public void guardarAtencion(TbReporteAcademico reporteA) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "update tb_reporteacademico set r_alumnoatencion = ?, r_atencion = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, reporteA.getRalumnoatencion());
+            pst.setInt(2, reporteA.getRatencion());
+
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("Error al guardar");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
 
     public void guardaComportamiento(CtAtencion atencion, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1128,5 +1201,4 @@ public class ConsultasAlumno {
             }
         }
     }
-
 }

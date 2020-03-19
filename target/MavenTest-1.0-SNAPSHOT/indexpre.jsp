@@ -63,7 +63,7 @@
     </head>
     <!-- END HEAD -->
     <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-terra1 white-sidebar-color logo-white">
-        <img src="assets/img/">
+        <img style="width: 500; height: 500;" src="file://C:/Users/Complx/Desktop/Paisaje.jpg">
         
         <div class="page-wrapper">
             <!-- start header -->

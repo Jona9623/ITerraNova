@@ -60,6 +60,11 @@ public class AlumnosController {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getAlumnos(grado, grupo, tipoescuela);
     }
+    
+    public List<Alumno> getAlumnosAtencion(int grado, int grupo, int tipoescuela) throws Exception {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getAlumnosAtencion(grado,grupo,tipoescuela);
+    }
 
     public void guardaIncidente(CtIncidente incidente, int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
@@ -177,6 +182,11 @@ public class AlumnosController {
     public void guardaReporteAcademico(TbReporteAcademico reporteA,int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         consulta.guardaReporteAcademico(reporteA,tipoescuela);
+    }
+    
+    public void guardarAtencion(TbReporteAcademico reporteA)  throws Exception{
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        consulta.guardarAtencion(reporteA);
     }
 
     public void guardaComportamiento(CtAtencion atencion, int tipoescuela) throws Exception {
@@ -298,5 +308,7 @@ public class AlumnosController {
             throw e;
         }
     }
+
+    
     
 }

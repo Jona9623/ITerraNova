@@ -270,10 +270,6 @@
                                                            hidden="true">
                                                     <div class="card-body row">
                                                         <div class="col-md-6 col-sm-6">
-                                                            <div class="form-group">
-                                                                <label>Matricula</label>
-                                                                <input id="matricula" name="matricula" value="${requestScope.alumno.matricula}" type="text" class="form-control" placeholder="matricula">
-                                                            </div>
                                                             <div class="form-group" id="div-nombrea">
                                                                 <label>Nombre(s)*</label>
                                                                 <input  id="nombrea" name="nombrea" value="${requestScope.alumno.nombre}" type="text" class="form-control" placeholder="nombre(s)" maxlength="35">

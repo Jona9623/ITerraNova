@@ -115,7 +115,6 @@ var Reportes = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
-                    //  $("#alumnogradoA").html(arguments[0]);
                     $("#alumnogradoAA").html(arguments[0]);
                     $("#gradohonor").change(function () {
                         gradohonor = $("#gradohonor").val();
@@ -125,17 +124,6 @@ var Reportes = (function () {
                         grupohonor = $("#grupohonor").val();
                         Reportes.getAlumnoAca(gradohonor, grupohonor)
                     })
-                    /* $("#gradoatencion").change(function () {
-                     gradoatencion = $("#gradoatencion").val();
-                     Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
-                     }),
-                     $("#grupoatencion").change(function () {
-                     grupoatencion = $("#grupoatencion").val();
-                     Reportes.getAlumnoAca(gradohonor, grupohonor, gradoatencion,grupoatencion)
-                     });
-                     $("#agregacomp").on('click', function () {
-                     Reportes.agregaComportamiento();
-                     });*/
                 }
             });
         },
@@ -311,12 +299,19 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#content").html(arguments[0]);
+                    //$("#honor").hide();
                     $("#mostrarreportesaca").on('click', function () {
                         Reportes.mostrarReportesAcademicos();
                     });
                     $("#mostraractividades").on('click', function () {
                         Reportes.mostrarActividades();
                     });
+                    /*$("#guardarhonor").on('click', function () {
+                     Reportes.guardarHonor();
+                     });
+                     $("#guardaratencion").on('click', function () {
+                     Reportes.guardarAtencion();
+                     })*/
                     gradohonor = $("#gradohonor").val();
                     grupohonor = $("#grupohonor").val();
                     gradoatencion = $("#gradoatencion").val();
@@ -335,6 +330,47 @@ var Reportes = (function () {
                         else
                             swal("Faltan campos requeridos", "", "warning");
                     });
+                }
+            });
+        },
+        guardarHonor: function () {
+            var honor = {
+                "rpersonal": $("#personalreporteA").val(),
+                "rmateria": $("#materiaA").val(),
+                "rsemana": $("#semanafiscal").val(),
+                "ralumnohonor": $("#alumnohonor").val(),
+                "rperiodo": $("#periodoA").val()
+            }
+            console.log(honor);
+            $.get("SReportes", {
+                ACCION: "guardarHonor",
+                OBJETO: JSON.stringify(honor),
+                TIPOESCUELA: tipoescuela
+            }).done(function (hxr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    $("#honor").show();
+                gradoatencion = $("#gradoatencion").val();
+                grupoatencion = $("#grupoatencion").val();
+                alert(gradoatencion);
+                Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
+            });
+        },
+        guardarAtencion: function () {
+            var atencion = {
+                "ralumnoatencion": $("#alumnoatencion").val(),
+                "ratencion": $("#comportamiento").val()
+            }
+            $.get("SReportes", {
+                ACCION: "guardarAtencion",
+                OBJETO: JSON.stringify(atencion)
+            }).don(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    swal("Hecho!", "Datos guardados correctamente", "success");
+                    Reportes.imagenReporteAca();
                 }
             });
         },
@@ -443,7 +479,6 @@ var Reportes = (function () {
                 "ralumnoatencion": $("#alumnoatencion").val(),
                 "ratencion": $("#comportamiento").val(),
                 "rperiodo": $("#periodoA").val(),
-                "nombreimagen": $("#nombrearchivob").val()
             }
             $.get("SReportes", {
                 ACCION: "guardaReporteAcademico",
@@ -606,7 +641,7 @@ var Reportes = (function () {
             });
         },
         formImagenActividad: function (xhr, status, error) {
-            $('form[name="formActividad"]').ajaxForm(function (xhr,status,error) {
+            $('form[name="formActividad"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else

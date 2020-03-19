@@ -79,8 +79,8 @@
                                 <div class="card-body row">
                                     <div class="col-lg-10 p-t-20"> 
                                         <div class="form-group">
-                                            <label>Puesto</label>
-                                            <input type="text" id="periodoAdmin" class="form-control" placeholder="nombre...">
+                                            <label>Periodo completo</label>
+                                            <input type="text" id="periodoAdmin" class="form-control" placeholder="Ej: Ago 2020 - Dic 2020">
                                         </div>
                                         <div class="form-group">
                                             <label>Fecha inicio</label>

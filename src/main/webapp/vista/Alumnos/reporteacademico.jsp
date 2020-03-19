@@ -115,44 +115,46 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card-head">
-                                                        <header>Cuadro de atención</header>
-                                                    </div>
-                                                    <div class="card-body row">
-                                                        <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione grado</label>
-                                                            <select id="gradoatencion" class="custom-select" name="gradoatencion">
-                                                                <c:forEach items="${requestScope.listgrado}" var="listgrado">
-                                                                    <option value="${listgrado.idtbgrado}">${listgrado.nombre} </option>
-                                                                </c:forEach>
-                                                            </select>
+                                                    <div id="honor">
+                                                        <div class="card-head">
+                                                            <header>Cuadro de atención</header>
                                                         </div>
-                                                        <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione grupo</label>
-                                                            <select id="grupoatencion" name="grupoatencion" class="custom-select">
-                                                                <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
-                                                                    <option value="${listgrupo.idtbgrupo}">${listgrupo.nombre} </option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-4 p-t-20">
-                                                            <div id="alumnogradoA">
-                                                                <jsp:include page='alumnogradogrupoatencion.jsp'>
-                                                                    <jsp:param name="article1" value=""/>
-                                                                </jsp:include>
+                                                        <div class="card-body row">
+                                                            <div class="col-lg-4 p-t-20">
+                                                                <label >Seleccione grado</label>
+                                                                <select id="gradoatencion" class="custom-select" name="gradoatencion">
+                                                                    <c:forEach items="${requestScope.listgrado}" var="listgrado">
+                                                                        <option value="${listgrado.idtbgrado}">${listgrado.nombre} </option>
+                                                                    </c:forEach>
+                                                                </select>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione Tipo de comportamiento</label>
-                                                            <select id="comportamiento" class="custom-select">
-                                                                <c:forEach items="${requestScope.listatencion}" var="listatencion">
-                                                                    <option value="${listatencion.idtbatencion}">${listatencion.nombre} </option>
-                                                                </c:forEach>
-                                                            </select>
-                                                            <br> 
-                                                            <a class="clic" data-toggle="modal" data-target="#exampleModalCenter">Si no encuentra comportmaiento puede agregar uno aqui</a>
+                                                            <div class="col-lg-4 p-t-20">
+                                                                <label >Seleccione grupo</label>
+                                                                <select id="grupoatencion" name="grupoatencion" class="custom-select">
+                                                                    <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
+                                                                        <option value="${listgrupo.idtbgrupo}">${listgrupo.nombre} </option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-lg-4 p-t-20">
+                                                                <div id="alumnogradoA">
+                                                                    <jsp:include page='alumnogradogrupoatencion.jsp'>
+                                                                        <jsp:param name="article1" value=""/>
+                                                                    </jsp:include>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 p-t-20">
+                                                                <label >Seleccione Tipo de comportamiento</label>
+                                                                <select id="comportamiento" class="custom-select">
+                                                                    <c:forEach items="${requestScope.listatencion}" var="listatencion">
+                                                                        <option value="${listatencion.idtbatencion}">${listatencion.nombre} </option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                                <br> 
+                                                                <a class="clic" data-toggle="modal" data-target="#exampleModalCenter">Si no encuentra comportmaiento puede agregar uno aqui</a>
 
 
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <button type="button" id="guardareporteA" class="btn btn-terra">Guardar</button>
