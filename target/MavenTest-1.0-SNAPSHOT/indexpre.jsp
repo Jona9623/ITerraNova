@@ -63,8 +63,20 @@
     </head>
     <!-- END HEAD -->
     <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-terra1 white-sidebar-color logo-white">
-        <img style="width: 500; height: 500;" src="file://C:/Users/Complx/Desktop/Paisaje.jpg">
-        
+
+
+        <p>Paste excel data here:</p>
+        <textarea name="excel_data" style="width:250px;height:150px;"></textarea><br>
+        <input type="button" onclick="javascript:generateTable()" value="Genereate Table"/>
+        <br><br>
+        <p>Table data will appear below</p>
+        <hr>
+        <form>
+            <div id="excel_table">
+                <button type="submit">guardar</button>
+            </div>
+        </form>
+
         <div class="page-wrapper">
             <!-- start header -->
             <div class="page-header navbar navbar-fixed-top">
@@ -474,6 +486,32 @@
         </div>
         <% }%>
         <!-- start js include path -->
+        <script>
+            function generateTable() {
+                var data = $('textarea[name=excel_data]').val();
+                console.log(data);
+                var rows = data.split("\n");
+                var table = $('<table />');
+                table.addClass('table');
+                table.addClass('table-bordered');
+                var a=0;
+                var b =0;
+                for (var y in rows) {
+                    a++;
+                    var cells = rows[y].split("\t");
+                    var row = $('<tr />');
+                    for (var x in cells) {
+                        b++
+                        row.append('<td id="'+a+b+'">' + cells[x] + '</td>');
+                    }
+                    table.append(row);
+                }
+
+// Insert into DOM
+                $('#excel_table').html(table);
+            }
+
+        </script>
         <script src="assets/plugins/jquery/jquery.min.js" ></script>
         <script src="assets/plugins/popper/popper.min.js" ></script>
         <script src="assets/plugins/jquery-blockui/jquery.blockui.min.js" ></script>

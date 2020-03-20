@@ -164,6 +164,7 @@
                         <a class="material-icons f-left">camera_enhance</a>
                         <a> Agregar fotografía (opcional) </a> <br>
                         <input id="foto" type="file" name="Archivo">
+                        <input hidden="true" id="imagenRD" name="imagenRD" val="">
                     </div>
                 </div>
                 <button id="guardareporteD" type="submit" class="btn btn-terra">Guardar</button> &nbsp; &nbsp; &nbsp;

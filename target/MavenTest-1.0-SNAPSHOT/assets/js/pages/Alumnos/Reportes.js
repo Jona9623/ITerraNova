@@ -4,7 +4,6 @@ var Reportes = (function () {
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     var grado;
     var grupo;
-    var data;
     return {
         reporteDisciplinar: function () {
 

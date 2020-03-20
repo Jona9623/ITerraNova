@@ -45,16 +45,17 @@
         </div>
         <div class="form formLogin">
             <h2>Inicia Sesión</h2>
-            <form action="Login" method="POST">
+            <form id="formlogin" name="formlogin" action="Login" method="POST">
                 <input name="user" type="text" placeholder="Usuario" />
                 <input name="password" type="password" placeholder="Contraseña" />
-                <button class="btn-terra2">Iniciar sesión</button>
+                <button type="submit" class="btn-terra2">Iniciar sesión</button>
             </form>
         </div>
     </div>
     <!-- start js include path -->
     <script src="assets/plugins/jquery/jquery.min.js" ></script>
     <script src="assets/js/pages/extra_pages/pages.js" ></script>
+    <script src="assets/js/index.js"></script>
     <!-- end js include path -->
 </body>
 </html>
