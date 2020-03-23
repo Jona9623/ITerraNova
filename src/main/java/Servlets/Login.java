@@ -5,10 +5,14 @@
  */
 package Servlets;
 
+import Controlador.AdministradorController;
 import Controlador.Usuarios;
+import Modelos.TbPersonal;
 import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +25,8 @@ import javax.servlet.http.HttpSession;
  * @author Complx
  */
 public class Login extends HttpServlet {
+    AdministradorController adminC = new AdministradorController();
+    List<TbPersonal> listpersonal = new ArrayList<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,11 +65,13 @@ public class Login extends HttpServlet {
                 if(user.getR_tipo() == 5){
                     sesion.setAttribute("id", user.getIdtbusuario());
                 }
+                Boolean a = Boolean.parseBoolean(request.getParameter("escuela"));
                 //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user.getUsuario());
                 sesion.setAttribute("user", user.getUsuario());
                 sesion.setAttribute("password", user.getContrasena());
                 sesion.setAttribute("tipo", user.getR_tipo());
-                response.sendRedirect(request.getContextPath()+ "/Principal.jsp");
+                
+                response.sendRedirect(request.getContextPath()+ "/indexpre.jsp");
             }else{
                 response.sendRedirect(request.getContextPath()+ "/Login.jsp");
             }

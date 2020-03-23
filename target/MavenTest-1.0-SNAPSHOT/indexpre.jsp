@@ -64,7 +64,7 @@
     <!-- END HEAD -->
     <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-terra1 white-sidebar-color logo-white">
 
-
+<!--
         <p>Paste excel data here:</p>
         <textarea name="excel_data" style="width:250px;height:150px;"></textarea><br>
         <input type="button" onclick="javascript:generateTable()" value="Genereate Table"/>
@@ -75,7 +75,7 @@
             <div id="excel_table">
                 <button type="submit">guardar</button>
             </div>
-        </form>
+        </form> -->
 
         <div class="page-wrapper">
             <!-- start header -->
@@ -463,14 +463,24 @@
                                         <form action="RegistroLogin" method="POST">
                                             <input name="newuser"  type="text" placeholder="Usuario" />
                                             <input name="newpassword" type="password" placeholder="Contraseña" /> <br>
-                                            <label >Seleccione un tipo de usuario</label>
-                                            <select name="newtipo" id="tipousuario" class="custom-select" name="tipousuario">
-                                                <option value="1">Prefectos</option>
-                                                <option value="2">Maestros</option>
-                                                <option value="3">Sub director</option>
-                                                <option value="4">Control escolar</option>
-                                                <option value="5">Administrador</option>
-                                            </select> <br> <br>
+                                            <div class="form-group">
+                                                <label >Seleccione el personal a registrar</label>
+                                                <select class="custom-select">
+                                                    <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
+                                                        <option value="${listpersonal.idtbpersonal}">${listpersonal.nombre} </option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Seleccione un tipo de usuario</label>
+                                                <select name="newtipo" id="tipousuario" class="custom-select" name="tipousuario">
+                                                    <option value="1">Prefectos</option>
+                                                    <option value="2">Maestros</option>
+                                                    <option value="3">Sub director</option>
+                                                    <option value="4">Control escolar</option>
+                                                    <option value="5">Administrador</option>
+                                                </select> <br> <br>
+                                            </div>
                                             <button class="btn-terra2">Registrar</button>
                                         </form>
                                     </div>
@@ -494,15 +504,15 @@
                 var table = $('<table />');
                 table.addClass('table');
                 table.addClass('table-bordered');
-                var a=0;
-                var b =0;
+                var a = 0;
+                var b = 0;
                 for (var y in rows) {
                     a++;
                     var cells = rows[y].split("\t");
                     var row = $('<tr />');
                     for (var x in cells) {
                         b++
-                        row.append('<td id="'+a+b+'">' + cells[x] + '</td>');
+                        row.append('<td id="' + a + b + '">' + cells[x] + '</td>');
                     }
                     table.append(row);
                 }
