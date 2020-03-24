@@ -76,12 +76,13 @@ public class SPrincipal extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void preparatoria(HttpServletRequest request, HttpServletResponse response) {
+    private void preparatoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             RequestDispatcher rd = request.getRequestDispatcher("Web Pages/indexpre.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 

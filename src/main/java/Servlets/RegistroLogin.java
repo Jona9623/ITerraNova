@@ -37,6 +37,7 @@ public class RegistroLogin extends HttpServlet {
             newuser.setUsuario(request.getParameter("newuser"));
             newuser.setContrasena(request.getParameter("newpassword"));
             newuser.setR_tipo(Integer.parseInt(request.getParameter("newtipo")));
+            newuser.setR_personal(Integer.parseInt(request.getParameter("selectuser")));
             String contra = AES.encrypt(newuser.getContrasena(), "terra");
             newuser.setContrasena(contra);
             Usuarios usuarios = new Usuarios();
@@ -44,7 +45,8 @@ public class RegistroLogin extends HttpServlet {
                 response.sendRedirect(request.getContextPath()+ "/indexpre.jsp");
             else response.sendRedirect(request.getContextPath()+ "/Login.jsp");
         } catch (Exception e) {
-            System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 

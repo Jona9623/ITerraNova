@@ -474,6 +474,7 @@ public class SReportes extends HttpServlet {
     private void guardaReporteD(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TbReporteDisciplinar reporteD = new TbReporteDisciplinar();
         String ruta = null;
+        String base64 = null;
         try {
             String foto = (String.valueOf(request.getParameter("Archivo")));
             if (foto.equals("null")) {
@@ -481,16 +482,17 @@ public class SReportes extends HttpServlet {
                 System.out.println("OTRA RUTA" + applicationPath);
                 String uploadPath = "/home/escape9/sistema.iterra.edu.mx/reporte_disciplinar"; //applicationPath + File.separator + "archivos";
                 //String uploadPath = "/home/escape9/";
-                File fileUploadDirectory = new File(uploadPath);
+                File fileUploadDirectory = new File(applicationPath);
                 if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();
                 }
                 Part part = request.getPart("Archivo");
                 String nombrearchivo = extractFileName(part);
                 //ruta = applicationPath + uploadPath + File.separator + nombrearchivo;
-                ruta = uploadPath + "/" + nombrearchivo;
+                ruta = applicationPath + "/" + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
+                base64 = String.valueOf(request.getParameter("savefile"));
             }
             int status = Integer.parseInt(request.getParameter("tutorcorreo"));
             reporteD.setRperiodo(Integer.parseInt(request.getParameter("PeriodoD")));
@@ -506,7 +508,7 @@ public class SReportes extends HttpServlet {
             reporteD.setRpersonal(Integer.parseInt(request.getParameter("Personal")));
             reporteD.setLugar(String.valueOf(request.getParameter("Lugarincidente")));
             reporteD.setDescripcion(String.valueOf(request.getParameter("Descripcion")));
-            alumnoC.guardaReporteD(reporteD, ruta, status, tipoescuelareporte);
+            alumnoC.guardaReporteD(reporteD, base64, status, tipoescuelareporte);
 
         } catch (Exception e) {
             System.out.println(e);

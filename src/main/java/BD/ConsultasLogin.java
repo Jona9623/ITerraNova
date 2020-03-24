@@ -53,18 +53,19 @@ public class ConsultasLogin {
         return usuario;
     }
 
-    public int registroUsuario(Usuario newuser) {
+    public int registroUsuario(Usuario newuser) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
             con.setAutoCommit(false);
-            String consulta = "insert into usuarios (r_tipo,usuario,contrasena,status,tipoescuela) values (?,?,?,?,?)";
+            String consulta = "insert into usuarios (r_tipo,r_personal,usuario,contrasena,status,tipoescuela) values (?,?,?,?,?,?)";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, newuser.getR_tipo());
-            pst.setString(2, newuser.getUsuario());
-            pst.setString(3, newuser.getContrasena());
-            pst.setInt(4, 1);
+            pst.setInt(2, newuser.getR_personal());
+            pst.setString(3, newuser.getUsuario());
+            pst.setString(4, newuser.getContrasena());
             pst.setInt(5, 1);
+            pst.setInt(6, 1);
             
             if (pst.executeUpdate() == 1) {
                 con.commit();
@@ -72,7 +73,7 @@ public class ConsultasLogin {
                 System.out.println("Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println(e);
+           throw e;
         }finally {
             try {
                 if (con != null) {

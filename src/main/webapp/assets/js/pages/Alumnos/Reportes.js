@@ -32,6 +32,13 @@ var Reportes = (function () {
                     $("#mostrarreportes").on('click', function () {
                         Reportes.mostrarReportes();
                     });
+                    $("#foto").click(function () {
+                        $(this).val("");
+                    });
+
+                    $("#foto").change(function () {
+                        convertBase64();
+                    });
                 }
             });
         },
@@ -651,6 +658,16 @@ var Reportes = (function () {
     }
     ;
 }());
+async function convertBase64(){
+    const file = document.querySelector('#foto').files[0];
+    $("#savefile").val(await toBase64(file));
+}
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
 function validacionActividadSemanal() {
     var valido = true;
     if ($("#fechaentrega").val().trim() == "") {

@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.context.FacesContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpSession;
  * @author Complx
  */
 public class Login extends HttpServlet {
+
     AdministradorController adminC = new AdministradorController();
     List<TbPersonal> listpersonal = new ArrayList<>();
 
@@ -48,32 +50,35 @@ public class Login extends HttpServlet {
             user.setContrasena(contra);
             Usuarios usuarios = new Usuarios();
             user = usuarios.iniciarSesion(user);
-            if(user.getIdtbusuario() > 0){
+            if (user.getIdtbusuario() > 0) {
                 HttpSession sesion = request.getSession(true);
-                if(user.getR_tipo() == 1){
+                if (user.getR_tipo() == 1) {
                     sesion.setAttribute("id", user.getIdtbusuario());
                 }
-                if(user.getR_tipo() == 2){
+                if (user.getR_tipo() == 2) {
                     sesion.setAttribute("id", user.getIdtbusuario());
                 }
-                if(user.getR_tipo() == 3){
+                if (user.getR_tipo() == 3) {
                     sesion.setAttribute("id", user.getIdtbusuario());
                 }
-                if(user.getR_tipo() == 4){
+                if (user.getR_tipo() == 4) {
                     sesion.setAttribute("id", user.getIdtbusuario());
                 }
-                if(user.getR_tipo() == 5){
+                if (user.getR_tipo() == 5) {
                     sesion.setAttribute("id", user.getIdtbusuario());
                 }
-                Boolean a = Boolean.parseBoolean(request.getParameter("escuela"));
                 //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user.getUsuario());
                 sesion.setAttribute("user", user.getUsuario());
                 sesion.setAttribute("password", user.getContrasena());
                 sesion.setAttribute("tipo", user.getR_tipo());
-                
-                response.sendRedirect(request.getContextPath()+ "/indexpre.jsp");
-            }else{
-                response.sendRedirect(request.getContextPath()+ "/Login.jsp");
+                sesion.setAttribute("personal", user.getR_personal());
+                listpersonal = adminC.getPersonal(Integer.parseInt(request.getParameter("input")));
+                request.setAttribute("listpersonal", listpersonal);
+                RequestDispatcher rd = request.getRequestDispatcher("/indexpre.jsp");
+                rd.forward(request, response);
+                //response.sendRedirect(request.getContextPath() + "/indexpre.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/Login.jsp");
             }
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());

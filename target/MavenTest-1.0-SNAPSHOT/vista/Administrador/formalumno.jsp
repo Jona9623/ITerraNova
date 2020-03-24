@@ -81,7 +81,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Correo</label>
-                                                            <input id="correot" value="${requestScope.tutor.correo}" type="email" class="form-control" placeholder="correo" maxlength="20">
+                                                            <input id="correot" value="${requestScope.tutor.correo}" type="email" class="form-control" placeholder="correo" maxlength="50">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Calle del domicilio</label>
@@ -263,6 +263,7 @@
                                                 <strong type="text" >Los campos con signo * son obligatorios</strong>
                                                 <form id="formalumno" enctype="multipart/form-data" method="POST" action="SAdminalumno" name="formAlumno">
                                                     <input type="text" name="ACCION" id="ACCION" value="GuardaAlumno" hidden="true">
+                                                    <input type="text" name="filealumno" id="filealumno" value="" hidden="true">
                                                     <input type="text" id="idalumno" name="idalumno"<c:choose>
                                                                <c:when test="${requestScope.alumno.idtbalumnos>0}"> value="${requestScope.alumno.idtbalumnos}" </c:when>
                                                                <c:otherwise> value="0" </c:otherwise>
@@ -300,7 +301,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Correo</label>
-                                                                <input id="correoa" name="correoa" value="${requestScope.alumno.correo}" type="email" class="form-control" placeholder="correo" maxlength="20">
+                                                                <input id="correoa" name="correoa" value="${requestScope.alumno.correo}" type="email" class="form-control" placeholder="correo" maxlength="50">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Municipio de nacimiento</label>
@@ -367,7 +368,7 @@
                                                             </div>
                                                             <div class="form-group" id="div-nivela">
                                                                 <label>Nivel que cursa*</label>
-                                                                <input id="nivela" name="nivela" value="${requestScope.alumno.nivelcursa}" type="text" class="form-control" placeholder="nivel" maxlength="1">
+                                                                <input id="nivela" name="nivela" value="${requestScope.alumno.nivelcursa}" type="text" class="form-control" placeholder="nivel" maxlength="20">
                                                             </div>
                                                             <div class="form-group" id="div-grado">
                                                                 <label >Seleccione el grado*</label>
@@ -446,7 +447,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <c:if test="${requestScope.alumno.foto != null}">
-                                                                    <img src="file://${requestScope.alumno.foto}">
+                                                                    <img class="img-responsive" src="${requestScope.alumno.foto}">
                                                                 </c:if>
                                                                 <a class="material-icons f-left">camera_enhance</a>
                                                                 <a> Agregar fotografía</a> <br>

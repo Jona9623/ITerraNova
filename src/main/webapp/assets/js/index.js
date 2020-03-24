@@ -4,9 +4,11 @@ var tipoescuela = 0;
 $('input:radio[name=escuela]').change(function() {
         if (this.value == 'secundaria') {
             sessionStorage.setItem("tipoescuela", "2");
+            $("#input").val("2");
         }
         else if (this.value == 'preparatoria') {
             sessionStorage.setItem("tipoescuela", "1");
+            $("#input").val("1");
         }
     });
 /*$('#secundaria').on('click', function () {
@@ -17,7 +19,7 @@ $('input:radio[name=escuela]').change(function() {
 })*/
 $(document).ready(function () {
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
-    alert(tipoescuela);
+    //alert(tipoescuela);
     $("#reportedis").on('click', function () {
         Reportes.reporteDisciplinar();
     }),

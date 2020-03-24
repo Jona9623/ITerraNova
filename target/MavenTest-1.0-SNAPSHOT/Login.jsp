@@ -60,7 +60,7 @@
                             <input type="radio" name="escuela" id="preparatoria" value="preparatoria">
                         </div>
                     </div>
-                    <input type="text" name="ACCION" id="ACCION" value="GUARDAR" hidden="true">
+                    <input type="text" name="input" id="input" value="" hidden="true">
                     <button type="submit" class="btn-terra2">Iniciar sesión</button>
                 </form>
             </div>

@@ -465,9 +465,9 @@
                                             <input name="newpassword" type="password" placeholder="Contraseña" /> <br>
                                             <div class="form-group">
                                                 <label >Seleccione el personal a registrar</label>
-                                                <select class="custom-select">
+                                                <select id="selectuser" name="selectuser" class="custom-select">
                                                     <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
-                                                        <option value="${listpersonal.idtbpersonal}">${listpersonal.nombre} </option>
+                                                        <option value="${listpersonal.idtbpersonal}">${listpersonal.nombre} ${listpersonal.apellidop} ${listpersonal.apellidom} </option>
                                                     </c:forEach>
                                                 </select>
                                             </div>

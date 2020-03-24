@@ -83,4 +83,9 @@
             <strong>Descripcion</strong> <br>
             <p>${requestScope.reporteD.descripcion}</p>
     </div>
+    <div class="col-md-6 col-6 b-r">
+        <br> <br>
+        <strong class="center">Eviddencia del reporte</strong> <br>
+        <img class="img-responsive center" src="${requestScope.reporteD.foto}">
+    </div>
 </div>

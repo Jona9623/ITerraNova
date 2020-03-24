@@ -18,7 +18,7 @@ public class Usuarios {
         return consulta.iniciarSesion(user);
     }
 
-    public int registroUsuario(Usuario newuser) {
+    public int registroUsuario(Usuario newuser) throws Exception {
         ConsultasLogin consulta = new ConsultasLogin();
         if (consulta.registroUsuario(newuser) != 0)
             return 1;

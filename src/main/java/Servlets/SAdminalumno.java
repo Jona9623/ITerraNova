@@ -266,6 +266,7 @@ public class SAdminalumno extends HttpServlet {
     private void GuardaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TbAlumnos alumno = new TbAlumnos();
         String ruta = null;
+        String base64 = null;
         adminC = new AdministradorController();
         //objectJson = request.getParameter("ALUMNO");
         //mapper = new ObjectMapper();
@@ -275,15 +276,16 @@ public class SAdminalumno extends HttpServlet {
                 String applicationPath = getServletContext().getRealPath("");
                 System.out.println("OTRA RUTA" + applicationPath);
                 String uploadPath = "/home/escape9/sistema.iterra.edu.mx/alumnos/";
-                File fileUploadDirectory = new File(uploadPath);
+                File fileUploadDirectory = new File(applicationPath);
                 if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();
                 }
                 Part part = request.getPart("fotoAlumno");
                 String nombrearchivo = extractFileName(part);
-                ruta = uploadPath + nombrearchivo;
+                ruta = applicationPath + "/" + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
+                base64 = String.valueOf(request.getParameter("filealumno"));
             }
             alumno.setIdtbalumnos(Integer.parseInt(request.getParameter("idalumno")));
             alumno.setNombre(String.valueOf(request.getParameter("nombrea")));
@@ -313,9 +315,9 @@ public class SAdminalumno extends HttpServlet {
             alumno.setGradoanterior(Integer.parseInt(request.getParameter("gradoanterior")));
             alumno.setPlantelproce(String.valueOf(request.getParameter("plantelanterior")));
             if (alumno.getIdtbalumnos() > 0) {
-                adminC.actualizaAlumno(alumno, ruta);
+                adminC.actualizaAlumno(alumno, base64);
             } else {
-                adminC.guardaAlumno(alumno, tipoescuelaAlumno, ruta);
+                adminC.guardaAlumno(alumno, tipoescuelaAlumno, base64);
             }
         } catch (Exception e) {
             System.out.println(e);

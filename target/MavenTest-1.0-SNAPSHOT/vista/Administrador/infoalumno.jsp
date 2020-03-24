@@ -171,10 +171,10 @@
                     <strong>Sexo</strong> <br>
                     <p> <c:if test="${requestScope.alumno.sexo == true}"> Hombre</c:if></p>
                     <p> <c:if test="${requestScope.alumno.sexo == false}"> Mujer</c:if></p>
-                </div>
-                <div class="col-md-6 col-6 b-r">
-                    <strong>Calle, número y colonia de domicilio</strong> <br>
-                    <p>${requestScope.alumno.calledom} ${requestScope.alumno.numerodom} ${requestScope.alumno.coloniadom}</p>
+                    </div>
+                    <div class="col-md-6 col-6 b-r">
+                        <strong>Calle, número y colonia de domicilio</strong> <br>
+                        <p>${requestScope.alumno.calledom} ${requestScope.alumno.numerodom} ${requestScope.alumno.coloniadom}</p>
                 </div>
                 <div class="col-md-6 col-6 b-r">
                     <strong>Código postal</strong> <br>
@@ -233,8 +233,9 @@
                     <p>${requestScope.alumno.municipioante}</p>
                 </div>
                 <div class="col-md-6 col-6 b-r">
-                    <strong>Fotografia del alumno</strong> <br>
-                    <img src="file://${requestScope.alumno.foto}">
+                    <br> <br>
+                    <strong class="center">Fotografía del alumno</strong> <br>
+                    <img class="img-responsive center" src="${requestScope.alumno.foto}">
                 </div>
             </div>
         </div>

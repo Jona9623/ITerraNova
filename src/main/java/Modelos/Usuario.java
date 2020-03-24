@@ -12,9 +12,18 @@ package Modelos;
 public class Usuario {
     private int idtbusuario;
     private int r_tipo;
+    private int r_personal;
     private String rtipo;
     private String usuario;
     private String contrasena;
+
+    public int getR_personal() {
+        return r_personal;
+    }
+
+    public void setR_personal(int r_personal) {
+        this.r_personal = r_personal;
+    }
 
     public int getIdtbusuario() {
         return idtbusuario;

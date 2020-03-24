@@ -43,6 +43,7 @@
             <strong type="text" >Los campos con signo * son obligatorios</strong>
             <form  id="formReporteD" enctype="multipart/form-data" method="POST" action="SReportes" name="formreporteD">
                 <input type="text" name="ACCION" id="ACCION" value="GUARDAR" hidden="true">
+                <input type="text" name="savefile" id="savefile" value="" hidden="true">
                 <div class="col-lg-4 p-t-20">
                     <label >Seleccione periodo escolar</label>
                     <select id="periodoD" class="custom-select" name="PeriodoD">

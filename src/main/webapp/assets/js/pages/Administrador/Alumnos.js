@@ -74,7 +74,7 @@ var Adminalumno = (function () {
             })
         },
         importaAlumno: function () {
-            $('form[name="importaralumno"]').ajaxForm(function (xhr,status,error) {
+            $('form[name="importaralumno"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else
@@ -90,6 +90,12 @@ var Adminalumno = (function () {
                 } else
                     swal("Faltan campos requeridos", "", "warning");
             });
+            $("#fotoalumno").click(function () {
+                $(this).val("");
+            });
+            $("#fotoalumno").change(function () {
+                convertBase64A();
+            });
             /* $('#guardaalumno').on('click', function () {
              if (validacionAlumno()) {
              Adminalumno.guardaAlumno(Adminalumno.datosAlumno(), 'GuardaAlumno');
@@ -99,7 +105,7 @@ var Adminalumno = (function () {
              });*/
         },
         guardarAlumno: function () {
-            $('form[name="formAlumno"]').ajaxForm(function (xhr,status,error) {
+            $('form[name="formAlumno"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
@@ -270,6 +276,16 @@ $("body").on("focus", "input", function (event) {
 });
 $("body").on("focus", "textarea", function (event) {
     $(this).parent().removeClass('has-error');
+});
+async function convertBase64A(){
+    const file = document.querySelector('#fotoalumno').files[0];
+    $("#filealumno").val(await toBase64A(file));
+}
+const toBase64A = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
 });
 function validacionAlumno() {
     var valido = true;
