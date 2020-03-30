@@ -179,10 +179,11 @@ public class ConsultasAdministrador {
                 con.commit();
                 String sql2 = "update tb_tutor set tb_tutor.matricula = 10000 + tb_tutor.idTb_Tutor;";
                 pst2 = con.prepareStatement(sql2);
-                if(pst2.executeUpdate() > 0)
+                if (pst2.executeUpdate() > 0) {
                     con.commit();
-                else
+                } else {
                     System.out.println("No se pudo guardar");
+                }
             } else {
                 System.out.println("Error al guardar");
             }
@@ -265,10 +266,11 @@ public class ConsultasAdministrador {
                 con.commit();
                 String sql2 = "update tb_alumnos set tb_alumnos.matricula = 10000 + tb_alumnos.idTb_Alumnos;";
                 pst2 = con.prepareStatement(sql2);
-                if(pst2.executeUpdate() > 0)
+                if (pst2.executeUpdate() > 0) {
                     con.commit();
-                else
+                } else {
                     System.out.println("No se pudo guardar");
+                }
             } else {
                 System.out.println("Error al guardar");
             }
@@ -768,11 +770,12 @@ public class ConsultasAdministrador {
                 con.commit();
                 String sql2 = "update tb_personal set tb_personal.matricula = 10000 + tb_personal.idTb_Personal;";
                 pst2 = con.prepareStatement(sql2);
-                if(pst2.executeUpdate() > 0)
+                if (pst2.executeUpdate() > 0) {
                     con.commit();
-                else
+                } else {
                     System.out.println("No se pudo guardar");
-                
+                }
+
             } else {
                 System.out.println("Error al guardar");
             }
@@ -1749,9 +1752,10 @@ public class ConsultasAdministrador {
         }
     }
 
-    public void guardaImportaPersonal(List<TbPersonal> listpersonal) {
+    public void guardaImportaPersonal(List<TbPersonal> listpersonal) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
+        PreparedStatement pst2 = null;
         try {
             for (TbPersonal item : listpersonal) {
                 con.setAutoCommit(false);
@@ -1787,13 +1791,21 @@ public class ConsultasAdministrador {
 
                 if (pst.executeUpdate() == 1) {
                     con.commit();
+                    String sql2 = "update tb_personal set tb_personal.matricula = 10000 + tb_personal.idTb_Personal;";
+                    pst2 = con.prepareStatement(sql2);
+                    if (pst2.executeUpdate() > 0) {
+                        con.commit();
+                    } else {
+                        System.out.println("No se pudo guardar");
+                    }
+
                 } else {
                     System.out.println("Error al guardar");
                 }
                 pst = null;
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         } finally {
             try {
                 if (con != null) {
@@ -1811,15 +1823,16 @@ public class ConsultasAdministrador {
     public void guardaImportaAlumnos(List<TbAlumnos> listalumnos) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
-        int tutores = 0;
+        PreparedStatement pst2 = null;
+        int tutores = 1;
         try {
             con.setAutoCommit(false);
-            String sql = "select count(idTb_Tutor) AS tutoresTotales from tb_tutor";
+            /*String sql = "select count(idTb_Tutor) AS tutoresTotales from tb_tutor";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 tutores = rs.getInt(1);
-            }
+            }*/
             for (TbAlumnos item : listalumnos) {
                 String consulta = "insert into tb_alumnos (matricula,nombre,apellidopaterno,apellidomaterno,fechanacimiento,curp,municipionacimiento,estadonacimiento,\n"
                         + "nacionalidad,sexo,calledomicilio,numerodomicilio,coloniadomicilio,codigopostal,telefonocasa,celularalumno,correoalumno,nivelcursa,\n"
@@ -1829,10 +1842,11 @@ public class ConsultasAdministrador {
                 pst.setString(1, item.getMatricula());
                 pst.setString(2, item.getNombre());
                 pst.setString(3, item.getApellidop());
-                if(item.getApellidom() == "0")
+                if (item.getApellidom() == "0") {
                     pst.setString(4, null);
-                else
+                } else {
                     pst.setString(4, item.getApellidom());
+                }
                 pst.setString(5, item.getFechanacimiento());
                 pst.setString(6, item.getCurp());
                 pst.setString(7, item.getMunicipiona());
@@ -1870,11 +1884,18 @@ public class ConsultasAdministrador {
 
                 if (pst.executeUpdate() == 1) {
                     con.commit();
+                    String sql2 = "update tb_alumnos set tb_alumnos.matricula = 10000 + tb_alumnos.idTb_Alumnos;";
+                    pst2 = con.prepareStatement(sql2);
+                    if (pst2.executeUpdate() > 0) {
+                        con.commit();
+                    } else {
+                        System.out.println("No se pudo guardar");
+                    }
                 } else {
                     System.out.println("Error al guardar");
                 }
                 pst = null;
-                tutores--;
+                tutores++;
             }
 
         } catch (Exception e) {
@@ -1896,6 +1917,7 @@ public class ConsultasAdministrador {
     public void guardaImportaTutor(List<TbTutor> listtutor) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
+        PreparedStatement pst2 = null;
         try {
             for (TbTutor item : listtutor) {
                 con.setAutoCommit(false);
@@ -1945,6 +1967,13 @@ public class ConsultasAdministrador {
 
                 if (pst.executeUpdate() == 1) {
                     con.commit();
+                    String sql2 = "update tb_tutor set tb_tutor.matricula = 10000 + tb_tutor.idTb_Tutor;";
+                    pst2 = con.prepareStatement(sql2);
+                    if (pst2.executeUpdate() > 0) {
+                        con.commit();
+                    } else {
+                        System.out.println("No se pudo guardar");
+                    }
                 } else {
                     System.out.println("Error al guardar");
                 }

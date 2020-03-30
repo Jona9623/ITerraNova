@@ -358,7 +358,7 @@ public class SAdminalumno extends HttpServlet {
                 part.write(ruta);
             }
             listalumnos = adminC.exportaAlumnos(ruta,tipoescuelaAlumno);
-             //adminC.guardaImportaAlumnos(listalumnos);
+             adminC.guardaImportaAlumnos(listalumnos);
             String f = null;
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
@@ -386,7 +386,7 @@ public class SAdminalumno extends HttpServlet {
                 part.write(ruta);
             }
             listtutor = adminC.exportaTutor(ruta,tipoescuelaAlumno);
-            //adminC.guardaImportaTutor(listtutor);
+            adminC.guardaImportaTutor(listtutor);
             String f = null;
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());

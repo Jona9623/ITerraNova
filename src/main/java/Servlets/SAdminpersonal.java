@@ -239,7 +239,7 @@ public class SAdminpersonal extends HttpServlet {
                 part.write(ruta);
             }
             listpersonal = adminC.exportaPersonal(ruta,tipoescuela);
-            //adminC.guardaImportaPersonal(listpersonal);
+            adminC.guardaImportaPersonal(listpersonal);
             String f = null;
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());

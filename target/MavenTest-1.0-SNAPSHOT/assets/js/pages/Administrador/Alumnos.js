@@ -17,13 +17,7 @@ var Adminalumno = (function () {
                     $("#tablaalumnos").DataTable({
                         "scrollX": true
                     });
-                    /*$("#importaAlumno").on('click',function(){
-                     $.get("SAdminalumno",{
-                     ACCION: "importaAlumno"
-                     }).then(function(){
-                     Adminalumno.tablaAlumnos(); 
-                     }); 
-                     });*/
+                    Adminalumno.importaTutor();
                     Adminalumno.importaAlumno();
                     $('#btnagregaA').on('click', function () {
                         Adminalumno.agregaAlumno();
@@ -72,6 +66,14 @@ var Adminalumno = (function () {
                     $("#content").html(arguments[0]);
                 }
             })
+        },
+        importaTutor: function () {
+            $('form[name="importartutor"]').ajaxForm(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    swal("Hecho!", "Datos importados correctamente", "success");
+            });
         },
         importaAlumno: function () {
             $('form[name="importaralumno"]').ajaxForm(function (xhr, status, error) {
@@ -277,16 +279,16 @@ $("body").on("focus", "input", function (event) {
 $("body").on("focus", "textarea", function (event) {
     $(this).parent().removeClass('has-error');
 });
-async function convertBase64A(){
+async function convertBase64A() {
     const file = document.querySelector('#fotoalumno').files[0];
     $("#filealumno").val(await toBase64A(file));
 }
 const toBase64A = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 function validacionAlumno() {
     var valido = true;
     if ($("#nombrea").val().trim() == "") {
