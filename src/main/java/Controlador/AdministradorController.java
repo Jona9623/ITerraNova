@@ -29,6 +29,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.annotation.MultipartConfig;
 
 /**
@@ -553,6 +559,43 @@ public class AdministradorController {
             tutor.setTipoescuela(2);
         }
         return tutor;
+    }
+
+    public void correoUsuario(String usuariocorreo, String contrasenacorreo, int id) throws Exception{
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        String correo = consulta.correoUsuario(id);
+        enviaCorreoUsuario(usuariocorreo, contrasenacorreo,correo);
+    }
+
+    private void enviaCorreoUsuario(String usuariocorreo, String contrasenacorreo, String correo) throws Exception {
+        String usuario = "sistema@iterra.edu.mx";
+        String contrasena = "guanabana2035";
+        String asunto = "Datos Inicio de sesion al sistema";
+        String cuerpo = "Usted ha sido registrado con éxito, por favor inicie sesión dentro del sistema www.sistema.iterra.edu.mx con los siguientes datos\n\n"
+                + "usuario: "+usuariocorreo+"\ncontraseña: "+contrasenacorreo;
+
+        try {
+            Properties pro = System.getProperties();
+            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
+            pro.put("mail.smtp.port", "587");
+            pro.put("mail.smtp.auth", "true");
+            pro.put("mail.smtp.starttls.enable", "true");
+
+            Session sesion = Session.getDefaultInstance(pro);
+
+            Message mensaje = new MimeMessage(sesion);
+            mensaje.setFrom(new InternetAddress(usuario));
+            mensaje.setRecipient(Message.RecipientType.TO, new InternetAddress(correo));
+            mensaje.setSubject(asunto);
+            mensaje.setText(cuerpo);
+            Transport t = sesion.getTransport("smtp");
+            t.connect(usuario, contrasena);
+            t.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
+            t.close();
+
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }

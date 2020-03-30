@@ -1999,4 +1999,39 @@ public class ConsultasAdministrador {
         }
     }
 
+    public String correoUsuario(int id) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String correo = null;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select tb_personal.correo from tb_personal where tb_personal.idTb_Personal = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                correo=(rs.getString("tb_personal.correo"));
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return correo;
+    }
+
 }

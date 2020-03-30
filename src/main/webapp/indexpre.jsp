@@ -460,7 +460,7 @@
                                 <div class="">
                                     <div class="">
                                         <h2>Nueva cuenta</h2>
-                                        <form action="RegistroLogin" method="POST">
+                                        <form name="formregistro" action="RegistroLogin" method="POST">
                                             <input name="newuser"  type="text" placeholder="Usuario" />
                                             <input name="newpassword" type="password" placeholder="Contraseña" /> <br>
                                             <div class="form-group">

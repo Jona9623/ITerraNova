@@ -20,6 +20,7 @@ $('input:radio[name=escuela]').change(function() {
 $(document).ready(function () {
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     //alert(tipoescuela);
+    Admin.registro();
     $("#reportedis").on('click', function () {
         Reportes.reporteDisciplinar();
     }),
@@ -104,7 +105,6 @@ $(document).ready(function () {
     $('#amasignacionmaterias').on('click', function () {
         Admin.tablaMateria();
     });
-
 });
 
 

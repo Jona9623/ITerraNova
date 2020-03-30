@@ -6,6 +6,14 @@
 var Admin = (function () {
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     return {
+        registro: function () {
+            $('form[name="formregistro"]').ajaxForm(function (xhr, status, error) {
+                if (error.status != 200)
+                swal(error.getResponseHeader("ERROR"), "", "warning");
+            else
+                swal("Listo!", "Registrado correctamente, favor de revisar su correo", "success");
+            });
+        },
         tablaPuesto: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaPuesto",

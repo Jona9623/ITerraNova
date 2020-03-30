@@ -68,6 +68,7 @@
         <!-- start js include path -->
         <script src="assets/plugins/jquery/jquery.min.js" ></script>
         <script src="assets/js/pages/extra_pages/pages.js" ></script>
+        <script type="text/javascript" src="assets/js/pages/Administrador/Administrador.js"></script>
         <script src="assets/js/index.js"></script>
         <!-- end js include path -->
     </body>

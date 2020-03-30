@@ -275,14 +275,14 @@ public class SAdminalumno extends HttpServlet {
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
                 System.out.println("OTRA RUTA" + applicationPath);
-                String uploadPath = "/home/escape9/sistema.iterra.edu.mx/alumnos/";
-                File fileUploadDirectory = new File(applicationPath);
+                String uploadPath = "/home/escape9/sistema.iterra.edu.mx/alumnos";
+                File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();
                 }
                 Part part = request.getPart("fotoAlumno");
                 String nombrearchivo = extractFileName(part);
-                ruta = applicationPath + "/" + nombrearchivo;
+                ruta = uploadPath + "/" + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
                 base64 = String.valueOf(request.getParameter("filealumno"));

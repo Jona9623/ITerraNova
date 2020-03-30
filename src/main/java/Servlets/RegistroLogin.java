@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Controlador.AdministradorController;
 import Controlador.Usuarios;
 import Modelos.Usuario;
 import java.io.IOException;
@@ -19,6 +20,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author Complx
  */
 public class RegistroLogin extends HttpServlet {
+
+    private String usuariocorreo;
+    private String contrasenacorreo;
+    AdministradorController adminC;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,12 +43,18 @@ public class RegistroLogin extends HttpServlet {
             newuser.setContrasena(request.getParameter("newpassword"));
             newuser.setR_tipo(Integer.parseInt(request.getParameter("newtipo")));
             newuser.setR_personal(Integer.parseInt(request.getParameter("selectuser")));
+            usuariocorreo = newuser.getUsuario();
+            contrasenacorreo = newuser.getContrasena();
             String contra = AES.encrypt(newuser.getContrasena(), "terra");
             newuser.setContrasena(contra);
             Usuarios usuarios = new Usuarios();
-            if(usuarios.registroUsuario(newuser)!= 0)
-                response.sendRedirect(request.getContextPath()+ "/indexpre.jsp");
-            else response.sendRedirect(request.getContextPath()+ "/Login.jsp");
+            if (usuarios.registroUsuario(newuser) != 0) {
+                adminC = new AdministradorController();
+                adminC.correoUsuario(usuariocorreo,contrasenacorreo,newuser.getR_personal());
+                response.sendRedirect(request.getContextPath() + "/indexpre.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/Login.jsp");
+            }
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);

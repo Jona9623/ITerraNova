@@ -482,14 +482,14 @@ public class SReportes extends HttpServlet {
                 System.out.println("OTRA RUTA" + applicationPath);
                 String uploadPath = "/home/escape9/sistema.iterra.edu.mx/reporte_disciplinar"; //applicationPath + File.separator + "archivos";
                 //String uploadPath = "/home/escape9/";
-                File fileUploadDirectory = new File(applicationPath);
+                File fileUploadDirectory = new File(uploadPath);
                 if (!fileUploadDirectory.exists()) {
                     fileUploadDirectory.mkdirs();
                 }
                 Part part = request.getPart("Archivo");
                 String nombrearchivo = extractFileName(part);
                 //ruta = applicationPath + uploadPath + File.separator + nombrearchivo;
-                ruta = applicationPath + "/" + nombrearchivo;
+                ruta = uploadPath + "/" + nombrearchivo;
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
                 base64 = String.valueOf(request.getParameter("savefile"));
