@@ -322,7 +322,8 @@ public class AdministradorController {
         alumno.setCelular(attributes[14]);
         alumno.setCorreo(attributes[15]);
         alumno.setNivelcursa(attributes[16]);
-        if (attributes[26].equals("Secuandaria")) {
+        if (attributes[27].equals("Secundaria")) {
+            System.out.println("entra");
             switch (attributes[17]) {
                 case "1":
                     alumno.setRgrado(1);
@@ -340,7 +341,8 @@ public class AdministradorController {
                     break;
             }
         }
-        if (attributes[25].equals("Preparatoria")) {
+        if (attributes[27].equals("Preparatoria")) {
+            System.out.println("entra");
             switch (attributes[17]) {
                 case "1":
                     alumno.setRgrado(4);
@@ -388,7 +390,7 @@ public class AdministradorController {
             alumno.setTurnoanterior(2);
         }
         alumno.setMunicipioante(attributes[25]);
-        if (attributes[25].equals("Secuandaria")) {
+        if (attributes[27].equals("Secuandaria")) {
             alumno.setTipoescuela(2);
         } else {
             alumno.setTipoescuela(1);

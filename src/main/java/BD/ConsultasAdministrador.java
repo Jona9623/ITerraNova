@@ -1824,6 +1824,7 @@ public class ConsultasAdministrador {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         PreparedStatement pst2 = null;
+        int cont = 1;
         int tutores = 1;
         try {
             con.setAutoCommit(false);
@@ -1894,11 +1895,13 @@ public class ConsultasAdministrador {
                 } else {
                     System.out.println("Error al guardar");
                 }
+                cont++;
                 pst = null;
                 tutores++;
             }
 
         } catch (Exception e) {
+            System.out.println(cont);
             throw e;
         } finally {
             try {
@@ -1938,30 +1941,30 @@ public class ConsultasAdministrador {
                 pst.setString(10, item.getTelefonocasa());
                 pst.setString(11, item.getCelular());
                 pst.setString(12, item.getCorreo());
-                pst.setString(13, item.getNombre());
-                pst.setString(14, item.getApellidop());
-                pst.setString(15, item.getApellidom());
-                pst.setString(16, item.getOcupacion());
-                pst.setString(17, item.getParentesco());
-                pst.setString(18, item.getCalledom());
-                pst.setInt(19, item.getNumerodom());
-                pst.setString(20, item.getColoniadom());
-                pst.setInt(21, item.getCodigopostal());
-                pst.setString(22, item.getTelefonocasa());
-                pst.setString(23, item.getCelular());
-                pst.setString(24, item.getCorreo());
-                pst.setString(25, item.getNombre());
-                pst.setString(26, item.getApellidop());
-                pst.setString(27, item.getApellidom());
-                pst.setString(28, item.getOcupacion());
-                pst.setString(29, item.getParentesco());
-                pst.setString(30, item.getCalledom());
-                pst.setInt(31, item.getNumerodom());
-                pst.setString(32, item.getColoniadom());
-                pst.setInt(33, item.getCodigopostal());
-                pst.setString(34, item.getTelefonocasa());
-                pst.setString(35, item.getCelular());
-                pst.setString(36, item.getCorreo());
+                pst.setString(13, item.getNombre2());
+                pst.setString(14, item.getApellidop2());
+                pst.setString(15, item.getApellidom2());
+                pst.setString(16, item.getOcupacion2());
+                pst.setString(17, item.getParentesco2());
+                pst.setString(18, item.getCalledom2());
+                pst.setInt(19, item.getNumerodom2());
+                pst.setString(20, item.getColoniadom2());
+                pst.setInt(21, item.getCodigopostal2());
+                pst.setString(22, item.getTelefonocasa2());
+                pst.setString(23, item.getCelular2());
+                pst.setString(24, item.getCorreo2());
+                pst.setString(25, item.getNombre3());
+                pst.setString(26, item.getApellidop3());
+                pst.setString(27, item.getApellidom3());
+                pst.setString(28, item.getOcupacion3());
+                pst.setString(29, item.getParentesco3());
+                pst.setString(30, item.getCalledom3());
+                pst.setInt(31, item.getNumerodom3());
+                pst.setString(32, item.getColoniadom3());
+                pst.setInt(33, item.getCodigopostal3());
+                pst.setString(34, item.getTelefonocasa3());
+                pst.setString(35, item.getCelular3());
+                pst.setString(36, item.getCorreo3());
                 pst.setInt(37, 1);
                 pst.setInt(38, item.getTipoescuela());
 
