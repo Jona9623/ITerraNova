@@ -63,6 +63,10 @@
                                         <i id="infopersonal" class="icon-user"></i>Mas info</a>
                                 </li>
                                 <li>
+                                    <a href="javascript:;" class="agregamateria">
+                                        <i id="agregamateria" class="icon-user"></i>Agregar materias</a>
+                                </li>
+                                <li>
                                     <a href="javascript:;" class="editarpe">
                                         <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>

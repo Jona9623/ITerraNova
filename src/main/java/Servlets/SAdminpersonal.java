@@ -6,7 +6,9 @@
 package Servlets;
 
 import Controlador.AdministradorController;
+import Controlador.AlumnosController;
 import Modelos.CtPuesto;
+import Modelos.TbMateria;
 import Modelos.TbPersonal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
@@ -30,6 +32,7 @@ import javax.servlet.http.Part;
 public class SAdminpersonal extends HttpServlet {
 
     AdministradorController adminC;
+    AlumnosController alumC;
     public String objectJson;
     public ObjectMapper mapper;
     int tipoescuela = 0;
@@ -87,6 +90,13 @@ public class SAdminpersonal extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
+            case "agregaMateria":
+                try {
+                    agregaMateria(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "guardaMateria": guardaMateria(request,response); break;
         }
     }
 
@@ -246,6 +256,23 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
+    
+    private void agregaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        alumC = new AlumnosController();
+        List<TbMateria> listmateria = new ArrayList<>();
+        TbPersonal personal = new TbPersonal();
+        try {
+            listmateria = alumC.getMaterias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listmateria", listmateria);
+            personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("personal", personal);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/agregamateriaspersonal.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
 
     private String extractFileName(Part part) {
         String fileName = "",
@@ -257,6 +284,11 @@ public class SAdminpersonal extends HttpServlet {
             }
         }
         return fileName;
+    }
+
+    private void guardaMateria(HttpServletRequest request, HttpServletResponse response) {
+        String prueba[] = request.getParameterValues("PRUEBA");
+        System.out.println(prueba);
     }
 
 }

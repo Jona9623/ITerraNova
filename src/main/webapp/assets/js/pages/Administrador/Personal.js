@@ -23,7 +23,11 @@ var Adminpersonal = (function () {
                     $(".infopersonal").on('click', function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.infoPersonal(idpersonal);
-                    })
+                    });
+                    $(".agregamateria").on('click', function () {
+                        idpersonal = $(this).parents("tr").find("td").eq(0).html();
+                        Adminpersonal.agregaMateria(idpersonal);
+                    });
                     $('.editarpe').on('click', function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.editarPersonal(idpersonal);
@@ -51,7 +55,7 @@ var Adminpersonal = (function () {
             })
         },
         importarPersonal: function () {
-            $('form[name="importarpersonal"]').ajaxForm(function (xhr,status,error) {
+            $('form[name="importarpersonal"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else
@@ -78,6 +82,33 @@ var Adminpersonal = (function () {
                     $("#content").html(arguments[0]);
                 }
             });
+        },
+        agregaMateria: function (idpersonal) {
+            $.get("SAdminpersonal", {
+                ACCION: "agregaMateria",
+                ID: idpersonal,
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    var prueba = [];
+                    $("#asignamateria").on('click', function () {
+                        alert("entra");
+                        $("#check input[type='checkbox']:checked").each(function () {
+                           prueba.push($(this).val());
+                        });
+                        $("#prueba").val(prueba);
+                        $.get("SAdminpersonal",{
+                            ACCION: "guardaMateria",
+                            PRUEBA: prueba
+                        });
+                        console.log(prueba);
+                        prueba = [];
+                    });
+                }
+            })
         },
         editarPersonal: function (idpersonal) {
             $.get("SAdminpersonal", {

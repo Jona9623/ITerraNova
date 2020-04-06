@@ -396,7 +396,7 @@ public class AdministradorController {
             alumno.setTurnoanterior(2);
         }
         alumno.setMunicipioante(attributes[25]);
-        if (attributes[27].equals("Secuandaria")) {
+        if (attributes[27].equals("Secundaria")) {
             alumno.setTipoescuela(2);
         } else {
             alumno.setTipoescuela(1);
