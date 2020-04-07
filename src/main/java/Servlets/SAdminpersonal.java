@@ -73,7 +73,7 @@ public class SAdminpersonal extends HttpServlet {
                 break;
             case "infoPersonal":
                 try {
-                    infoPersonal(request,response);
+                    infoPersonal(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -94,13 +94,13 @@ public class SAdminpersonal extends HttpServlet {
                 break;
             case "agregaMateria":
                 try {
-                    agregaMateria(request,response);
+                    agregaMateria(request, response);
                 } catch (Exception e) {
                 }
                 break;
-            case "guardaMateria": 
+            case "asignaMateria":
                 try {
-                   guardaMateria(request,response); 
+                    asignaMateria(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -160,15 +160,15 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-    
-    private void infoPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+    private void infoPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         TbPersonal personal = new TbPersonal();
         try {
-           personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("IDPERSONAL")));
+            personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("IDPERSONAL")));
             request.setAttribute("personal", personal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/infopersonal.jsp");
-            rd.forward(request, response); 
+            rd.forward(request, response);
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
@@ -255,7 +255,7 @@ public class SAdminpersonal extends HttpServlet {
                 System.out.println("Ruta:" + ruta);
                 part.write(ruta);
             }
-            listpersonal = adminC.exportaPersonal(ruta,tipoescuela);
+            listpersonal = adminC.exportaPersonal(ruta, tipoescuela);
             adminC.guardaImportaPersonal(listpersonal);
             String f = null;
         } catch (Exception e) {
@@ -263,13 +263,13 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-    
+
     private void agregaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumC = new AlumnosController();
         List<TbMateria> listmateria = new ArrayList<>();
         TbPersonal personal = new TbPersonal();
         try {
-            listmateria = alumC.getMaterias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listmateria = alumC.getMateriasPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")),Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("listmateria", listmateria);
             personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("personal", personal);
@@ -293,18 +293,18 @@ public class SAdminpersonal extends HttpServlet {
         return fileName;
     }
 
-    private void guardaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    private void asignaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
         mapper = new ObjectMapper();
-       // TbMateria materias = new TbMateria();
-       objectJson = request.getParameter("PRUEBA");
+        objectJson = request.getParameter("PRUEBA");
         try {
             List<TbMateria> idmaterias = Arrays.asList(mapper.readValue(objectJson, TbMateria[].class));
-            System.out.println(idmaterias);
+            adminC.asignaMateria(Integer.parseInt(request.getParameter("ID")),idmaterias, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
-           response.addHeader("ERROR", e.toString());
-            response.sendError(204); 
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
-       
+
     }
 
 }

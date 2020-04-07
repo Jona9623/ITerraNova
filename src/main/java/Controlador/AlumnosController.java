@@ -50,6 +50,11 @@ public class AlumnosController {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getMaterias(tipoescuela);
     }
+    
+    public List<TbMateria> getMateriasPersonal(int tipoescuela ,int idpersonal) throws Exception {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getMateriasPersonal(tipoescuela,idpersonal);
+    }
 
     public List<CtIncidente> getIncidentes(int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
@@ -308,7 +313,5 @@ public class AlumnosController {
             throw e;
         }
     }
-
-    
-    
+  
 }

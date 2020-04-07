@@ -282,6 +282,11 @@ public class AdministradorController {
         consulta.eliminaMateria(id);
     }
 
+    public void asignaMateria(int id, List<TbMateria> idmaterias, int tipoescuela) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.asignaMateria(id,idmaterias,tipoescuela);
+    }
+
     private List<TbAlumnos> readFromCSVA(String ruta, int tipoescuela) throws Exception {
         List<TbAlumnos> alumnos = new ArrayList<>();
         Path pathToFile = Paths.get(ruta);
@@ -299,7 +304,7 @@ public class AdministradorController {
             }
 
         } catch (Exception e) {
-            System.out.println("Este es el error........"+con);
+            System.out.println("Este es el error........" + con);
             throw e;
         }
         return alumnos;
@@ -561,10 +566,10 @@ public class AdministradorController {
         return tutor;
     }
 
-    public void correoUsuario(String usuariocorreo, String contrasenacorreo, int id) throws Exception{
+    public void correoUsuario(String usuariocorreo, String contrasenacorreo, int id) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         String correo = consulta.correoUsuario(id);
-        enviaCorreoUsuario(usuariocorreo, contrasenacorreo,correo);
+        enviaCorreoUsuario(usuariocorreo, contrasenacorreo, correo);
     }
 
     private void enviaCorreoUsuario(String usuariocorreo, String contrasenacorreo, String correo) throws Exception {
@@ -572,7 +577,7 @@ public class AdministradorController {
         String contrasena = "guanabana2035";
         String asunto = "Datos Inicio de sesion al sistema";
         String cuerpo = "Usted ha sido registrado con éxito, por favor inicie sesión dentro del sistema www.sistema.iterra.edu.mx con los siguientes datos\n\n"
-                + "usuario: "+usuariocorreo+"\ncontraseña: "+contrasenacorreo;
+                + "usuario: " + usuariocorreo + "\ncontraseña: " + contrasenacorreo;
 
         try {
             Properties pro = System.getProperties();
@@ -597,5 +602,4 @@ public class AdministradorController {
             throw e;
         }
     }
-
 }

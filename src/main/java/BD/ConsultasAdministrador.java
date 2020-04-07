@@ -1751,6 +1751,32 @@ public class ConsultasAdministrador {
             }
         }
     }
+    
+    public void asignaMateria(int id, List<TbMateria> idmaterias, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            for (TbMateria item: idmaterias){
+                con.setAutoCommit(false);
+                String consulta = "insert into tb_materiapersonal (r_materia,r_personal,status,tipoescuela) values (?,?,?,?)";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, item.getIdtbmateria());
+                pst.setInt(2, id);
+                pst.setInt(3, 1);
+                pst.setInt(4, tipoescuela);
+                
+                if(pst.executeUpdate() == 1){
+                    con.commit();
+                }
+                else {
+                    System.out.println("no se pudo guardar");
+                }
+                pst = null;
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
     public void guardaImportaPersonal(List<TbPersonal> listpersonal) throws Exception {
         con = new Conexion().conexion();
@@ -1824,7 +1850,6 @@ public class ConsultasAdministrador {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         PreparedStatement pst2 = null;
-        int cont = 1;
         int tutores = 1;
         try {
             con.setAutoCommit(false);
@@ -1895,13 +1920,11 @@ public class ConsultasAdministrador {
                 } else {
                     System.out.println("Error al guardar");
                 }
-                cont++;
                 pst = null;
                 tutores++;
             }
 
         } catch (Exception e) {
-            System.out.println(cont);
             throw e;
         } finally {
             try {

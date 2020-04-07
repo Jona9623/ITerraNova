@@ -93,9 +93,13 @@ var Adminpersonal = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#content").html(arguments[0]);
-                    var listmateria =[] ;;
+                     $('#tablaasignamateria').DataTable({
+                        "scrollX": true
+                    });
+                    var listmateria = [];
+                    ;
                     $("#asignamateria").on('click', function () {
-                        alert("entra");
+                        alert(tipoescuela);
                         $("#check input[type='checkbox']:checked").each(function () {
                             var materia = {
                                 "idtbmateria": $(this).val()
@@ -103,11 +107,20 @@ var Adminpersonal = (function () {
                             listmateria.push(materia);
                         });
                         console.log(listmateria);
-                        $.get("SAdminpersonal",{
-                            ACCION: "guardaMateria",
-                            PRUEBA: JSON.stringify(listmateria)
+                        $.get("SAdminpersonal", {
+                            ACCION: "asignaMateria",
+                            PRUEBA: JSON.stringify(listmateria),
+                            TIPOESCUELA: tipoescuela,
+                            ID: idpersonal
+                        }).done(function (xhr, status, error) {
+                            if (error.status != 200)
+                                swal(error.getResponseHeader("ERROR"), "", "warning");
+                            else {
+                                listmateria = [];
+                                swal("Hecho!", "Materias asignadas al maestro", "success");
+                            }
                         });
-                        listmateria = [];
+
                     });
                 }
             })

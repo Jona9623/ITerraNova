@@ -116,6 +116,51 @@ public class ConsultasAlumno {
         return listmateria;
     }
 
+    public List<TbMateria> getMateriasPersonal(int tipoescuela, int idpersonal) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbMateria> listmateria = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = " SELECT * FROM terranova.tb_materiapersonal right join tb_materia on tb_materiapersonal.r_materia = tb_materia.idTb_Materia\n"
+                    + "inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where idTb_Materia not in (\n"
+                    + "	select r_materia from tb_materiapersonal where tb_materiapersonal.r_personal = ? and tb_materia.status = 1 and tb_materia.tipoescuela = ?\n"
+                    + ");";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idpersonal);
+            pst.setInt(2, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TbMateria materia = new TbMateria();
+                materia.setIdtbmateria(rs.getInt("tb_materia.idTb_Materia"));
+                materia.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+                materia.setNombrecorto(rs.getString("ct_datosmateria.nombrecorto"));
+                materia.setStatus(rs.getInt("tb_materia.status"));
+                materia.setTipoescuela(rs.getInt("tb_materia.tipoescuela"));
+                listmateria.add(materia);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listmateria;
+    }
+
     public List<CtIncidente> getIncidentes(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -197,7 +242,7 @@ public class ConsultasAlumno {
         }
         return listalumno;
     }
-    
+
     public List<Alumno> getAlumnosAtencion(int grado, int grupo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -739,7 +784,7 @@ public class ConsultasAlumno {
             }
         }
     }
-    
+
     public void guardarAtencion(TbReporteAcademico reporteA) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1201,4 +1246,5 @@ public class ConsultasAlumno {
             }
         }
     }
+
 }

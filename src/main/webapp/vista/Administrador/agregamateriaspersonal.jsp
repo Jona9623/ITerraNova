@@ -22,7 +22,7 @@
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <strong> Marque las casillas para agregar las materias a los maestros</strong>
-        <table id="tablamateria" class="table table-bordered" style="width:100%">
+        <table id="tablaasignamateria" class="table table-bordered" style="width:100%">
             <thead class="thead-light">
                 <tr>
                     <th style="display: none"></th>
