@@ -93,19 +93,21 @@ var Adminpersonal = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#content").html(arguments[0]);
-                    var prueba = [];
+                    var listmateria =[] ;;
                     $("#asignamateria").on('click', function () {
                         alert("entra");
                         $("#check input[type='checkbox']:checked").each(function () {
-                           prueba.push($(this).val());
+                            var materia = {
+                                "idtbmateria": $(this).val()
+                            };
+                            listmateria.push(materia);
                         });
-                        $("#prueba").val(prueba);
+                        console.log(listmateria);
                         $.get("SAdminpersonal",{
                             ACCION: "guardaMateria",
-                            PRUEBA: prueba
+                            PRUEBA: JSON.stringify(listmateria)
                         });
-                        console.log(prueba);
-                        prueba = [];
+                        listmateria = [];
                     });
                 }
             })

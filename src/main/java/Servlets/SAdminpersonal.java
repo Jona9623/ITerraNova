@@ -10,11 +10,13 @@ import Controlador.AlumnosController;
 import Modelos.CtPuesto;
 import Modelos.TbMateria;
 import Modelos.TbPersonal;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -96,7 +98,12 @@ public class SAdminpersonal extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
-            case "guardaMateria": guardaMateria(request,response); break;
+            case "guardaMateria": 
+                try {
+                   guardaMateria(request,response); 
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -286,9 +293,18 @@ public class SAdminpersonal extends HttpServlet {
         return fileName;
     }
 
-    private void guardaMateria(HttpServletRequest request, HttpServletResponse response) {
-        String prueba[] = request.getParameterValues("PRUEBA");
-        System.out.println(prueba);
+    private void guardaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        mapper = new ObjectMapper();
+       // TbMateria materias = new TbMateria();
+       objectJson = request.getParameter("PRUEBA");
+        try {
+            List<TbMateria> idmaterias = Arrays.asList(mapper.readValue(objectJson, TbMateria[].class));
+            System.out.println(idmaterias);
+        } catch (Exception e) {
+           response.addHeader("ERROR", e.toString());
+            response.sendError(204); 
+        }
+       
     }
 
 }

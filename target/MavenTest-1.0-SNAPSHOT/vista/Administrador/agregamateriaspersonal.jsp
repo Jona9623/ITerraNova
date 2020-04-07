@@ -52,11 +52,7 @@
         </table>
         <div style="text-align: right">
             <div class="btn-group">
-                <form id="guardamateria" name="guardamateria">
-                    <input type="text" name="ACCION" id="ACCION" value="guardaMateria" hidden="true">
-                    <input value="" id="prueba" name="prueba" hidden="true">
-                    <button id="asignamateria" type="submit" class="btn btn-terra">Asignar Materia</button> <br>
-                </form>
+                    <button id="asignamateria" type="button" class="btn btn-terra">Asignar Materia</button> <br>
             </div>
         </div>
     </div>
