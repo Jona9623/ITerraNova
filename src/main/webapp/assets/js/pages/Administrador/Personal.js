@@ -93,16 +93,16 @@ var Adminpersonal = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#content").html(arguments[0]);
-                     $('#tablaasignamateria').DataTable({
+                    $('#tablaasignamateria').DataTable({
                         "scrollX": true
                     });
                     var listmateria = [];
-                    ;
                     $("#asignamateria").on('click', function () {
                         alert(tipoescuela);
                         $("#check input[type='checkbox']:checked").each(function () {
                             var materia = {
-                                "idtbmateria": $(this).val()
+                                "idtbmateriapersonal": $(this).val(),
+                                "r_periodo": $("#periodomateria").val()
                             };
                             listmateria.push(materia);
                         });
@@ -121,6 +121,56 @@ var Adminpersonal = (function () {
                             }
                         });
 
+                    });
+                    $("#asignaralumnos").on('click', function () {
+                        $.get("SAdminpersonal", {
+                            ACCION: "agregaAlumnos",
+                            ID: idpersonal,
+                            TIPOESCUELA: tipoescuela
+                        }).done(function (xhr, status, error) {
+                            if (error.status != 200)
+                                swal(error.getResponseHeader("ERROR"), "", "warning");
+                            else {
+                                $("#content").html(arguments[0]);
+                                grado = $("#gradoAlumPer").val();
+                                grupo = $("#grupoAlumPer").val();
+                                Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal);
+                                var alumnos = [];
+                                $("body").on("click", "#alumnoasigna", function (event) {
+                                    alert("entra");
+                                    $("#check2 input[type='checkbox']:checked").each(function () {
+                                        var alumno = {
+                                            "idtbalumno": $(this).val()
+                                        };
+                                        alumnos.push(alumno);
+                                    });
+                                    console.log(alumnos);
+                                });
+                            }
+                        })
+                    });
+                }
+            })
+        },
+        getAsignaAlumno: function (grado, grupo, idpersonal) {
+            $.get("SAdminpersonal", {
+                ACCION: "getAsignaAlumno",
+                GRADO: grado,
+                GRUPO: grupo,
+                ID: idpersonal,
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#asignaAlumno").html(arguments[0]);
+                    $("#gradoAlumPer").change(function () {
+                        grado = $("#gradoAlumPer").val()
+                        Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal);
+                    }),
+                            $("#grupoAlumPer").change(function () {
+                        grupo = $("#grupoAlumPer").val();
+                        Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal);
                     });
                 }
             })
@@ -213,6 +263,16 @@ var Adminpersonal = (function () {
                 "tipoescuela": 1
             }
             return personal
+        },
+        seleccionaTodo: function () {
+            for (i = 0; i < document.asignaAlumno.elements.length; i++)
+                if (document.asignaAlumno.elements[i].type == "checkbox")
+                    document.asignaAlumno.elements[i].checked = 1;
+        },
+        desmarcarTodo: function () {
+            for (i = 0; i < document.asignaAlumno.elements.length; i++)
+                if (document.asignaAlumno.elements[i].type == "checkbox")
+                    document.asignaAlumno.elements[i].checked = 0;
         }
     }
 }());

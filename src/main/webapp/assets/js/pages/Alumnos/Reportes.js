@@ -87,9 +87,6 @@ var Reportes = (function () {
                 GRUPO: grupo,
                 TIPOESCUELA: tipoescuela
             }).done(function (xhr, status, error) {
-                console.log(arguments);
-                console.log(error.status);
-                console.log(error.getResponseHeader("ERROR"));
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {

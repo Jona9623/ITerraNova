@@ -18,6 +18,7 @@ import Modelos.CtTipoCalificaicon;
 import Modelos.GradoGrupo;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
+import Modelos.TbMateriaPersonal;
 import Modelos.TbPersonal;
 import Modelos.TbTutor;
 import java.io.BufferedReader;
@@ -282,9 +283,14 @@ public class AdministradorController {
         consulta.eliminaMateria(id);
     }
 
-    public void asignaMateria(int id, List<TbMateria> idmaterias, int tipoescuela) throws Exception {
+    public void asignaMateria(int id, List<TbMateriaPersonal> materiapersonal, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.asignaMateria(id,idmaterias,tipoescuela);
+        consulta.asignaMateria(id,materiapersonal,tipoescuela);
+    }
+    
+    public List<TbMateriaPersonal> getMateriasAPersonal(int tipoescuela, int idpersonal) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getMateriasAPersonal(tipoescuela,idpersonal);
     }
 
     private List<TbAlumnos> readFromCSVA(String ruta, int tipoescuela) throws Exception {
@@ -602,4 +608,5 @@ public class AdministradorController {
             throw e;
         }
     }
+
 }

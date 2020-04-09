@@ -7,8 +7,14 @@ package Servlets;
 
 import Controlador.AdministradorController;
 import Controlador.AlumnosController;
+import Modelos.Alumno;
+import Modelos.CtGrado;
+import Modelos.CtGrupo;
+import Modelos.CtPeriodoEscolar;
 import Modelos.CtPuesto;
+import Modelos.TbAlumnos;
 import Modelos.TbMateria;
+import Modelos.TbMateriaPersonal;
 import Modelos.TbPersonal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -101,6 +107,18 @@ public class SAdminpersonal extends HttpServlet {
             case "asignaMateria":
                 try {
                     asignaMateria(request, response);
+                } catch (Exception e) {
+                }
+                break;
+            case "agregaAlumnos":
+                try {
+                    agregaAlumnos(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "getAsignaAlumno":
+                try {
+                    getAsignaAlumno(request,response);
                 } catch (Exception e) {
                 }
                 break;
@@ -267,13 +285,74 @@ public class SAdminpersonal extends HttpServlet {
     private void agregaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumC = new AlumnosController();
         List<TbMateria> listmateria = new ArrayList<>();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
         TbPersonal personal = new TbPersonal();
         try {
             listmateria = alumC.getMateriasPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")),Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("listmateria", listmateria);
             personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("personal", personal);
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/agregamateriaspersonal.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    
+    private void asignaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        mapper = new ObjectMapper();
+        objectJson = request.getParameter("PRUEBA");
+        try {
+            List<TbMateriaPersonal> materiapersonal = Arrays.asList(mapper.readValue(objectJson, TbMateriaPersonal[].class));
+            adminC.asignaMateria(Integer.parseInt(request.getParameter("ID")),materiapersonal, Integer.parseInt(request.getParameter("TIPOESCUELA")));
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+
+    }
+    
+    private void agregaAlumnos(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        List<TbMateriaPersonal> listmateria = new ArrayList<>();
+        List<CtGrado> listgrado = new ArrayList<>();
+        List<CtGrupo> listgrupo = new ArrayList<>();
+        try {
+            listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")),Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("listmateria", listmateria);
+            listgrado = adminC.getGrado(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listgrado", listgrado);
+            listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listgrupo", listgrupo);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/agregaalumnospersonal.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    
+    private void getAsignaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        alumC = new  AlumnosController();
+        List<TbMateriaPersonal> listmateria = new ArrayList<>();
+        List<CtGrado> listgrado = new ArrayList<>();
+        List<CtGrupo> listgrupo = new ArrayList<>();
+        List<Alumno> listalumno = new ArrayList<>();
+        try {
+            listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")),Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("listmateria", listmateria);
+            listgrado = adminC.getGrado(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listgrado", listgrado);
+            listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listgrupo", listgrupo);
+            listalumno = alumC.getAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listalumno", listalumno);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/asignaalumno.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
@@ -291,20 +370,6 @@ public class SAdminpersonal extends HttpServlet {
             }
         }
         return fileName;
-    }
-
-    private void asignaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        adminC = new AdministradorController();
-        mapper = new ObjectMapper();
-        objectJson = request.getParameter("PRUEBA");
-        try {
-            List<TbMateria> idmaterias = Arrays.asList(mapper.readValue(objectJson, TbMateria[].class));
-            adminC.asignaMateria(Integer.parseInt(request.getParameter("ID")),idmaterias, Integer.parseInt(request.getParameter("TIPOESCUELA")));
-        } catch (Exception e) {
-            response.addHeader("ERROR", e.toString());
-            response.sendError(204);
-        }
-
     }
 
 }

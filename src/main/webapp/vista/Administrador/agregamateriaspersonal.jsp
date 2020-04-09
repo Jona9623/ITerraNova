@@ -21,6 +21,14 @@
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12">
+        <div class="col-lg-4 p-t-20">
+            <label >Seleccione periodo escolar</label>
+            <select id="periodomateria" class="custom-select" name="Periodomateria">
+                <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
+                    <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
+                </c:forEach>
+            </select>
+        </div>
         <strong> Marque las casillas para agregar las materias a los maestros</strong>
         <table id="tablaasignamateria" class="table table-bordered" style="width:100%">
             <thead class="thead-light">
@@ -52,7 +60,11 @@
         </table>
         <div style="text-align: right">
             <div class="btn-group">
-                    <button id="asignamateria" type="button" class="btn btn-terra">Asignar Materia</button> <br>
+                <br>
+                <button id="asignamateria" type="button" class="btn btn-terra">Asignar Materia</button>  &nbsp; &nbsp;
+                <div class="btn-group">
+                    <button id="asignaralumnos" type="button" class="btn btn-terra">Asignar Alumnos</button> 
+                </div>
             </div>
         </div>
     </div>

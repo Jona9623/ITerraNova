@@ -16,6 +16,7 @@ import Modelos.CtTipoCalificaicon;
 import Modelos.GradoGrupo;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
+import Modelos.TbMateriaPersonal;
 import Modelos.TbPersonal;
 import Modelos.TbTutor;
 import java.sql.Connection;
@@ -1751,24 +1752,24 @@ public class ConsultasAdministrador {
             }
         }
     }
-    
-    public void asignaMateria(int id, List<TbMateria> idmaterias, int tipoescuela) throws Exception {
+
+    public void asignaMateria(int id, List<TbMateriaPersonal> materiapersonal, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         try {
-            for (TbMateria item: idmaterias){
+            for (TbMateriaPersonal item : materiapersonal) {
                 con.setAutoCommit(false);
-                String consulta = "insert into tb_materiapersonal (r_materia,r_personal,status,tipoescuela) values (?,?,?,?)";
+                String consulta = "insert into tb_materiapersonal (r_materia,r_personal,r_periodo,status,tipoescuela) values (?,?,?,?,?)";
                 pst = con.prepareStatement(consulta);
-                pst.setInt(1, item.getIdtbmateria());
+                pst.setInt(1, item.getIdtbmateriapersonal());
                 pst.setInt(2, id);
-                pst.setInt(3, 1);
-                pst.setInt(4, tipoescuela);
-                
-                if(pst.executeUpdate() == 1){
+                pst.setInt(3, item.getR_periodo());
+                pst.setInt(4, 1);
+                pst.setInt(5, tipoescuela);
+
+                if (pst.executeUpdate() == 1) {
                     con.commit();
-                }
-                else {
+                } else {
                     System.out.println("no se pudo guardar");
                 }
                 pst = null;
@@ -1776,6 +1777,48 @@ public class ConsultasAdministrador {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    public List<TbMateriaPersonal> getMateriasAPersonal(int tipoescuela, int idpersonal) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbMateriaPersonal> personalmateria = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select tb_materiapersonal.idTb_MateriaPersonal, ct_datosmateria.nombrecorto, tb_materiapersonal.r_periodo from tb_materiapersonal inner join tb_materia on tb_materiapersonal.r_materia = tb_materia.idTb_Materia\n"
+                    + "inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria \n"
+                    + "where tb_materiapersonal.r_personal = ? and tb_materiapersonal.status = 1 and tb_materiapersonal.tipoescuela = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idpersonal);
+            pst.setInt(2, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TbMateriaPersonal materia = new TbMateriaPersonal();
+                materia.setIdtbmateriapersonal(rs.getInt("tb_materiapersonal.idTb_MateriaPersonal"));
+                materia.setMateria(rs.getString("ct_datosmateria.nombrecorto"));
+                materia.setR_periodo(rs.getInt("tb_materiapersonal.r_periodo"));
+                personalmateria.add(materia);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return personalmateria;
     }
 
     public void guardaImportaPersonal(List<TbPersonal> listpersonal) throws Exception {
@@ -2034,7 +2077,7 @@ public class ConsultasAdministrador {
             pst.setInt(1, id);
             rs = pst.executeQuery();
             while (rs.next()) {
-                correo=(rs.getString("tb_personal.correo"));
+                correo = (rs.getString("tb_personal.correo"));
             }
 
         } catch (Exception e) {
