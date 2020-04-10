@@ -14,10 +14,12 @@ import Modelos.CtPeriodoEscolar;
 import Modelos.CtPuesto;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
+import Modelos.TbMateriaAlumno;
 import Modelos.TbMateriaPersonal;
 import Modelos.TbPersonal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -119,6 +121,12 @@ public class SAdminpersonal extends HttpServlet {
             case "getAsignaAlumno":
                 try {
                     getAsignaAlumno(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "asignaAlumnos":
+                try {
+                    asignaAlumnos(request,response);
                 } catch (Exception e) {
                 }
                 break;
@@ -350,10 +358,24 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listgrado", listgrado);
             listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listgrupo", listgrupo);
-            listalumno = alumC.getAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listalumno = alumC.getAlumnosMateria(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")),Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumno", listalumno);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/asignaalumno.jsp");
             rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    
+    private void asignaAlumnos(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        mapper = new ObjectMapper();
+        adminC = new AdministradorController();
+        List<TbMateriaAlumno> listmateriaalum = new ArrayList<TbMateriaAlumno>();
+        objectJson = request.getParameter("OBJETO");
+        try {
+            listmateriaalum = Arrays.asList(mapper.readValue(objectJson, TbMateriaAlumno[].class));
+            adminC.asignaAlumnos(Integer.parseInt(request.getParameter("TIPOESCUELA")),listmateriaalum);
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
@@ -371,5 +393,6 @@ public class SAdminpersonal extends HttpServlet {
         }
         return fileName;
     }
+
 
 }

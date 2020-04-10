@@ -123,8 +123,8 @@ public class ConsultasAlumno {
         List<TbMateria> listmateria = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = " SELECT * FROM terranova.tb_materiapersonal right join tb_materia on tb_materiapersonal.r_materia = tb_materia.idTb_Materia\n"
-                    + "inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where idTb_Materia not in (\n"
+            String consulta = " SELECT * FROM terranova.tb_materia inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                    + " where idTb_Materia not in (\n"
                     + "	select r_materia from tb_materiapersonal where tb_materiapersonal.r_personal = ? and tb_materia.status = 1 and tb_materia.tipoescuela = ?\n"
                     + ");";
             pst = con.prepareStatement(consulta);
@@ -1245,6 +1245,53 @@ public class ConsultasAlumno {
                 System.out.println(e);
             }
         }
+    }
+
+    public List<Alumno> getAlumnosMateria(int grado, int grupo, int materiapersonal, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<Alumno> listalumno = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "SELECT tb_alumnos.idTb_Alumnos,tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno from tb_alumnos"
+                    + " where tb_alumnos.r_grado = ? and tb_alumnos.r_grupo = ? and tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?\n"
+                    + "and idTb_Alumnos not in (\n"
+                    + "	select r_alumno from tb_materiaalumno where tb_materiaalumno.r_materiapersonal = ?\n"
+                    + ");";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, grado);
+            pst.setInt(2, grupo);
+            pst.setInt(3, tipoescuela);
+            pst.setInt(4, materiapersonal);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Alumno alumno = new Alumno();
+                alumno.setId(rs.getInt("tb_alumnos.idTb_Alumnos"));
+                alumno.setNombre(rs.getString("tb_alumnos.nombre"));
+                alumno.setApellidop(rs.getString("tb_alumnos.apellidopaterno"));
+                alumno.setApellidom(rs.getString("tb_alumnos.apellidomaterno"));
+                listalumno.add(alumno);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listalumno;
     }
 
 }

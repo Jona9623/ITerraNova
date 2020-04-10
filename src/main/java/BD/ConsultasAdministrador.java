@@ -16,6 +16,7 @@ import Modelos.CtTipoCalificaicon;
 import Modelos.GradoGrupo;
 import Modelos.TbAlumnos;
 import Modelos.TbMateria;
+import Modelos.TbMateriaAlumno;
 import Modelos.TbMateriaPersonal;
 import Modelos.TbPersonal;
 import Modelos.TbTutor;
@@ -1776,6 +1777,17 @@ public class ConsultasAdministrador {
             }
         } catch (Exception e) {
             throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
@@ -1819,6 +1831,42 @@ public class ConsultasAdministrador {
             }
         }
         return personalmateria;
+    }
+
+    public void asignaAlumnos(int tipoescuela, List<TbMateriaAlumno> listmateriaalum) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            for (TbMateriaAlumno item : listmateriaalum) {
+                con.setAutoCommit(false);
+                String consulta = "insert into tb_materiaalumno (r_materiapersonal,r_alumno,status,tipoescuela) values (?,?,?,?)";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, item.getR_materiapersonal());
+                pst.setInt(2, item.getR_alumno());
+                pst.setInt(3, 1);
+                pst.setInt(4, tipoescuela);
+
+                if (pst.executeUpdate() == 1) {
+                    con.commit();
+                } else {
+                    System.out.println("no se pudo guardar");
+                }
+                pst = null;
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
     public void guardaImportaPersonal(List<TbPersonal> listpersonal) throws Exception {

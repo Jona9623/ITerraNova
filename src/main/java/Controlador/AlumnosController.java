@@ -313,5 +313,10 @@ public class AlumnosController {
             throw e;
         }
     }
+
+    public List<Alumno> getAlumnosMateria(int grado, int grupo, int materiapersonal, int tipoescuela) throws Exception{
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getAlumnosMateria(grado,grupo,materiapersonal,tipoescuela);
+    }
   
 }

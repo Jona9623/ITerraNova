@@ -120,7 +120,6 @@ var Adminpersonal = (function () {
                                 swal("Hecho!", "Materias asignadas al maestro", "success");
                             }
                         });
-
                     });
                     $("#asignaralumnos").on('click', function () {
                         $.get("SAdminpersonal", {
@@ -134,17 +133,31 @@ var Adminpersonal = (function () {
                                 $("#content").html(arguments[0]);
                                 grado = $("#gradoAlumPer").val();
                                 grupo = $("#grupoAlumPer").val();
-                                Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal);
+                                materiapersonal = $("#materiaAlumPer").val();
+                                Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal, materiapersonal);
                                 var alumnos = [];
                                 $("body").on("click", "#alumnoasigna", function (event) {
                                     alert("entra");
                                     $("#check2 input[type='checkbox']:checked").each(function () {
                                         var alumno = {
-                                            "idtbalumno": $(this).val()
+                                            "r_alumno": $(this).val(),
+                                            "r_materiapersonal": $("#materiaAlumPer").val()
                                         };
                                         alumnos.push(alumno);
                                     });
                                     console.log(alumnos);
+                                    $.get("SAdminpersonal", {
+                                        ACCION: "asignaAlumnos",
+                                        OBJETO: JSON.stringify(alumnos),
+                                        TIPOESCUELA: tipoescuela
+
+                                    }).done(function (xhr, status, error) {
+                                        if (error.status != 200)
+                                            swal(error.getResponseHeader("ERROR"), "", "warning");
+                                        else {
+                                            swal("Hecho!", "Alumnos asignados al maestro", "success");
+                                        }
+                                    });
                                 });
                             }
                         })
@@ -152,12 +165,13 @@ var Adminpersonal = (function () {
                 }
             })
         },
-        getAsignaAlumno: function (grado, grupo, idpersonal) {
+        getAsignaAlumno: function (grado, grupo, idpersonal, materiapersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "getAsignaAlumno",
                 GRADO: grado,
                 GRUPO: grupo,
                 ID: idpersonal,
+                IDM: materiapersonal,
                 TIPOESCUELA: tipoescuela
             }).done(function (xhr, status, error) {
                 if (error.status != 200)
@@ -166,11 +180,15 @@ var Adminpersonal = (function () {
                     $("#asignaAlumno").html(arguments[0]);
                     $("#gradoAlumPer").change(function () {
                         grado = $("#gradoAlumPer").val()
-                        Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal);
-                    }),
-                            $("#grupoAlumPer").change(function () {
+                        Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal, materiapersonal);
+                    });
+                    $("#grupoAlumPer").change(function () {
                         grupo = $("#grupoAlumPer").val();
-                        Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal);
+                        Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal, materiapersonal);
+                    });
+                    $("#materiaAlumPer").change(function () {
+                        materiapersonal = $("#materiaAlumPer").val();
+                        Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal, materiapersonal);
                     });
                 }
             })
