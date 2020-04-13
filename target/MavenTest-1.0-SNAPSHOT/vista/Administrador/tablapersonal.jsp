@@ -26,7 +26,7 @@
                 <button id="btnaregarP"type="button" class="btn btn-terra">Agregar Personal</button> <br>
             </div>
             <div class="btn-group">
-                <a data-toggle="modal" data-target="#modalArchivoP" id="importaPersonal"type="button" class="btn btn-terra">Importar Alumno</a> <br> 
+                <a data-toggle="modal" data-target="#modalArchivoP" id="importaPersonal"type="button" class="btn btn-terra">Importar Personal</a> <br> 
             </div>
         </div>
     </div>
@@ -64,7 +64,11 @@
                                 </li>
                                 <li>
                                     <a href="javascript:;" class="agregamateria">
-                                        <i id="agregamateria" class="icon-user"></i>Agregar materias</a>
+                                        <i id="agregamateria" class="icon-plus"></i>Agregar materias</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" class="listaalumnos">
+                                        <i id="listaalumnos" class="icon-book-open"></i>Listas alumnos</a>
                                 </li>
                                 <li>
                                     <a href="javascript:;" class="editarpe">

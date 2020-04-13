@@ -318,5 +318,10 @@ public class AlumnosController {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getAlumnosMateria(grado,grupo,materiapersonal,tipoescuela);
     }
+
+    public List<Alumno> getListaAlumnos(int grado, int grupo, int materiapersonal, int tipoescuela) throws Exception {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getListaAlumnos(grado,grupo,materiapersonal,tipoescuela);
+    }
   
 }

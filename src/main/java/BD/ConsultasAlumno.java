@@ -1294,4 +1294,50 @@ public class ConsultasAlumno {
         return listalumno;
     }
 
+    public List<Alumno> getListaAlumnos(int grado, int grupo, int materiapersonal, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<Alumno> listalumno = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select tb_materiaalumno.idtb_materiaalumno, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno from tb_materiaalumno inner join tb_alumnos\n"
+                    + "on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
+                    + "on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal\n"
+                    + "where tb_alumnos.r_grado = ? and tb_alumnos.r_grupo = ? and tb_materiaalumno.r_materiapersonal = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, grado);
+            pst.setInt(2, grupo);
+            pst.setInt(3, materiapersonal);
+            pst.setInt(4, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Alumno alumno = new Alumno();
+                alumno.setId(rs.getInt("tb_materiaalumno.idtb_materiaalumno"));
+                alumno.setNombre(rs.getString("tb_alumnos.nombre"));
+                alumno.setApellidop(rs.getString("tb_alumnos.apellidopaterno"));
+                alumno.setApellidom(rs.getString("tb_alumnos.apellidomaterno"));
+                listalumno.add(alumno);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listalumno;
+    }
+
 }

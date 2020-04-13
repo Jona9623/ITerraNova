@@ -28,6 +28,10 @@ var Adminpersonal = (function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.agregaMateria(idpersonal);
                     });
+                    $(".listaalumnos").on('click', function () {
+                        idpersonal = $(this).parents("tr").find("td").eq(0).html();
+                        Adminpersonal.listaAlumnos(idpersonal);
+                    });
                     $('.editarpe').on('click', function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.editarPersonal(idpersonal);
@@ -164,6 +168,51 @@ var Adminpersonal = (function () {
                     });
                 }
             })
+        },
+        listaAlumnos: function (idpersonal) {
+            $.get("SAdminpersonal", {
+                ACCION: "listaAlumnos",
+                ID: idpersonal,
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    grado = $("#gradoLista").val();
+                    grupo = $("#grupoLista").val();
+                    materiapersonal = $("#materiaLista").val();
+                    Adminpersonal.getListaAlumno(grado, grupo, materiapersonal);
+                }
+            });
+        },
+        getListaAlumno: function (grado, grupo, materiapersonal) {
+            $.get("SAdminpersonal", {
+                ACCION: "getListaAlumno",
+                GRADO: grado,
+                GRUPO: grupo,
+                ID: idpersonal,
+                IDM: materiapersonal,
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#ListaAlumnos").html(arguments[0]);
+                    $("#gradoLista").change(function () {
+                        grado = $("#gradoLista").val()
+                        Adminpersonal.getListaAlumno(grado, grupo, materiapersonal);
+                    });
+                    $("#grupoLista").change(function () {
+                        grupo = $("#grupoLista").val();
+                        Adminpersonal.getListaAlumno(grado, grupo, materiapersonal);
+                    });
+                    $("#materiaLista").change(function () {
+                        materiapersonal = $("#materiaLista").val();
+                        Adminpersonal.getListaAlumno(grado, grupo, materiapersonal);
+                    });
+                }
+            });
         },
         getAsignaAlumno: function (grado, grupo, idpersonal, materiapersonal) {
             $.get("SAdminpersonal", {

@@ -35,6 +35,7 @@ public class ConsultasLogin {
                 usuario.setUsuario(rs.getString("usuario"));
                 usuario.setContrasena(rs.getString("contrasena"));
                 usuario.setR_tipo(rs.getInt("r_tipo"));
+                usuario.setR_personal(rs.getInt("r_personal"));
             }
         } catch (Exception e) {
             throw e;
