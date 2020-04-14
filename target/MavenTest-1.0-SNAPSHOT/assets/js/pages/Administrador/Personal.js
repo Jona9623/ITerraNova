@@ -170,6 +170,7 @@ var Adminpersonal = (function () {
             })
         },
         listaAlumnos: function (idpersonal) {
+            alert(idpersonal);
             $.get("SAdminpersonal", {
                 ACCION: "listaAlumnos",
                 ID: idpersonal,

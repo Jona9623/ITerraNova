@@ -23,13 +23,16 @@ $(document).ready(function () {
     Admin.registro();
     $("#reportedis").on('click', function () {
         Reportes.reporteDisciplinar();
-    }),
+    });
             $("#reporteaca").on('click', function () {
         Reportes.reporteAcademico();
-    }),
+    });
+    $("#listaalumnosP").on('click',function(){
+       Adminpersonal.listaAlumnos($("#personal").val()); 
+    });
             $('#amalumnos').on('click', function () {
         Adminalumno.tablaAlumnos();
-    }),
+    });
             $('#ampersonal').on('click', function () {
         Adminpersonal.tablaPersonal();
     });

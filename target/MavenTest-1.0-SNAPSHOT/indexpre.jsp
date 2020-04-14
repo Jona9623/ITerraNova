@@ -2,14 +2,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     int x = 0;
-    int id_sesion;
+    int personal = 0;
     HttpSession objsesion = request.getSession(false);
     String usuario = (String) objsesion.getAttribute("user");
     if (usuario == null) {
         response.sendRedirect("Login.jsp");
     } else {
         x = (int) objsesion.getAttribute("tipo");
-        id_sesion = (int) objsesion.getAttribute("id");
+        personal = (int) objsesion.getAttribute("personal");
     }
 %><!DOCTYPE html>
 <html lang="en">
@@ -163,6 +163,23 @@
                                         <li class="nav-item">
                                             <a id="reporteaca" class="nav-link ">
                                                 <span class="title">Reporte académico</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <% } %>
+                                <% if (x == 2) { %>
+                                <li class="nav-item start">
+                                    <a href="#" class="nav-link nav-toggle">
+                                        <i class="material-icons">label</i>
+                                        <span id="Alumnos" class="title">Profesores</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <a id="listaalumnosP" class="nav-link ">
+                                                <span class="title">Listas de alumnos</span>
+                                                <input id="personal" value="<%=personal%>" hidden="true">
                                             </a>
                                         </li>
                                     </ul>
