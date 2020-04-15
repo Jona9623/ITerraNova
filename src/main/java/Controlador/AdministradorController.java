@@ -298,6 +298,11 @@ public class AdministradorController {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.asignaAlumnos(tipoescuela,listmateriaalum);
     }
+    
+    public List<TbMateriaAlumno> getMateriasAlum(int idalumno, int tipoescuela) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getMateriasAlum(idalumno,tipoescuela);
+    }
 
     private List<TbAlumnos> readFromCSVA(String ruta, int tipoescuela) throws Exception {
         List<TbAlumnos> alumnos = new ArrayList<>();
@@ -614,5 +619,4 @@ public class AdministradorController {
             throw e;
         }
     }
-
 }

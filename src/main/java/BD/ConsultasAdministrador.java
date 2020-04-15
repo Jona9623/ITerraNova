@@ -1869,6 +1869,50 @@ public class ConsultasAdministrador {
         }
     }
 
+    public List<TbMateriaAlumno> getMateriasAlum(int idalumno, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbMateriaAlumno> listmateriasalum = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select tb_materiaalumno.idtb_materiaalumno, ct_datosmateria.nombrecorto, ct_datosmateria.nombrelargo from tb_materiaalumno inner join tb_materiapersonal on\n"
+                    + "tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join\n"
+                    + "tb_materia on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join\n"
+                    + "ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where\n"
+                    + "tb_materiaalumno.r_alumno = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idalumno);
+            pst.setInt(2, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TbMateriaAlumno materiaalum = new TbMateriaAlumno();
+                materiaalum.setIdtbmateriaalumno(rs.getInt("tb_materiaalumno.idtb_materiaalumno"));
+                materiaalum.setNombrecorto(rs.getString("ct_datosmateria.nombrecorto"));
+                materiaalum.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+                listmateriasalum.add(materiaalum);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listmateriasalum;
+    }
+
     public void guardaImportaPersonal(List<TbPersonal> listpersonal) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;

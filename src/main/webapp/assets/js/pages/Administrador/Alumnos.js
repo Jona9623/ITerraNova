@@ -26,7 +26,11 @@ var Adminalumno = (function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         idtutor = $(this).parents("tr").find("td").eq(1).html();
                         Adminalumno.infoAlumno(idalumno, idtutor);
-                    })
+                    });
+                    $(".horairoalum").on('click',function(){
+                        idalumno = $(this).parents("tr").find("td").eq(0).html();
+                        Adminalumno.asignaHorario(idalumno);
+                    });
                     $('.editaralu').on('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         idtutor = $(this).parents("tr").find("td").eq(1).html();
@@ -66,6 +70,19 @@ var Adminalumno = (function () {
                     $("#content").html(arguments[0]);
                 }
             })
+        },
+        asignaHorario: function(idalumno){
+            $.get("SAdminalumno",{
+                ACCION: "getMateriasAlum",
+                ID: idalumno,
+                TIPOESCUELA: tipoescuela
+            }).done(function(xhr,status,error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                }
+            });
         },
         importaTutor: function () {
             $('form[name="importartutor"]').ajaxForm(function (xhr, status, error) {

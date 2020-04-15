@@ -68,7 +68,11 @@
                             <ul class="dropdown-menu pull-left" role="menu">
                                 <li>
                                     <a href="javascript:;" class="infoalumno">
-                                        <i id="infoalumno" class="icon-plus"></i>Mostrar toda la información</a>
+                                        <i id="infoalumno" class="icon-plus"></i>Más info</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" class="horairoalum">
+                                        <i id="horairoalum" class="icon-plus"></i>Asignar horario</a>
                                 </li>
                                 <li>
                                     <a href="javascript:;" class="editaralu">

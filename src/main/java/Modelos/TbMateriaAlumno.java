@@ -12,6 +12,8 @@ package Modelos;
 public class TbMateriaAlumno {
     private int idtbmateriaalumno;
     private int r_materiapersonal;
+    private String nombrecorto;
+    private String nombrelargo;
     private String nombrepe;
     private String apellidopp;
     private String apellidomp;
@@ -19,6 +21,22 @@ public class TbMateriaAlumno {
     private String nombrealum;
     private String apellidopa;
     private String apellidoma;
+
+    public String getNombrecorto() {
+        return nombrecorto;
+    }
+
+    public void setNombrecorto(String nombrecorto) {
+        this.nombrecorto = nombrecorto;
+    }
+
+    public String getNombrelargo() {
+        return nombrelargo;
+    }
+
+    public void setNombrelargo(String nombrelargo) {
+        this.nombrelargo = nombrelargo;
+    }
 
     public int getIdtbmateriaalumno() {
         return idtbmateriaalumno;

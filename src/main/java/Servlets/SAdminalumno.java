@@ -14,10 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Controlador.AdministradorController;
+import Controlador.AlumnosController;
 import Modelos.CtAreaalumno;
+import Modelos.TbMateriaAlumno;
 import Modelos.CtCptalumno;
 import Modelos.CtGrado;
 import Modelos.CtGrupo;
+import Modelos.CtPeriodoEscolar;
 import Modelos.TbAlumnos;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,6 +40,7 @@ import javax.servlet.http.Part;
 public class SAdminalumno extends HttpServlet {
 
     AdministradorController adminC;
+    AlumnosController alumC;
     public String objectJson;
     public ObjectMapper mapper;
     int tipoescuelaAlumno = 0;
@@ -106,6 +110,12 @@ public class SAdminalumno extends HttpServlet {
             case "importaTutor":
                 try {
                     importaTutor(request, response);
+                } catch (Exception e) {
+                }
+                break;
+            case "getMateriasAlum":
+                try {
+                    getMateriasAlum(request,response);
                 } catch (Exception e) {
                 }
                 break;
@@ -321,6 +331,24 @@ public class SAdminalumno extends HttpServlet {
             }
         } catch (Exception e) {
             System.out.println(e);
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    
+    private void getMateriasAlum(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        alumC = new AlumnosController();
+        List<TbMateriaAlumno> listmateriaalum = new ArrayList<> ();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        try {
+            listmateriaalum  = adminC.getMateriasAlum(Integer.parseInt(request.getParameter("ID")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listmateriaalum", listmateriaalum);
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/asignahorario.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
