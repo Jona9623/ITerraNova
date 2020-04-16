@@ -23,7 +23,7 @@
         <div class="col-lg-4 p-t-20"></div>
         <div class="col-lg-4 p-t-20">
             <label >Seleccione periodo</label>
-            <select id="gradoLista" class="custom-select" name="gradoLista">
+            <select id="periodohorario" class="custom-select" name="periodohorario">
                 <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
                     <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
                 </c:forEach>
@@ -31,7 +31,7 @@
         </div>
         <div class="col-lg-4 p-t-20">
             <label >Seleccione una materia</label>
-            <select id="materiaLista" name="materiaLista" class="custom-select">
+            <select id="materiahorario" name="materiahorario" class="custom-select">
                 <c:forEach items="${requestScope.listmateriaalum}" var="listmateriaalum">
                     <option value="${listmateriaalum.idtbmateriaalumno}">${listmateriaalum.nombrecorto} </option>
                 </c:forEach>
@@ -39,7 +39,10 @@
         </div>
         <div class="col-lg-4 p-t-20">
             <label>Hora</label>
-            <input value="" id="curpp" type="text" class="form-control" placeholder="hora" maxlength="18">
+            <input value="" id="horahorario" type="text" class="form-control" placeholder="Ej: 12:00-13:00" maxlength="18">
+        </div>
+        <div class="btn-group">
+            <button id="asignahorario" type="button" class="btn btn-terra">Agregar a horario</button> 
         </div>
     </div>
 </div>

@@ -22,6 +22,7 @@ import Modelos.CtGrado;
 import Modelos.CtGrupo;
 import Modelos.CtPeriodoEscolar;
 import Modelos.TbAlumnos;
+import Modelos.TbHorario;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
@@ -116,6 +117,12 @@ public class SAdminalumno extends HttpServlet {
             case "getMateriasAlum":
                 try {
                     getMateriasAlum(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "asignaHorario":
+                try {
+                    asignaHorario(request,response);
                 } catch (Exception e) {
                 }
                 break;
@@ -348,6 +355,20 @@ public class SAdminalumno extends HttpServlet {
             request.setAttribute("listperiodo", listperiodo);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/asignahorario.jsp");
             rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    
+    private void asignaHorario(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        mapper = new ObjectMapper();
+        objectJson = request.getParameter("OBJETO");
+        TbHorario horario = new TbHorario();
+        try {
+            horario = mapper.readValue(objectJson, TbHorario.class);
+            adminC.asignaHorario(horario,Integer.parseInt("TIPOESCUELA"));
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);

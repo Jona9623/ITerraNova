@@ -27,7 +27,7 @@ var Adminalumno = (function () {
                         idtutor = $(this).parents("tr").find("td").eq(1).html();
                         Adminalumno.infoAlumno(idalumno, idtutor);
                     });
-                    $(".horairoalum").on('click',function(){
+                    $(".horairoalum").on('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Adminalumno.asignaHorario(idalumno);
                     });
@@ -71,16 +71,34 @@ var Adminalumno = (function () {
                 }
             })
         },
-        asignaHorario: function(idalumno){
-            $.get("SAdminalumno",{
+        asignaHorario: function (idalumno) {
+            $.get("SAdminalumno", {
                 ACCION: "getMateriasAlum",
                 ID: idalumno,
                 TIPOESCUELA: tipoescuela
-            }).done(function(xhr,status,error){
+            }).done(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#content").html(arguments[0]);
+                    $("#asignahorario").on('click', function () {
+                        var horario = {
+                            "r_periodo": $("#periodohorario").val(),
+                            "r_materiaalumno": $("#materiahorario").val(),
+                            "hora": $("#horahorario").val
+                        }
+                        console.log(horario);
+                        $.get("SAdminalumno", {
+                            ACCION: "asignaHorario",
+                            OBJETO: JSON.stringify(horario),
+                            TIPOESCUELA: tipoescuela
+                        }).done(function (xhr, status, error) {
+                            if (error.status != 200)
+                                swal(error.getResponseHeader("ERROR"), "", "warning");
+                            else
+                                swal("Hecho!", "Datos importados correctamente", "success");
+                        });
+                    });
                 }
             });
         },
