@@ -368,7 +368,7 @@ public class SAdminalumno extends HttpServlet {
         TbHorario horario = new TbHorario();
         try {
             horario = mapper.readValue(objectJson, TbHorario.class);
-            adminC.asignaHorario(horario,Integer.parseInt("TIPOESCUELA"));
+            adminC.asignaHorario(horario,Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);

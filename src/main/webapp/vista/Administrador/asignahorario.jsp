@@ -39,7 +39,7 @@
         </div>
         <div class="col-lg-4 p-t-20">
             <label>Hora</label>
-            <input value="" id="horahorario" type="text" class="form-control" placeholder="Ej: 12:00-13:00" maxlength="18">
+            <input id="horahorario" type="text" class="form-control" placeholder="Ej: 12:00-13:00" maxlength="18">
         </div>
         <div class="btn-group">
             <button id="asignahorario" type="button" class="btn btn-terra">Agregar a horario</button> 

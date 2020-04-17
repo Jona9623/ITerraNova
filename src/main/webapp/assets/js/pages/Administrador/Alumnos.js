@@ -85,7 +85,7 @@ var Adminalumno = (function () {
                         var horario = {
                             "r_periodo": $("#periodohorario").val(),
                             "r_materiaalumno": $("#materiahorario").val(),
-                            "hora": $("#horahorario").val
+                            "hora": $("#horahorario").val()
                         }
                         console.log(horario);
                         $.get("SAdminalumno", {

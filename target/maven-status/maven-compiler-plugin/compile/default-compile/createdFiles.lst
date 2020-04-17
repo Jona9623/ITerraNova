@@ -16,6 +16,7 @@ Controlador\AlumnosController.class
 Modelos\TbCalificacionAlumno.class
 Servlets\Login.class
 Modelos\TbPersonal.class
+Modelos\TbHorario.class
 Modelos\CtGrado.class
 Modelos\CtGrupo.class
 Modelos\GradoGrupo.class

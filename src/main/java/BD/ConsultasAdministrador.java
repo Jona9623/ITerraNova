@@ -15,6 +15,7 @@ import Modelos.CtPuesto;
 import Modelos.CtTipoCalificaicon;
 import Modelos.GradoGrupo;
 import Modelos.TbAlumnos;
+import Modelos.TbHorario;
 import Modelos.TbMateria;
 import Modelos.TbMateriaAlumno;
 import Modelos.TbMateriaPersonal;
@@ -1880,10 +1881,14 @@ public class ConsultasAdministrador {
                     + "tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join\n"
                     + "tb_materia on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join\n"
                     + "ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where\n"
-                    + "tb_materiaalumno.r_alumno = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?;";
+                    + " tb_materiaalumno.r_alumno = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ? and idtb_materiaalumno not in (\n"
+                    + "	select r_materiaalumno from tb_horario inner join tb_materiaalumno on tb_horario.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno\n"
+                    + "	where tb_materiaalumno.r_alumno = ?\n"
+                    + ");";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, idalumno);
             pst.setInt(2, tipoescuela);
+            pst.setInt(3, idalumno);
             rs = pst.executeQuery();
             while (rs.next()) {
                 TbMateriaAlumno materiaalum = new TbMateriaAlumno();
@@ -1911,6 +1916,40 @@ public class ConsultasAdministrador {
             }
         }
         return listmateriasalum;
+    }
+
+    public void asignaHorario(TbHorario horario, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "insert into tb_horario (r_materiaalumno,r_periodo,hora,status,tipoescuela) values (?,?,?,?,?)";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, horario.getR_materiaalumno());
+            pst.setInt(2, horario.getR_periodo());
+            pst.setString(3, horario.getHora());
+            pst.setInt(4, 1);
+            pst.setInt(5, tipoescuela);
+
+            if (pst.executeUpdate() == 1) {
+                con.commit();
+            } else {
+                System.out.println("no se pudo guardar");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
     public void guardaImportaPersonal(List<TbPersonal> listpersonal) throws Exception {

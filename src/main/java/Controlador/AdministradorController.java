@@ -17,6 +17,7 @@ import Modelos.CtPuesto;
 import Modelos.CtTipoCalificaicon;
 import Modelos.GradoGrupo;
 import Modelos.TbAlumnos;
+import Modelos.TbHorario;
 import Modelos.TbMateria;
 import Modelos.TbMateriaAlumno;
 import Modelos.TbMateriaPersonal;
@@ -302,6 +303,11 @@ public class AdministradorController {
     public List<TbMateriaAlumno> getMateriasAlum(int idalumno, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getMateriasAlum(idalumno,tipoescuela);
+    }
+    
+    public void asignaHorario(TbHorario horario, int tipoescuela) throws Exception {
+        ConsultasAdministrador consulta = new  ConsultasAdministrador();
+        consulta.asignaHorario(horario,tipoescuela);
     }
 
     private List<TbAlumnos> readFromCSVA(String ruta, int tipoescuela) throws Exception {
@@ -619,4 +625,5 @@ public class AdministradorController {
             throw e;
         }
     }
+
 }
