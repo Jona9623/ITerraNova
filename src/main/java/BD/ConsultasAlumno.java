@@ -14,6 +14,7 @@ import Modelos.CtSemanaFiscal;
 import Modelos.ImagenReporteAcademico;
 import Modelos.ImagenReporteAcademicoTarea;
 import Modelos.TbAlumnos;
+import Modelos.TbHorario;
 import Modelos.TbMateria;
 import Modelos.TbReporteAcademico;
 import Modelos.TbReporteDisciplinar;
@@ -1338,6 +1339,57 @@ public class ConsultasAlumno {
             }
         }
         return listalumno;
+    }
+
+    public List<TbHorario> getHorario(int idalumno, int idperiodo, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbHorario> listhorario = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select tb_horario.idtb_horario, ct_datosmateria.nombrecorto, ct_datosmateria.nombrelargo, tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno,\n"
+                    + "tb_horario.hora from tb_horario inner join tb_materiaalumno on tb_horario.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno\n"
+                    + "inner join tb_materiapersonal on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal\n"
+                    + "inner join tb_materia on tb_materiapersonal.r_materia = tb_materia.idTb_Materia\n"
+                    + "inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                    + "inner join tb_personal on tb_materiapersonal.r_personal = tb_personal.idTb_Personal\n"
+                    + "where tb_materiaalumno.r_alumno = ? and tb_horario.status = 1 and tb_horario.tipoescuela = ? and tb_horario.r_periodo = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idalumno);
+            pst.setInt(2, tipoescuela);
+            pst.setInt(3, idperiodo);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TbHorario horario = new TbHorario();
+                horario.setIdtbhorario(rs.getInt("tb_horario.idtb_horario"));
+                horario.setNombrecorto(rs.getString("ct_datosmateria.nombrecorto"));
+                horario.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+                horario.setNombrepe(rs.getString("tb_personal.nombre"));
+                horario.setApellidopp(rs.getString("tb_personal.apellidopaterno"));
+                horario.setApellidomp(rs.getString("tb_personal.apellidomaterno"));
+                horario.setHora(rs.getString("tb_horario.hora"));
+                listhorario.add(horario);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listhorario;
     }
 
 }

@@ -75,6 +75,10 @@
                                         <i id="horairoalum" class="icon-plus"></i>Asignar horario</a>
                                 </li>
                                 <li>
+                                    <a href="javascript:;" class="muestrahorario">
+                                        <i id="muestrahorario" class="icon-plus"></i>Mostrar horarios</a>
+                                </li>
+                                <li>
                                     <a href="javascript:;" class="editaralu">
                                         <i id="editaralu" class="icon-pencil"></i> Editar </a>
                                 </li>

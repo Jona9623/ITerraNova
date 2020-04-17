@@ -126,6 +126,18 @@ public class SAdminalumno extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
+            case "muestraHorario":
+                try {
+                    muestraHorario(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "getHorario":
+                try {
+                    getHorario(request,response);
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -374,6 +386,38 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
+    
+    private void muestraHorario(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        alumC = new AlumnosController();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        try {
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/muestrahorario.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    private void getHorario(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        alumC = new AlumnosController();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List<TbHorario> listhorario = new ArrayList<>();
+        try {
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            listhorario = alumC.getHorario(Integer.parseInt(request.getParameter("ID")),Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listhorario", listhorario);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/gethorario.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
 
     private String extractFileName(Part part) {
         String fileName = "",
@@ -443,5 +487,6 @@ public class SAdminalumno extends HttpServlet {
         }
 
     }
+
 
 }

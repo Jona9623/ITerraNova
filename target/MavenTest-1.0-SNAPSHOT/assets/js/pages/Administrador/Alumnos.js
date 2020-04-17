@@ -31,6 +31,11 @@ var Adminalumno = (function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Adminalumno.asignaHorario(idalumno);
                     });
+                    $(".muestrahorario").on('click', function () {
+                        alert("entra");
+                        idalumno = $(this).parents("tr").find("td").eq(0).html();
+                        Adminalumno.muestraHorario(idalumno);
+                    });
                     $('.editaralu').on('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         idtutor = $(this).parents("tr").find("td").eq(1).html();
@@ -101,6 +106,38 @@ var Adminalumno = (function () {
                     });
                 }
             });
+        },
+        muestraHorario: function (idalumno) {
+            $.get("SAdminalumno", {
+                ACCION: "muestraHorario",
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    Adminalumno.getHorario(idalumno,0);
+                }
+            });
+        },
+        getHorario: function (idalumno,idperiodo) {
+            idperiodo = $("#periodogethorario").val()
+            $.get("SAdminalumno", {
+                ACCION: "getHorario",
+                IDP: idperiodo,
+                ID: idalumno,
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else{
+                    $("#getHorarios").html(arguments[0]);
+                    $("#periodogethorario").change(function () {
+                        idperiodo = $("#periodogethorario").val();
+                        Adminalumno.getHorario(idalumno,idperiodo)
+                    });
+                }
+            })
         },
         importaTutor: function () {
             $('form[name="importartutor"]').ajaxForm(function (xhr, status, error) {
