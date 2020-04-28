@@ -7,6 +7,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<%
+    int x = 0;
+    int id_sesion;
+    HttpSession objsesion = request.getSession(false);
+    String usuario = (String) objsesion.getAttribute("user");
+    x = (int) objsesion.getAttribute("tipo");
+    id_sesion = (int) objsesion.getAttribute("id");
+
+%>
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
         <div class=" pull-left">
@@ -30,6 +39,7 @@
 <div class="profile-content">
     <div class="row">
         <div class="col-md-12 col-sm-12">
+            <% if (x != 2) { %>
             <div style="text-align: right">
                 <a id="mostrarreportesaca" type="button" class="btn btn-terra float-rt">Mostrar cuadro de honor/atencion</a>
             </div>
@@ -41,6 +51,7 @@
                     </div>  
                 </div>
             </div>
+            <%}%>
             <div class="">
                 <!-- Tab panes -->
                 <div class="tab-content">

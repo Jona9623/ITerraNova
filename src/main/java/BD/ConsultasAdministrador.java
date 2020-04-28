@@ -8,6 +8,7 @@ package BD;
 import Modelos.CtAreaalumno;
 import Modelos.CtCptalumno;
 import Modelos.CtDatosMateria;
+import Modelos.CtDia;
 import Modelos.CtGrado;
 import Modelos.CtGrupo;
 import Modelos.CtPeriodoEscolar;
@@ -45,9 +46,12 @@ public class ConsultasAdministrador {
         List<TbAlumnos> listalumnos = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from\n"
+           /* String consulta = "select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from\n"
                     + "(((tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado) inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo) inner join\n"
-                    + "tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor) where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?";
+                    + "tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor) where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?";*/
+            String consulta = "select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre from\n" +
+"                    tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo \n" +
+"                    where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?;";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
@@ -60,8 +64,8 @@ public class ConsultasAdministrador {
                 alumno.setMatricula(rs.getString("tb_alumnos.matricula"));
                 alumno.setRgrado(rs.getInt("ct_grado.nombre"));
                 alumno.setGrupo(rs.getString("ct_grupo.nombre"));
-                alumno.setRtutor(rs.getInt("tb_alumnos.r_tutor"));
-                alumno.setTutor(rs.getString("tb_tutor.nombre"));
+                //alumno.setRtutor(rs.getInt("tb_alumnos.r_tutor"));
+                //alumno.setTutor(rs.getString("tb_tutor.nombre"));
                 listalumnos.add(alumno);
             }
 
@@ -2078,7 +2082,7 @@ public class ConsultasAdministrador {
                 pst.setInt(25, item.getGradoanterior());
                 pst.setInt(26, item.getTurnoanterior());
                 pst.setString(27, item.getMunicipioante());
-                pst.setInt(28, tutores);
+                pst.setString(28, null);
                 pst.setInt(29, 1);
                 pst.setInt(30, item.getTipoescuela());
 
@@ -2229,6 +2233,44 @@ public class ConsultasAdministrador {
             }
         }
         return correo;
+    }
+
+    public List<CtDia> getDias(int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<CtDia> listdia = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select * from ct_dia where status = 1 and tipoescuela = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                CtDia dia = new CtDia();
+                dia.setIdtbdia(rs.getInt("ct_dia.idCt_Dia"));
+                dia.setNombre(rs.getString("ct_dia.nombre"));
+                listdia.add(dia);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listdia;
     }
 
 }

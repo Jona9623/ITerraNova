@@ -103,6 +103,13 @@
                     <!-- start header menu -->
                     <div class="top-menu">
                         <ul class="nav navbar-nav pull-right">
+                             <div class="btn-group">
+                                 <button value="0" style="margin-top: 10px;" id="cambiasecu"type="button" class="btn btn-terra2">Secundaria</button> <br>
+                        </div>
+                        &nbsp; &nbsp;
+                        <div class="btn-group">
+                            <button style="margin-top: 10px;" id="cambiaprepa"type="button" class="btn btn-terra2">Preparatoria</button> <br>
+                        </div>
                             <!-- start notification dropdown -->
                             <!-- start manage user dropdown -->
                             <li class="dropdown dropdown-user">
@@ -168,7 +175,7 @@
                                     </ul>
                                 </li>
                                 <% } %>
-                                <% if (x == 2) { %>
+                                <% if (x == 2) {%>
                                 <li class="nav-item start">
                                     <a href="#" class="nav-link nav-toggle">
                                         <i class="material-icons">label</i>

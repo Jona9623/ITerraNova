@@ -9,13 +9,14 @@
 <br>
 <br> <br> 
 <div class="row col-lg-12 col-md-12 colsm-12">
-    <table id="tablapersonal" class="table table-bordered" style="width:100%">
+    <table id="tablalistaalumnos" class="table table-bordered" style="width:100%">
         <thead class="thead-light">
             <tr>
                 <th style="display: none"></th>
                 <th class="center">Nombre</th>
                 <th class="center">A. Paterno</th>
                 <th class="center">A. Materno</th>
+                <th class="center">Asistencia</th>
                 <th class="center">Acciones</th>
             </tr>
         </thead>
@@ -26,6 +27,16 @@
                     <td class="center">${listalumno.nombre}</td>
                     <td class="center">${listalumno.apellidop}</td>
                     <td class="center">${listalumno.apellidom}</td>
+                    <td class="center">
+                        <div id="check3" class="checkbox checkbox-icon-black p-0 col-lg-6 col-md-6">
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <input id="lista${listalumno.id}" value="${listalumno.id}" type="checkbox" checked="checked">
+                            <label for="lista${listalumno.id}">
+                                Asistencia
+                            </label>
+                            <br> <br>
+                        </div>
+                    </td>
                     <td class="center">
                         <div class="btn-group">
                             <a href="javascript:;" class="aliminarpe">

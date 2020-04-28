@@ -12,7 +12,7 @@
     HttpSession objsesion = request.getSession(false);
     String usuario = (String) objsesion.getAttribute("user");
     if (usuario != null) {
-        response.sendRedirect("Principal.jsp");
+        response.sendRedirect("indexpre.jsp");
     }
 %>
 <html>

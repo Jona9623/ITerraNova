@@ -356,7 +356,7 @@ var Reportes = (function () {
                     $("#honor").show();
                 gradoatencion = $("#gradoatencion").val();
                 grupoatencion = $("#grupoatencion").val();
-                alert(gradoatencion);
+                //alert(gradoatencion);
                 Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
             });
         },
@@ -589,7 +589,7 @@ var Reportes = (function () {
                     $("#guardarimagen").hide();
                     html2canvas([document.getElementById('imagen')], {
                         onrendered: function (canvas) {
-                            alert("entra");
+                            //alert("entra");
                             var data = canvas.toDataURL();
                             var image = new Image();
                             image.src = data;

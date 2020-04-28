@@ -10,6 +10,7 @@ import BD.ConsultasAlumno;
 import Modelos.CtAreaalumno;
 import Modelos.CtCptalumno;
 import Modelos.CtDatosMateria;
+import Modelos.CtDia;
 import Modelos.CtGrado;
 import Modelos.CtGrupo;
 import Modelos.CtPeriodoEscolar;
@@ -283,6 +284,11 @@ public class AdministradorController {
     public void eliminaMateria(int id) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.eliminaMateria(id);
+    }
+    
+    public List<CtDia> getDias(int tipoescuela) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getDias(tipoescuela);
     }
 
     public void asignaMateria(int id, List<TbMateriaPersonal> materiapersonal, int tipoescuela) throws Exception {

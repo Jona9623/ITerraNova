@@ -17,26 +17,33 @@ var Adminpersonal = (function () {
                         "scrollX": true
                     });
                     Adminpersonal.importarPersonal();
-                    $('#btnaregarP').on('click', function () {
+                    //$('#btnaregarP').on('click', function () {
+                        $("body").on("click", "#btnaregarP", function (event) {
                         Adminpersonal.agregaPersonal();
                     });
-                    $(".infopersonal").on('click', function () {
+                    //$(".infopersonal").on('click', function () {
+                        $("body").on("click", ".infopersonal", function (event) {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.infoPersonal(idpersonal);
                     });
-                    $(".agregamateria").on('click', function () {
+                    //$(".agregamateria").on('click', function () {
+                        $("body").on("click", ".agregamateria", function (event) {
+                        alert("entra");
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.agregaMateria(idpersonal);
                     });
-                    $(".listaalumnos").on('click', function () {
+                    //$(".listaalumnos").on('click', function () {
+                        $("body").on("click", ".listaalumnos", function (event) {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.listaAlumnos(idpersonal);
                     });
-                    $('.editarpe').on('click', function () {
+                    //$('.editarpe').on('click', function () {
+                        $("body").on("click", ".editarpe", function (event) {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.editarPersonal(idpersonal);
                     });
-                    $(".aliminarpe").on('click', function () {
+                    //$(".aliminarpe").on('click', function () {
+                        $("body").on("click", ".eliminarpe", function (event) {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         swal({
                             title: "Estas seguro?",
@@ -54,7 +61,8 @@ var Adminpersonal = (function () {
                     });
                 }
             });
-            $("#actualizaTablaP").on('click', function () {
+            //$("#actualizaTablaP").on('click', function () {
+                $("body").on("click", "#actualizaTablaP", function (event) {
                 Adminpersonal.tablaPersonal();
             })
         },
@@ -200,6 +208,9 @@ var Adminpersonal = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#ListaAlumnos").html(arguments[0]);
+                    $('#tablalistaalumnos').DataTable({
+                        "scrollX": true
+                    });
                     $("#gradoLista").change(function () {
                         grado = $("#gradoLista").val()
                         Adminpersonal.getListaAlumno(grado, grupo, materiapersonal);

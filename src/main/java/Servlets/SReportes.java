@@ -14,6 +14,7 @@ import Modelos.CtPeriodoEscolar;
 import Modelos.TbAlumnos;
 import Modelos.Alumno;
 import Modelos.CtAtencion;
+import Modelos.CtDia;
 import Modelos.CtSemanaFiscal;
 import Modelos.TbMateria;
 import Modelos.TbPersonal;
@@ -357,6 +358,7 @@ public class SReportes extends HttpServlet {
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
         List<CtAtencion> listatencion = new ArrayList<>();
+        List<CtDia> listdia = new  ArrayList<>();
         try {
             tipoescuelareporte = Integer.parseInt(request.getParameter("TIPOESCUELA"));
             listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
@@ -373,6 +375,8 @@ public class SReportes extends HttpServlet {
             request.setAttribute("listgrupo", listgrupo);
             listatencion = alumnoC.getAtencion(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listatencion", listatencion);
+            listdia = adminC.getDias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listdia", listdia);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/reporteacademico.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

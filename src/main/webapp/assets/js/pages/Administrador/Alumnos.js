@@ -22,26 +22,31 @@ var Adminalumno = (function () {
                     $('#btnagregaA').on('click', function () {
                         Adminalumno.agregaAlumno();
                     });
-                    $(".infoalumno").on('click', function () {
+                    //$(".infoalumno").on('click', function () {
+                        $("body").on("click", ".infoalumno", function (event) {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         idtutor = $(this).parents("tr").find("td").eq(1).html();
                         Adminalumno.infoAlumno(idalumno, idtutor);
                     });
-                    $(".horairoalum").on('click', function () {
+                    //$(".horairoalum").on('click', function () {
+                        $("body").on("click", ".horairoalum", function (event) {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Adminalumno.asignaHorario(idalumno);
                     });
-                    $(".muestrahorario").on('click', function () {
+                    //$(".muestrahorario").on('click', function () {
+                        $("body").on("click", ".muestrahorario", function (event) {
                         alert("entra");
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Adminalumno.muestraHorario(idalumno);
                     });
-                    $('.editaralu').on('click', function () {
+                    //$('.editaralu').on('click', function () {
+                        $("body").on("click", ".editaralu", function (event) {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         idtutor = $(this).parents("tr").find("td").eq(1).html();
                         Adminalumno.editarAlumno(idalumno, idtutor);
                     });
-                    $(".aliminaralu").on('click', function () {
+                    //$(".aliminaralu").on('click', function () {
+                        $("body").on("click", ".aliminaralu", function (event) {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         swal({
                             title: "Estas seguro?",
@@ -59,7 +64,8 @@ var Adminalumno = (function () {
                     });
                 }
             });
-            $("#actualizaTablaA").on('click', function () {
+            //$("#actualizaTablaA").on('click', function () {
+                $("body").on("click", "#actualizaTablaA", function (event) {
                 Adminalumno.tablaAlumnos();
             });
         },
@@ -101,7 +107,7 @@ var Adminalumno = (function () {
                             if (error.status != 200)
                                 swal(error.getResponseHeader("ERROR"), "", "warning");
                             else
-                                swal("Hecho!", "Datos importados correctamente", "success");
+                                swal("Hecho!", "Materia agregada a horario correctamente", "success");
                         });
                     });
                 }

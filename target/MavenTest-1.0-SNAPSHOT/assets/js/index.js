@@ -1,39 +1,49 @@
 var tipoescuela = 0;
 
 //$(document).on('change', 'input[type="radio"]', function (e) {
-$('input:radio[name=escuela]').change(function() {
-        if (this.value == 'secundaria') {
-            sessionStorage.setItem("tipoescuela", "2");
-            $("#input").val("2");
-        }
-        else if (this.value == 'preparatoria') {
-            sessionStorage.setItem("tipoescuela", "1");
-            $("#input").val("1");
-        }
-    });
-/*$('#secundaria').on('click', function () {
-    sessionStorage.setItem("tipoescuela", "2");
-}),
-        $('#preparatoria').on('click', function () {
-    sessionStorage.setItem("tipoescuela", "1");
-})*/
+$('input:radio[name=escuela]').change(function () {
+    if (this.value == 'secundaria') {
+        sessionStorage.setItem("tipoescuela", "2");
+        $("#input").val("2");
+    } else if (this.value == 'preparatoria') {
+        sessionStorage.setItem("tipoescuela", "1");
+        $("#input").val("1");
+    }
+});
 $(document).ready(function () {
+    $("#cambiasecu").on('click', function () {
+            $("#cambiasecu").removeClass("btn-terra2");
+            $("#cambiasecu").addClass("btn-terra");
+            $("#cambiaprepa").removeClass("btn-terra");
+            $("#cambiaprepa").addClass("btn-terra2");
+            sessionStorage.setItem("tipoescuela", "2");
+            window.location.href = 'indexpre.jsp';
+
+    });
+    $("#cambiaprepa").on('click', function () {
+            $("#cambiaprepa").removeClass("btn-terra2");
+            $("#cambiaprepa").addClass("btn-terra");
+            $("#cambiasecu").removeClass("btn-terra");
+            $("#cambiasecu").addClass("btn-terra2");
+            sessionStorage.setItem("tipoescuela", "1");
+            window.location.href = 'indexpre.jsp';
+
+    });
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
-    //alert(tipoescuela);
     Admin.registro();
     $("#reportedis").on('click', function () {
         Reportes.reporteDisciplinar();
     });
-            $("#reporteaca").on('click', function () {
+    $("#reporteaca").on('click', function () {
         Reportes.reporteAcademico();
     });
-    $("#listaalumnosP").on('click',function(){
-       Adminpersonal.listaAlumnos($("#personal").val()); 
+    $("#listaalumnosP").on('click', function () {
+        Adminpersonal.listaAlumnos($("#personal").val());
     });
-            $('#amalumnos').on('click', function () {
+    $('#amalumnos').on('click', function () {
         Adminalumno.tablaAlumnos();
     });
-            $('#ampersonal').on('click', function () {
+    $('#ampersonal').on('click', function () {
         Adminpersonal.tablaPersonal();
     });
     $('#ampuesto').on('click', function () {
