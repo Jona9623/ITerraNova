@@ -8,6 +8,39 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <br>
 <br> <br> 
+<div class="row">
+    <p class="header">Toma de asistencia</p>
+</div>
+<div class="row col-lg-12 col-md-12 colsm-12">
+    <div class="col-lg-4 p-t-20">
+        <label >Seleccione periodo escolar</label>
+        <select id="periodoasistencia" class="custom-select" name="periodoasistencia">
+            <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
+                <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
+            </c:forEach>
+        </select>
+    </div>
+    <div class="col-lg-4 p-t-20">
+        <label >Seleccione Semana fiscal</label>
+        <select id="semanafiscalasistencia" name="semanafiscalasistencia" class="custom-select">
+            <c:forEach items="${requestScope.listsemana}" var="listsemana">
+                <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
+            </c:forEach>
+        </select>
+    </div>
+    <div class="col-lg-4 p-t-20">
+        <label >Seleccione el dia actual</label>
+        <select id="diaasistencia" name="diaasistencia" class="custom-select">
+            <c:forEach items="${requestScope.listdia}" var="listdia">
+                <option value="${listdia.idtbdia}">${listdia.nombre} </option>
+            </c:forEach>
+        </select>
+    </div>
+    <div class="col-lg-4 p-t-20">
+        <button type="button" id="asistencia" class="btn btn-terra">Guardar asistencia</button>
+    </div>
+
+</div>
 <div class="row col-lg-12 col-md-12 colsm-12">
     <table id="tablalistaalumnos" class="table table-bordered" style="width:100%">
         <thead class="thead-light">

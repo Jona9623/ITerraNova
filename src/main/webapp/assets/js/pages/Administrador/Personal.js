@@ -18,32 +18,32 @@ var Adminpersonal = (function () {
                     });
                     Adminpersonal.importarPersonal();
                     //$('#btnaregarP').on('click', function () {
-                        $("body").on("click", "#btnaregarP", function (event) {
+                    $("body").on("click", "#btnaregarP", function (event) {
                         Adminpersonal.agregaPersonal();
                     });
                     //$(".infopersonal").on('click', function () {
-                        $("body").on("click", ".infopersonal", function (event) {
+                    $("body").on("click", ".infopersonal", function (event) {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.infoPersonal(idpersonal);
                     });
                     //$(".agregamateria").on('click', function () {
-                        $("body").on("click", ".agregamateria", function (event) {
+                    $("body").on("click", ".agregamateria", function (event) {
                         alert("entra");
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.agregaMateria(idpersonal);
                     });
                     //$(".listaalumnos").on('click', function () {
-                        $("body").on("click", ".listaalumnos", function (event) {
+                    $("body").on("click", ".listaalumnos", function (event) {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.listaAlumnos(idpersonal);
                     });
                     //$('.editarpe').on('click', function () {
-                        $("body").on("click", ".editarpe", function (event) {
+                    $("body").on("click", ".editarpe", function (event) {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.editarPersonal(idpersonal);
                     });
                     //$(".aliminarpe").on('click', function () {
-                        $("body").on("click", ".eliminarpe", function (event) {
+                    $("body").on("click", ".eliminarpe", function (event) {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         swal({
                             title: "Estas seguro?",
@@ -62,7 +62,7 @@ var Adminpersonal = (function () {
                 }
             });
             //$("#actualizaTablaP").on('click', function () {
-                $("body").on("click", "#actualizaTablaP", function (event) {
+            $("body").on("click", "#actualizaTablaP", function (event) {
                 Adminpersonal.tablaPersonal();
             })
         },
@@ -191,11 +191,11 @@ var Adminpersonal = (function () {
                     grado = $("#gradoLista").val();
                     grupo = $("#grupoLista").val();
                     materiapersonal = $("#materiaLista").val();
-                    Adminpersonal.getListaAlumno(grado, grupo, materiapersonal);
+                    Adminpersonal.getListaAlumno(grado, grupo, materiapersonal,idpersonal);
                 }
             });
         },
-        getListaAlumno: function (grado, grupo, materiapersonal) {
+        getListaAlumno: function (grado, grupo, materiapersonal,idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "getListaAlumno",
                 GRADO: grado,
@@ -213,15 +213,47 @@ var Adminpersonal = (function () {
                     });
                     $("#gradoLista").change(function () {
                         grado = $("#gradoLista").val()
-                        Adminpersonal.getListaAlumno(grado, grupo, materiapersonal);
+                        Adminpersonal.getListaAlumno(grado, grupo, materiapersonal,idpersonal);
                     });
                     $("#grupoLista").change(function () {
                         grupo = $("#grupoLista").val();
-                        Adminpersonal.getListaAlumno(grado, grupo, materiapersonal);
+                        Adminpersonal.getListaAlumno(grado, grupo, materiapersonal,idpersonal);
                     });
                     $("#materiaLista").change(function () {
                         materiapersonal = $("#materiaLista").val();
-                        Adminpersonal.getListaAlumno(grado, grupo, materiapersonal);
+                        Adminpersonal.getListaAlumno(grado, grupo, materiapersonal,idpersonal);
+                    });
+                    $("#asistencia").on('click', function () {
+                        var listasistencia = [];
+                        var check = 0;
+                        $("#check3 input[type='checkbox']").each(function () {
+                            if ($(this).is(':checked')) {
+                                check = 1;
+                            } else {
+                                check = 0;
+                            }
+                            var asistencia = {
+                                "r_materiaalumno": $(this).val(),
+                                "r_dia": $("#diaasistencia").val(),
+                                "r_semana": $("#semanafiscalasistencia").val(),
+                                "r_periodo": $("#periodoasistencia").val(),
+                                "asistencia": check
+
+                            };
+                            listasistencia.push(asistencia);
+                        });
+                        console.log(listasistencia);
+                        $.get("SAdminpersonal", {
+                            ACCION: "guardaAsistencia",
+                            OBJETO: JSON.stringify(listasistencia),
+                            TIPOESCUELA: tipoescuela
+                        }).done(function (xhr, status, error) {
+                            if (error.status != 200)
+                                swal(error.getResponseHeader("ERROR"), "", "warning");
+                            else {
+                                swal("Hecho!", "Asistencia del dia guardada", "success");
+                            }
+                        });
                     });
                 }
             });

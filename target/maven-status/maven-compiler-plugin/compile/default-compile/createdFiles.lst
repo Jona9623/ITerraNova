@@ -20,6 +20,7 @@ Modelos\TbHorario.class
 Modelos\CtGrado.class
 Modelos\CtGrupo.class
 Modelos\GradoGrupo.class
+Modelos\TbAsistencia.class
 Controlador\Usuarios.class
 BD\ConsultasAdministrador.class
 Modelos\TbMateria.class

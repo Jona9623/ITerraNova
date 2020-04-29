@@ -16,6 +16,7 @@ import Modelos.CtPuesto;
 import Modelos.CtTipoCalificaicon;
 import Modelos.GradoGrupo;
 import Modelos.TbAlumnos;
+import Modelos.TbAsistencia;
 import Modelos.TbHorario;
 import Modelos.TbMateria;
 import Modelos.TbMateriaAlumno;
@@ -1939,6 +1940,45 @@ public class ConsultasAdministrador {
                 con.commit();
             } else {
                 System.out.println("no se pudo guardar");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+    
+    public void guardaAsistencia(List<TbAsistencia> listasistencia, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            for (TbAsistencia item : listasistencia) {
+                con.setAutoCommit(false);
+                String consulta = "insert into tb_asistencia (r_materiaalumno,r_dia,r_semanafiscal,r_periodo,asistencia,status,tipoescuela) values (?,?,?,?,?,?,?)";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, item.getR_materiaalumno());
+                pst.setInt(2, item.getR_dia());
+                pst.setInt(3, item.getR_semana());
+                pst.setInt(4, item.getR_periodo());
+                pst.setInt(5, item.getAsistencia());
+                pst.setInt(6,1);
+                pst.setInt(7, tipoescuela);
+
+                if (pst.executeUpdate() == 1) {
+                    con.commit();
+                } else {
+                    System.out.println("no se pudo guardar");
+                }
+                pst = null;
             }
         } catch (Exception e) {
             throw e;
