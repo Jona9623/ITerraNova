@@ -25,11 +25,11 @@
             <label >Materia a agregar alumnos</label>
             <select id="materiaAlumPer" name="materiaAlumPer" class="custom-select">
                 <c:forEach items="${requestScope.listmateria}" var="listmateria">
-                    <option value="${listmateria.idtbmateriapersonal}">${listmateria.materia} </option>
+                    <option value="${listmateria.idtbmateriapersonal}" grado="${listmateria.r_grado}" grupo="${listmateria.r_grupo}" area="${listmateria.r_area}" cpt="${listmateria.r_cpt}">${listmateria.materia} </option>
                 </c:forEach>
             </select>
         </div>
-        <div class="card-body row">
+       <!-- <div class="card-body row">
             <div class="col-lg-4 p-t-20">
                 <label >Seleccione grado</label>
                 <select id="gradoAlumPer" class="custom-select" name="gradoAlumPer">
@@ -46,7 +46,7 @@
                     </c:forEach>
                 </select>
             </div>
-        </div>
+        </div> -->
         <div id="asignaAlumno">
             <jsp:include page='asignaalumno.jsp'>
                 <jsp:param name="article1" value=""/>

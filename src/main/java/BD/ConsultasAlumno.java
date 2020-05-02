@@ -83,7 +83,12 @@ public class ConsultasAlumno {
         List<TbMateria> listmateria = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from (tb_materia inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria) where tb_materia.status = 1 and tb_materia.tipoescuela = ?";
+            String consulta = "select * from tb_materia inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                    + "left join ct_grado on tb_materia.r_grado = ct_grado.idCt_Grado\n"
+                    + "left join ct_grupo on tb_materia.r_grupo = ct_grupo.idCt_Grupo \n"
+                    + "left join ct_areaalumno on tb_materia.r_area = ct_areaalumno.idCt_AreaAlumno\n"
+                    + "left join ct_cptalumno on tb_materia.r_cpt = ct_cptalumno.idCt_CptAlumno\n"
+                    + "where tb_materia.status = 1 and tb_materia.tipoescuela = ?;";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
@@ -94,6 +99,10 @@ public class ConsultasAlumno {
                 materia.setNombrecorto(rs.getString("ct_datosmateria.nombrecorto"));
                 materia.setStatus(rs.getInt("tb_materia.status"));
                 materia.setTipoescuela(rs.getInt("tb_materia.tipoescuela"));
+                materia.setGrado(rs.getString("ct_grado.nombre"));
+                materia.setGrupo(rs.getString("ct_grupo.nombre"));
+                materia.setArea(rs.getString("ct_areaalumno.nombre"));
+                materia.setCpt(rs.getString("ct_cptalumno.nombre"));
                 listmateria.add(materia);
             }
 
@@ -1248,24 +1257,63 @@ public class ConsultasAlumno {
         }
     }
 
-    public List<Alumno> getAlumnosMateria(int grado, int grupo, int materiapersonal, int tipoescuela) throws Exception {
+    public List<Alumno> getAlumnosMateria(int grado, int grupo, int area, int cpt, int materiapersonal, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<Alumno> listalumno = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "SELECT tb_alumnos.idTb_Alumnos,tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno from tb_alumnos"
-                    + " where tb_alumnos.r_grado = ? and tb_alumnos.r_grupo = ? and tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?\n"
-                    + "and idTb_Alumnos not in (\n"
-                    + "	select r_alumno from tb_materiaalumno where tb_materiaalumno.r_materiapersonal = ?\n"
-                    + ");";
-            pst = con.prepareStatement(consulta);
-            pst.setInt(1, grado);
-            pst.setInt(2, grupo);
-            pst.setInt(3, tipoescuela);
-            pst.setInt(4, materiapersonal);
-            rs = pst.executeQuery();
+            if(grado != 0 && grupo == 0){
+                String consulta = "SELECT tb_alumnos.idTb_Alumnos,tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno from tb_alumnos"
+                        + " where tb_alumnos.r_grado = ? and tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?\n"
+                        + "and idTb_Alumnos not in (\n"
+                        + "	select r_alumno from tb_materiaalumno where tb_materiaalumno.r_materiapersonal = ?\n"
+                        + ");";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, grado);
+                pst.setInt(2, tipoescuela);
+                pst.setInt(3, materiapersonal);
+                rs = pst.executeQuery();
+            }else if (area == 0 && cpt == 0) {
+                String consulta = "SELECT tb_alumnos.idTb_Alumnos,tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno from tb_alumnos"
+                        + " where tb_alumnos.r_grado = ? and tb_alumnos.r_grupo = ? and tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?\n"
+                        + "and idTb_Alumnos not in (\n"
+                        + "	select r_alumno from tb_materiaalumno where tb_materiaalumno.r_materiapersonal = ?\n"
+                        + ");";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, grado);
+                pst.setInt(2, grupo);
+                pst.setInt(3, tipoescuela);
+                pst.setInt(4, materiapersonal);
+                rs = pst.executeQuery();
+            }
+            if (area != 0 && cpt == 0) {
+                String consulta = "SELECT tb_alumnos.idTb_Alumnos,tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno from tb_alumnos\n"
+                        + "                    where tb_alumnos.r_area = ? and tb_alumnos.r_grado = ? and tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?\n"
+                        + "                    and idTb_Alumnos not in (\n"
+                        + "                    	select r_alumno from tb_materiaalumno where tb_materiaalumno.r_materiapersonal = ?\n"
+                        + "                    );";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, area);
+                pst.setInt(2, grado);
+                pst.setInt(3, tipoescuela);
+                pst.setInt(4, materiapersonal);
+                rs = pst.executeQuery();
+            }
+            if (area == 0 && cpt != 0) {
+                String consulta = "SELECT tb_alumnos.idTb_Alumnos,tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno from tb_alumnos\n"
+                        + "                    where tb_alumnos.r_cpt = ? and tb_alumnos.r_grado = ? and tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?\n"
+                        + "                    and idTb_Alumnos not in (\n"
+                        + "                    	select r_alumno from tb_materiaalumno where tb_materiaalumno.r_materiapersonal = ?\n"
+                        + "                    );";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, cpt);
+                pst.setInt(2, grado);
+                pst.setInt(3, tipoescuela);
+                pst.setInt(4, materiapersonal);
+                rs = pst.executeQuery();
+            }
             while (rs.next()) {
                 Alumno alumno = new Alumno();
                 alumno.setId(rs.getInt("tb_alumnos.idTb_Alumnos"));
@@ -1295,23 +1343,59 @@ public class ConsultasAlumno {
         return listalumno;
     }
 
-    public List<Alumno> getListaAlumnos(int grado, int grupo, int materiapersonal, int tipoescuela) throws Exception {
+    public List<Alumno> getListaAlumnos(int grado, int grupo, int area, int cpt, int materiapersonal, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<Alumno> listalumno = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select tb_materiaalumno.idtb_materiaalumno, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno from tb_materiaalumno inner join tb_alumnos\n"
-                    + "on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
-                    + "on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal\n"
-                    + "where tb_alumnos.r_grado = ? and tb_alumnos.r_grupo = ? and tb_materiaalumno.r_materiapersonal = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?;";
-            pst = con.prepareStatement(consulta);
-            pst.setInt(1, grado);
-            pst.setInt(2, grupo);
-            pst.setInt(3, materiapersonal);
-            pst.setInt(4, tipoescuela);
-            rs = pst.executeQuery();
+            if(grado != 0 && grupo == 0){
+                String consulta = "select tb_materiaalumno.idtb_materiaalumno, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno from tb_materiaalumno inner join tb_alumnos\n"
+                        + "on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
+                        + "on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal\n"
+                        + "where tb_alumnos.r_grado = ? and tb_materiaalumno.r_materiapersonal = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, grado);
+                pst.setInt(2, materiapersonal);
+                pst.setInt(3, tipoescuela);
+                rs = pst.executeQuery();
+            }else if (area == 0 && cpt == 0) {
+                String consulta = "select tb_materiaalumno.idtb_materiaalumno, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno from tb_materiaalumno inner join tb_alumnos\n"
+                        + "on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
+                        + "on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal\n"
+                        + "where tb_alumnos.r_grado = ? and tb_alumnos.r_grupo = ? and tb_materiaalumno.r_materiapersonal = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, grado);
+                pst.setInt(2, grupo);
+                pst.setInt(3, materiapersonal);
+                pst.setInt(4, tipoescuela);
+                rs = pst.executeQuery();
+            }
+            if (area != 0 && cpt == 0){
+                String consulta = "select tb_materiaalumno.idtb_materiaalumno, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno from tb_materiaalumno inner join tb_alumnos\n"
+                        + "on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
+                        + "on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal\n"
+                        + "where tb_alumnos.r_area = ? and tb_alumnos.r_grado = ? and tb_materiaalumno.r_materiapersonal = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, area);
+                pst.setInt(2, grado);
+                pst.setInt(3, materiapersonal);
+                pst.setInt(4, tipoescuela);
+                rs = pst.executeQuery();
+            }
+            if (area == 0 && cpt != 0){
+                String consulta = "select tb_materiaalumno.idtb_materiaalumno, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno from tb_materiaalumno inner join tb_alumnos\n"
+                        + "on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
+                        + "on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal\n"
+                        + "where tb_alumnos.r_cpt = ? and tb_alumnos.r_grado = ? and tb_materiaalumno.r_materiapersonal = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, cpt);
+                pst.setInt(2, grado);
+                pst.setInt(3, materiapersonal);
+                pst.setInt(4, tipoescuela);
+                rs = pst.executeQuery();
+            }
             while (rs.next()) {
                 Alumno alumno = new Alumno();
                 alumno.setId(rs.getInt("tb_materiaalumno.idtb_materiaalumno"));

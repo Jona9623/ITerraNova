@@ -18,6 +18,42 @@ public class TbMateriaPersonal {
     private int r_materia;
     private String materia;
     private int r_periodo;
+    private int r_grado;
+    private int r_grupo;
+    private int r_area;
+    private int r_cpt;
+
+    public int getR_area() {
+        return r_area;
+    }
+
+    public void setR_area(int r_area) {
+        this.r_area = r_area;
+    }
+
+    public int getR_cpt() {
+        return r_cpt;
+    }
+
+    public void setR_cpt(int r_cpt) {
+        this.r_cpt = r_cpt;
+    }
+    
+    public int getR_grado() {
+        return r_grado;
+    }
+
+    public void setR_grado(int r_grado) {
+        this.r_grado = r_grado;
+    }
+
+    public int getR_grupo() {
+        return r_grupo;
+    }
+
+    public void setR_grupo(int r_grupo) {
+        this.r_grupo = r_grupo;
+    }
 
     public int getR_periodo() {
         return r_periodo;

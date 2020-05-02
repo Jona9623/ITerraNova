@@ -315,14 +315,14 @@ public class AlumnosController {
         }
     }
 
-    public List<Alumno> getAlumnosMateria(int grado, int grupo, int materiapersonal, int tipoescuela) throws Exception{
+    public List<Alumno> getAlumnosMateria(int grado, int grupo, int area, int cpt, int materiapersonal, int tipoescuela) throws Exception{
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return consulta.getAlumnosMateria(grado,grupo,materiapersonal,tipoescuela);
+        return consulta.getAlumnosMateria(grado,grupo,area,cpt,materiapersonal,tipoescuela);
     }
 
-    public List<Alumno> getListaAlumnos(int grado, int grupo, int materiapersonal, int tipoescuela) throws Exception {
+    public List<Alumno> getListaAlumnos(int grado, int grupo,int area, int cpt, int materiapersonal, int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
-        return consulta.getListaAlumnos(grado,grupo,materiapersonal,tipoescuela);
+        return consulta.getListaAlumnos(grado,grupo,area,cpt,materiapersonal,tipoescuela);
     }
 
     public List<TbHorario> getHorario(int idalumno, int idperiodo, int tipoescuela) throws Exception {

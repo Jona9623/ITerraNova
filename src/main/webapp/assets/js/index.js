@@ -17,7 +17,7 @@ $(document).ready(function () {
             $("#cambiaprepa").removeClass("btn-terra");
             $("#cambiaprepa").addClass("btn-terra2");
             sessionStorage.setItem("tipoescuela", "2");
-            window.location.href = 'indexpre.jsp';
+           window.location.href = 'indexpre.jsp';
 
     });
     $("#cambiaprepa").on('click', function () {
@@ -30,6 +30,7 @@ $(document).ready(function () {
 
     });
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
+    //alert(tipoescuela);
     Admin.registro();
     $("#reportedis").on('click', function () {
         Reportes.reporteDisciplinar();

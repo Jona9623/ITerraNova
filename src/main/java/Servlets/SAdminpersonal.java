@@ -383,7 +383,7 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listgrado", listgrado);
             listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listgrupo", listgrupo);
-            listalumno = alumC.getAlumnosMateria(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listalumno = alumC.getAlumnosMateria(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")),Integer.parseInt(request.getParameter("AREA")),Integer.parseInt(request.getParameter("CPT")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumno", listalumno);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/asignaalumno.jsp");
             rd.forward(request, response);
@@ -460,7 +460,7 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listsemana", listsemana);
             listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);
-            listalumno = alumC.getListaAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listalumno = alumC.getListaAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")),Integer.parseInt(request.getParameter("AREA")),Integer.parseInt(request.getParameter("CPT")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumno", listalumno);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/alumnoslista.jsp");
             rd.forward(request, response);

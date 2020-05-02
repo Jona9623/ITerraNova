@@ -21,8 +21,15 @@ var Reportes = (function () {
                     grado = $("#gradodisciplinar").val();
                     grupo = $("#grupodisciplinar").val();
                     Reportes.getAlumno(grado, grupo);
+                    $("#gradodisciplinar").change(function () {
+                        grado = $("#gradodisciplinar").val()
+                        Reportes.getAlumno(grado, grupo)
+                    });
+                            $("#grupodisciplinar").change(function () {
+                        grupo = $("#grupodisciplinar").val();
+                        Reportes.getAlumno(grado, grupo);
+                    });
                     $("#agregafalta").on('click', function () {
-
                         Reportes.agregaFalta();
                     });
                     $("#guardaincidente").on('click', function () {
@@ -91,17 +98,6 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#alumnogradoD").html(arguments[0]);
-                    $("#gradodisciplinar").change(function () {
-                        grado = $("#gradodisciplinar").val()
-                        Reportes.getAlumno(grado, grupo)
-                    }),
-                            $("#grupodisciplinar").change(function () {
-                        grupo = $("#grupodisciplinar").val();
-                        Reportes.getAlumno(grado, grupo);
-                    });
-                    $("#agregafalta").on('click', function () {
-                        Reportes.agregaFalta();
-                    });
                 }
             });
         },
@@ -119,14 +115,6 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#alumnogradoAA").html(arguments[0]);
-                    $("#gradohonor").change(function () {
-                        gradohonor = $("#gradohonor").val();
-                        Reportes.getAlumnoAca(gradohonor, grupohonor)
-                    }),
-                            $("#grupohonor").change(function () {
-                        grupohonor = $("#grupohonor").val();
-                        Reportes.getAlumnoAca(gradohonor, grupohonor)
-                    })
                 }
             });
         },
@@ -144,14 +132,6 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#alumnogradoA").html(arguments[0]);
-                    $("#gradoatencion").change(function () {
-                        gradoatencion = $("#gradoatencion").val();
-                        Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
-                    }),
-                            $("#grupoatencion").change(function () {
-                        grupoatencion = $("#grupoatencion").val();
-                        Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
-                    });
                 }
             });
         },
@@ -168,6 +148,8 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     swal("Hecho!", "Datos actualizados correctamente", "success");
+                    Reportes.reporteDisciplinar();
+                    
                 }
             });
         },
@@ -321,6 +303,22 @@ var Reportes = (function () {
                     grupoatencion = $("#grupoatencion").val();
                     Reportes.getAlumnoAca(gradohonor, grupohonor);
                     Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
+                    $("#gradohonor").change(function () {
+                        gradohonor = $("#gradohonor").val();
+                        Reportes.getAlumnoAca(gradohonor, grupohonor)
+                    });
+                            $("#grupohonor").change(function () {
+                        grupohonor = $("#grupohonor").val();
+                        Reportes.getAlumnoAca(gradohonor, grupohonor)
+                    });
+                    $("#gradoatencion").change(function () {
+                        gradoatencion = $("#gradoatencion").val();
+                        Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
+                    });
+                            $("#grupoatencion").change(function () {
+                        grupoatencion = $("#grupoatencion").val();
+                        Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
+                    });
                     $("#guardacomportammiento").on('click', function () {
                         Reportes.guardaComportamiento();
                     });

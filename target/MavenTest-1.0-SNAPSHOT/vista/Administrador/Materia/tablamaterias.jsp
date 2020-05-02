@@ -31,9 +31,11 @@
         <thead class="thead-light">
             <tr>
                 <th style="display: none"></th>
-                <th class="center">Estatus</th>
                 <th class="center">Nombre Largo</th>
                 <th class="center">Nombre Corto</th>
+                <th class="center">Grado y grupo</th>
+                <th class="center">Area</th>
+                <th class="center">CPT</th>
                 <th class="center">Acciones</th>
             </tr>
         </thead>
@@ -41,9 +43,11 @@
             <c:forEach items="${requestScope.listmateria}" var="listmateria">
                 <tr>
                     <td class="center" style="display: none">${listmateria.idtbmateria}</td>
-                    <td class="center"><c:if test="${listmateria.status == 1}">Activo</c:if></td>
                     <td class="center">${listmateria.nombrelargo}</td>
                     <td class="center">${listmateria.nombrecorto}</td>
+                    <td class="center">${listmateria.grado} ${listmateria.grupo}</td>
+                    <td class="center">${listmateria.area}</td>
+                    <td class="center">${listmateria.cpt}</td>
                     <td class="center">
                         <div class="btn-group">
                             <button class="btn btn-xs btn-terra dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Acciones
@@ -99,6 +103,7 @@
                                         <div class="form-group">
                                             <label >Seleccione una grupo</label>
                                             <select id="gruposelect" class="custom-select">
+                                                <option value="0"> No aplica</option>
                                                 <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
                                                     <option value="${listgrupo.idtbgrupo}">${listgrupo.nombre} </option>
                                                 </c:forEach>

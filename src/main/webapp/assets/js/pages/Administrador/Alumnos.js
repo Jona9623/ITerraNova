@@ -35,7 +35,7 @@ var Adminalumno = (function () {
                     });
                     //$(".muestrahorario").on('click', function () {
                         $("body").on("click", ".muestrahorario", function (event) {
-                        alert("entra");
+                        //alert("entra");
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Adminalumno.muestraHorario(idalumno);
                     });

@@ -15,12 +15,48 @@ public class TbMateria {
     private String nombrelargo;
     private String nombrecorto;
     private int rgrado;
+    private String grado;
     private int rgrupo;
+    private String grupo;
     private int rpersonal;
     private int rarea;
+    private String area;
     private int rcpt;
+    private String cpt;
     private int status;
     private int tipoescuela;
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCpt() {
+        return cpt;
+    }
+
+    public void setCpt(String cpt) {
+        this.cpt = cpt;
+    }
+
+    public String getGrado() {
+        return grado;
+    }
+
+    public void setGrado(String grado) {
+        this.grado = grado;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
 
     public int getRdatosmateria() {
         return rdatosmateria;

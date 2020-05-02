@@ -39,7 +39,6 @@
 <div class="profile-content">
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <% if (x != 2) { %>
             <div style="text-align: right">
                 <a id="mostrarreportesaca" type="button" class="btn btn-terra float-rt">Mostrar cuadro de honor/atencion</a>
             </div>
@@ -51,7 +50,6 @@
                     </div>  
                 </div>
             </div>
-            <%}%>
             <div class="">
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -206,17 +204,15 @@
                                         <div class="col-md-12 col-sm-12">
                                             <form>
                                                 <div class="card-body row">
-                                                    <div class="col-lg-4 p-t-20"> 
-                                                        <div class="form-group">
-                                                            <label>Seleccione el dia actual</label>
-                                                            <select id="diaactividad" name="semanafiscal" class="custom-select">
-                                                                <option value="1"> Lunes </option>
-                                                                <option value="2"> Martes </option>
-                                                                <option value="3"> Miercoles </option>
-                                                                <option value="4"> Jueves </option>
-                                                                <option value="5"> Viernes </option>
-                                                            </select>
-                                                        </div>
+                                                    <div class="col-lg-4 p-t-20">
+                                                        <label >Seleccione el dia actual</label>
+                                                        <select id="diaasistencia" name="diaasistencia" class="custom-select">
+                                                            <c:forEach items="${requestScope.listdia}" var="listdia">
+                                                                <option value="${listdia.idtbdia}">${listdia.nombre} </option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-4 p-t-20">
                                                         <div class="form-group" id="div-actividad">
                                                             <label> Descripción de la actividad*</label>
                                                             <textarea id="actividad" class="form-control" rows="5" placeholder="Describa la actividad..."></textarea>

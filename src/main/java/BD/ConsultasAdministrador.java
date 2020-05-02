@@ -47,12 +47,12 @@ public class ConsultasAdministrador {
         List<TbAlumnos> listalumnos = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-           /* String consulta = "select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from\n"
+            /* String consulta = "select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre, tb_tutor.nombre from\n"
                     + "(((tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado) inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo) inner join\n"
                     + "tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor) where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?";*/
-            String consulta = "select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre from\n" +
-"                    tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo \n" +
-"                    where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?;";
+            String consulta = "select tb_alumnos.r_tutor, tb_alumnos.idTb_Alumnos, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, tb_alumnos.matricula, ct_grado.nombre, ct_grupo.nombre from\n"
+                    + "                    tb_alumnos inner join ct_grado on tb_alumnos.r_grado = ct_grado.idCt_Grado inner join ct_grupo on tb_alumnos.r_grupo = ct_grupo.idCt_Grupo \n"
+                    + "                    where tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?;";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
@@ -1695,8 +1695,16 @@ public class ConsultasAdministrador {
             String consulta = "insert into tb_materia (r_datosmateria,r_grado,r_grupo,r_area,r_cpt,status,tipoescuela) values (?,?,?,?,?,?,?)";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, materia.getRdatosmateria());
-            pst.setInt(2, materia.getRgrado());
-            pst.setInt(3, materia.getRgrupo());
+            if (materia.getRgrado() != 0) {
+                pst.setInt(2, materia.getRgrado());
+            } else {
+                pst.setString(2, null);
+            }
+            if (materia.getRgrupo() != 0) {
+                pst.setInt(3, materia.getRgrupo());
+            } else {
+                pst.setString(3, null);
+            }
             if (materia.getRarea() != 0) {
                 pst.setInt(4, materia.getRarea());
             } else {
@@ -1804,7 +1812,7 @@ public class ConsultasAdministrador {
         List<TbMateriaPersonal> personalmateria = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select tb_materiapersonal.idTb_MateriaPersonal, ct_datosmateria.nombrecorto, tb_materiapersonal.r_periodo from tb_materiapersonal inner join tb_materia on tb_materiapersonal.r_materia = tb_materia.idTb_Materia\n"
+            String consulta = "select tb_materiapersonal.idTb_MateriaPersonal,tb_materia.r_grado,tb_materia.r_grupo,tb_materia.r_area,tb_materia.r_cpt, ct_datosmateria.nombrecorto, tb_materiapersonal.r_periodo from tb_materiapersonal inner join tb_materia on tb_materiapersonal.r_materia = tb_materia.idTb_Materia\n"
                     + "inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria \n"
                     + "where tb_materiapersonal.r_personal = ? and tb_materiapersonal.status = 1 and tb_materiapersonal.tipoescuela = ?;";
             pst = con.prepareStatement(consulta);
@@ -1816,6 +1824,10 @@ public class ConsultasAdministrador {
                 materia.setIdtbmateriapersonal(rs.getInt("tb_materiapersonal.idTb_MateriaPersonal"));
                 materia.setMateria(rs.getString("ct_datosmateria.nombrecorto"));
                 materia.setR_periodo(rs.getInt("tb_materiapersonal.r_periodo"));
+                materia.setR_grado(rs.getInt("tb_materia.r_grado"));
+                materia.setR_grupo(rs.getInt("tb_materia.r_grupo"));
+                materia.setR_area(rs.getInt("tb_materia.r_area"));
+                materia.setR_cpt(rs.getInt("tb_materia.r_cpt"));
                 personalmateria.add(materia);
             }
 
@@ -1956,7 +1968,7 @@ public class ConsultasAdministrador {
             }
         }
     }
-    
+
     public void guardaAsistencia(List<TbAsistencia> listasistencia, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1970,7 +1982,7 @@ public class ConsultasAdministrador {
                 pst.setInt(3, item.getR_semana());
                 pst.setInt(4, item.getR_periodo());
                 pst.setInt(5, item.getAsistencia());
-                pst.setInt(6,1);
+                pst.setInt(6, 1);
                 pst.setInt(7, tipoescuela);
 
                 if (pst.executeUpdate() == 1) {
