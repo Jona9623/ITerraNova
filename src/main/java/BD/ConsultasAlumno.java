@@ -133,7 +133,7 @@ public class ConsultasAlumno {
         List<TbMateria> listmateria = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = " SELECT * FROM terranova.tb_materia inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+            String consulta = " SELECT * FROM tb_materia inner join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
                     + " where idTb_Materia not in (\n"
                     + "	select r_materia from tb_materiapersonal where tb_materiapersonal.r_personal = ? and tb_materia.status = 1 and tb_materia.tipoescuela = ?\n"
                     + ");";
@@ -646,7 +646,7 @@ public class ConsultasAlumno {
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select * from ct_semanafiscal where status = 1 and tipoescuela = ?";
+            String consulta = "select * from ct_semanafiscal where status = 1 and tipoescuela = ? order by idCt_SemanaFiscal desc";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();

@@ -98,9 +98,8 @@ public class ConsultasAdministrador {
         try {
             con.setAutoCommit(false);
             String consulta = "select tb_personal.idTb_Personal, tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno, tb_personal.correo, ct_puesto.nombre from (tb_personal inner join\n"
-                    + "ct_puesto on tb_personal.r_puesto = ct_puesto.idCt_Puesto) where tb_personal.status = 1 and tb_personal.tipoescuela = ?";
+                    + "ct_puesto on tb_personal.r_puesto = ct_puesto.idCt_Puesto) where tb_personal.status = 1";
             pst = con.prepareStatement(consulta);
-            pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
             while (rs.next()) {
                 TbPersonal personal = new TbPersonal();

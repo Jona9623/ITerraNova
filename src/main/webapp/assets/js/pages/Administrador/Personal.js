@@ -192,6 +192,7 @@ var Adminpersonal = (function () {
         },
         listaAlumnos: function (idpersonal) {
             //alert(idpersonal);
+            console.log(idpersonal);
             $.get("SAdminpersonal", {
                 ACCION: "listaAlumnos",
                 ID: idpersonal,
@@ -221,6 +222,7 @@ var Adminpersonal = (function () {
             });
         },
         getListaAlumno: function (grado, grupo, area, cpt, materiapersonal, idpersonal) {
+            console.log(idpersonal);
             $.get("SAdminpersonal", {
                 ACCION: "getListaAlumno",
                 GRADO: grado,
