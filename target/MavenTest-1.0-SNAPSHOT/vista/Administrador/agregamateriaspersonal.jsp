@@ -62,9 +62,9 @@
             <div class="btn-group">
                 <br>
                 <button id="asignamateria" type="button" class="btn btn-terra">Asignar Materia</button>  &nbsp; &nbsp;
-                <div class="btn-group">
+               <!-- <div class="btn-group">
                     <button id="asignaralumnos" type="button" class="btn btn-terra">Asignar Alumnos</button> 
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

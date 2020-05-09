@@ -31,7 +31,7 @@
     <div style="text-align: right">
         <div class="btn-group">
             <br>
-            <button id="alumnoasigna" type="button" class="btn btn-terra">Asignar Alumnos</button>
+            <button id="asignaalumnos" type="button" class="btn btn-terra">Asignar Alumnos</button>
         </div>
     </div>
 </form>

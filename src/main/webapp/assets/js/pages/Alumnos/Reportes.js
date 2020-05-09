@@ -21,11 +21,13 @@ var Reportes = (function () {
                     grado = $("#gradodisciplinar").val();
                     grupo = $("#grupodisciplinar").val();
                     Reportes.getAlumno(grado, grupo);
-                    $("#gradodisciplinar").change(function () {
+                    //$("#gradodisciplinar").change(function () {
+                    $("body").find("select[id='gradodisciplinar']").unbind('change').bind('change', function () {
                         grado = $("#gradodisciplinar").val()
-                        Reportes.getAlumno(grado, grupo)
+                        Reportes.getAlumno(grado, grupo);
                     });
-                            $("#grupodisciplinar").change(function () {
+                    //$("#grupodisciplinar").change(function () {
+                    $("body").find("select[id='grupodisciplinar']").unbind('change').bind('change', function () {
                         grupo = $("#grupodisciplinar").val();
                         Reportes.getAlumno(grado, grupo);
                     });
@@ -149,7 +151,7 @@ var Reportes = (function () {
                 else {
                     swal("Hecho!", "Datos actualizados correctamente", "success");
                     Reportes.reporteDisciplinar();
-                    
+
                 }
             });
         },
@@ -175,19 +177,22 @@ var Reportes = (function () {
                         $('#consultareporteD').find('tr[name^="alumno-"]').hide();
                         $('#consultareporteD').find('tr[name="alumno-' + $(this).val() + '"]').show();
                     });
-                    $(".inforeporteD").on('click', function () {
+                    //$(".inforeporteD").on('click', function () {
+                        $("body").find('a.inforeporteD').unbind('click').bind('click', function () {
                         alumnoreporte = $(this).parents("tr").find("td").eq(0).html();
                         reportefecha = $(this).parents("tr").find("td").eq(1).html();
                         hora = $(this).parents("tr").find("td").eq(3).html();
                         Reportes.infoReporteD(alumnoreporte, reportefecha, hora);
                     });
-                    $(".editarreporteD").on('click', function () {
+                    //$(".editarreporteD").on('click', function () {
+                          $("body").find('a.editarreporteD').unbind('click').bind('click', function () {
                         editaralumnoreporte = $(this).parents("tr").find("td").eq(0).html();
                         editarreportefecha = $(this).parents("tr").find("td").eq(1).html();
                         editarhora = $(this).parents("tr").find("td").eq(3).html();
                         Reportes.editarReporteD(editaralumnoreporte, editarreportefecha, editarhora);
                     });
-                    $(".eliminarreporteD").on('click', function () {
+                    //$(".eliminarreporteD").on('click', function () {
+                          $("body").find('a.eliminarreporteD').unbind('click').bind('click', function () {
                         eliminarreporteD = $(this).parents("tr").find("td").eq(4).html();
                         swal({
                             title: "Estas seguro?",
@@ -303,19 +308,23 @@ var Reportes = (function () {
                     grupoatencion = $("#grupoatencion").val();
                     Reportes.getAlumnoAca(gradohonor, grupohonor);
                     Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
-                    $("#gradohonor").change(function () {
+                    //$("#gradohonor").change(function () {
+                        $("body").find("select[id='gradohonor']").unbind('change').bind('change', function () {
                         gradohonor = $("#gradohonor").val();
                         Reportes.getAlumnoAca(gradohonor, grupohonor)
                     });
-                            $("#grupohonor").change(function () {
+                    //$("#grupohonor").change(function () {
+                        $("body").find("select[id='grupohonor']").unbind('change').bind('change', function () {
                         grupohonor = $("#grupohonor").val();
                         Reportes.getAlumnoAca(gradohonor, grupohonor)
                     });
-                    $("#gradoatencion").change(function () {
+                    //$("#gradoatencion").change(function () {
+                        $("body").find("select[id='gradoatencion']").unbind('change').bind('change', function () {
                         gradoatencion = $("#gradoatencion").val();
                         Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
                     });
-                            $("#grupoatencion").change(function () {
+                    //s$("#grupoatencion").change(function () {
+                        $("body").find("select[id='grupoatencion']").unbind('change').bind('change', function () {
                         grupoatencion = $("#grupoatencion").val();
                         Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
                     });
@@ -653,16 +662,16 @@ var Reportes = (function () {
     }
     ;
 }());
-async function convertBase64(){
+async function convertBase64() {
     const file = document.querySelector('#foto').files[0];
     $("#savefile").val(await toBase64(file));
 }
 const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 function validacionActividadSemanal() {
     var valido = true;
     if ($("#fechaentrega").val().trim() == "") {

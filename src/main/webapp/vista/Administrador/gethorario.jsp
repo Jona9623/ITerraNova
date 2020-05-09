@@ -20,5 +20,5 @@
                     <strong>Hora:     </strong>${listhorario.hora} <br> <br>
                 </div>
             </div>
-        </c:forEach>
-    </div>
+        </div>
+    </c:forEach>

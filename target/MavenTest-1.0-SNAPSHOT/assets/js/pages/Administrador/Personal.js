@@ -18,32 +18,43 @@ var Adminpersonal = (function () {
                     });
                     Adminpersonal.importarPersonal();
                     //$('#btnaregarP').on('click', function () {
-                    $("body").on("click", "#btnaregarP", function (event) {
+                    //s$("body").on("click", "#btnaregarP", function (event) {
+                    $("body").find("button[id='btnaregarP']").unbind('click').bind('click', function () {
                         Adminpersonal.agregaPersonal();
                     });
                     //$(".infopersonal").on('click', function () {
-                    $("body").on("click", ".infopersonal", function (event) {
+                    //$("body").on("click", ".infopersonal", function (event) {
+                    $("body").find('a.infopersonal').unbind('click').bind('click', function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.infoPersonal(idpersonal);
                     });
                     //$(".agregamateria").on('click', function () {
-                    $("body").on("click", ".agregamateria", function (event) {
+                    $("body").find('a.agregamateria').unbind('click').bind('click', function () {
                         //alert("entra");
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.agregaMateria(idpersonal);
                     });
+                    //$("body").on("click", ".asignaralumnos", function (event) {
+                    $("body").find('a.asignaralumnos').unbind('click').bind('click', function () {
+                        //alert("entra");
+                        idpersonal = $(this).parents("tr").find("td").eq(0).html();
+                        Adminpersonal.asignarAlumnos(idpersonal);
+                    });
                     //$(".listaalumnos").on('click', function () {
-                    $("body").on("click", ".listaalumnos", function (event) {
+                    //$("body").on("click", ".listaalumnos", function (event) {
+                    $("body").find('a.listaalumnos').unbind('click').bind('click', function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.listaAlumnos(idpersonal);
                     });
                     //$('.editarpe').on('click', function () {
-                    $("body").on("click", ".editarpe", function (event) {
+                    //$("body").on("click", ".editarpe", function (event) {
+                    $("body").find('a.editarpe').unbind('click').bind('click', function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.editarPersonal(idpersonal);
                     });
                     //$(".aliminarpe").on('click', function () {
-                    $("body").on("click", ".eliminarpe", function (event) {
+                    //$("body").on("click", ".eliminarpe", function (event) {
+                    $("body").find('a.eliminarpe').unbind('click').bind('click', function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         swal({
                             title: "Estas seguro?",
@@ -109,7 +120,8 @@ var Adminpersonal = (function () {
                         "scrollX": true
                     });
                     var listmateria = [];
-                    $("#asignamateria").on('click', function () {
+                    //$("#asignamateria").on('click', function () {
+                    $("body").find("button[id='asignamateria']").unbind('click').bind('click', function () {
                         //alert(tipoescuela);
                         $("#check input[type='checkbox']:checked").each(function () {
                             var materia = {
@@ -130,65 +142,68 @@ var Adminpersonal = (function () {
                             else {
                                 swal("Hecho!", "Materias asignadas al maestro", "success");
                                 listmateria = [];
+                                Adminpersonal.tablaPersonal();
                             }
                         });
                     });
-                    $("#asignaralumnos").on('click', function () {
+                }
+            })
+        },
+        asignarAlumnos: function (idpersonal) {
+            $.get("SAdminpersonal", {
+                ACCION: "agregaAlumnos",
+                ID: idpersonal,
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    grado = $('option:selected').attr('grado');
+                    grupo = $('option:selected').attr('grupo');
+                    area = $('option:selected').attr('area');
+                    cpt = $('option:selected').attr('cpt');
+                    materiapersonal = $("#materiaAlumPer").val();
+                    Adminpersonal.getAsignaAlumno(grado, grupo, area, cpt, idpersonal, materiapersonal);
+                    //$("#materiaAlumPer").change(function () {
+                    $("body").find("select[id='materiaAlumPer']").unbind('change').bind('change', function () {
+                        grado = $('option:selected').attr('grado');
+                        grupo = $('option:selected').attr('grupo');
+                        area = $('option:selected').attr('area');
+                        cpt = $('option:selected').attr('cpt');
+                        materiapersonal = $("#materiaAlumPer").val();
+                        Adminpersonal.getAsignaAlumno(grado, grupo, area, cpt, idpersonal, materiapersonal);
+                        //$("#materiaAlumPer").empty();
+                    });
+                    $("body").unbind('click').on("click", "#asignaalumnos", function (event) {
+                        //$("body").find("button[id='asignaalumnos']").unbind('click').bind('click', function () {
+                        let alumnos = [];
+                        $("#check2 input[type='checkbox']:checked").each(function () {
+                            let alumno = {
+                                "r_alumno": $(this).val(),
+                                "r_materiapersonal": $("#materiaAlumPer").val()
+                            };
+                            alumnos.push(alumno);
+                            alumno = null;
+                        });
+                        console.log(alumnos);
                         $.get("SAdminpersonal", {
-                            ACCION: "agregaAlumnos",
-                            ID: idpersonal,
+                            ACCION: "asignaAlumnos",
+                            OBJETO: JSON.stringify(alumnos),
                             TIPOESCUELA: tipoescuela
+
                         }).done(function (xhr, status, error) {
                             if (error.status != 200)
                                 swal(error.getResponseHeader("ERROR"), "", "warning");
                             else {
-                                $("#content").html(arguments[0]);
-                                grado = $('option:selected').attr('grado');
-                                grupo = $('option:selected').attr('grupo');
-                                area = $('option:selected').attr('area');
-                                cpt = $('option:selected').attr('cpt');
-                                materiapersonal = $("#materiaAlumPer").val();
-                                Adminpersonal.getAsignaAlumno(grado, grupo, area, cpt, idpersonal, materiapersonal);
-                                $("#materiaAlumPer").change(function () {
-                                    grado = $('option:selected').attr('grado');
-                                    grupo = $('option:selected').attr('grupo');
-                                    area = $('option:selected').attr('area');
-                                    cpt = $('option:selected').attr('cpt');
-                                    materiapersonal = $("#materiaAlumPer").val();
-                                    Adminpersonal.getAsignaAlumno(grado, grupo, area, cpt, idpersonal, materiapersonal);
-                                    //$("#materiaAlumPer").empty();
-                                });
-                                let alumnos = [];
-                                $("body").on("click", "#alumnoasigna", function (event) {
-                                    // alert("entra");
-                                    $("#check2 input[type='checkbox']:checked").each(function () {
-                                        let alumno = {
-                                            "r_alumno": $(this).val(),
-                                            "r_materiapersonal": $("#materiaAlumPer").val()
-                                        };
-                                        alumnos.push(alumno);
-                                        alumno = null;
-                                    });
-                                    console.log(alumnos);
-                                    $.get("SAdminpersonal", {
-                                        ACCION: "asignaAlumnos",
-                                        OBJETO: JSON.stringify(alumnos),
-                                        TIPOESCUELA: tipoescuela
-
-                                    }).done(function (xhr, status, error) {
-                                        if (error.status != 200)
-                                            swal(error.getResponseHeader("ERROR"), "", "warning");
-                                        else {
-                                            swal("Hecho!", "Alumnos asignados al maestro", "success");
-                                            alumnos = [];
-                                        }
-                                    });
-                                });
+                                swal("Hecho!", "Alumnos asignados al maestro", "success");
+                                alumnos = [];
+                                Adminpersonal.asignarAlumnos(idpersonal);
                             }
-                        })
+                        });
                     });
                 }
-            })
+            });
         },
         listaAlumnos: function (idpersonal) {
             //alert(idpersonal);
@@ -208,16 +223,15 @@ var Adminpersonal = (function () {
                     cpt = $('option:selected').attr('cpt');
                     materiapersonal = $("#materiaLista").val();
                     Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal);
-                    $("#materiaLista").change(function () {
+                    //$("#materiaLista").change(function () {
+                    $("body").find("select[id='materiaLista']").unbind('change').bind('change', function () {
                         grado = $('option:selected').attr('grado');
                         grupo = $('option:selected').attr('grupo');
                         area = $('option:selected').attr('area');
                         cpt = $('option:selected').attr('cpt');
                         materiapersonal = $("#materiaLista").val();
                         Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal);
-                        //$("#materiaLista").empty();
                     });
-                    //$("#materiaLista").empty();
                 }
             });
         },
@@ -241,7 +255,8 @@ var Adminpersonal = (function () {
                         paging: false,
                         "scrollX": true
                     });
-                    $("#asistencia").on('click', function () {
+                    //$("#asistencia").on('click', function () {
+                    $("body").find("button[id='asistencia']").unbind('click').bind('click', function () {
                         let listasistencia = [];
                         let check = 0;
                         $("#check3 input[type='checkbox']").each(function () {

@@ -43,24 +43,6 @@
                 </c:forEach>
             </select>
         </div>
-        <!-- <div class="card-body row">
-             <div class="col-lg-4 p-t-20">
-                 <label >Seleccione grado</label>
-                 <select id="gradoLista" class="custom-select" name="gradoLista">
-        <c:forEach items="${requestScope.listgrado}" var="listgrado">
-            <option value="${listgrado.idtbgrado}">${listgrado.nombre} </option>
-        </c:forEach>
-    </select>
-</div>
-<div class="col-lg-4 p-t-20">
-    <label >Seleccione grupo</label>
-    <select id="grupoLista" name="grupoLista" class="custom-select">
-        <c:forEach items="${requestScope.listgrupo}" var="listgrupo">
-            <option value="${listgrupo.idtbgrupo}">${listgrupo.nombre} </option>
-        </c:forEach>
-    </select>
-</div>
-</div> -->
         <div id="ListaAlumnos">
             <jsp:include page='alumnoslista.jsp'>
                 <jsp:param name="article1" value=""/>

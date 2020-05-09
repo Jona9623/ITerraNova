@@ -67,6 +67,10 @@
                                         <i id="agregamateria" class="icon-plus"></i>Agregar materias</a>
                                 </li>
                                 <li>
+                                    <a href="javascript:;" class="asignaralumnos">
+                                        <i id="asignaralumnos" class="icon-plus"></i>Asignar alumnos </a>
+                                </li>
+                                <li>
                                     <a href="javascript:;" class="listaalumnos">
                                         <i id="listaalumnos" class="icon-book-open"></i>Listas alumnos</a>
                                 </li>
@@ -75,7 +79,7 @@
                                         <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="aliminarpe">
+                                    <a href="javascript:;" class="eliminarpe">
                                         <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
                                 </li>
                             </ul>

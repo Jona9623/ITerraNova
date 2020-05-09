@@ -206,7 +206,7 @@
                                                 <div class="card-body row">
                                                     <div class="col-lg-4 p-t-20">
                                                         <label >Seleccione el dia actual</label>
-                                                        <select id="diaasistencia" name="diaasistencia" class="custom-select">
+                                                        <select id="diaactividad" name="diaactividad" class="custom-select">
                                                             <c:forEach items="${requestScope.listdia}" var="listdia">
                                                                 <option value="${listdia.idtbdia}">${listdia.nombre} </option>
                                                             </c:forEach>

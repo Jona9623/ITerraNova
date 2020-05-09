@@ -23,30 +23,35 @@ var Adminalumno = (function () {
                         Adminalumno.agregaAlumno();
                     });
                     //$(".infoalumno").on('click', function () {
-                        $("body").on("click", ".infoalumno", function (event) {
+                    //$("body").on("click", ".infoalumno", function (event) {
+                    $("body").find('a.infoalumno').unbind('click').bind('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         idtutor = $(this).parents("tr").find("td").eq(1).html();
                         Adminalumno.infoAlumno(idalumno, idtutor);
                     });
                     //$(".horairoalum").on('click', function () {
-                        $("body").on("click", ".horairoalum", function (event) {
+                    //$("body").on("click", ".horairoalum", function (event) {
+                    $("body").find('a.horairoalum').unbind('click').bind('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Adminalumno.asignaHorario(idalumno);
                     });
                     //$(".muestrahorario").on('click', function () {
-                        $("body").on("click", ".muestrahorario", function (event) {
+                    //$("body").on("click", ".muestrahorario", function (event) {
+                    $("body").find('a.muestrahorario').unbind('click').bind('click', function () {
                         //alert("entra");
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Adminalumno.muestraHorario(idalumno);
                     });
                     //$('.editaralu').on('click', function () {
-                        $("body").on("click", ".editaralu", function (event) {
+                    //$("body").on("click", ".editaralu", function (event) {
+                    $("body").find('a.editaralu').unbind('click').bind('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         idtutor = $(this).parents("tr").find("td").eq(1).html();
                         Adminalumno.editarAlumno(idalumno, idtutor);
                     });
                     //$(".aliminaralu").on('click', function () {
-                        $("body").on("click", ".aliminaralu", function (event) {
+                    //$("body").on("click", ".aliminaralu", function (event) {
+                    $("body").find('a.aliminaralu').unbind('click').bind('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         swal({
                             title: "Estas seguro?",
@@ -65,7 +70,7 @@ var Adminalumno = (function () {
                 }
             });
             //$("#actualizaTablaA").on('click', function () {
-                $("body").on("click", "#actualizaTablaA", function (event) {
+            $("body").on("click", "#actualizaTablaA", function (event) {
                 Adminalumno.tablaAlumnos();
             });
         },
@@ -122,11 +127,11 @@ var Adminalumno = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#content").html(arguments[0]);
-                    Adminalumno.getHorario(idalumno,0);
+                    Adminalumno.getHorario(idalumno, 0);
                 }
             });
         },
-        getHorario: function (idalumno,idperiodo) {
+        getHorario: function (idalumno, idperiodo) {
             idperiodo = $("#periodogethorario").val()
             $.get("SAdminalumno", {
                 ACCION: "getHorario",
@@ -136,11 +141,14 @@ var Adminalumno = (function () {
             }).done(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else{
+                else {
                     $("#getHorarios").html(arguments[0]);
-                    $("#periodogethorario").change(function () {
+                    idperiodo = $("#periodogethorario").val();
+                    Adminalumno.getHorario(idalumno, idperiodo);
+                    //$("#periodogethorario").change(function () {
+                    $("body").find("select[id='periodogethorario']").unbind('change').bind('change', function () {
                         idperiodo = $("#periodogethorario").val();
-                        Adminalumno.getHorario(idalumno,idperiodo)
+                        Adminalumno.getHorario(idalumno, idperiodo);
                     });
                 }
             })
