@@ -49,6 +49,7 @@ var Admin = (function () {
                         });
                     });
                     $("#tablapuesto").DataTable({
+                        paging: false,
                         "scrollX": true
                     });
                 }
@@ -121,6 +122,7 @@ var Admin = (function () {
                         });
                     });
                     $("#tablaperiodo").DataTable({
+                        paging: false,
                         "scrollX": true
                     });
                 }
@@ -188,6 +190,7 @@ var Admin = (function () {
                         });
                     });
                     $("#tablaarea").DataTable({
+                        paging: false,
                         "sccrollX": true
                     });
                 }
@@ -255,6 +258,7 @@ var Admin = (function () {
                         });
                     });
                     $("#tablacpt").DataTable({
+                        paging: false,
                         "scrollX": true
                     });
                 }
@@ -340,6 +344,7 @@ var Admin = (function () {
                         });
                     });
                     $("#tablatipocali").DataTable({
+                        paging: false,
                         "scrollX": true
                     });
                 }
@@ -407,6 +412,7 @@ var Admin = (function () {
                         });
                     });
                     $("#tablamateria").DataTable({
+                        paging: false,
                         "scrollX": true
                     });
                 }

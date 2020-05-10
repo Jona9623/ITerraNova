@@ -68,7 +68,7 @@
                                 </li>
                                 <li>
                                     <a href="javascript:;" class="asignaralumnos">
-                                        <i id="asignaralumnos" class="icon-plus"></i>Asignar alumnos </a>
+                                        <i id="asignaralumnos" class="icon-arrow-up"></i>Asignar alumnos </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;" class="listaalumnos">

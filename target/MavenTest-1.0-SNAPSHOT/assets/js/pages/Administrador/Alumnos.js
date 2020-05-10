@@ -14,9 +14,6 @@ var Adminalumno = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $('#content').html(arguments[0]);
-                    $("#tablaalumnos").DataTable({
-                        "scrollX": true
-                    });
                     Adminalumno.importaTutor();
                     Adminalumno.importaAlumno();
                     $('#btnagregaA').on('click', function () {
@@ -66,6 +63,10 @@ var Adminalumno = (function () {
                             Adminalumno.eliminarAlumno(idalumno);
                         });
 
+                    });
+                    $("#tablaalumnos").DataTable({
+                        paging: false,
+                        "scrollX": true
                     });
                 }
             });

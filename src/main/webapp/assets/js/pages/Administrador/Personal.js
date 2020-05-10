@@ -13,9 +13,6 @@ var Adminpersonal = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $('#content').html(arguments[0]);
-                    $('#tablapersonal').DataTable({
-                        "scrollX": true
-                    });
                     Adminpersonal.importarPersonal();
                     //$('#btnaregarP').on('click', function () {
                     //s$("body").on("click", "#btnaregarP", function (event) {
@@ -70,6 +67,12 @@ var Adminpersonal = (function () {
                         });
 
                     });
+                    var tablapersonal = $('#tablapersonal');
+                    tablapersonal.DataTable({
+                        //paging: false,
+                        "scrollX": true
+                    });
+                    tablapersonal.rows().nodes().to$();
                 }
             });
             //$("#actualizaTablaP").on('click', function () {
@@ -117,11 +120,13 @@ var Adminpersonal = (function () {
                 else {
                     $("#content").html(arguments[0]);
                     $('#tablaasignamateria').DataTable({
+                        paging: false,
                         "scrollX": true
                     });
-                    var listmateria = [];
+                    
                     //$("#asignamateria").on('click', function () {
                     $("body").find("button[id='asignamateria']").unbind('click').bind('click', function () {
+                        var listmateria = [];
                         //alert(tipoescuela);
                         $("#check input[type='checkbox']:checked").each(function () {
                             var materia = {
