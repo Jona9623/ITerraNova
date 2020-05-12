@@ -1314,6 +1314,20 @@ public class ConsultasAlumno {
                 pst.setInt(4, materiapersonal);
                 rs = pst.executeQuery();
             }
+            if (area != 0 && cpt != 0 && grado != 0 && grupo == 0) {
+                String consulta = "SELECT tb_alumnos.idTb_Alumnos,tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno from tb_alumnos\n"
+                        + "                    where tb_alumnos.r_cpt = ? and tb_alumnos.r_grado = ? and tb_alumnos.r_grupo = ? and tb_alumnos.status = 1 and tb_alumnos.tipoescuela = ?\n"
+                        + "                    and idTb_Alumnos not in (\n"
+                        + "                    	select r_alumno from tb_materiaalumno where tb_materiaalumno.r_materiapersonal = ?\n"
+                        + "                    );";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, cpt);
+                pst.setInt(2, grado);
+                pst.setInt(3, grupo);
+                pst.setInt(4, tipoescuela);
+                pst.setInt(5, materiapersonal);
+                rs = pst.executeQuery();
+            }
             while (rs.next()) {
                 Alumno alumno = new Alumno();
                 alumno.setId(rs.getInt("tb_alumnos.idTb_Alumnos"));
