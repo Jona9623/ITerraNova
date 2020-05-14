@@ -15,6 +15,7 @@ import Modelos.CtAtencion;
 import Modelos.CtSemanaFiscal;
 import Modelos.ImagenReporteAcademico;
 import Modelos.ImagenReporteAcademicoTarea;
+import Modelos.TbAsistencia;
 import Modelos.TbHorario;
 import Modelos.TbReporteAcademico;
 import Modelos.TbReporteDisciplinar;
@@ -328,6 +329,11 @@ public class AlumnosController {
     public List<TbHorario> getHorario(int idalumno, int idperiodo, int tipoescuela) throws Exception {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getHorario(idalumno,idperiodo,tipoescuela);
+    }
+
+    public List<TbAsistencia> getAlumnosAsistencia(int idperiodo, int idmateria, int idsemana, int tipoescuela) throws Exception {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getAlumnosAsistencia(idperiodo,idmateria,idsemana,tipoescuela);
     }
   
 }

@@ -152,6 +152,18 @@ public class SAdminpersonal extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
+            case "reporteAsistencia":
+            try {
+                    reporteAsistencia(request,response);
+                } catch (Exception e) {
+                }
+            break;
+            case "getreporteAsistencia":
+                try {
+                    getreporteAsistencia(request,response);
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -479,6 +491,56 @@ public class SAdminpersonal extends HttpServlet {
             listasistencia = Arrays.asList(mapper.readValue(objectJson, TbAsistencia[].class));
             adminC.guardaAsistencia(listasistencia, Integer.parseInt(request.getParameter("TIPOESCUELA")));
         } catch (Exception e) {
+        }
+    }
+    private void reporteAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        alumC = new AlumnosController();
+        List<TbMateriaPersonal> listmateria = new ArrayList<>();
+        List<CtGrado> listgrado = new ArrayList<>();
+        List<CtGrupo> listgrupo = new ArrayList<>();
+        List<Alumno> listalumno = new ArrayList<>();
+        List<CtDia> listdia = new  ArrayList<>();
+        List<CtSemanaFiscal> listsemana = new ArrayList<>();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        try {
+            listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")), Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("listmateria", listmateria);
+            listsemana = alumC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listsemana", listsemana);
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/reporteasistencia.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+    private void getreporteAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        alumC = new AlumnosController();
+        List<TbMateriaPersonal> listmateria = new ArrayList<>();
+        List<CtGrado> listgrado = new ArrayList<>();
+        List<CtGrupo> listgrupo = new ArrayList<>();
+        List<TbAsistencia> listalumno = new ArrayList<>();
+        List<CtDia> listdia = new  ArrayList<>();
+        List<CtSemanaFiscal> listsemana = new ArrayList<>();
+        List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        try {
+            listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")), Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("listmateria", listmateria);
+            listsemana = alumC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listsemana", listsemana);
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            listalumno = alumC.getAlumnosAsistencia(Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listalumno", listalumno);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/getreporteasistencia.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
         }
     }
 

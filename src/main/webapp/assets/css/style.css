@@ -5018,6 +5018,21 @@ tr.group:hover {
     background-color: #e1e5ec !important;
     border-color: #e1e5ec !important;
 }
+.asi-grave {
+    background-color: #FAA9A9 !important;
+    border: 1px solid #FAA9A9 !important;
+    color: #000 !important;
+}
+.asi-media {
+    background-color: #FAD8A9 !important;
+    border: 1px solid #FAD8A9 !important;
+    color: #000 !important;
+}
+.asi {
+    background-color: #F6FAA9 !important;
+    border: 1px solid #F6FAA9 !important;
+    color: #000 !important;
+}
 .btn-primary {
     background-color: #188ae2 !important;
     border: 1px solid #188ae2 !important;

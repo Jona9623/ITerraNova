@@ -75,6 +75,10 @@
                                         <i id="listaalumnos" class="icon-book-open"></i>Listas alumnos</a>
                                 </li>
                                 <li>
+                                    <a href="javascript:;" class="reporteasistencia">
+                                        <i id="reporteasistencia" class="icon-book-open"></i>Reporte de asistencia </a>
+                                </li>
+                                <li>
                                     <a href="javascript:;" class="editarpe">
                                         <i id="editarpe" class="icon-pencil"></i> Editar </a>
                                 </li>

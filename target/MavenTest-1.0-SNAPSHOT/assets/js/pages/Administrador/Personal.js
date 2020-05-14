@@ -43,6 +43,10 @@ var Adminpersonal = (function () {
                         idpersonal = $(this).parents("tr").find("td").eq(0).html();
                         Adminpersonal.listaAlumnos(idpersonal);
                     });
+                    $("body").find('a.reporteasistencia').unbind('click').bind('click', function () {
+                        idpersonal = $(this).parents("tr").find("td").eq(0).html();
+                        Adminpersonal.reporteAsistencia(idpersonal);
+                    })
                     //$('.editarpe').on('click', function () {
                     //$("body").on("click", ".editarpe", function (event) {
                     $("body").find('a.editarpe').unbind('click').bind('click', function () {
@@ -123,7 +127,7 @@ var Adminpersonal = (function () {
                         paging: false,
                         "scrollX": true
                     });
-                    
+
                     //$("#asignamateria").on('click', function () {
                     $("body").find("button[id='asignamateria']").unbind('click').bind('click', function () {
                         var listmateria = [];
@@ -321,6 +325,52 @@ var Adminpersonal = (function () {
                      grupo = $("#grupoAlumPer").val();
                      Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal, materiapersonal);
                      });*/
+                }
+            })
+        },
+        reporteAsistencia: function (idpersonal) {
+            $.get("SAdminpersonal", {
+                ACCION: "reporteAsistencia",
+                ID: idpersonal,
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    idperiodo = $("#periodoReporte").val();
+                    idmateria = $("#materiaReporte").val();
+                    idsemana = $("#semanaReporte").val();
+                    Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana,idpersonal);
+                    $("body").find("select[id='periodoReporte']").unbind('change').bind('change', function () {
+                        idperodo = $("#periodoReporte").val();
+                        Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana,idpersonal);
+                    });
+                    $("body").find("select[id='materiaReporte']").unbind('change').bind('change', function () {
+                        idmateria = $("#materiaReporte").val();
+                        Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana,idpersonal);
+                    });
+                    $("body").find("select[id='semanaReporte']").unbind('change').bind('change', function () {
+                        idsemana = $("#semanaReporte").val();
+                        Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana,idpersonal);
+                    });
+                    $("#tablaasisencia").DataTable();
+                }
+            })
+        },
+        getreporteAsistencia: function(idperiodo,idmateria,idsemana,idpersonal){
+            $.get("SAdminpersonal", {
+                ACCION: "getreporteAsistencia",
+                ID: idpersonal,
+                IDP: idperiodo,
+                IDM: idmateria,
+                IDS: idsemana,
+                TIPOESCUELA: tipoescuela
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#ReporteAsistencia").html(arguments[0]);
                 }
             })
         },
