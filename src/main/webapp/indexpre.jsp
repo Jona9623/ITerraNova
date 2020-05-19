@@ -189,6 +189,12 @@
                                                 <input id="personal" value="<%=personal%>" hidden="true">
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a id="AsistenciaReporte" class="nav-link ">
+                                                <span class="title">Reporte de asistencias</span>
+                                                <input id="personalReporte" value="<%=personal%>" hidden="true">
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <% } %>

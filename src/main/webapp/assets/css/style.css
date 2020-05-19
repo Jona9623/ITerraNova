@@ -5019,18 +5019,18 @@ tr.group:hover {
     border-color: #e1e5ec !important;
 }
 .asi-grave {
-    background-color: #FAA9A9 !important;
-    border: 1px solid #FAA9A9 !important;
+    background-color: #ff1c1c !important;
+    border: 1px solid #ff1c1c !important;
     color: #000 !important;
 }
 .asi-media {
-    background-color: #FAD8A9 !important;
-    border: 1px solid #FAD8A9 !important;
+    background-color: #ff641c !important;
+    border: 1px solid #ff641c !important;
     color: #000 !important;
 }
 .asi {
-    background-color: #F6FAA9 !important;
-    border: 1px solid #F6FAA9 !important;
+    background-color: #ffc11c !important;
+    border: 1px solid #ffc11c !important;
     color: #000 !important;
 }
 .btn-primary {

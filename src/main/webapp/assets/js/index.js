@@ -41,6 +41,9 @@ $(document).ready(function () {
     $("#listaalumnosP").on('click', function () {
         Adminpersonal.listaAlumnos($("#personal").val());
     });
+    $("#AsistenciaReporte").on('click',function(){
+        Adminpersonal.reporteAsistencia($("#personalReporte").val());
+    })
     $('#amalumnos').on('click', function () {
         Adminalumno.tablaAlumnos();
     });

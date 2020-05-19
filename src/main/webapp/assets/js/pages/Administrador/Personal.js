@@ -354,7 +354,10 @@ var Adminpersonal = (function () {
                         idsemana = $("#semanaReporte").val();
                         Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana,idpersonal);
                     });
-                    $("#tablaasisencia").DataTable();
+                    $("#tablaasisencia").DataTable({
+                        //paging: false,
+                        "scrollX": true
+                    });
                 }
             })
         },

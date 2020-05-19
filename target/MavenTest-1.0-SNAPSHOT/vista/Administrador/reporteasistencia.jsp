@@ -62,7 +62,9 @@
         </div>
     </div>
 </div>
+<br>
 <div class="row">
+    <br>
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div id="ReporteAsistencia">
             <jsp:include page='getreporteasistencia.jsp'>
