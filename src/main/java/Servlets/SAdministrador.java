@@ -14,6 +14,7 @@ import Modelos.CtGrado;
 import Modelos.CtGrupo;
 import Modelos.CtPeriodoEscolar;
 import Modelos.CtPuesto;
+import Modelos.CtSemanaFiscal;
 import Modelos.CtTipoCalificaicon;
 import Modelos.GradoGrupo;
 import Modelos.TbMateria;
@@ -166,6 +167,12 @@ public class SAdministrador extends HttpServlet {
                 break;
             case "eliminaMateria":
                 eliminaMateria(request, response);
+                break;
+            case "reporteGAsistencia":
+                try {
+                    reporteGAsistencia(request,response);
+                } catch (Exception e) {
+                }
                 break;
         }
     }
@@ -524,6 +531,37 @@ public class SAdministrador extends HttpServlet {
         adminC = new AdministradorController();
         try {
             adminC.eliminaMateria(Integer.parseInt(request.getParameter("ID")));
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+
+    private void reporteGAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        alumC = new AlumnosController();
+        List <CtSemanaFiscal> listsemana = new ArrayList<>();
+        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List <CtGrado> listgrado = new ArrayList<>();
+        List <CtGrupo> listgrupo = new ArrayList<>();
+        List <CtAreaalumno> listarea = new ArrayList<>();
+        List <CtCptalumno> listcpt = new ArrayList<>();
+        try {
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            listsemana = alumC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listsemana", listsemana);
+            listarea = adminC.getArea(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listarea", listarea);
+            listcpt = adminC.getCpt(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listcpt", listcpt);
+            listgrado = adminC.getGrado(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listgrado", listgrado);
+            listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listgrupo", listgrupo);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/reporteGAsistencia.jsp");
+            rd.forward(request, response);
+            
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);

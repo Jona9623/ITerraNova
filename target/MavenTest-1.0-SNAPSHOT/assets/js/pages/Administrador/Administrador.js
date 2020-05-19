@@ -14,6 +14,18 @@ var Admin = (function () {
                 swal("Listo!", "Registrado correctamente, favor de revisar su correo", "success");
             });
         },
+        reporteGAsistencia: function(){
+            $.get("SAdministrador",{
+                ACCION: "reporteGAsistencia",
+                TIPOESCUELA: tipoescuela
+            }).done(function(xhr,status,error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                }
+            });
+        },
         tablaPuesto: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaPuesto",

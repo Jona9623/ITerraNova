@@ -43,7 +43,10 @@ $(document).ready(function () {
     });
     $("#AsistenciaReporte").on('click',function(){
         Adminpersonal.reporteAsistencia($("#personalReporte").val());
-    })
+    });
+    $("#generalasistencia").on('click',function(){
+       Admin.reporteGAsistencia(); 
+    });
     $('#amalumnos').on('click', function () {
         Adminalumno.tablaAlumnos();
     });
