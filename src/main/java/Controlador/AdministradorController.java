@@ -7,6 +7,7 @@ package Controlador;
 
 import BD.ConsultasAdministrador;
 import BD.ConsultasAlumno;
+import Modelos.Alumno;
 import Modelos.CtAreaalumno;
 import Modelos.CtCptalumno;
 import Modelos.CtDatosMateria;
@@ -286,7 +287,7 @@ public class AdministradorController {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.eliminaMateria(id);
     }
-    
+
     public List<CtDia> getDias(int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getDias(tipoescuela);
@@ -294,32 +295,47 @@ public class AdministradorController {
 
     public void asignaMateria(int id, List<TbMateriaPersonal> materiapersonal, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.asignaMateria(id,materiapersonal,tipoescuela);
+        consulta.asignaMateria(id, materiapersonal, tipoescuela);
     }
-    
+
     public List<TbMateriaPersonal> getMateriasAPersonal(int tipoescuela, int idpersonal) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getMateriasAPersonal(tipoescuela,idpersonal);
+        return consulta.getMateriasAPersonal(tipoescuela, idpersonal);
     }
-    
+
     public void asignaAlumnos(int tipoescuela, List<TbMateriaAlumno> listmateriaalum) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.asignaAlumnos(tipoescuela,listmateriaalum);
+        consulta.asignaAlumnos(tipoescuela, listmateriaalum);
     }
-    
+
     public List<TbMateriaAlumno> getMateriasAlum(int idalumno, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getMateriasAlum(idalumno,tipoescuela);
+        return consulta.getMateriasAlum(idalumno, tipoescuela);
     }
-    
+
     public void asignaHorario(TbHorario horario, int tipoescuela) throws Exception {
-        ConsultasAdministrador consulta = new  ConsultasAdministrador();
-        consulta.asignaHorario(horario,tipoescuela);
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.asignaHorario(horario, tipoescuela);
     }
-    
+
     public void guardaAsistencia(List<TbAsistencia> listasistencia, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        consulta.guardaAsistencia(listasistencia,tipoescuela);
+        consulta.guardaAsistencia(listasistencia, tipoescuela);
+    }
+
+    public List<TbAsistencia> getreporteGAsistencia(int idperiodo, int idsemana, int idgrado, int idgrupo, int tipoescuela) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getreporteGAsistencia(idperiodo, idsemana, idgrado, idgrupo, tipoescuela);
+    }
+
+    public List<CtDatosMateria> getMateriasAsistencia(int idgrado, int idgrupo, int tipoescuela) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getMateriasAsistencia(idgrado, idgrupo, tipoescuela);
+    }
+
+    public List<Alumno> getAlumnosAsistencia(int idgrado, int idgrupo, int tipoescuela) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getAlumnosAsistencia(idgrado, idgrupo, tipoescuela);
     }
 
     private List<TbAlumnos> readFromCSVA(String ruta, int tipoescuela) throws Exception {
@@ -637,5 +653,5 @@ public class AdministradorController {
             throw e;
         }
     }
-    
+
 }

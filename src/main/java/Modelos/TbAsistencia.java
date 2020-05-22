@@ -15,6 +15,7 @@ public class TbAsistencia {
     private String nombrealum;
     private String apellidopa;
     private String apellidoma;
+    private int r_alumno;
     private int r_dia;
     private String dia;
     private int r_semana;
@@ -22,6 +23,50 @@ public class TbAsistencia {
     private int r_periodo;
     private String periodo;
     private int asistencia;
+    private int r_materia;
+    private String nombrelargo;
+    private String nombrepe;
+    private String apellidopape;
+
+    public int getR_alumno() {
+        return r_alumno;
+    }
+
+    public void setR_alumno(int r_alumno) {
+        this.r_alumno = r_alumno;
+    }
+
+    public int getR_materia() {
+        return r_materia;
+    }
+
+    public void setR_materia(int r_materia) {
+        this.r_materia = r_materia;
+    }
+
+    public String getNombrepe() {
+        return nombrepe;
+    }
+
+    public void setNombrepe(String nombrepe) {
+        this.nombrepe = nombrepe;
+    }
+
+    public String getApellidopape() {
+        return apellidopape;
+    }
+
+    public void setApellidopape(String apellidopape) {
+        this.apellidopape = apellidopape;
+    }
+
+    public String getNombrelargo() {
+        return nombrelargo;
+    }
+
+    public void setNombrelargo(String nombrelargo) {
+        this.nombrelargo = nombrelargo;
+    }
 
     public int getIdtbasistencia() {
         return idtbasistencia;

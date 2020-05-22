@@ -68,24 +68,6 @@
             </c:forEach>
         </select>
     </div>
-    <div class="col-lg-4 p-t-20">
-        <label >Seleccione una área</label>
-        <select id="areaGasistencia" class="custom-select">
-            <option value="0"> No aplica</option>
-            <c:forEach items="${requestScope.listarea}" var="listarea">
-                <option value="${listarea.idtbarea}">${listarea.nombre} </option>
-            </c:forEach>
-        </select>
-    </div>
-    <div class="col-lg-4 p-t-20">
-        <label >Seleccione capaciatación para el trabajo</label>
-        <select id="cptGassitencia" class="custom-select">
-            <option value="0"> No aplica</option>
-            <c:forEach items="${requestScope.listcpt}" var="listcpt">
-                <option value="${listcpt.idtbcpt}">${listcpt.nombre} </option>
-            </c:forEach>
-        </select>
-    </div>
 </div>
 <br>
 <div class="row">

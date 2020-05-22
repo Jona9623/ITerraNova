@@ -206,11 +206,11 @@
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="nav-item">
+                                       <li class="nav-item">
                                             <a id="generalasistencia" class="nav-link ">
                                                 <span class="title"> <strong>Reporte general de asistencia</strong></span>
                                             </a>
-                                        </li>
+                                        </li> 
                                         <li class="nav-item">
                                             <a id="amalumnos" class="nav-link ">
                                                 <span class="title"> <strong>Mostrar/Agregar Alumnos</strong></span>

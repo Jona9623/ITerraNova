@@ -266,37 +266,59 @@ var Adminpersonal = (function () {
                     });
                     //$("#asistencia").on('click', function () {
                     $("body").find("button[id='asistencia']").unbind('click').bind('click', function () {
-                        let listasistencia = [];
-                        let check = 0;
-                        $("#check3 input[type='checkbox']").each(function () {
-                            if ($(this).is(':checked')) {
-                                check = 1;
-                            } else {
-                                check = 0;
-                            }
-                            let asistencia = {
-                                "r_materiaalumno": $(this).val(),
-                                "r_dia": $("#diaasistencia").val(),
-                                "r_semana": $("#semanafiscalasistencia").val(),
-                                "r_periodo": $("#periodoasistencia").val(),
-                                "asistencia": check
+                        var dia = $("#diaasistencia").val();
+                        var nombredia;
+                        if (dia == 1 || dia == 6)
+                            nombredia = "Lunes";
+                        if (dia == 2 || dia == 7)
+                            nombredia = "Martes";
+                        if (dia == 3 || dia == 8)
+                            nombredia = "Miercoles";
+                        if (dia == 4 || dia == 9)
+                            nombredia = "Jueves";
+                        if (dia == 5 || dia == 10)
+                                nombredia = "Viernes";
+                        swal({
+                            title: "Estas seguro?",
+                            text: "Se guardara asistencia para el dia: " + nombredia,
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Confirmar",
+                            closeOnConfirm: false
+                        }, function () {
+                            let listasistencia = [];
+                            let check = 0;
+                            $("#check3 input[type='checkbox']").each(function () {
+                                if ($(this).is(':checked')) {
+                                    check = 1;
+                                } else {
+                                    check = 0;
+                                }
+                                let asistencia = {
+                                    "r_materiaalumno": $(this).val(),
+                                    "r_dia": $("#diaasistencia").val(),
+                                    "r_semana": $("#semanafiscalasistencia").val(),
+                                    "r_periodo": $("#periodoasistencia").val(),
+                                    "asistencia": check
 
-                            };
-                            listasistencia.push(asistencia);
-                            asistencia = null;
-                        });
-                        console.log(listasistencia);
-                        $.get("SAdminpersonal", {
-                            ACCION: "guardaAsistencia",
-                            OBJETO: JSON.stringify(listasistencia),
-                            TIPOESCUELA: tipoescuela
-                        }).done(function (xhr, status, error) {
-                            if (error.status != 200)
-                                swal(error.getResponseHeader("ERROR"), "", "warning");
-                            else {
-                                swal("Hecho!", "Asistencia del dia guardada", "success");
-                                listasistencia = [];
-                            }
+                                };
+                                listasistencia.push(asistencia);
+                                asistencia = null;
+                            });
+                            console.log(listasistencia);
+                            $.get("SAdminpersonal", {
+                                ACCION: "guardaAsistencia",
+                                OBJETO: JSON.stringify(listasistencia),
+                                TIPOESCUELA: tipoescuela
+                            }).done(function (xhr, status, error) {
+                                if (error.status != 200)
+                                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                                else {
+                                    swal("Hecho!", "Asistencia del dia guardada", "success");
+                                    listasistencia = [];
+                                }
+                            });
                         });
                     });
                 }
@@ -341,27 +363,23 @@ var Adminpersonal = (function () {
                     idperiodo = $("#periodoReporte").val();
                     idmateria = $("#materiaReporte").val();
                     idsemana = $("#semanaReporte").val();
-                    Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana,idpersonal);
+                    Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana, idpersonal);
                     $("body").find("select[id='periodoReporte']").unbind('change').bind('change', function () {
                         idperodo = $("#periodoReporte").val();
-                        Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana,idpersonal);
+                        Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana, idpersonal);
                     });
                     $("body").find("select[id='materiaReporte']").unbind('change').bind('change', function () {
                         idmateria = $("#materiaReporte").val();
-                        Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana,idpersonal);
+                        Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana, idpersonal);
                     });
                     $("body").find("select[id='semanaReporte']").unbind('change').bind('change', function () {
                         idsemana = $("#semanaReporte").val();
-                        Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana,idpersonal);
-                    });
-                    $("#tablaasisencia").DataTable({
-                        //paging: false,
-                        "scrollX": true
+                        Adminpersonal.getreporteAsistencia(idperiodo, idmateria, idsemana, idpersonal);
                     });
                 }
             })
         },
-        getreporteAsistencia: function(idperiodo,idmateria,idsemana,idpersonal){
+        getreporteAsistencia: function (idperiodo, idmateria, idsemana, idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "getreporteAsistencia",
                 ID: idpersonal,
@@ -374,6 +392,10 @@ var Adminpersonal = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#ReporteAsistencia").html(arguments[0]);
+                    $("#tablaasisencia").DataTable({
+                        //paging: false,
+                        "scrollX": true
+                    });
                 }
             })
         },

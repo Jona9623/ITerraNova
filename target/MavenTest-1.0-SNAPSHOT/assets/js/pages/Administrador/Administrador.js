@@ -23,6 +23,48 @@ var Admin = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#content").html(arguments[0]);
+                    idperiodo = $("#periodoGasistencia").val();
+                    idsemana = $("#semanafiscalGasistencia").val();
+                    idgrado = $("#gradoGasistencia").val();
+                    idgrupo = $("#grupoGasistencia").val();
+                    Admin.getreporteGAsistencia(idperiodo,idsemana,idgrado,idgrupo);
+                    $("body").find("select[id='periodoGasistencia']").unbind('change').bind('change', function () {
+                        idperiodo = $("#periodoGasistencia").val();
+                        Admin.getreporteGAsistencia(idperiodo,idsemana,idgrado,idgrupo);
+                    });
+                    $("body").find("select[id='semanafiscalGasistencia']").unbind('change').bind('change', function () {
+                        idsemana = $("#semanafiscalGasistencia").val();
+                        Admin.getreporteGAsistencia(idperiodo,idsemana,idgrado,idgrupo);
+                    });
+                    $("body").find("select[id='gradoGasistencia']").unbind('change').bind('change', function () {
+                        idgrado = $("#gradoGasistencia").val();
+                        Admin.getreporteGAsistencia(idperiodo,idsemana,idgrado,idgrupo);
+                    });
+                    $("body").find("select[id='grupoGasistencia']").unbind('change').bind('change', function () {
+                        idgrupo = $("#grupoGasistencia").val();
+                        Admin.getreporteGAsistencia(idperiodo,idsemana,idgrado,idgrupo);
+                    });
+                }
+            });
+        },
+        getreporteGAsistencia: function(idperiodo,idsemana,idgrado,idgrupo){
+            $.get("SAdministrador",{
+                ACCION: "getreporteGAsistencia",
+                IDP: idperiodo,
+                IDS: idsemana,
+                IDGRADO: idgrado,
+                IDGRUPO: idgrupo,
+                TIPOESCUELA: tipoescuela
+            }).done(function(xhr,stats,error){
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#ReporteGAsistencia").html(arguments[0]);
+                    $("#tablaaGsisencia").DataTable({
+                        paging: false,
+                        "scrollX": true
+                        
+                    });
                 }
             });
         },

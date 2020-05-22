@@ -9,32 +9,42 @@
 <!DOCTYPE html>
 <br>
 <div class="row col-lg-12 col-md-12 col-sm-12">
-    <table id="tablaasisencia" class="table table-bordered" style="width:100%">
+    <table id="tablaaGsisencia" class="table table-bordered" style="width:100%">
         <thead class="thead-light">
             <tr>
-                <th style="display: none"></th>
-                <th class="center">Nombre</th>
-                <th class="center">A. Paterno</th>
-                <th class="center">A. Materno</th>
-                <th class="center">Materia</th>
-                <th class="center">Materia</th>
-                <th class="center">Materia</th>
-                <th class="center">Materia</th>
-                <th class="center">Materia</th>
-                <th class="center">Materia</th>
+                <th class="center">Nombre completo alumno</th>
+                    <c:forEach items="${requestScope.listmateria}" var="listmateria">
+                    <th class="center">${listmateria.nombrelargo}</th>
+                    </c:forEach>
+
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${requestScope.listalumno}" var="listalumno">
-                <tr class=" <c:if test="${listalumno.asistencia == 1}">asi</c:if> <c:if test="${listalumno.asistencia == 2}">asi-media</c:if> <c:if test="${listalumno.asistencia >= 3}">asi-grave</c:if>">
-                    <td class="center" style="display: none">${listalumno.idtbasistencia}</td>
-                    <td class="center">${listalumno.nombrealum}</td>
-                    <td class="center">${listalumno.apellidopa}</td>
-                    <td class="center">${listalumno.apellidoma}</td>
-                    <td class="center">${listalumno.asistencia}</td>
-                    <td class="center">${listalumno.asistencia}</td>
+            <c:set var="bandera" value="0"></c:set> 
+            <c:forEach items="${requestScope.listalumnos}" var="listalumnos" varStatus="i">
+                <tr class="" >
+                    <td class="center">${listalumnos.nombre} ${listalumnos.apellidop} ${listalumnos.apellidom}</td>
+                    <c:forEach items="${requestScope.listmateria}" var="listmateria" varStatus="j">
+                        <c:forEach items="${requestScope.listasistencia}" var="listasistencia" varStatus="k">
+                            <c:if test="${listasistencia.r_materia == listmateria.idtbdatosmateria && listasistencia.r_alumno == listalumnos.id}">
+                                <c:set var="bandera" value="${listasistencia.asistencia}"></c:set> 
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bandera >0}">
+                            <td class="center <c:if test="${bandera == 1}">asi</c:if> <c:if test="${bandera == 2}">asi-media</c:if> <c:if test="${bandera >= 3}">asi-grave</c:if>">
+                                <c:out value="${bandera}"></c:out>
+                            </td> 
+                        </c:if>
+                            <c:if test="${bandera == 0}">
+                            <td class="center">
+                                0
+                            </td> 
+                        </c:if>
+                            <c:set var="bandera" value="0"></c:set> 
+                    </c:forEach>
                 </tr>
-                </c:forEach>
+            </c:forEach>
         </tbody>
     </table>
 </div>
+

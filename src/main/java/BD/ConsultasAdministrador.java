@@ -5,6 +5,7 @@
  */
 package BD;
 
+import Modelos.Alumno;
 import Modelos.CtAreaalumno;
 import Modelos.CtCptalumno;
 import Modelos.CtDatosMateria;
@@ -2322,6 +2323,224 @@ public class ConsultasAdministrador {
             }
         }
         return listdia;
+    }
+
+    public List<TbAsistencia> getreporteGAsistencia(int idperiodo, int idsemana, int idgrado, int idgrupo, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbAsistencia> listasistencia = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            if (idgrupo == 0) {
+                String consulta = "select tb_asistencia.idtb_asistencia, count(tb_asistencia.asistencia) as faltas,group_concat(ct_dia.nombre) as dias,ct_datosmateria.nombrelargo,ct_datosmateria.idCt_DatosMateria,tb_alumnos.idTb_Alumnos,  tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno\n"
+                        + "						from tb_asistencia inner join tb_materiaalumno\n"
+                        + "						on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno inner join ct_semanafiscal\n"
+                        + "                        on tb_asistencia.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join ct_dia\n"
+                        + "                        on tb_asistencia.r_dia = ct_dia.idCt_Dia inner join ct_periodoescolar\n"
+                        + "                        on tb_asistencia.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join tb_alumnos\n"
+                        + "                        on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
+                        + "                        on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join tb_personal\n"
+                        + "                        on tb_materiapersonal.r_personal = tb_personal.idTb_Personal inner join tb_materia\n"
+                        + "                        on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join ct_datosmateria\n"
+                        + "                        on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                        + "                       where tb_asistencia.r_periodo = ? and  tb_materia.r_grado = ? and tb_asistencia.r_semanafiscal = ? and\n"
+                        + "                       tb_asistencia.status = 1 and tb_asistencia.tipoescuela = ? and tb_asistencia.asistencia = 0\n"
+                        + "					   group by tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, ct_datosmateria.nombrelargo, tb_personal.Nombre, tb_personal.apellidopaterno\n"
+                        + "                       order by tb_alumnos.apellidopaterno asc;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, idperiodo);
+                pst.setInt(2, idgrado);
+                pst.setInt(3, idsemana);
+                pst.setInt(4, tipoescuela);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    TbAsistencia asistencia = new TbAsistencia();
+                    asistencia.setIdtbasistencia(rs.getInt("tb_asistencia.idtb_asistencia"));
+                    asistencia.setNombrealum(rs.getString("tb_alumnos.nombre"));
+                    asistencia.setApellidopa(rs.getString("tb_alumnos.apellidopaterno"));
+                    asistencia.setApellidoma(rs.getString("tb_alumnos.apellidomaterno"));
+                    asistencia.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+                    asistencia.setDia(rs.getString("dias"));
+                    asistencia.setAsistencia(rs.getInt("faltas"));
+                    asistencia.setR_materia(rs.getInt("ct_datosmateria.idCt_DatosMateria"));
+                    asistencia.setR_alumno(rs.getInt("tb_alumnos.idTb_Alumnos"));
+                    listasistencia.add(asistencia);
+                }
+            } else {
+                String consulta = "select tb_asistencia.idtb_asistencia, count(tb_asistencia.asistencia) as faltas,group_concat(ct_dia.nombre) as dias,ct_datosmateria.nombrelargo,ct_datosmateria.idCt_DatosMateria,tb_alumnos.idTb_Alumnos,  tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno\n"
+                        + "						from tb_asistencia inner join tb_materiaalumno\n"
+                        + "						on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno inner join ct_semanafiscal\n"
+                        + "                        on tb_asistencia.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join ct_dia\n"
+                        + "                        on tb_asistencia.r_dia = ct_dia.idCt_Dia inner join ct_periodoescolar\n"
+                        + "                        on tb_asistencia.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join tb_alumnos\n"
+                        + "                        on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
+                        + "                        on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join tb_personal\n"
+                        + "                        on tb_materiapersonal.r_personal = tb_personal.idTb_Personal inner join tb_materia\n"
+                        + "                        on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join ct_datosmateria\n"
+                        + "                        on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                        + "                       where tb_asistencia.r_periodo = ? and  tb_materia.r_grado = ? and  tb_materia.r_grupo = ? and tb_asistencia.r_semanafiscal = ? and\n"
+                        + "                       tb_asistencia.status = 1 and tb_asistencia.tipoescuela = ? and tb_asistencia.asistencia = 0\n"
+                        + "					   group by tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno, ct_datosmateria.nombrelargo, tb_personal.Nombre, tb_personal.apellidopaterno\n"
+                        + "                       order by tb_alumnos.apellidopaterno asc;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, idperiodo);
+                pst.setInt(2, idgrado);
+                pst.setInt(3, idgrupo);
+                pst.setInt(4, idsemana);
+                pst.setInt(5, tipoescuela);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    TbAsistencia asistencia = new TbAsistencia();
+                    asistencia.setIdtbasistencia(rs.getInt("tb_asistencia.idtb_asistencia"));
+                    asistencia.setNombrealum(rs.getString("tb_alumnos.nombre"));
+                    asistencia.setApellidopa(rs.getString("tb_alumnos.apellidopaterno"));
+                    asistencia.setApellidoma(rs.getString("tb_alumnos.apellidomaterno"));
+                    asistencia.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+                    asistencia.setDia(rs.getString("dias"));
+                    asistencia.setAsistencia(rs.getInt("faltas"));
+                    asistencia.setR_materia(rs.getInt("ct_datosmateria.idCt_DatosMateria"));
+                    asistencia.setR_alumno(rs.getInt("tb_alumnos.idTb_Alumnos"));
+                    listasistencia.add(asistencia);
+                }
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listasistencia;
+    }
+
+    public List<CtDatosMateria> getMateriasAsistencia(int idgrado, int idgrupo, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<CtDatosMateria> listmaterias = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            if (idgrupo == 0) {
+                String consulta = "SELECT ct_datosmateria.idCt_DatosMateria, ct_datosmateria.nombrelargo FROM tb_materia inner join ct_datosmateria \n"
+                        + "on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                        + "where tb_materia.r_grado = ? and tb_materia.tipoescuela = ?;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, idgrado);
+                pst.setInt(2, tipoescuela);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    CtDatosMateria materia = new CtDatosMateria();
+                    materia.setIdtbdatosmateria(rs.getInt("ct_datosmateria.idCt_DatosMateria"));
+                    materia.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+                    listmaterias.add(materia);
+                }
+            } else {
+                String consulta = "SELECT ct_datosmateria.idCt_DatosMateria, ct_datosmateria.nombrelargo FROM tb_materia inner join ct_datosmateria \n"
+                        + "on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                        + "where tb_materia.r_grado = ? and  tb_materia.r_grupo = ? and tb_materia.tipoescuela = ?;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, idgrado);
+                pst.setInt(2, idgrupo);
+                pst.setInt(3, tipoescuela);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    CtDatosMateria materia = new CtDatosMateria();
+                    materia.setIdtbdatosmateria(rs.getInt("ct_datosmateria.idCt_DatosMateria"));
+                    materia.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+                    listmaterias.add(materia);
+                }
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listmaterias;
+    }
+
+    public List<Alumno> getAlumnosAsistencia(int idgrado, int idgrupo, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<Alumno> listalumno = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            if (idgrupo == 0) {
+                String consulta = "SELECT tb_alumnos.idTb_Alumnos, tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno FROM tb_alumnos\n"
+                        + "where tb_alumnos.r_grado = ? and tb_alumnos.tipoescuela = ?;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, idgrado);
+                pst.setInt(2, tipoescuela);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    Alumno alumno = new Alumno();
+                    alumno.setId(rs.getInt("tb_alumnos.idTb_Alumnos"));
+                    alumno.setNombre(rs.getString("tb_alumnos.nombre"));
+                    alumno.setApellidop(rs.getString("tb_alumnos.apellidopaterno"));
+                    alumno.setApellidom(rs.getString("tb_alumnos.apellidomaterno"));
+                    listalumno.add(alumno);
+                }
+            } else {
+                String consulta = "SELECT tb_alumnos.idTb_Alumnos, tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno FROM tb_alumnos\n"
+                        + "where tb_alumnos.r_grado = ? and tb_alumnos.r_grupo = ? and tb_alumnos.tipoescuela = ?;";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, idgrado);
+                pst.setInt(2, idgrupo);
+                pst.setInt(3, tipoescuela);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    Alumno alumno = new Alumno();
+                    alumno.setId(rs.getInt("tb_alumnos.idTb_Alumnos"));
+                    alumno.setNombre(rs.getString("tb_alumnos.nombre"));
+                    alumno.setApellidop(rs.getString("tb_alumnos.apellidopaterno"));
+                    alumno.setApellidom(rs.getString("tb_alumnos.apellidomaterno"));
+                    listalumno.add(alumno);
+                }
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listalumno;
     }
 
 }
