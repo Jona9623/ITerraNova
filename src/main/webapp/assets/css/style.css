@@ -112,9 +112,9 @@ h6.block {
     box-shadow: 0 1px 3px rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .18)
 }
 .vertical{
-    width:20px;
-  word-wrap: break-word;
-  text-align:center;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    vertical-align: middle;
 }
 .badge {
     display: inline-block;

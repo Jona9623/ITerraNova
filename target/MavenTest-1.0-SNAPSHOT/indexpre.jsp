@@ -631,6 +631,7 @@
         <script type="text/javascript" src="assets/js/canvas/jquery.canvasjs.min.js"></script>
         <script type="text/javascript" src="assets/js/canvas/html2canvas.js"></script>
         <script type="text/javascript" src="assets/js/canvas/FileSaver.js"></script>
+        <script type="text/javascript" src="assets/js/filter.js"></script>
 
         <!-- end js include path -->
     </body>

@@ -14,7 +14,7 @@
             <tr>
                 <th class="center">Nombre completo alumno</th>
                     <c:forEach items="${requestScope.listmateria}" var="listmateria">
-                    <th class="center">${listmateria.nombrelargo}</th>
+                    <th class="center"><p class="center vertical">${listmateria.nombrelargo}</p></th>
                     </c:forEach>
 
             </tr>
@@ -23,7 +23,7 @@
             <c:set var="bandera" value="0"></c:set> 
             <c:forEach items="${requestScope.listalumnos}" var="listalumnos" varStatus="i">
                 <tr class="" >
-                    <td class="center">${listalumnos.nombre} ${listalumnos.apellidop} ${listalumnos.apellidom}</td>
+                    <td class="center">${listalumnos.apellidop} ${listalumnos.apellidom} ${listalumnos.nombre}</td>
                     <c:forEach items="${requestScope.listmateria}" var="listmateria" varStatus="j">
                         <c:forEach items="${requestScope.listasistencia}" var="listasistencia" varStatus="k">
                             <c:if test="${listasistencia.r_materia == listmateria.idtbdatosmateria && listasistencia.r_alumno == listalumnos.id}">
