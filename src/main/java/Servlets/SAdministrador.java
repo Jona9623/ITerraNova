@@ -11,6 +11,7 @@ import Modelos.Alumno;
 import Modelos.CtAreaalumno;
 import Modelos.CtCptalumno;
 import Modelos.CtDatosMateria;
+import Modelos.CtDia;
 import Modelos.CtGrado;
 import Modelos.CtGrupo;
 import Modelos.CtPeriodoEscolar;
@@ -179,6 +180,18 @@ public class SAdministrador extends HttpServlet {
             case "getreporteGAsistencia":
                 try {
                     getreporteGAsistencia(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "justificarFaltas":
+                try {
+                    justificarFaltas(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "getDiasFaltas":
+                try {
+                    getDiasFaltas(request,response);
                 } catch (Exception e) {
                 }
                 break;
@@ -596,6 +609,53 @@ public class SAdministrador extends HttpServlet {
             listalumnos = adminC.getAlumnosAsistencia(Integer.parseInt(request.getParameter("IDGRADO")),Integer.parseInt(request.getParameter("IDGRUPO")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumnos", listalumnos);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/getreporteGasistencia.jsp");
+            rd.forward(request, response);
+            
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+
+    private void justificarFaltas(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        adminC = new AdministradorController();
+        alumC = new AlumnosController();
+        List <CtSemanaFiscal> listsemana = new ArrayList<>();
+        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List <CtDatosMateria> listmateria = new ArrayList<>();
+        try {
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            listsemana = alumC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listsemana", listsemana);
+            listmateria = adminC.justificarFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listmateria", listmateria);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/justificar.jsp");
+            rd.forward(request, response);
+            
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+
+    private void getDiasFaltas(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        adminC = new AdministradorController();
+        alumC = new AlumnosController();
+        List <CtSemanaFiscal> listsemana = new ArrayList<>();
+        List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        List <CtDatosMateria> listmateria = new ArrayList<>();
+        List <CtDia> listdias = new ArrayList<>();
+        try {
+            listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);
+            listsemana = alumC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listsemana", listsemana);
+            listmateria = adminC.justificarFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listmateria", listmateria);
+            listdias = adminC.getDiasFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listdias", listdias);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/justificar.jsp");
             rd.forward(request, response);
             
         } catch (Exception e) {

@@ -12,10 +12,12 @@
     <table id="tablaaGsisencia" class="table table-bordered" style="width:100%">
         <thead class="thead-light">
             <tr>
+                <th style="display: none"></th>
                 <th class="center">Nombre completo alumno</th>
                     <c:forEach items="${requestScope.listmateria}" var="listmateria">
                     <th class="center"><p class="center vertical">${listmateria.nombrelargo}</p></th>
                     </c:forEach>
+                    <th class="center">Acciones</th>
 
             </tr>
         </thead>
@@ -23,6 +25,7 @@
             <c:set var="bandera" value="0"></c:set> 
             <c:forEach items="${requestScope.listalumnos}" var="listalumnos" varStatus="i">
                 <tr class="" >
+                    <td class="center" style="display: none">${listalumnos.id}</td>
                     <td class="center">${listalumnos.apellidop} ${listalumnos.apellidom} ${listalumnos.nombre}</td>
                     <c:forEach items="${requestScope.listmateria}" var="listmateria" varStatus="j">
                         <c:forEach items="${requestScope.listasistencia}" var="listasistencia" varStatus="k">
@@ -42,6 +45,9 @@
                         </c:if>
                             <c:set var="bandera" value="0"></c:set> 
                     </c:forEach>
+                            <td class="center">
+                                <a data-toggle="modal" data-target="#modalJustificar" class="btn-terra2 btnjustificar">Justificar</a>
+                            </td>
                 </tr>
             </c:forEach>
         </tbody>

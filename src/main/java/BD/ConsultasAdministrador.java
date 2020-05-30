@@ -2543,4 +2543,99 @@ public class ConsultasAdministrador {
         return listalumno;
     }
 
+    public List<CtDatosMateria> justificarFaltas(int idalumno, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<CtDatosMateria> listmaterias = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "SELECT tb_materiaalumno.idtb_materiaalumno, ct_datosmateria.nombrelargo FROM tb_materiaalumno inner join tb_materiapersonal\n"
+                    + "on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join tb_materia\n"
+                    + "on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join ct_datosmateria\n"
+                    + "on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                    + "where tb_materiaalumno.r_alumno = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idalumno);
+            pst.setInt(2, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                CtDatosMateria materia = new CtDatosMateria();
+                materia.setIdtbdatosmateria(rs.getInt("tb_materiaalumno.idtb_materiaalumno"));
+                materia.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+                listmaterias.add(materia);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listmaterias;
+    }
+
+    public List<CtDia> getDiasFaltas(int idalumno, int idperiodo, int idsemana, int idmateria, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<CtDia> listdias = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select tb_asistencia.idtb_asistencia, ct_dia.nombre, ct_datosmateria.nombrelargo from tb_asistencia inner join tb_materiaalumno\n"
+                    + "on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno inner join tb_alumnos\n"
+                    + "on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join ct_dia \n"
+                    + "on tb_asistencia.r_dia = ct_dia.idCt_Dia inner join ct_semanafiscal\n"
+                    + "on tb_asistencia.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join ct_periodoescolar\n"
+                    + "on tb_asistencia.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join tb_materiapersonal\n"
+                    + "on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join tb_materia\n"
+                    + "on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join ct_datosmateria\n"
+                    + "on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                    + "where tb_materiaalumno.r_alumno = ? and tb_asistencia.r_materiaalumno = ? and  tb_asistencia.r_semanafiscal = ? and tb_asistencia.r_periodo = ? \n"
+                    + "and tb_asistencia.asistencia = 0 and tb_asistencia.status = 1 and tb_asistencia.tipoescuela = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idalumno);
+            pst.setInt(2, idmateria);
+            pst.setInt(3, idsemana);
+            pst.setInt(4, idperiodo);
+            pst.setInt(5, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                CtDia dia = new CtDia();
+                dia.setIdtbdia(rs.getInt("tb_asistencia.idtb_asistencia"));
+                dia.setNombre(rs.getString("ct_dia.nombre"));
+                listdias.add(dia);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listdias;
+    }
+
 }

@@ -60,18 +60,60 @@ var Admin = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#ReporteGAsistencia").html(arguments[0]);
-                    var tabla = $("#tablaaGsisencia").DataTable({
-                        "searching": true,
-                        paging: false,
-                        "scrollX": true,
-                        "columns": [
-                         {"width": "20%"},
-                         {"width": "10%"}
-                         ]
 
+                    $("body").find('a.btnjustificar').unbind('click').bind('click', function () {
+                        idalumno = $(this).parents("tr").find("td").eq(0).html();
+                        Admin.justificarFaltas(idalumno, idsemana, idperiodo);
                     });
                 }
             });
+        },
+        justificarFaltas: function (idalumno, idsemana, idperiodo) {
+            $.get("SAdministrador", {
+                ACCION: "justificarFaltas",
+                TIPOESCUELA: tipoescuela,
+                IDA: idalumno,
+                IDS: idsemana,
+                IDP: idperiodo
+            }).done(function (xhr, staturs, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else {
+                    $("#content").html(arguments[0]);
+                    idperiodo = $("#periodojustificar").val();
+                    idsemana = $("#semanajustificar").val();
+                    idmateria = $("#materiajustificar").val();
+                    Admin.getDiasFaltas(idalumno, idperiodo, idsemana, idmateria);
+                    $("body").find("select[id='periodojustificar']").unbind('change').bind('change', function () {
+                        idperiodo = $("#periodojustificar").val();
+                        Admin.getDiasFaltas(idalumno, idperiodo, idsemana, idmateria);
+                    });
+                    $("body").find("select[id='semanajustificar']").unbind('change').bind('change', function () {
+                        idsemana = $("#semanajustificar").val();
+                        Admin.getDiasFaltas(idalumno, idperiodo, idsemana, idmateria);
+                    });
+                    $("body").find("select[id='materiajustificar']").unbind('change').bind('change', function () {
+                        idmateria = $("#materiajustificar").val();
+                        Admin.getDiasFaltas(idalumno, idperiodo, idsemana, idmateria);
+                    });
+                }
+            });
+        },
+        getDiasFaltas: function (idalumno, idperiodo, idsemana, idmateria) {
+            $.get("SAdministrador", {
+                ACCION: "getDiasFaltas",
+                TIPOESCUELA: tipoescuela,
+                IDA: idalumno,
+                IDS: idsemana,
+                IDP: idperiodo,
+                IDM: idmateria
+            }).done(function (xhr, status, error) {
+                if (error.status != 200)
+                    swal(error.getResponseHeader("ERROR"), "", "warning");
+                else
+                    $("#JustificarFaltas").html(arguments[0]);
+                    console.log("entra");
+            })
         },
         tablaPuesto: function () {
             $.get("SAdministrador", {
