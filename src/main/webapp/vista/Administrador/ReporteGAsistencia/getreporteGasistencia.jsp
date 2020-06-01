@@ -17,7 +17,7 @@
                     <c:forEach items="${requestScope.listmateria}" var="listmateria">
                     <th class="center"><p class="center vertical">${listmateria.nombrelargo}</p></th>
                     </c:forEach>
-                    <th class="center">Acciones</th>
+                <th class="center">Acciones</th>
 
             </tr>
         </thead>
@@ -36,18 +36,19 @@
                         <c:if test="${bandera >0}">
                             <td class="center <c:if test="${bandera == 1}">asi</c:if> <c:if test="${bandera == 2}">asi-media</c:if> <c:if test="${bandera >= 3}">asi-grave</c:if>">
                                 <c:out value="${bandera}"></c:out>
-                            </td> 
+                                </td> 
                         </c:if>
-                            <c:if test="${bandera == 0}">
+                        <c:if test="${bandera == 0}">
                             <td class="center">
                                 0
                             </td> 
                         </c:if>
-                            <c:set var="bandera" value="0"></c:set> 
+                        <c:set var="bandera" value="0"></c:set> 
                     </c:forEach>
-                            <td class="center">
-                                <a data-toggle="modal" data-target="#modalJustificar" class="btn-terra2 btnjustificar">Justificar</a>
-                            </td>
+
+                    <td class="center">
+                        <a class="btn-terra2 btnjustificar">Justificar</a>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>

@@ -1500,7 +1500,7 @@ public class ConsultasAlumno {
         List<TbAsistencia> listalumno = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select tb_asistencia.idtb_asistencia, count(tb_asistencia.asistencia) as faltas,group_concat(ct_dia.nombre) as dias,  tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno\n"
+            String consulta = "select tb_asistencia.idtb_asistencia, count(tb_asistencia.asistencia) as faltas,group_concat(ct_dia.nombre) as dias,tb_alumnos.idTb_Alumnos,  tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno\n"
                     + "from tb_asistencia inner join tb_materiaalumno\n"
                     + "						on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno inner join ct_semanafiscal\n"
                     + "                        on tb_asistencia.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join ct_dia\n"
@@ -1525,6 +1525,63 @@ public class ConsultasAlumno {
                 asistencia.setNombrealum(rs.getString("tb_alumnos.nombre"));
                 asistencia.setApellidopa(rs.getString("tb_alumnos.apellidopaterno"));
                 asistencia.setApellidoma(rs.getString("tb_alumnos.apellidomaterno"));
+                asistencia.setR_alumno(rs.getInt("tb_alumnos.idTb_Alumnos"));
+                listalumno.add(asistencia);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listalumno;
+    }
+
+    public List<TbAsistencia> getAlumnosAsistenciaJ(int idperiodo, int idmateria, int idsemana, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbAsistencia> listalumno = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select tb_asistencia.idtb_asistencia, count(tb_asistencia.asistencia) as faltas,group_concat(ct_dia.nombre) as dias,tb_alumnos.idTb_Alumnos,  tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno\n"
+                    + "from tb_asistencia inner join tb_materiaalumno\n"
+                    + "						on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno inner join ct_semanafiscal\n"
+                    + "                        on tb_asistencia.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join ct_dia\n"
+                    + "                        on tb_asistencia.r_dia = ct_dia.idCt_Dia inner join ct_periodoescolar\n"
+                    + "                        on tb_asistencia.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join tb_alumnos\n"
+                    + "                        on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
+                    + "                        on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal\n"
+                    + "                       where tb_asistencia.r_periodo = ? and tb_materiaalumno.r_materiapersonal = ? and tb_asistencia.r_semanafiscal = ? and\n"
+                    + "                       tb_asistencia.status = 1 and tb_materiaalumno.tipoescuela = ? and tb_asistencia.asistencia = 3 \n"
+                    + "						group by tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idperiodo);
+            pst.setInt(2, idmateria);
+            pst.setInt(3, idsemana);
+            pst.setInt(4, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TbAsistencia asistencia = new TbAsistencia();
+                asistencia.setIdtbasistencia(rs.getInt("tb_asistencia.idtb_asistencia"));
+                asistencia.setAsistencia(rs.getInt("faltas"));
+                asistencia.setDia(rs.getString("dias"));
+                asistencia.setNombrealum(rs.getString("tb_alumnos.nombre"));
+                asistencia.setApellidopa(rs.getString("tb_alumnos.apellidopaterno"));
+                asistencia.setApellidoma(rs.getString("tb_alumnos.apellidomaterno"));
+                asistencia.setR_alumno(rs.getInt("tb_alumnos.idTb_Alumnos"));
                 listalumno.add(asistencia);
             }
 

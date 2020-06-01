@@ -6,6 +6,19 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div class="page-bar  card-topline-terra2">
+    <div class="page-title-breadcrumb">
+        <div class=" pull-left">
+            <div class="page-title">Justificar/Mostrar faltas</div>
+        </div>
+        <ol class="breadcrumb page-breadcrumb pull-right">
+            <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="indexpre.jsp">Inicio</a>&nbsp;<i class="fa fa-angle-right"></i>
+                &nbsp;<a class="parent-item" href="javascript:Admin.reporteGAsistencia();">Reporte asistencia general</a>&nbsp;<i class="fa fa-angle-right"></i>
+            </li>
+            <li class="active">Justificar/Mostrar faltas</li>
+        </ol>
+    </div>
+</div>
 <br>
 <br> <br>
 <div class="row ">
@@ -35,10 +48,8 @@
     </div>
 
 </div>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div id="JustificarFaltas">
-            <jsp:include page='getdiasfaltas.jsp'>
-                <jsp:param name="article1" value=""/>
-            </jsp:include>
-        </div>
-    </div>
+<div id="Justificacion">
+    <jsp:include page='getdiasfaltas.jsp'>
+        <jsp:param name="article1" value=""/>
+    </jsp:include>
+</div>

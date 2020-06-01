@@ -23,9 +23,9 @@
                         <td class="center" style="display: none">${listdias.idtbdia}</td>
                         <td class="center">${listdias.nombre}</td>
                         <td class="center">
-                            <div id="check" class="checkbox checkbox-icon-black">
-                                <input id="dia${listdia.idtbdia}" type="checkbox" value="${listdia.idtbdia}">
-                                <label for="dia${listdia.idtbdia}"></label>
+                            <div id="checkfaltas" class="checkbox checkbox-icon-black">
+                                <input id="dia${listdias.idtbdia}" type="checkbox" value="${listdias.idtbdia}">
+                                <label for="dia${listdias.idtbdia}"></label>
                             </div>
                         </td>
                     </tr>

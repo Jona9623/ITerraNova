@@ -347,6 +347,11 @@ public class AdministradorController {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getDiasFaltas(idalumno,idperiodo,idsemana,idmateria,tipoescuela);
     }
+    
+    public void updateJustificar(List<TbAsistencia> listasistencia) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.updateJustificar(listasistencia);
+    }
 
     private List<TbAlumnos> readFromCSVA(String ruta, int tipoescuela) throws Exception {
         List<TbAlumnos> alumnos = new ArrayList<>();

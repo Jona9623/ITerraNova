@@ -21,10 +21,12 @@ import Modelos.CtTipoCalificaicon;
 import Modelos.GradoGrupo;
 import Modelos.TbAsistencia;
 import Modelos.TbMateria;
+import Modelos.TbMateriaAlumno;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -192,6 +194,12 @@ public class SAdministrador extends HttpServlet {
             case "getDiasFaltas":
                 try {
                     getDiasFaltas(request,response);
+                } catch (Exception e) {
+                }
+                break;
+            case "updateJustificar":
+                try {
+                    updateJustificar(request,response);
                 } catch (Exception e) {
                 }
                 break;
@@ -658,6 +666,21 @@ public class SAdministrador extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/justificar.jsp");
             rd.forward(request, response);
             
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
+
+    private void updateJustificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        mapper = new ObjectMapper();
+        adminC = new AdministradorController();
+        List<TbAsistencia> listasistencia = new ArrayList<TbAsistencia>();
+        objectJson = request.getParameter("OBJETO");
+        try {
+            listasistencia = Arrays.asList(mapper.readValue(objectJson, TbAsistencia[].class));
+            System.out.println(listasistencia);
+            adminC.updateJustificar(listasistencia);
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);

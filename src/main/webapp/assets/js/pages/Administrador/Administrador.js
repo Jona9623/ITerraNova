@@ -60,7 +60,6 @@ var Admin = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#ReporteGAsistencia").html(arguments[0]);
-
                     $("body").find('a.btnjustificar').unbind('click').bind('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Admin.justificarFaltas(idalumno, idsemana, idperiodo);
@@ -96,6 +95,28 @@ var Admin = (function () {
                         idmateria = $("#materiajustificar").val();
                         Admin.getDiasFaltas(idalumno, idperiodo, idsemana, idmateria);
                     });
+                    $("body").unbind('click').on("click", "#justificarfaltas", function (event) {
+                       let faltas = [];
+                        $("#checkfaltas input[type='checkbox']:checked").each(function () {
+                            let falta = {
+                                "idtbasistencia": $(this).val()
+                            };
+                            faltas.push(falta);
+                            falta = null;
+                        }); 
+                        console.log(faltas);
+                        $.get("SAdministrador",{
+                            ACCION: "updateJustificar",
+                            OBJETO: JSON.stringify(faltas)
+                        }).done(function(xhr,status,error){
+                            if (error.status != 200)
+                                swal(error.getResponseHeader("ERROR"), "", "warning");
+                            else {
+                                swal("Hecho!", "Faltas justificadas", "success");
+                                alumnos = [];
+                            }
+                        });
+                    });
                 }
             });
         },
@@ -111,7 +132,7 @@ var Admin = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else
-                    $("#JustificarFaltas").html(arguments[0]);
+                    $("#Justificacion").html(arguments[0]);
                     console.log("entra");
             })
         },

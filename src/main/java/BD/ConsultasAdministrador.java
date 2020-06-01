@@ -2638,4 +2638,37 @@ public class ConsultasAdministrador {
         return listdias;
     }
 
+    public void updateJustificar(List<TbAsistencia> listasistencia) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            for (TbAsistencia item : listasistencia) {
+                con.setAutoCommit(false);
+                String consulta = "UPDATE `tb_asistencia` SET `asistencia` = '3' WHERE (`idtb_asistencia` = ?);";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, item.getIdtbasistencia());
+
+                if (pst.executeUpdate() == 1) {
+                    con.commit();
+                } else {
+                    System.out.println("no se pudo guardar");
+                }
+                pst = null;
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
 }

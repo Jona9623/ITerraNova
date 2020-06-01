@@ -524,6 +524,7 @@ public class SAdminpersonal extends HttpServlet {
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
         List<TbAsistencia> listalumno = new ArrayList<>();
+        List<TbAsistencia> listalumnoJ = new ArrayList<>();
         List<CtDia> listdia = new  ArrayList<>();
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
@@ -536,6 +537,8 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listperiodo", listperiodo);
             listalumno = alumC.getAlumnosAsistencia(Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumno", listalumno);
+            listalumnoJ = alumC.getAlumnosAsistenciaJ(Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listalumnoJ", listalumnoJ);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/getreporteasistencia.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

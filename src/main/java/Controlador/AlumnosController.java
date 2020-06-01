@@ -335,5 +335,10 @@ public class AlumnosController {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getAlumnosAsistencia(idperiodo,idmateria,idsemana,tipoescuela);
     }
+
+    public List<TbAsistencia> getAlumnosAsistenciaJ(int idperiodo, int idmateria, int idsemana, int tipoescuela) throws Exception {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.getAlumnosAsistenciaJ(idperiodo,idmateria,idsemana,tipoescuela);
+    }
   
 }
