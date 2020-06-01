@@ -663,9 +663,8 @@ public class SAdministrador extends HttpServlet {
             request.setAttribute("listmateria", listmateria);
             listdias = adminC.getDiasFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listdias", listdias);
-            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/justificar.jsp");
-            rd.forward(request, response);
-            
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/getdiasfaltas.jsp");
+            rd.forward(request, response);           
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);

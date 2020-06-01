@@ -4,9 +4,9 @@
     Author     : Complx
 --%>
 
->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<br><br> <br>
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <table id="" class="table table-bordered" style="width:100%">

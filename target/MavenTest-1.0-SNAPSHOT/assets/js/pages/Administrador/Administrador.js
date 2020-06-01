@@ -131,9 +131,10 @@ var Admin = (function () {
             }).done(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else
+                else{
                     $("#Justificacion").html(arguments[0]);
                     console.log("entra");
+                }
             })
         },
         tablaPuesto: function () {
