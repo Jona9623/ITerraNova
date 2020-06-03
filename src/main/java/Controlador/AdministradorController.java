@@ -668,6 +668,12 @@ public class AdministradorController {
             throw e;
         }
     }
+
+    public Alumno getAlumno(int idalumno, int tipoescuela)throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getAlumno(idalumno,tipoescuela);
+        
+    }
  
 
 }

@@ -2548,6 +2548,7 @@ public class ConsultasAdministrador {
         PreparedStatement pst = null;
         ResultSet rs = null;
         List<CtDatosMateria> listmaterias = new ArrayList<>();
+        Alumno alumno = new Alumno();
         try {
             con.setAutoCommit(false);
             String consulta = "SELECT tb_materiaalumno.idtb_materiaalumno, ct_datosmateria.nombrelargo FROM tb_materiaalumno inner join tb_materiapersonal\n"
@@ -2669,6 +2670,44 @@ public class ConsultasAdministrador {
                 System.out.println(e);
             }
         }
+    }
+
+    public Alumno getAlumno(int idalumno, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Alumno alumno = new Alumno();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select * from tb_alumnos where idTb_Alumnos = ? and tipoescuela = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idalumno);
+            pst.setInt(2, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellidop(rs.getString("apellidopaterno"));
+                alumno.setApellidom(rs.getString("apellidomaterno"));
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return alumno;
     }
 
 }

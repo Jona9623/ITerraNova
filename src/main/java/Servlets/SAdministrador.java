@@ -631,6 +631,7 @@ public class SAdministrador extends HttpServlet {
         List <CtSemanaFiscal> listsemana = new ArrayList<>();
         List <CtPeriodoEscolar> listperiodo = new ArrayList<>();
         List <CtDatosMateria> listmateria = new ArrayList<>();
+        Alumno alumno = new Alumno();
         try {
             listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);
@@ -638,6 +639,8 @@ public class SAdministrador extends HttpServlet {
             request.setAttribute("listsemana", listsemana);
             listmateria = adminC.justificarFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listmateria", listmateria);
+            alumno = adminC.getAlumno(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("alumno", alumno);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/justificar.jsp");
             rd.forward(request, response);
             

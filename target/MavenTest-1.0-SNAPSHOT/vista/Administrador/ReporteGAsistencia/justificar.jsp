@@ -9,7 +9,8 @@
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
         <div class=" pull-left">
-            <div class="page-title">Justificar/Mostrar faltas</div>
+            <div class="page-title">Justificar/Mostrar faltas</div> <br>
+            <p>Alumno(a): <strong>${requestScope.alumno.apellidop} ${requestScope.alumno.apellidom} ${requestScope.alumno.nombre}</strong></p>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="indexpre.jsp">Inicio</a>&nbsp;<i class="fa fa-angle-right"></i>

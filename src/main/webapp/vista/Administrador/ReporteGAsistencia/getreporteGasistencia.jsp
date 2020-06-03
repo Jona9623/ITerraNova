@@ -8,8 +8,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <br>
-<div class="row col-lg-12 col-md-12 col-sm-12">
-    <table id="tablaaGsisencia" class="table table-bordered" style="width:100%">
+<div id="scroll" class="row col-lg-12 col-md-12 col-sm-12">
+    <table id="tablaGsisencia" class="table table-bordered" style="width:100%">
         <thead class="thead-light">
             <tr>
                 <th style="display: none"></th>

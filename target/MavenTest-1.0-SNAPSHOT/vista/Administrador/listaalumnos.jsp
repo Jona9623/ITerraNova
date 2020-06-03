@@ -21,7 +21,8 @@
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
         <div class=" pull-left">
-            <div class="page-title">Lista Alumnos</div>
+            <div class="page-title">Lista Alumnos</div><br>
+            <p>Personal: <strong>${requestScope.personal.apellidop} ${requestScope.personal.apellidom} ${requestScope.personal.nombre}</strong></p>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <% if (x == 3 || x == 4 || x == 5) { %>  

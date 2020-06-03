@@ -366,6 +366,7 @@ public class SAdminpersonal extends HttpServlet {
         List<TbMateriaPersonal> listmateria = new ArrayList<>();
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
+        TbPersonal personal = new TbPersonal();
         try {
             listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")), Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("listmateria", listmateria);
@@ -373,6 +374,8 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listgrado", listgrado);
             listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listgrupo", listgrupo);
+            personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("personal", personal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/agregaalumnospersonal.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -428,6 +431,7 @@ public class SAdminpersonal extends HttpServlet {
         List<CtDia> listdia = new  ArrayList<>();
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        TbPersonal personal = new TbPersonal();
         try {
             listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")), Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("listmateria", listmateria);
@@ -441,6 +445,8 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listsemana", listsemana);
             listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);
+            personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("personal", personal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/listaalumnos.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -503,6 +509,7 @@ public class SAdminpersonal extends HttpServlet {
         List<CtDia> listdia = new  ArrayList<>();
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
+        TbPersonal personal = new TbPersonal();
         try {
             listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")), Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("listmateria", listmateria);
@@ -510,6 +517,8 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listsemana", listsemana);
             listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);
+            personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("personal", personal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/reporteasistencia.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

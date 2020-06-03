@@ -99,6 +99,11 @@ h6.block {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+#scroll {
+    display: block;
+    overflow-x: auto;
+
+}
 .alert,
 .badge,
 .btn-group>.btn,

@@ -9,7 +9,8 @@
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
         <div class=" pull-left">
-            <div class="page-title">Agregar Alumnos</div>
+            <div class="page-title">Agregar Alumnos</div><br>
+            <p>Personal: <strong>${requestScope.personal.apellidop} ${requestScope.personal.apellidom} ${requestScope.personal.nombre}</strong></p>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="indexpre.jsp">Inicio</a>&nbsp;<i class="fa fa-angle-right"></i>

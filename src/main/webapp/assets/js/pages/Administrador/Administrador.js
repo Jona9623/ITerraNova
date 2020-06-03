@@ -64,6 +64,12 @@ var Admin = (function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Admin.justificarFaltas(idalumno, idsemana, idperiodo);
                     });
+                   /* $("#tablaGsisencia").DataTable({
+                        "ordering": false,
+                        "paging": false,
+                        "searching": false,
+                        "scrollX": true,
+                    });*/
                 }
             });
         },
@@ -96,19 +102,19 @@ var Admin = (function () {
                         Admin.getDiasFaltas(idalumno, idperiodo, idsemana, idmateria);
                     });
                     $("body").unbind('click').on("click", "#justificarfaltas", function (event) {
-                       let faltas = [];
+                        let faltas = [];
                         $("#checkfaltas input[type='checkbox']:checked").each(function () {
                             let falta = {
                                 "idtbasistencia": $(this).val()
                             };
                             faltas.push(falta);
                             falta = null;
-                        }); 
+                        });
                         console.log(faltas);
-                        $.get("SAdministrador",{
+                        $.get("SAdministrador", {
                             ACCION: "updateJustificar",
                             OBJETO: JSON.stringify(faltas)
-                        }).done(function(xhr,status,error){
+                        }).done(function (xhr, status, error) {
                             if (error.status != 200)
                                 swal(error.getResponseHeader("ERROR"), "", "warning");
                             else {
@@ -131,7 +137,7 @@ var Admin = (function () {
             }).done(function (xhr, status, error) {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
-                else{
+                else {
                     $("#Justificacion").html(arguments[0]);
                     console.log("entra");
                 }
