@@ -48,6 +48,7 @@ var Admin = (function () {
             });
         },
         getreporteGAsistencia: function (idperiodo, idsemana, idgrado, idgrupo) {
+            alert (idperiodo);
             $.get("SAdministrador", {
                 ACCION: "getreporteGAsistencia",
                 IDP: idperiodo,

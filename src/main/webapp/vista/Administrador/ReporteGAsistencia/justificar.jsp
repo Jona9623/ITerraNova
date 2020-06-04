@@ -27,7 +27,11 @@
         <label >Seleccione periodo escolar</label>
         <select id="periodojustificar" class="custom-select" name="periodojustificar">
             <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
-                <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
+                <option value="${listperiodo.idtbperiodo}" 
+                        <c:if test="${listperiodo.idtbperiodo == requestScope.idperiodo}">
+                            selected=""
+                        </c:if>
+                        >${listperiodo.nombre} </option>
             </c:forEach>
         </select>
     </div>
@@ -35,7 +39,11 @@
         <label >Seleccione Semana fiscal</label>
         <select id="semanajustificar" name="semanajustificar" class="custom-select">
             <c:forEach items="${requestScope.listsemana}" var="listsemana">
-                <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
+                <option value="${listsemana.idtbsemana}" 
+                        <c:if test="${listsemana.idtbsemana == requestScope.idsemana}">
+                            selected=""
+                        </c:if>
+                        >${listsemana.nombre} </option>
             </c:forEach>
         </select>
     </div>

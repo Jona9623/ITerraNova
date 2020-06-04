@@ -44,6 +44,8 @@ public class SAdministrador extends HttpServlet {
     AlumnosController alumC;
     public String objectJson;
     public ObjectMapper mapper;
+    public int idsemana = 0;
+    public int idperiodo = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -616,6 +618,8 @@ public class SAdministrador extends HttpServlet {
             request.setAttribute("listmateria", listmateria);
             listalumnos = adminC.getAlumnosAsistencia(Integer.parseInt(request.getParameter("IDGRADO")),Integer.parseInt(request.getParameter("IDGRUPO")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumnos", listalumnos);
+            idsemana = Integer.parseInt(request.getParameter("IDS"));
+            idperiodo = Integer.parseInt(request.getParameter("IDP"));
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/getreporteGasistencia.jsp");
             rd.forward(request, response);
             
@@ -641,6 +645,8 @@ public class SAdministrador extends HttpServlet {
             request.setAttribute("listmateria", listmateria);
             alumno = adminC.getAlumno(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("alumno", alumno);
+            request.setAttribute("idsemana", idsemana);
+            request.setAttribute("idperiodo", idperiodo);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/ReporteGAsistencia/justificar.jsp");
             rd.forward(request, response);
             

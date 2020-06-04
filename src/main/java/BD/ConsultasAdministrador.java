@@ -2551,11 +2551,14 @@ public class ConsultasAdministrador {
         Alumno alumno = new Alumno();
         try {
             con.setAutoCommit(false);
-            String consulta = "SELECT tb_materiaalumno.idtb_materiaalumno, ct_datosmateria.nombrelargo FROM tb_materiaalumno inner join tb_materiapersonal\n"
-                    + "on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join tb_materia\n"
-                    + "on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join ct_datosmateria\n"
-                    + "on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
-                    + "where tb_materiaalumno.r_alumno = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ?";
+            String consulta = "SELECT tb_materiaalumno.idtb_materiaalumno, ct_datosmateria.nombrelargo, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno FROM tb_asistencia inner join tb_materiaalumno \n"
+                    + "					on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno inner join tb_materiapersonal\n"
+                    + "                    on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join tb_materia\n"
+                    + "                    on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join ct_datosmateria\n"
+                    + "                    on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria inner join tb_alumnos\n"
+                    + "                    on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos\n"
+                    + "                    where tb_materiaalumno.r_alumno = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ? and tb_asistencia.asistencia = 0\n"
+                    + "                    group by tb_materiaalumno.idtb_materiaalumno, ct_datosmateria.nombrelargo, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno;";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, idalumno);
             pst.setInt(2, tipoescuela);
