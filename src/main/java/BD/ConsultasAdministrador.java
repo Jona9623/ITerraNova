@@ -2543,7 +2543,7 @@ public class ConsultasAdministrador {
         return listalumno;
     }
 
-    public List<CtDatosMateria> justificarFaltas(int idalumno, int tipoescuela) throws Exception {
+    public List<CtDatosMateria> justificarFaltas(int idalumno,int idsemana,int idperiodo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -2557,11 +2557,13 @@ public class ConsultasAdministrador {
                     + "                    on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join ct_datosmateria\n"
                     + "                    on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria inner join tb_alumnos\n"
                     + "                    on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos\n"
-                    + "                    where tb_materiaalumno.r_alumno = ? and tb_materiaalumno.status = 1 and tb_materiaalumno.tipoescuela = ? and tb_asistencia.asistencia = 0\n"
+                    + "                    where tb_materiaalumno.r_alumno = ? and tb_asistencia.status = 1 and tb_asistencia.tipoescuela = ? and tb_asistencia.asistencia = 0 and tb_asistencia.r_semanafiscal = ? and tb_asistencia.r_periodo = ?\n"
                     + "                    group by tb_materiaalumno.idtb_materiaalumno, ct_datosmateria.nombrelargo, tb_alumnos.nombre, tb_alumnos.apellidopaterno, tb_alumnos.apellidomaterno;";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, idalumno);
             pst.setInt(2, tipoescuela);
+            pst.setInt(3, idsemana);
+            pst.setInt(4, idperiodo);
             rs = pst.executeQuery();
             while (rs.next()) {
                 CtDatosMateria materia = new CtDatosMateria();

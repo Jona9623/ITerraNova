@@ -338,9 +338,9 @@ public class AdministradorController {
         return consulta.getAlumnosAsistencia(idgrado, idgrupo, tipoescuela);
     }
     
-    public List<CtDatosMateria> justificarFaltas(int idalumno, int tipoescuela) throws Exception {
+    public List<CtDatosMateria> justificarFaltas(int idalumno,int idsemana,int idperiodo, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.justificarFaltas(idalumno,tipoescuela);
+        return consulta.justificarFaltas(idalumno,idsemana,idperiodo,tipoescuela);
     }
     
     public List<CtDia> getDiasFaltas(int idalumno, int idperiodo, int idsemana, int idmateria, int tipoescuela) throws Exception {

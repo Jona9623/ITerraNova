@@ -27,7 +27,7 @@
         <ol class="breadcrumb page-breadcrumb pull-right">
             <% if (x == 3 || x == 4 || x == 5) { %>  
             <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="indexpre.jsp">Inicio</a>&nbsp;<i class="fa fa-angle-right"></i>
-                &nbsp;<a class="parent-item" href="javascript:Adminpersonal.tablaPersonal();">Tabla Personal</a>&nbsp;<i class="fa fa-angle-right"></i>
+                
             </li>
             <% }%>
             <li class="active">Reporte de asistencia </li>

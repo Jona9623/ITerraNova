@@ -641,7 +641,7 @@ public class SAdministrador extends HttpServlet {
             request.setAttribute("listperiodo", listperiodo);
             listsemana = alumC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listsemana", listsemana);
-            listmateria = adminC.justificarFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listmateria = adminC.justificarFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listmateria", listmateria);
             alumno = adminC.getAlumno(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("alumno", alumno);
@@ -668,7 +668,7 @@ public class SAdministrador extends HttpServlet {
             request.setAttribute("listperiodo", listperiodo);
             listsemana = alumC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listsemana", listsemana);
-            listmateria = adminC.justificarFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listmateria = adminC.justificarFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listmateria", listmateria);
             listdias = adminC.getDiasFaltas(Integer.parseInt(request.getParameter("IDA")),Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listdias", listdias);
