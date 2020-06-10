@@ -36,8 +36,11 @@
             </c:forEach>
         </select>
     </div>
-    <div class="col-lg-4 p-t-20">
+    <div class="col-lg-2 p-t-20">
         <button type="button" id="asistencia" class="btn btn-terra">Guardar asistencia</button>
+    </div>
+    <div class="col-lg-2 p-t-20">
+        <button type="button" id="asistenciaanterior" class="btn btn-terra">Asistencia anterior </button>
     </div>
 
 </div>
@@ -72,8 +75,8 @@
                     </td>
                     <td class="center">
                         <div class="btn-group">
-                            <a href="javascript:;" class="aliminarpe">
-                                <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
+                            <a href="javascript:;" class="">
+                                <i id="" class=""></i> No disponible aun </a>
                         </div>
                     </td>
                 </tr>

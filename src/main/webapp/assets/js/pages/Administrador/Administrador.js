@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 var Admin = (function () {
+    /*Variable para saber si estamos en secundaria o preparatoria*/
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     return {
+        /*Funcion que recoge los datos del formulario de registro de nuevo usuario por medio de post*/
         registro: function () {
             $('form[name="formregistro"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
@@ -14,6 +16,7 @@ var Admin = (function () {
                     swal("Listo!", "Registrado correctamente, favor de revisar su correo", "success");
             });
         },
+        /*Funcion que hace mostrar la vista de reporte de asistencia general en pestaña control escolar*/
         reporteGAsistencia: function () {
             $.get("SAdministrador", {
                 ACCION: "reporteGAsistencia",
@@ -22,6 +25,7 @@ var Admin = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
+                    /*Recogemos los valores de los selects para cargar informacion de la siguiente funcion*/
                     $("#content").html(arguments[0]);
                     idperiodo = $("#periodoGasistencia").val();
                     idsemana = $("#semanafiscalGasistencia").val();
@@ -47,6 +51,7 @@ var Admin = (function () {
                 }
             });
         },
+        /*Funcion que sirve para traer infomacion y cargarla en la vista de la funcion anterior*/
         getreporteGAsistencia: function (idperiodo, idsemana, idgrado, idgrupo) {
             //alert (idperiodo);
             $.get("SAdministrador", {
@@ -60,20 +65,16 @@ var Admin = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
+                    /*No usamos el id content porque solo queremos cargar informacion en otra vista*/
                     $("#ReporteGAsistencia").html(arguments[0]);
                     $("body").find('a.btnjustificar').unbind('click').bind('click', function () {
                         idalumno = $(this).parents("tr").find("td").eq(0).html();
                         Admin.justificarFaltas(idalumno, idsemana, idperiodo);
                     });
-                   /* $("#tablaGsisencia").DataTable({
-                        "ordering": false,
-                        "paging": false,
-                        "searching": false,
-                        "scrollX": true,
-                    });*/
                 }
             });
         },
+        /*Funcion que se ejecuta al presionar el boton de justificar*/
         justificarFaltas: function (idalumno, idsemana, idperiodo) {
             $.get("SAdministrador", {
                 ACCION: "justificarFaltas",
@@ -85,6 +86,7 @@ var Admin = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
+                    /*De igual manera recogemos valores de los selects para cargar informacion de la siguiente funcion*/
                     $("#content").html(arguments[0]);
                     idperiodo = $("#periodojustificar").val();
                     idsemana = $("#semanajustificar").val();
@@ -102,6 +104,9 @@ var Admin = (function () {
                         idmateria = $("#materiajustificar").val();
                         Admin.getDiasFaltas(idalumno, idperiodo, idsemana, idmateria);
                     });
+                    /*Funciones como esta se usan cuando se desea guardar informacion proveniente de algun formulario o no necesariamente formulario
+                     * lo que se hace es crear variables para almacenar informacion de los inputs del formulario, en este caso la informacion se recoge de un conjunto de checkboxes
+                     * utilizamos la funcion each para iterar los checkboxes y toma en cuenta los valores marcados*/
                     $("body").unbind('click').on("click", "#justificarfaltas", function (event) {
                         let faltas = [];
                         $("#checkfaltas input[type='checkbox']:checked").each(function () {
@@ -111,6 +116,7 @@ var Admin = (function () {
                             faltas.push(falta);
                             falta = null;
                         });
+                        /*Mandamos por get el objeto al servlet*/
                         console.log(faltas);
                         $.get("SAdministrador", {
                             ACCION: "updateJustificar",
@@ -127,6 +133,7 @@ var Admin = (function () {
                 }
             });
         },
+        /*Funcion que sirve para traer infomacion y cargarla en la vista de la funcion anterior*/
         getDiasFaltas: function (idalumno, idperiodo, idsemana, idmateria) {
             $.get("SAdministrador", {
                 ACCION: "getDiasFaltas",
@@ -144,6 +151,7 @@ var Admin = (function () {
                 }
             })
         },
+        /*Funcion que muestra la tabla del apartado de puesto*/
         tablaPuesto: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaPuesto",
@@ -185,10 +193,12 @@ var Admin = (function () {
                 }
             });
         },
+        /*Funcion lanzada al presionar el boton de guardar puesto*/
         guardaPuesto: function () {
             var puesto = {
                 "nombre": $("#puestoAdmin").val()
             }
+            /*Creamos variable para poder mandar el objeto al servlet y tratarlo*/
             $.get("SAdministrador", {
                 ACCION: "guardaPuesto",
                 OBJETO: JSON.stringify(puesto),
@@ -205,11 +215,7 @@ var Admin = (function () {
                 }
             });
         },
-        editarPuesto: function (idpuesto) {
-            $.get("SAdministrador", {
-                ACCION: "editarPuesto"
-            })
-        },
+        /*Funcion para eliminar puesto, sólo tomamos el id del puesto que tomamos por medio de lboton editar en la tabla*/
         eliminarPuesto: function (idpuesto) {
             $.get("SAdministrador", {
                 ACCION: "eliminaPuesto",
@@ -221,6 +227,7 @@ var Admin = (function () {
                     Admin.tablaPuesto();
             });
         },
+        /*Traemos la vista de la tabla*/
         tablaPeriodo: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaPeriodo",
@@ -258,12 +265,14 @@ var Admin = (function () {
                 }
             });
         },
+        /*Se cativa funcion a usar el boton de guardar*/
         guardaPeriodo: function () {
             var periodo = {
                 "nombre": $("#periodoAdmin").val(),
                 "fechainicio": $("#fechainicioAdmin").val(),
                 "fechafin": $("#fechafinAdmin").val()
             }
+            /*Creamos variable para poder mandar el objeto al servlet y tratarlo*/
             $.get("SAdministrador", {
                 ACCION: "guardaPeriodo",
                 OBJETO: JSON.stringify(periodo),
@@ -278,6 +287,7 @@ var Admin = (function () {
             });
 
         },
+        /*Funcion para eliminar registro, sólo traemos el id al presionar el boton de eliminar*/
         eliminarPeriodo: function (idperiodo) {
             $.get("SAdministrador", {
                 ACCION: "eliminaPeriodo",
@@ -289,6 +299,7 @@ var Admin = (function () {
                     Admin.tablaPeriodo();
             });
         },
+        /*Traemos la vista de la tabla*/
         tablaArea: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaArea",
@@ -326,10 +337,12 @@ var Admin = (function () {
                 }
             });
         },
+        /*Se cativa funcion a usar el boton de guardar*/
         guardaArea: function () {
             var area = {
                 "nombre": $("#areaAdmin").val()
             }
+            /*Creamos variable para poder mandar el objeto al servlet y tratarlo*/
             $.get("SAdministrador", {
                 ACCION: "guardaArea",
                 OBJETO: JSON.stringify(area),
@@ -346,6 +359,7 @@ var Admin = (function () {
                 }
             });
         },
+        /*Funcion para eliminar registro, tomamos el id al presionar el boton de eliminar*/
         eliminarArea: function (idarea) {
             $.get("SAdministrador", {
                 ACCION: "eliminaArea",
@@ -357,6 +371,7 @@ var Admin = (function () {
                     Admin.tablaArea();
             });
         },
+        /*Traemos la vista de la tabla*/
         tablaCpt: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaCpt",
@@ -394,10 +409,12 @@ var Admin = (function () {
                 }
             });
         },
+        /*Se cativa funcion a usar el boton de guardar*/
         guardaCpt: function () {
             var cpt = {
                 "nombre": $("#cptAdmin").val()
             }
+            /*Creamos variable para poder mandar el objeto al servlet y tratarlo*/
             $.get("SAdministrador", {
                 ACCION: "guardaCpt",
                 OBJETO: JSON.stringify(cpt),
@@ -414,6 +431,7 @@ var Admin = (function () {
                 }
             });
         },
+        /*Funcion para eliminar registro, tomamos el id al presionar el boton de eliminar*/
         eliminarCpt: function (idcpt) {
             $.get("SAdministrador", {
                 ACCION: "eliminaCpt",
@@ -426,23 +444,7 @@ var Admin = (function () {
                     Admin.tablaCpt();
             });
         },
-        tablaGradoGrupo: function () {
-            $.get("SAdministrador", {
-                ACCION: "tablaGradoGrupo",
-                TIPOESCUELA: tipoescuela
-            }).done(function (xhr, status, error) {
-                console.log(arguments);
-                console.log(error.status);
-                console.log(error.getResponseHeader("ERROR"));
-                if (error.status != 200)
-                    swal(error.getResponseHeader("ERROR"), "", "warning");
-            }).fail(function (xhr, status, error) {
-                console.log(
-                        window.location.pathname);
-            }).then(function () {
-                $("#content").html(arguments[0]);
-            });
-        },
+        /*Traemos la vista de la tabla*/
         tablaTipoCalificacion: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaTipoCalificacion",
@@ -480,10 +482,12 @@ var Admin = (function () {
                 }
             });
         },
+        /*Se cativa funcion a usar el boton de guardar*/
         guardaTipoCali: function () {
             var tipocali = {
                 "nombre": $("#tipocaliAdmin").val()
             }
+            /*Creamos variable para poder mandar el objeto al servlet y tratarlo*/
             $.get("SAdministrador", {
                 ACCION: "guardaTipoCali",
                 OBJETO: JSON.stringify(tipocali),
@@ -500,6 +504,7 @@ var Admin = (function () {
                 }
             });
         },
+        /*Funcion para eliminar registro, tomamos el id al presionar el boton de eliminar*/
         eliminarTipoCali: function (idtipo) {
             $.get("SAdministrador", {
                 ACCION: "eliminaTipoCali",
@@ -511,6 +516,7 @@ var Admin = (function () {
                     Admin.tablaTipoCalificacion();
             });
         },
+        /*Traemos la vista de la tabla*/
         tablaMateria: function () {
             $.get("SAdministrador", {
                 ACCION: "tablaMateria",
@@ -548,6 +554,7 @@ var Admin = (function () {
                 }
             });
         },
+        /*Se cativa funcion a usar el boton de guardar*/
         guardaMateria: function () {
             var materia = {
                 "rdatosmateria": $("#materiaAdmin").val(),
@@ -555,7 +562,8 @@ var Admin = (function () {
                 "rgrupo": $("#gruposelect").val(),
                 "rarea": $("#areaselect").val(),
                 "rcpt": $("#cptselect").val()
-            }
+            }          
+            /*Creamos variable para poder mandar el objeto al servlet y tratarlo*/
             $.get("SAdministrador", {
                 ACCION: "guardaMateria",
                 OBJETO: JSON.stringify(materia),
@@ -572,6 +580,7 @@ var Admin = (function () {
                 }
             });
         },
+        /*Funcion para eliminar registro, tomamos el id al presionar el boton de eliminar*/
         eliminaMateria: function (idmateria) {
             $.get("SAdministrador", {
                 ACCION: "eliminaMateria",

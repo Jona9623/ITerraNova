@@ -340,5 +340,10 @@ public class AlumnosController {
         ConsultasAlumno consulta = new ConsultasAlumno();
         return consulta.getAlumnosAsistenciaJ(idperiodo,idmateria,idsemana,tipoescuela);
     }
+
+    public List<TbAsistencia> asistenciaAnterior(int iddia, int idperiodo, int idsemana, int tipoescuela) throws Exception {
+        ConsultasAlumno consulta = new ConsultasAlumno();
+        return consulta.asistenciaAnterior(iddia, idperiodo, idsemana,tipoescuela);
+    }
   
 }

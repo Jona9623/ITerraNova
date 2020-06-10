@@ -37,6 +37,7 @@ public class ConsultasAlumno {
     private Connection con;
     private int x = 1;
 
+    /*Consulta para obtener lista de periodos*/
     public List<CtPeriodoEscolar> getPeriodos(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -77,6 +78,7 @@ public class ConsultasAlumno {
         return listperiodo;
     }
 
+    /*Consulta para obtener lista de materias*/
     public List<TbMateria> getMaterias(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -127,6 +129,7 @@ public class ConsultasAlumno {
         return listmateria;
     }
 
+    /*Consulta para obtener materias de un profesor*/
     public List<TbMateria> getMateriasPersonal(int tipoescuela, int idpersonal) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -172,6 +175,7 @@ public class ConsultasAlumno {
         return listmateria;
     }
 
+    /*Consulta para obtener lista de incidentes*/
     public List<CtIncidente> getIncidentes(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -212,6 +216,7 @@ public class ConsultasAlumno {
         return listincidente;
     }
 
+    /*Consulta para obtener alumnos para cuadro de honor*/
     public List<Alumno> getAlumnos(int grado, int grupo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -254,6 +259,7 @@ public class ConsultasAlumno {
         return listalumno;
     }
 
+    /*Consulta para obtener alumnos para cuadro de atencion*/
     public List<Alumno> getAlumnosAtencion(int grado, int grupo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -296,6 +302,7 @@ public class ConsultasAlumno {
         return listalumno;
     }
 
+    /*Consulta para guardar incidente*/
     public void guardaIincidente(CtIncidente incidente, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -328,6 +335,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Consulta para guardar reporte disciplinar*/
     public void guardaReporteD(TbReporteDisciplinar reporteD, String ruta, int tipoescuela) {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -382,6 +390,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Consulta para traer alumnos con reportes disciplinares*/
     public List<TbReporteDisciplinar> getAlumnosReporteD(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -448,6 +457,7 @@ public class ConsultasAlumno {
         return alumnosdisciplinar;
     }
 
+    /*Consulta para traer la informacion de un reporte en especifico*/
     public TbReporteDisciplinar datosReporteD(int id, String fecha, String hora, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -518,6 +528,7 @@ public class ConsultasAlumno {
         return (datosreporteD);
     }
 
+    /*Consulta para trer los campos a acualizar del reporte*/
     public TbReporteDisciplinar editarReporteD(int id, String fecha, String hora) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -592,6 +603,7 @@ public class ConsultasAlumno {
         return (reportedAlumno);
     }
 
+    /*Consulta para guardar los cambios al reporte disciplinar*/
     public void guardareditarReporteD(TbReporteDisciplinar reporteD) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -640,6 +652,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Consulta para obtener lista de semana fiscal*/
     public List<CtSemanaFiscal> getSemanaFiscal(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -680,6 +693,7 @@ public class ConsultasAlumno {
         return listsemana;
     }
 
+    /*Consulta para obtener uns lista de problemas*/
     public List<CtAtencion> getAtencion(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -720,6 +734,7 @@ public class ConsultasAlumno {
         return listatencion;
     }
 
+    /*Consulta para guardar actividad semanal*/
     public void guardaActividadSemanal(TbTareaSemanal tarea, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -757,6 +772,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Consulta para guardar reporte academico*/
     public void guardaReporteAcademico(TbReporteAcademico reporteA, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -827,6 +843,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Consulta par aguardar un problema*/
     public void guardaComportamiento(CtAtencion atencion, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -859,6 +876,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Consulta para guardar una semana fiscal*/
     public void guardaSemana(CtSemanaFiscal semana, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -891,6 +909,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Consulta que trae datos para agregarlos a una imagen, el registro será el ultimo agregado a al tabla justo despues de guardar un reporte academico*/
     public ImagenReporteAcademico datosGuardaImagen(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -936,6 +955,7 @@ public class ConsultasAlumno {
         return datosA;
     }
 
+    /*Consulta que trae datos para agregarlos a una imagen, el registro será el ultimo agregado a al tabla justo despues de guardar un reporte academico en la parte de actividad semanal*/
     public ImagenReporteAcademicoTarea datosGuardaImagenTarea(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -978,6 +998,7 @@ public class ConsultasAlumno {
         return datosTarea;
     }
 
+    /*Consulta que trae los datos de una reporte academico especifico*/
     public TbReporteAcademico datosReporteA(int tipoescuelareporte) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1023,6 +1044,7 @@ public class ConsultasAlumno {
         return datosA;
     }
 
+    /*Consulta para traer los datos de una tarea asignada*/
     public TbTareaSemanal datosTareaSemanal(int tipoescuelareporte) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1065,6 +1087,7 @@ public class ConsultasAlumno {
         return tarea;
     }
 
+    /*Consulta para traer todos lso reportes academicos*/
     public List<TbReporteAcademico> getAlumnosReporteA(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1122,6 +1145,7 @@ public class ConsultasAlumno {
         return alumnosacademico;
     }
 
+    /*Consulta para traer todas las tareas asignadas*/
     public List<TbTareaSemanal> getTareas(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1171,6 +1195,7 @@ public class ConsultasAlumno {
         return listtareas;
     }
 
+    /*Se elimian el registro de manera logica*/
     public void eliminarTarea(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1200,6 +1225,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Se elimina el registro de manera logica*/
     public void eliminarReporteA(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1229,6 +1255,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Se elimina el regitro de manera logica*/
     public void eliminarReporteD(int id) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1258,6 +1285,7 @@ public class ConsultasAlumno {
         }
     }
 
+    /*Consulta que trae alumnos que aun no estan asignados a materias, las condiciones nos dicen que consulta usar de acuerdo a los parametros que recibimos*/
     public List<Alumno> getAlumnosMateria(int grado, int grupo, int area, int cpt, int materiapersonal, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1358,6 +1386,7 @@ public class ConsultasAlumno {
         return listalumno;
     }
 
+    /*Consulta que trae los alumnos para cada materia del profesor, la condicion nos dirá que consuta usar de acuerdo a los parametros recibidos*/
     public List<Alumno> getListaAlumnos(int grado, int grupo, int area, int cpt, int materiapersonal, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1493,7 +1522,8 @@ public class ConsultasAlumno {
         return listhorario;
     }
 
-    public List<TbAsistencia> getAlumnosAsistencia(int idperiodo, int idmateria, int idsemana, int tipoescuela) throws Exception{
+    /*Consulta que trae la cantidad de faltas de los alumnos de acuerdo a una materia, asi como los dias en lso que ha faltado, agrupados para no repetir registros*/
+    public List<TbAsistencia> getAlumnosAsistencia(int idperiodo, int idmateria, int idsemana, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -1549,6 +1579,7 @@ public class ConsultasAlumno {
         return listalumno;
     }
 
+    /*Consulta que trae la cantidad de faltas justificadasa de los alumnos de acuerdo a una materia, asi como los dias en lso que ha faltado, agrupados para no repetir registros*/
     public List<TbAsistencia> getAlumnosAsistenciaJ(int idperiodo, int idmateria, int idsemana, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1603,6 +1634,55 @@ public class ConsultasAlumno {
             }
         }
         return listalumno;
+    }
+
+    /*Consulta para traer una lista que contendrá la asistencia tomada con anterioridad para su modificacion y posterior actualizacion*/
+    public List<TbAsistencia> asistenciaAnterior(int iddia, int idperiodo, int idsemana, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        List<TbAsistencia> listasistencia = new ArrayList<>();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "SELECT tb_asistencia.idtb_asistencia, tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno, tb_asistencia.asistencia FROM tb_asistencia inner join tb_materiaalumno\n"
+                    + "on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno inner join tb_alumnos\n"
+                    + "on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos\n"
+                    + "where tb_asistencia.r_periodo = ? and tb_asistencia.r_semanafiscal = ? and tb_asistencia.r_dia = ? and tb_asistencia.status = 1 and tb_asistencia.tipoescuela = ?\n"
+                    + " order by tb_alumnos.apellidopaterno asc;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idperiodo);
+            pst.setInt(2, idsemana);
+            pst.setInt(3, iddia);
+            pst.setInt(4, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TbAsistencia asistencia = new TbAsistencia();
+                asistencia.setIdtbasistencia(rs.getInt("tb_asistencia.idtb_asistencia"));
+                asistencia.setAsistencia(rs.getInt("tb_asistencia.asistencia"));
+                asistencia.setNombrealum(rs.getString("tb_alumnos.nombre"));
+                asistencia.setApellidopa(rs.getString("tb_alumnos.apellidopaterno"));
+                asistencia.setApellidoma(rs.getString("tb_alumnos.apellidomaterno"));
+                listasistencia.add(asistencia);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return listasistencia;
     }
 
 }

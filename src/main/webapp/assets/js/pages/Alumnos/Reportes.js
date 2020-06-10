@@ -1,10 +1,12 @@
 
 
 var Reportes = (function () {
+    /*Variable para saber si estamos en secundaria o preparatoria*/
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     var grado;
     var grupo;
     return {
+        /*Muestra el formulario de reporte disciplinar*/
         reporteDisciplinar: function () {
 
             $.get("SReportes", {
@@ -31,26 +33,31 @@ var Reportes = (function () {
                         grupo = $("#grupodisciplinar").val();
                         Reportes.getAlumno(grado, grupo);
                     });
+                    /*Para agregar una falta del alumno dentro de la vista del formulario*/
                     $("#agregafalta").on('click', function () {
                         Reportes.agregaFalta();
                     });
+                    /*Aqui guarda la falta (lo sé tiene nombre diferente :v)*/
                     $("#guardaincidente").on('click', function () {
                         Reportes.guardaIncidente(Reportes.datosIncidente(), "guardaIncidente");
                     });
                     Reportes.guardarD();
+                    /*Existen un boton para mostrar todos lso reportes guardados*/
                     $("#mostrarreportes").on('click', function () {
                         Reportes.mostrarReportes();
                     });
+                    /*Aqui se hace lo mismo para poder guardar la foto, se asignamos valor vacio al inpuot de la foto*/
                     $("#foto").click(function () {
                         $(this).val("");
                     });
-
+                    /*Se convierte a base64 la imagen para poder guardarla*/
                     $("#foto").change(function () {
                         convertBase64();
                     });
                 }
             });
         },
+        /*Como tenemos que guardar una imagen utilizo el formulario por ajax para poder tratar la imagen y guardar los elementos del formulario*/
         guardarD: function () {
             $('form[name="formreporteD"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
@@ -61,6 +68,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Aqui son funciones que crean objetos tomando valores de los inputs de los distintos formulario*/
         datosIncidente: function () {
             var incidente = {
                 "nombre": $("#incidenteD").val()
@@ -89,6 +97,7 @@ var Reportes = (function () {
             }
             return reporteD;
         },
+        /*Funcion qu esirve para mostrar en un select los alumnos correspondientes a los parametros para reporte disciplinar*/
         getAlumno: function (grado, grupo) {
             $.get("SReportes", {
                 ACCION: "alumnoGradoGrupo",
@@ -103,6 +112,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Funcion que sirve para msotrar en un select alumnos correspondientes para cuadro de honor en reporte academico*/
         getAlumnoAca: function (gradohonor, grupohonor) {
             $.get("SReportes", {
                 ACCION: "alumnoGradoGrupoAca",
@@ -120,6 +130,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Funcion que sirve para msotrar en un select alumnos correspondientes para cuadro de atencion en reporte academico*/
         getAlumnoAcaAtencion: function (gradoatencion, grupoatencion) {
             $.get("SReportes", {
                 ACCION: "alumnoGradoGrupoAcaAtencion",
@@ -137,6 +148,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Aqui solo se guarda el incidente al preisonar el boton de agregar falta*/
         guardaIncidente: function (objeto, accion) {
             $.get("SReportes", {
                 ACCION: accion,
@@ -155,6 +167,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se muestra la tabla con todos los reportes al presionar el boton de mostrar reportes*/
         mostrarReportes: function () {
             $.get("SReportes", {
                 ACCION: "mostrarReportes",
@@ -166,10 +179,13 @@ var Reportes = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
+                    /*Vamos a mostrar los alumnos con reporte pero debemos tomar ciertos parametros para mostraar informacion mas concisa*/
                     $("#content").html(arguments[0]);
                     $("#tablareporteD").DataTable({
                         "scrollX": true
                     });
+                    /*Esta funcion sirve para la interaccion entre la tabla mostrada y los registros mostrado sean acorde al periodo seleccionado, se podia usar esto mas veces 
+                     * pero se notará que en siguientes funciones que aplican la misma idea se usa el jspincllude (se peude ver esto en los archivos jsp)*/
                     var id = $('#consultareporteD').find('#periodotablaD').val();
                     $('#consultareporteD').find('tr[name^="alumno-"]').hide();
                     $('#consultareporteD').find('tr[name="alumno-' + id + '"]').show();
@@ -210,6 +226,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se elimina el reporte disciplinar seleccionado*/
         eliminarReporteD: function (id) {
             $.get("SReportes", {
                 ACCION: "eliminarReporteD",
@@ -221,6 +238,7 @@ var Reportes = (function () {
                     Reportes.mostrarReportes();
             });
         },
+        /*Se muestra la info del reporte seleccionado de acuerdo a los parametros*/
         infoReporteD: function (alumnoreporte, reportefecha, hora) {
             $.get("SReportes", {
                 ACCION: "infoReporteD",
@@ -239,6 +257,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se muestran formulario para editar elementos del reporte*/
         editarReporteD: function (id, fecha, hora) {
             $.get("SReportes", {
                 ACCION: "editarReporteD",
@@ -260,6 +279,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Para guardar la info editada en el reprote disciplinar*/
         guardaeditarReporteD: function (objeto, accion) {
             $.get("SReportes", {
                 ACCION: accion,
@@ -277,6 +297,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se meustra el formulario del reporte academico*/
         reporteAcademico: function () {
             $.get("SReportes", {
                 ACCION: "Racademico",
@@ -343,6 +364,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Creamos objeto para guardar alumno a cuadro de honor*/
         guardarHonor: function () {
             var honor = {
                 "rpersonal": $("#personalreporteA").val(),
@@ -367,6 +389,7 @@ var Reportes = (function () {
                 Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
             });
         },
+        /*Creamo objeto para guardar alumno atencion*/
         guardarAtencion: function () {
             var atencion = {
                 "ralumnoatencion": $("#alumnoatencion").val(),
@@ -384,6 +407,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se muestra la tabla con los reportes academicos de manera similar a reporte disciplinar*/
         mostrarReportesAcademicos: function () {
             $.get("SReportes", {
                 ACCION: "mostrarReportesAca",
@@ -396,6 +420,7 @@ var Reportes = (function () {
                     $("#tablareporteA").DataTable({
                         "scrollX": true
                     });
+                    /*Usamos el mismo metodo para interactuar con los reportes mostrados en funcion del periodo seleccionado*/
                     var id = $('#consultareporteA').find('#periodotablaA').val();
                     $('#consultareporteA').find('tr[name^="alumno-"]').hide();
                     $('#consultareporteA').find('tr[name="alumno-' + id + '"]').show();
@@ -422,6 +447,7 @@ var Reportes = (function () {
 
             });
         },
+        /*Se elimina el reporte seleccionado*/
         eliminarReporteA: function (id) {
             $.get("SReportes", {
                 ACCION: "eliminarReporteA",
@@ -433,6 +459,7 @@ var Reportes = (function () {
                     Reportes.mostrarReportesAcademicos();
             });
         },
+        /*Se muestran las actividades semanales al presioanr el boton*/
         mostrarActividades: function () {
             $.get("SReportes", {
                 ACCION: "mostrarActividades",
@@ -445,6 +472,7 @@ var Reportes = (function () {
                     $("#tablaActividades").DataTable({
                         "scrollX": true
                     });
+                    /*Usamos el mismo metodo para interactuar con las actividades mostradas en funcion del periodo seleccionado*/
                     var id = $('#consultareporteAc').find('#periodotablaAc').val();
                     $('#consultareporteAc').find('tr[name^="alumno-"]').hide();
                     $('#consultareporteAc').find('tr[name="alumno-' + id + '"]').show();
@@ -469,7 +497,9 @@ var Reportes = (function () {
                     })
                 }
             });
-        }, eliminarTarea: function (id) {
+        },
+        /*Se elimina la actividad seleccionada*/
+        eliminarTarea: function (id) {
             $.get("SReportes", {
                 ACCION: "eliminarTarea",
                 ID: id
@@ -480,6 +510,7 @@ var Reportes = (function () {
                     Reportes.mostrarActividades();
             });
         },
+        /*Se crea el objeto para guardar la info de los inputs del reporte academico y actividad semanal*/
         guardarA: function () {
             var reporteA = {
                 "rpersonal": $("#personalreporteA").val(),
@@ -532,6 +563,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se guarda un comportaamiento para el alumno en caso de que se agrege*/
         guardaComportamiento: function () {
             var comportamiento = {"nombre": $("#comport").val()}
             $.get("SReportes", {
@@ -550,6 +582,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se guarda una nueva semana en caso de solicitarse*/
         guardaSemana: function () {
             var semana = {"nombre": $("#semana").val()}
             $.get("SReportes", {
@@ -585,6 +618,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se crea una imagen con los datos del alumno en cuadro de honor y atencion*/
         imagenReporteAca: function () {
             $.get("SReportes", {
                 ACCION: "imagenReporteAca"
@@ -614,6 +648,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se crea imagen con los datos de la actividad guardada*/
         imagenReporteActividad: function () {
             $.get("SReportes", {
                 ACCION: "imagenReporteActividad"
@@ -642,6 +677,7 @@ var Reportes = (function () {
                 }
             });
         },
+        /*Se uasa por medio de ajax el guardado de formulario al contener una image nde por medio para ser mas facil su tratado*/
         formReporteA: function () {
             $('form[name="formaReporteA"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
@@ -662,6 +698,7 @@ var Reportes = (function () {
     }
     ;
 }());
+/*Para ocnvertir a base 64 la imagen y guardarla*/
 async function convertBase64() {
     const file = document.querySelector('#foto').files[0];
     $("#savefile").val(await toBase64(file));
@@ -672,6 +709,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
         reader.onload = () => resolve(reader.result);
         reader.onerror = error => reject(error);
     });
+    /*validamos los campos de activida dsemanal*/
 function validacionActividadSemanal() {
     var valido = true;
     if ($("#fechaentrega").val().trim() == "") {

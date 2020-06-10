@@ -1,6 +1,8 @@
 var Adminpersonal = (function () {
+    /*Variable para saber si estamos en secundaria o preparatoria*/
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     return {
+        /*Traemos la vista de la tabla*/
         tablaPersonal: function () {
             $.get("SAdminpersonal", {
                 ACCION: "MuestraAgregaPersonal",
@@ -84,6 +86,7 @@ var Adminpersonal = (function () {
                 Adminpersonal.tablaPersonal();
             })
         },
+        /*Funcion creada de un solo uso, siver para importar el personal y guardar mucha informacion de golpe*/
         importarPersonal: function () {
             $('form[name="importarpersonal"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
@@ -92,6 +95,7 @@ var Adminpersonal = (function () {
                     swal("Hecho!", "Datos importados correctamente", "success");
             });
         },
+        /*Se usa para msotrar el formulario del personal*/
         formulariospe: function (argumento) {
             $('#content').html(argumento);
             $('#guardapersonal').on('click', function () {
@@ -101,6 +105,7 @@ var Adminpersonal = (function () {
                     swal("Faltan campos requeridos", "", "warning");
             });
         },
+        /*Se muestra la vista ocn la info completa del personal seleccionado*/
         infoPersonal: function (idperosnal) {
             $.get("SAdminpersonal", {
                 ACCION: "infoPersonal",
@@ -113,6 +118,8 @@ var Adminpersonal = (function () {
                 }
             });
         },
+        /*Se usa esta funcion cuando se quiere agregar materia a el profesor, tomamos su id al presionar el boton de agregar materia
+         * y se muestra una tabla con las materias disponibles para agregar*/
         agregaMateria: function (idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "agregaMateria",
@@ -140,6 +147,8 @@ var Adminpersonal = (function () {
                             listmateria.push(materia);
                         });
                         console.log(listmateria);
+                        /*Al presionar el boton de guardar iteramos con each los checkboxes para saber que materias ha marcado y agregarlas creando un arreglo de materias y mandarlo
+                         * al servlet*/
                         $.get("SAdminpersonal", {
                             ACCION: "asignaMateria",
                             PRUEBA: JSON.stringify(listmateria),
@@ -158,6 +167,7 @@ var Adminpersonal = (function () {
                 }
             })
         },
+        /*Se usa esta funcion cuando presiona el boton de asignar alumnos, se toma el id del profe seleccionado*/
         asignarAlumnos: function (idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "agregaAlumnos",
@@ -167,6 +177,7 @@ var Adminpersonal = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
+                    /*Aqui tomamos estos valores porque necesitamos tomarlos de la materia*/
                     $("#content").html(arguments[0]);
                     grado = $('option:selected').attr('grado');
                     grupo = $('option:selected').attr('grupo');
@@ -195,6 +206,8 @@ var Adminpersonal = (function () {
                             alumnos.push(alumno);
                             alumno = null;
                         });
+                        /*Aqui despues de presionar el boton de asignar alumnos iteramos de nuevo en un each los checkboxes para saber que alumnos fueron marcados
+                         * los agregamos aun arreglo y lo mandamos como objeto al servlet*/
                         console.log(alumnos);
                         $.get("SAdminpersonal", {
                             ACCION: "asignaAlumnos",
@@ -214,6 +227,7 @@ var Adminpersonal = (function () {
                 }
             });
         },
+        /*Se muestra una vista con una tabla y alumnos para el pase de asistencia*/
         listaAlumnos: function (idpersonal) {
             //alert(idpersonal);
             console.log(idpersonal);
@@ -225,6 +239,7 @@ var Adminpersonal = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
+                    /*Igual tomamos valores provenientes de la materia para mostrar alumnos*/
                     $("#content").html(arguments[0]);
                     grado = $('option:selected').attr('grado');
                     grupo = $('option:selected').attr('grupo');
@@ -244,6 +259,7 @@ var Adminpersonal = (function () {
                 }
             });
         },
+        /*Teniendo en cuenta los parametros mostramos en la misma vista la tabla con alumnos*/
         getListaAlumno: function (grado, grupo, area, cpt, materiapersonal, idpersonal) {
             console.log(idpersonal);
             $.get("SAdminpersonal", {
@@ -264,8 +280,12 @@ var Adminpersonal = (function () {
                         paging: false,
                         "scrollX": true
                     });
+                    $("#asistenciaanterior").hide();
+                    /*Esta validacion funciona para determinar el dia donde se toma asistencia, debido a ser dos escuelas se repiten 2 veces cada dia
+                     * y por esto tiene id diferentes un mismo dia*/
                     //$("#asistencia").on('click', function () {
                     $("body").find("button[id='asistencia']").unbind('click').bind('click', function () {
+                        $("#asistenciaanterior").show();
                         var dia = $("#diaasistencia").val();
                         var nombredia;
                         if (dia == 1 || dia == 6)
@@ -277,7 +297,7 @@ var Adminpersonal = (function () {
                         if (dia == 4 || dia == 9)
                             nombredia = "Jueves";
                         if (dia == 5 || dia == 10)
-                                nombredia = "Viernes";
+                            nombredia = "Viernes";
                         swal({
                             title: "Estas seguro?",
                             text: "Se guardara asistencia para el dia: " + nombredia,
@@ -306,6 +326,7 @@ var Adminpersonal = (function () {
                                 listasistencia.push(asistencia);
                                 asistencia = null;
                             });
+                            /*Se itera con each los checkboxes para determinar si el alumno faltó o asistió 1 asistencia, 0 falta*/
                             console.log(listasistencia);
                             $.get("SAdminpersonal", {
                                 ACCION: "guardaAsistencia",
@@ -321,9 +342,37 @@ var Adminpersonal = (function () {
                             });
                         });
                     });
+                    /*Aqui escuchamso el boton que muestra la asistencia anterior, la funcion es mostrar una vista de asistencia con los datos anteriores
+                     * para su actualizacion*/
+                    $("body").find("button[id='asistenciaanterior']").unbind('click').bind('click', function () {
+
+                        var dia = $("#diaasistencia").val();
+                        console.log(dia);
+                        var idperiodo = $("#periodoasistencia").val();
+                        var idsemana = $("#semanafiscalasistencia").val();
+                        console.log(dia);
+                        $.get("SAdminpersonal", {
+                            ACCION: "asistenciaAnterior",
+                            TIPOESCUELA: tipoescuela,
+                            IDD: dia,
+                            IDP: idperiodo,
+                            IDS: idsemana
+                        }).done(function (xhr, status, error) {
+                            if (error.status != 200)
+                                swal(error.getResponseHeader("ERROR"), "", "warning");
+                            else {
+                                $("#content").html(arguments[0]);
+                                $('#tablaasistenciaanterior').DataTable({
+                                    paging: false,
+                                    "scrollX": true
+                                });
+                            }
+                        });
+                    });
                 }
             });
         },
+        /*Aqui se usa esta funcion param mostrar la lista de alumnos de acuerdo a los parametros requeridos en la misma vista de asignar alumnos*/
         getAsignaAlumno: function (grado, grupo, area, cpt, idpersonal, materiapersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "getAsignaAlumno",
@@ -339,17 +388,10 @@ var Adminpersonal = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     $("#asignaAlumno").html(arguments[0]);
-                    /* $("#gradoAlumPer").change(function () {
-                     grado = $("#gradoAlumPer").val()
-                     Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal, materiapersonal);
-                     });
-                     $("#grupoAlumPer").change(function () {
-                     grupo = $("#grupoAlumPer").val();
-                     Adminpersonal.getAsignaAlumno(grado, grupo, idpersonal, materiapersonal);
-                     });*/
                 }
             })
         },
+        /*Aqui se mostrará una tabla para los profes con las faltas de los alumnos o faltas justificadas*/
         reporteAsistencia: function (idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "reporteAsistencia",
@@ -359,6 +401,7 @@ var Adminpersonal = (function () {
                 if (error.status != 200)
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
+                    /*Se tomaran parametros para mostrar los alumnos con fatlas o dias justificados*/
                     $("#content").html(arguments[0]);
                     idperiodo = $("#periodoReporte").val();
                     idmateria = $("#materiaReporte").val();
@@ -379,6 +422,7 @@ var Adminpersonal = (function () {
                 }
             })
         },
+        /*Aqui con los parametros requeridos se muestra la tabla con los alumnos, esto es para tener un control de la informacion que se muestra basada en los parametros*/
         getreporteAsistencia: function (idperiodo, idmateria, idsemana, idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "getreporteAsistencia",
@@ -399,6 +443,7 @@ var Adminpersonal = (function () {
                 }
             })
         },
+        /*Se mostrará el formulario del personal para editar su info*/
         editarPersonal: function (idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "editarPersonal",
@@ -415,6 +460,7 @@ var Adminpersonal = (function () {
                 }
             });
         },
+        /*Funcion para eliminar registro, tomamos el id al presionar el boton de eliminar*/
         eliminarPersonal: function (idpersonal) {
             $.get("SAdminpersonal", {
                 ACCION: "eliminarPersonal",
@@ -426,6 +472,7 @@ var Adminpersonal = (function () {
                     Adminpersonal.tablaPersonal();
             });
         },
+        /*Mostrará el formulario de lpersonal al preisonar el boton agregar personal*/
         agregaPersonal: function () {
             $.get("SAdminpersonal", {
                 ACCION: "AgregaPersonal",
@@ -440,6 +487,7 @@ var Adminpersonal = (function () {
                     Adminpersonal.formulariospe(arguments[0]);
             });
         },
+        /*Se cativa funcion a usar el boton de guardar*/
         guardaPersonal: function (objeto, accion) {
             $.get("SAdminpersonal", {
                 ACCION: accion,
@@ -457,6 +505,7 @@ var Adminpersonal = (function () {
                 }
             });
         },
+        /*Recopilamos los valores de los inputs del formulario para retornar el objeto y mandrlo al servlet*/
         datosPersonal: function () {
             var personal = {
                 "idtbpersonal": $("#idpersonal").val(),
@@ -488,6 +537,7 @@ var Adminpersonal = (function () {
             }
             return personal
         },
+        /*Funciones solo para marcar o desmarcar, se usan cuando se asignan alumnos*/
         seleccionaTodo: function () {
             for (i = 0; i < document.asignaAlumno.elements.length; i++)
                 if (document.asignaAlumno.elements[i].type == "checkbox")
@@ -500,6 +550,7 @@ var Adminpersonal = (function () {
         }
     }
 }());
+/*Funcion para validar los campos del formulario del personal*/
 function validacionPersonal() {
     var valido = true;
     if ($("#nombrep").val().trim() == "") {

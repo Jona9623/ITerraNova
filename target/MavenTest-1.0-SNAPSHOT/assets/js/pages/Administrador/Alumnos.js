@@ -1,7 +1,9 @@
 
 var Adminalumno = (function () {
+    /*Variable para saber si estamos en secundaria o preparatoria*/
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     return {
+        /*Traemos la vista de la tabla*/
         tablaAlumnos: function () {
             $.get("SAdminalumno", {
                 ACCION: "MuestraAgregaAlumno",
@@ -75,6 +77,7 @@ var Adminalumno = (function () {
                 Adminalumno.tablaAlumnos();
             });
         },
+        /*Funcion que muestra una vista con la informacion del registro solicidato, tomando el id al presionar el boton*/
         infoAlumno: function (idalumno, idtutor) {
             $.get("SAdminalumno", {
                 ACCION: "infoAlumno",
@@ -154,6 +157,7 @@ var Adminalumno = (function () {
                 }
             })
         },
+        /*Funcion creada para un sólo uso, importa tutores de alumnos para guardar mucha informacion de golpe*/
         importaTutor: function () {
             $('form[name="importartutor"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
@@ -162,6 +166,7 @@ var Adminalumno = (function () {
                     swal("Hecho!", "Datos importados correctamente", "success");
             });
         },
+        /*Funcion creada para un solo uso, importa alumnos para guardr mucha informacion de golpe*/
         importaAlumno: function () {
             $('form[name="importaralumno"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
@@ -170,6 +175,7 @@ var Adminalumno = (function () {
                     swal("Hecho!", "Datos importados correctamente", "success");
             });
         },
+        /*Funcion general para mostrar el formlario para guardar datos de lalumno*/
         formularios: function (argumento) {
             $('#content').html(argumento);
             Adminalumno.guardarAlumno();
@@ -179,9 +185,11 @@ var Adminalumno = (function () {
                 } else
                     swal("Faltan campos requeridos", "", "warning");
             });
+            /*Usamos el input file para atribuirle un valor vacio */
             $("#fotoalumno").click(function () {
                 $(this).val("");
             });
+            /*Cuando se selecciona la foto obtenemos la cadena base64 para guardalar en el valor del input*/
             $("#fotoalumno").change(function () {
                 convertBase64A();
             });
@@ -193,6 +201,8 @@ var Adminalumno = (function () {
              swal("Faltan campos requeridos","","warning");
              });*/
         },
+        /*Se cativa y se manda por ajax (se usa esta forma cuando el formulario requiere de almacenar una imagen) ya que se me hace mas facil tratar asi
+         * el formulario cuando contenga imagenes*/
         guardarAlumno: function () {
             $('form[name="formAlumno"]').ajaxForm(function (xhr, status, error) {
                 if (error.status != 200)
@@ -203,6 +213,7 @@ var Adminalumno = (function () {
                 }
             });
         },
+        /*Traemos el mismo formulario para editar la info del alumno*/
         editarAlumno: function (idalumno, idtutor) {
             $.get("SAdminalumno", {
                 ACCION: "editarAlumno",
@@ -220,6 +231,7 @@ var Adminalumno = (function () {
                 }
             });
         },
+        /*Funcion para eliminar registro, tomamos el id al presionar el boton de eliminar*/
         eliminarAlumno: function (idalumno) {
             $.get("SAdminalumno", {
                 ACCION: "eliminarAlumno",
@@ -231,6 +243,7 @@ var Adminalumno = (function () {
                     Adminalumno.tablaAlumnos();
             });
         },
+        /*Funcion que se llama al preisonar el boton de agregar alumno, muestra el formulario para agregar alumno*/
         agregaAlumno: function () {
             $.get("SAdminalumno", {
                 ACCION: "AgregaAlumno",
@@ -245,6 +258,7 @@ var Adminalumno = (function () {
                     Adminalumno.formularios(arguments[0]);
             });
         },
+        /*Se cativa funcion a usar el boton de guardar tutor*/
         guardaTutor: function (objeto, accion) {
             $.get("SAdminalumno", {
                 ACCION: accion,
@@ -260,25 +274,7 @@ var Adminalumno = (function () {
                     swal("Hecho!", "Datos guardados correctamente", "success");
             });
         },
-        /*  guardaAlumno: function (objeto, accion) {
-         $.get("SAdminalumno", {
-         ACCION: accion,
-         ALUMNO: JSON.stringify(objeto),
-         TIPOESCUELA: tipoescuela
-         }).done(function(xhr, status, error){
-         console.log(arguments);
-         console.log(error.status);
-         console.log(error.getResponseHeader("ERROR"));
-         if(error.status != 200)
-         swal(error.getResponseHeader("ERROR"),"","warning");
-         }).fail(function(xhr, status, error){
-         console.log(
-         window.location.pathname);
-         }).then(function () {
-         swal("Hecho!", "Datos guardados correctamente", "success");
-         Adminalumno.tablaAlumnos();
-         });
-         },*/
+        /*Funcion que recopila los valores tomados de los inputs del formulario del tutor*/
         datosTutor: function () {
             var tutor = {
                 "idtbtutor": $("#idtutor").val(),
@@ -323,49 +319,16 @@ var Adminalumno = (function () {
             }
             return tutor;
         }
-        /*  datosAlumno: function () {
-         var alumno = {
-         "idtbalumnos": $("#idalumno").val(),
-         "matricula": $("#matricula").val(),
-         "nombre": $("#nombrea").val(),
-         "apellidop": $("#apellidopa").val(),
-         "apellidom": $("#apellidoma").val(),
-         "fechanacimiento": $("#fechanaa").val(),
-         "curp": $("#curpa").val(),
-         "municipiona": $("#municipionaca").val(),
-         "estadona": $("#estadonaca").val(),
-         "nacionalidad": $("#nacionalidada").val(),
-         "sexo": $("input[name = 'sexo']:checked").val(),
-         "calledom": $("#calledoma").val(),
-         "numerodom": $("#numerodoma").val(),
-         "coloniadom": $("#coloniadoa").val(),
-         "codigopostal": $("#codigopostala").val(),
-         "telefonocasa": $("#telcasaa").val(),
-         "celular": $("#celulara").val(),
-         "correo": $("#correoa").val(),
-         "nivelcursa": $("#nivela").val(),
-         "rgrado": $("#grado").val(),
-         "rgrupo": $("#grupo").val(),
-         "rarea": $("#area").val(),
-         "rcpt": $("#cpt").val(),
-         "plantelproce": $("#plantelproce").val(),
-         "nivelanterior": $("#nivelanterior").val(),
-         "gradoanterior": $("#gradoanterior").val(),
-         "turnoanterior": $("#turnoanterior").val(),
-         "municipioante": $("#plantelanterior").val(),
-         "status": 1,
-         "tipoescuela": 1
-         }
-         return alumno;
-         }*/
     }
 }());
+/*Estas funciones se usan cuando los formularios no cumplen la funcion validar*/
 $("body").on("focus", "input", function (event) {
     $(this).parent().removeClass('has-error');
 });
 $("body").on("focus", "textarea", function (event) {
     $(this).parent().removeClass('has-error');
 });
+/*En general esta funcion convierte a base64 la imagen*/
 async function convertBase64A() {
     const file = document.querySelector('#fotoalumno').files[0];
     $("#filealumno").val(await toBase64A(file));
@@ -376,6 +339,7 @@ const toBase64A = file => new Promise((resolve, reject) => {
         reader.onload = () => resolve(reader.result);
         reader.onerror = error => reject(error);
     });
+    /*Funcion que valida que los inputs cuenten con informacion*/
 function validacionAlumno() {
     var valido = true;
     if ($("#nombrea").val().trim() == "") {

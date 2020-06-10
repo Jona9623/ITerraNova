@@ -164,6 +164,12 @@ public class SAdminpersonal extends HttpServlet {
                 } catch (Exception e) {
                 }
                 break;
+            case "asistenciaAnterior":
+                try {
+                    asistenciaAnterior(request,response);
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -555,6 +561,20 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
+    private void asistenciaAnterior(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        adminC = new AdministradorController();
+        alumC = new  AlumnosController();
+        List <TbAsistencia> listasistencia = new ArrayList<>();
+        try {
+            listasistencia = alumC.asistenciaAnterior(Integer.parseInt(request.getParameter("IDD")),Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listasistencia", listasistencia);
+            RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/asistenciaanterior.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            response.addHeader("ERROR", e.toString());
+            response.sendError(204);
+        }
+    }
 
     private String extractFileName(Part part) {
         String fileName = "",
@@ -567,5 +587,6 @@ public class SAdminpersonal extends HttpServlet {
         }
         return fileName;
     }
+
 
 }

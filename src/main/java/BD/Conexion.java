@@ -10,6 +10,7 @@ import java.sql.*;
  * @author complx
  */
 public class Conexion {
+    /*Esta clase sirve sólo para crear la variable de conexion a la base de datos y retornarla en donde la usamos (Clases dentro del paquete BD)*/
     private static Connection con = null;
     public static Connection conexion(){
         try {

@@ -10,6 +10,7 @@ $('input:radio[name=escuela]').change(function () {
         $("#input").val("1");
     }
 });
+/*Aqui escuchamos los botones de secundaria y preparatoria para cambiar la variable que define el tipo de escuela*/
 $(document).ready(function () {
     $("#cambiasecu").on('click', function () {
             $("#cambiasecu").removeClass("btn-terra2");
@@ -32,6 +33,7 @@ $(document).ready(function () {
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
     //alert(tipoescuela);
     Admin.registro();
+    /*Basicamente son los eventos on click principales que nos llevan a las funciones de los otros javascript*/
     $("#reportedis").on('click', function () {
         Reportes.reporteDisciplinar();
     });
