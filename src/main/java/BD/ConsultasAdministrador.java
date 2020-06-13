@@ -40,6 +40,7 @@ public class ConsultasAdministrador {
 
     private Connection con;
     private int x = 1;
+
     /*Consulta que trae informacion del alumno para mostrarlo en la tabla*/
     public List<TbAlumnos> getAlumnos(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -90,6 +91,7 @@ public class ConsultasAdministrador {
         }
         return listalumnos;
     }
+
     /*Consulta que trae informacion del personal para mostrarlos en la tabla*/
     public List<TbPersonal> getPersonal(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -132,6 +134,7 @@ public class ConsultasAdministrador {
         }
         return listpersonal;
     }
+
     /*Consulta que guarda la información del tutor*/
     public void guardaTutor(TbTutor tutor, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -210,6 +213,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta que guarda la informacion del alumno*/
     public void guardaAlumno(TbAlumnos alumno, int tipoescuela, String ruta) throws Exception {
         con = new Conexion().conexion();
@@ -298,6 +302,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta que trae la informacion de un alumno en especifico*/
     public TbAlumnos datosAlumno(int id) throws Exception {
         con = new Conexion().conexion();
@@ -366,6 +371,7 @@ public class ConsultasAdministrador {
         }
         return alumno;
     }
+
     /*Consulta que trae la informacion del tutor */
     public TbTutor datosTutor(int id) throws Exception {
         con = new Conexion().conexion();
@@ -435,6 +441,7 @@ public class ConsultasAdministrador {
         }
         return tutor;
     }
+
     /*Consulta que trae la info de un personal en especifico*/
     public TbPersonal datosPersonal(int idpersonal) throws Exception {
         con = new Conexion().conexion();
@@ -492,6 +499,7 @@ public class ConsultasAdministrador {
         }
         return personal;
     }
+
     /*Consulta que actualiza datos del alumno*/
     public void actualizaAlumno(TbAlumnos alumno, String ruta) throws Exception {
         con = new Conexion().conexion();
@@ -558,6 +566,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Actualiza datos del tutor*/
     public void actualizaTutor(TbTutor tutor) throws Exception {
         con = new Conexion().conexion();
@@ -627,6 +636,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Actualiza datos del personal en especifico*/
     public void actualizaPersonal(TbPersonal personal) throws Exception {
         con = new Conexion().conexion();
@@ -679,6 +689,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Eliminamos el registro del alumno de manera logica*/
     public void eliminaAlumno(int id) throws Exception {
         con = new Conexion().conexion();
@@ -708,6 +719,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Eliminamos el registro del personal de manera logica*/
     public void eliminaPersonal(int id) throws Exception {
         con = new Conexion().conexion();
@@ -737,6 +749,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para guardar personal*/
     public void guardaPersonal(TbPersonal personal, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -801,6 +814,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para obtener grados*/
     public List<CtGrado> getGrado(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -841,6 +855,7 @@ public class ConsultasAdministrador {
         }
         return listgrado;
     }
+
     /*Consulta para obtener grupos*/
     public List<CtGrupo> getGrupo(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -881,6 +896,7 @@ public class ConsultasAdministrador {
         }
         return listgrupo;
     }
+
     /*Consulta para obtener area*/
     public List<CtAreaalumno> getArea(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -922,6 +938,7 @@ public class ConsultasAdministrador {
         return listarea;
 
     }
+
     /*Consulta para obtener cpt*/
     public List<CtCptalumno> getCpt(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -962,6 +979,7 @@ public class ConsultasAdministrador {
         }
         return listcpt;
     }
+
     /*Consulta pra obtener puesto*/
     public List<CtPuesto> getPuesto(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1043,6 +1061,7 @@ public class ConsultasAdministrador {
         }
         return listgradogrupo;
     }
+
     /*Consult para obtener tupo de calificacion*/
     public List<CtTipoCalificaicon> getTipoCali(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1083,6 +1102,7 @@ public class ConsultasAdministrador {
         }
         return listtipocali;
     }
+
     /*Consulta pra guardr puesto*/
     public void guardaPuesto(CtPuesto puesto, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1146,6 +1166,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Eliminamos registro de manera logica*/
     public void eliminaPuesto(int id) throws Exception {
         con = new Conexion().conexion();
@@ -1175,6 +1196,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para guardar periodo*/
     public void guardaPeriodo(CtPeriodoEscolar periodo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1242,6 +1264,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Eliminamos registro de manera logica*/
     public void eliminaPeriodo(int id) throws Exception {
         con = new Conexion().conexion();
@@ -1271,6 +1294,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para guardar área*/
     public void guardaArea(CtAreaalumno area, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1334,6 +1358,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Eliminamos registro de manera logica*/
     public void eliminaArea(int id) throws Exception {
         con = new Conexion().conexion();
@@ -1363,6 +1388,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para guardar cpt*/
     public void guardaCpt(CtCptalumno cpt, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1426,6 +1452,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Eliminamos regisgtro de manera logica*/
     public void eliminaCpt(int id) throws Exception {
         con = new Conexion().conexion();
@@ -1455,6 +1482,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta que guarda grado*/
     public void guardaGrado(CtGrado grado, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1487,6 +1515,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta que guarda grupo*/
     public void guardaGrupo(CtGrupo grupo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1519,6 +1548,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta que guarda tipo calificacion*/
     public void guardaTipoCali(CtTipoCalificaicon tipocali, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1582,6 +1612,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Eliminamos registro de manera logica*/
     public void eliminaTipoCali(int id) throws Exception {
         con = new Conexion().conexion();
@@ -1611,6 +1642,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta pra traer las materias que aun no estan asociadas a grado o grupo*/
     public List<CtDatosMateria> getMateriasFaltantes(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1652,6 +1684,7 @@ public class ConsultasAdministrador {
         }
         return listmateriafaltante;
     }
+
     /*Comsulta para guardar nombre de una materia*/
     public void guardaNombreMateria(CtDatosMateria nombremateria, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1685,6 +1718,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta que guarda materias asociandolas con grado, grupo, area o cpt*/
     public void guardaMateria(TbMateria materia, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1737,6 +1771,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Eliminamos registro de manera logica*/
     public void eliminaMateria(int id) throws Exception {
         con = new Conexion().conexion();
@@ -1766,6 +1801,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para asignar un conjunto de materias a un profesor*/
     public void asignaMateria(int id, List<TbMateriaPersonal> materiapersonal, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1803,6 +1839,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para obtener las materias asociadas a un profesor*/
     public List<TbMateriaPersonal> getMateriasAPersonal(int tipoescuela, int idpersonal) throws Exception {
         con = new Conexion().conexion();
@@ -1849,6 +1886,7 @@ public class ConsultasAdministrador {
         }
         return personalmateria;
     }
+
     /*Consulta para asociar alumnos a materias de profesores*/
     public void asignaAlumnos(int tipoescuela, List<TbMateriaAlumno> listmateriaalum) throws Exception {
         con = new Conexion().conexion();
@@ -1885,6 +1923,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para obtener las materias de un alumno*/
     public List<TbMateriaAlumno> getMateriasAlum(int idalumno, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -1967,6 +2006,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para guardar la asistencia tomada*/
     public void guardaAsistencia(List<TbAsistencia> listasistencia, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -2006,6 +2046,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para guardar la informacion importada sobre el personal*/
     public void guardaImportaPersonal(List<TbPersonal> listpersonal) throws Exception {
         con = new Conexion().conexion();
@@ -2074,6 +2115,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para guardar la informacion importada sobre el alumno*/
     public void guardaImportaAlumnos(List<TbAlumnos> listalumnos) throws Exception {
         con = new Conexion().conexion();
@@ -2168,6 +2210,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para guardar la informacion importada sobre el tutor*/
     public void guardaImportaTutor(List<TbTutor> listtutor) throws Exception {
         con = new Conexion().conexion();
@@ -2250,6 +2293,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para obtener el correo del personal, se usa pra enviar algunos mensajes de otras funciones*/
     public String correoUsuario(int id) throws Exception {
         con = new Conexion().conexion();
@@ -2285,6 +2329,7 @@ public class ConsultasAdministrador {
         }
         return correo;
     }
+
     /*COnsulta para obtener los dias*/
     public List<CtDia> getDias(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -2323,6 +2368,7 @@ public class ConsultasAdministrador {
         }
         return listdia;
     }
+
     /*Consulta para traer todas las faltas de los alumnos de cualquier materia, agrupandolos para no repetir registros, las condiciones son para
     determinar que ocnsulta usar dependiendo los parametros que llegan*/
     public List<TbAsistencia> getreporteGAsistencia(int idperiodo, int idsemana, int idgrado, int idgrupo, int tipoescuela) throws Exception {
@@ -2424,6 +2470,7 @@ public class ConsultasAdministrador {
         }
         return listasistencia;
     }
+
     /*Consulta que trae todas las meterias de acuerdo a los parametros dados, la condicion define que consulta usar de acuerdo a que parametro viene vacio*/
     public List<CtDatosMateria> getMateriasAsistencia(int idgrado, int idgrupo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -2482,6 +2529,7 @@ public class ConsultasAdministrador {
         }
         return listmaterias;
     }
+
     /*Consulta que trae los alumnos de acuerdo a los parametros, la condicion define que consulta de usrara con respecto a los parametros */
     public List<Alumno> getAlumnosAsistencia(int idgrado, int idgrupo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -2542,8 +2590,9 @@ public class ConsultasAdministrador {
         }
         return listalumno;
     }
+
     /*Consulta que trae una lista de manerias en donde el alumno ha faltado*/
-    public List<CtDatosMateria> justificarFaltas(int idalumno,int idsemana,int idperiodo, int tipoescuela) throws Exception {
+    public List<CtDatosMateria> justificarFaltas(int idalumno, int idsemana, int idperiodo, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -2591,6 +2640,7 @@ public class ConsultasAdministrador {
         }
         return listmaterias;
     }
+
     /*Consulta que trae los dias en donde el alumno ha faltado*/
     public List<CtDia> getDiasFaltas(int idalumno, int idperiodo, int idsemana, int idmateria, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -2643,6 +2693,7 @@ public class ConsultasAdministrador {
         }
         return listdias;
     }
+
     /*Consulta que actualiza el campo de asistencia para justificar*/
     public void updateJustificar(List<TbAsistencia> listasistencia) throws Exception {
         con = new Conexion().conexion();
@@ -2676,6 +2727,7 @@ public class ConsultasAdministrador {
             }
         }
     }
+
     /*Consulta para traer alumno(s)*/
     public Alumno getAlumno(int idalumno, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
@@ -2713,6 +2765,81 @@ public class ConsultasAdministrador {
             }
         }
         return alumno;
+    }
+
+    public void actualizarAsistencia(List<TbAsistencia> listasistencia) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        try {
+            for (TbAsistencia item : listasistencia) {
+                con.setAutoCommit(false);
+                String consulta = "UPDATE `tb_asistencia` SET `asistencia` = ? WHERE (`idtb_asistencia` = ?);";
+                pst = con.prepareStatement(consulta);
+                pst.setInt(1, item.getAsistencia());
+                pst.setInt(2, item.getIdtbasistencia());
+
+                if (pst.executeUpdate() == 1) {
+                    con.commit();
+                } else {
+                    System.out.println("no se pudo guardar");
+                }
+                pst = null;
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public int verificarAsistencia(int idperiodo, int idsemana, int iddia, int idmateria, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int bandera = 0;
+        try {
+            con.setAutoCommit(false);
+            String consulta = "SELECT count(r_materiaalumno) as verifica from tb_asistencia inner join tb_materiaalumno\n"
+                    + "on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno  \n"
+                    + "where tb_asistencia.r_periodo = ? and tb_asistencia.r_dia = ? and tb_asistencia.r_semanafiscal = ? and tb_materiaalumno.r_materiapersonal = ? and tb_asistencia.tipoescuela = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idperiodo);
+            pst.setInt(2, iddia);
+            pst.setInt(3, idsemana);
+            pst.setInt(4, idmateria);
+            pst.setInt(5, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                bandera = rs.getInt("verifica");
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return bandera;
     }
 
 }

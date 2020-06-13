@@ -352,6 +352,15 @@ public class AdministradorController {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.updateJustificar(listasistencia);
     }
+    public void actualizaAsistencia(List<TbAsistencia> listasistencia) throws Exception {
+     ConsultasAdministrador consulta = new ConsultasAdministrador();
+     consulta.actualizarAsistencia(listasistencia);
+    }
+    
+    public int verificarAsistencia(int idperiodo, int idsemana, int iddia, int idmateria, int tipoescuela) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.verificarAsistencia(idperiodo,idsemana,iddia,idmateria,tipoescuela);
+    }
 
     private List<TbAlumnos> readFromCSVA(String ruta, int tipoescuela) throws Exception {
         List<TbAlumnos> alumnos = new ArrayList<>();
@@ -674,6 +683,6 @@ public class AdministradorController {
         return consulta.getAlumno(idalumno,tipoescuela);
         
     }
- 
+
 
 }

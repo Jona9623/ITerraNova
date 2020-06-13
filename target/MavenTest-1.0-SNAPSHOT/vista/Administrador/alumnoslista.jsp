@@ -6,41 +6,33 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+ 
+    int x = 0;
+    int personal = 0;
+    HttpSession objsesion = request.getSession(false);
+    String usuario = (String) objsesion.getAttribute("user");
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+    } else {
+        x = (int) objsesion.getAttribute("tipo");
+        personal = (int) objsesion.getAttribute("personal");
+    }
+%>
 <br>
 <br> <br> 
 <div class="row">
     <p class="header">Toma de asistencia</p>
 </div>
 <div class="row col-lg-12 col-md-12 colsm-12">
-    <div class="col-lg-4 p-t-20">
-        <label >Seleccione periodo escolar</label>
-        <select id="periodoasistencia" class="custom-select" name="periodoasistencia">
-            <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
-                <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
-            </c:forEach>
-        </select>
-    </div>
-    <div class="col-lg-4 p-t-20">
-        <label >Seleccione Semana fiscal</label>
-        <select id="semanafiscalasistencia" name="semanafiscalasistencia" class="custom-select">
-            <c:forEach items="${requestScope.listsemana}" var="listsemana">
-                <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
-            </c:forEach>
-        </select>
-    </div>
-    <div class="col-lg-4 p-t-20">
-        <label >Seleccione el dia actual</label>
-        <select id="diaasistencia" name="diaasistencia" class="custom-select">
-            <c:forEach items="${requestScope.listdia}" var="listdia">
-                <option value="${listdia.idtbdia}">${listdia.nombre} </option>
-            </c:forEach>
-        </select>
+    
+    <div class="col-lg-2 p-t-20">
+        <button type="button"<c:if test="${requestScope.bandera == 1}">hidden="true"</c:if>
+                id="asistencia" class="btn btn-terra">Guardar asistencia</button>
     </div>
     <div class="col-lg-2 p-t-20">
-        <button type="button" id="asistencia" class="btn btn-terra">Guardar asistencia</button>
-    </div>
-    <div class="col-lg-2 p-t-20">
-        <button type="button" id="asistenciaanterior" class="btn btn-terra">Asistencia anterior </button>
+        <button type="button"<c:if test="${requestScope.bandera == 0}">hidden="true"</c:if>
+            id="asistenciaanterior" class="btn btn-terra">Actualizar asistencia </button>
     </div>
 
 </div>

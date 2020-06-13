@@ -44,6 +44,24 @@
                 </c:forEach>
             </select>
         </div>
+        <div class="row">
+            <div class="col-lg-4 p-t-20">
+                <label >Periodo: ${requestScope.periodo.nombre}</label>
+                <input hidden="true" id="periodoasistencia" name="periodoasistencia" value="${requestScope.periodo.idtbperiodo}">
+            </div>
+            <div class="col-lg-4 p-t-20">
+                <label >Semana: ${requestScope.semana.nombre}</label>
+                <input hidden="true" id="semanafiscalasistencia" name="semanafiscalasistencia" value="${requestScope.semana.idtbsemana}">
+            </div>
+            <div class="col-lg-4 p-t-20">
+                    <c:forEach items="${requestScope.listdia}" var="listdia">
+                        <c:if test="${listdia.nombre == requestScope.diaactual}"><label>Dia actual: ${listdia.nombre}</label>
+                            <input hidden="true" id="diaasistencia" name="diaasistencia" value="${listdia.idtbdia}">
+                        </c:if>
+                    </c:forEach>
+            </div>
+        </div>
+
         <div id="ListaAlumnos">
             <jsp:include page='alumnoslista.jsp'>
                 <jsp:param name="article1" value=""/>

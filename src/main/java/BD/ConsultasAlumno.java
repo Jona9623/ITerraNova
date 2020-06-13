@@ -1637,7 +1637,7 @@ public class ConsultasAlumno {
     }
 
     /*Consulta para traer una lista que contendrá la asistencia tomada con anterioridad para su modificacion y posterior actualizacion*/
-    public List<TbAsistencia> asistenciaAnterior(int iddia, int idperiodo, int idsemana, int tipoescuela) throws Exception {
+    public List<TbAsistencia> asistenciaAnterior(int iddia, int idperiodo, int idsemana, int idmateria, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -1645,15 +1645,17 @@ public class ConsultasAlumno {
         try {
             con.setAutoCommit(false);
             String consulta = "SELECT tb_asistencia.idtb_asistencia, tb_alumnos.nombre,tb_alumnos.apellidopaterno,tb_alumnos.apellidomaterno, tb_asistencia.asistencia FROM tb_asistencia inner join tb_materiaalumno\n"
-                    + "on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno inner join tb_alumnos\n"
-                    + "on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos\n"
-                    + "where tb_asistencia.r_periodo = ? and tb_asistencia.r_semanafiscal = ? and tb_asistencia.r_dia = ? and tb_asistencia.status = 1 and tb_asistencia.tipoescuela = ?\n"
-                    + " order by tb_alumnos.apellidopaterno asc;";
+                    + "                    on tb_asistencia.r_materiaalumno = tb_materiaalumno.idtb_materiaalumno inner join tb_alumnos\n"
+                    + "                    on tb_materiaalumno.r_alumno = tb_alumnos.idTb_Alumnos inner join tb_materiapersonal\n"
+                    + "                    on tb_materiaalumno.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal\n"
+                    + "                    where tb_asistencia.r_periodo = ? and tb_asistencia.r_semanafiscal = ? and tb_asistencia.r_dia = ? and tb_asistencia.status = 1 and tb_asistencia.tipoescuela = ? and tb_materiaalumno.r_materiapersonal = ?\n"
+                    + "                     order by tb_alumnos.apellidopaterno asc;";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, idperiodo);
             pst.setInt(2, idsemana);
             pst.setInt(3, iddia);
             pst.setInt(4, tipoescuela);
+            pst.setInt(5, idmateria);
             rs = pst.executeQuery();
             while (rs.next()) {
                 TbAsistencia asistencia = new TbAsistencia();
@@ -1683,6 +1685,80 @@ public class ConsultasAlumno {
             }
         }
         return listasistencia;
+    }
+    public CtPeriodoEscolar getPeriodosAsistencia(int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        CtPeriodoEscolar periodo = new CtPeriodoEscolar();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select * FROM ct_periodoescolar where tipoescuela = ? and status = 1 order by idCt_PeriodoEscolar desc limit 1;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                periodo.setIdtbperiodo(rs.getInt("idCt_PeriodoEscolar"));
+                periodo.setNombre(rs.getString("nombre"));
+                periodo.setStatus(rs.getInt("status"));
+                periodo.setTipoescuela(rs.getInt("tipoescuela"));
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return periodo;
+    }
+    public CtSemanaFiscal getSemanaFiscalAsistencia(int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        CtSemanaFiscal semana = new CtSemanaFiscal();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "select * from ct_semanafiscal where status = 1 and tipoescuela = ? order by idCt_SemanaFiscal desc limit 1";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                semana.setIdtbsemana(rs.getInt("idCt_SemanaFiscal"));
+                semana.setNombre(rs.getString("nombre"));
+                semana.setStatus(rs.getInt("status"));
+                semana.setTipoescuela(rs.getInt("tipoescuela"));
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return semana;
     }
 
 }

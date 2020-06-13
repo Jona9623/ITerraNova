@@ -126,7 +126,7 @@
                                     <% } %>
                                     <li>
                                         <a href="Logout">
-                                            <i class="icon-logout"></i> Salir </a>
+                                            <i class="icon-logout salir"></i> Salir </a>
                                     </li>
                                 </ul>
                             </li>

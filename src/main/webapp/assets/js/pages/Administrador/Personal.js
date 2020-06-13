@@ -1,6 +1,7 @@
 var Adminpersonal = (function () {
     /*Variable para saber si estamos en secundaria o preparatoria*/
     var tipoescuela = JSON.parse(sessionStorage.getItem("tipoescuela"));
+    var ban = 0;
     return {
         /*Traemos la vista de la tabla*/
         tablaPersonal: function () {
@@ -246,7 +247,7 @@ var Adminpersonal = (function () {
                     area = $('option:selected').attr('area');
                     cpt = $('option:selected').attr('cpt');
                     materiapersonal = $("#materiaLista").val();
-                    Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal);
+                    Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
                     //$("#materiaLista").change(function () {
                     $("body").find("select[id='materiaLista']").unbind('change').bind('change', function () {
                         grado = $('option:selected').attr('grado');
@@ -254,13 +255,22 @@ var Adminpersonal = (function () {
                         area = $('option:selected').attr('area');
                         cpt = $('option:selected').attr('cpt');
                         materiapersonal = $("#materiaLista").val();
-                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal);
+                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
+                    });
+                    $("body").find("select[id='periodoasistencia']").unbind('change').bind('change', function () {
+                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
+                    });
+                    $("body").find("select[id='semanafiscalasistencia']").unbind('change').bind('change', function () {
+                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
+                    });
+                    $("body").find("select[id='diaasistencia']").unbind('change').bind('change', function () {
+                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
                     });
                 }
             });
         },
         /*Teniendo en cuenta los parametros mostramos en la misma vista la tabla con alumnos*/
-        getListaAlumno: function (grado, grupo, area, cpt, materiapersonal, idpersonal) {
+        getListaAlumno: function (grado, grupo, area, cpt, materiapersonal, idpersonal, idperiodo, idsemana, iddia) {
             console.log(idpersonal);
             $.get("SAdminpersonal", {
                 ACCION: "getListaAlumno",
@@ -270,6 +280,9 @@ var Adminpersonal = (function () {
                 CPT: cpt,
                 ID: idpersonal,
                 IDM: materiapersonal,
+                IDP: idperiodo,
+                IDS: idsemana,
+                IDD: iddia,
                 TIPOESCUELA: tipoescuela
             }).done(function (xhr, status, error) {
                 if (error.status != 200)
@@ -280,12 +293,11 @@ var Adminpersonal = (function () {
                         paging: false,
                         "scrollX": true
                     });
-                    $("#asistenciaanterior").hide();
                     /*Esta validacion funciona para determinar el dia donde se toma asistencia, debido a ser dos escuelas se repiten 2 veces cada dia
                      * y por esto tiene id diferentes un mismo dia*/
                     //$("#asistencia").on('click', function () {
                     $("body").find("button[id='asistencia']").unbind('click').bind('click', function () {
-                        $("#asistenciaanterior").show();
+
                         var dia = $("#diaasistencia").val();
                         var nombredia;
                         if (dia == 1 || dia == 6)
@@ -338,6 +350,7 @@ var Adminpersonal = (function () {
                                 else {
                                     swal("Hecho!", "Asistencia del dia guardada", "success");
                                     listasistencia = [];
+                                    Adminpersonal.listaAlumnos(idpersonal);
                                 }
                             });
                         });
@@ -356,7 +369,9 @@ var Adminpersonal = (function () {
                             TIPOESCUELA: tipoescuela,
                             IDD: dia,
                             IDP: idperiodo,
-                            IDS: idsemana
+                            IDS: idsemana,
+                            ID: idpersonal,
+                            IDM: materiapersonal
                         }).done(function (xhr, status, error) {
                             if (error.status != 200)
                                 swal(error.getResponseHeader("ERROR"), "", "warning");
@@ -365,6 +380,34 @@ var Adminpersonal = (function () {
                                 $('#tablaasistenciaanterior').DataTable({
                                     paging: false,
                                     "scrollX": true
+                                });
+                                $("body").find("button[id='actualizarasistencia']").unbind('click').bind('click', function () {
+                                    let listasistencia = [];
+                                    let check = 0;
+                                    $("#check3 input[type='checkbox']").each(function () {
+                                        if ($(this).is(':checked')) {
+                                            check = 1;
+                                        } else {
+                                            check = 0;
+                                        }
+                                        let asistencia = {
+                                            "idtbasistencia": $(this).val(),
+                                            "asistencia": check
+
+                                        };
+                                        listasistencia.push(asistencia);
+                                        asistencia = null;
+                                    });
+                                    $.get("SAdminpersonal", {
+                                        ACCION: "actualizaAsistencia",
+                                        OBJETO: JSON.stringify(listasistencia)
+                                    }).done(function (xhr, status, error) {
+                                        if (error.status != 200)
+                                            swal(error.getResponseHeader("ERROR"), "", "warning");
+                                        else {
+                                            swal("Hecho!", "Asistencia del dia actualizada", "success");
+                                        }
+                                    })
                                 });
                             }
                         });
