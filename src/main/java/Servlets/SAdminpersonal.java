@@ -26,8 +26,11 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -150,37 +153,37 @@ public class SAdminpersonal extends HttpServlet {
                 break;
             case "guardaAsistencia":
                 try {
-                    guardaAsistencia(request,response);
+                    guardaAsistencia(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "reporteAsistencia":
-            try {
-                    reporteAsistencia(request,response);
+                try {
+                    reporteAsistencia(request, response);
                 } catch (Exception e) {
                 }
-            break;
+                break;
             case "getreporteAsistencia":
                 try {
-                    getreporteAsistencia(request,response);
+                    getreporteAsistencia(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "asistenciaAnterior":
                 try {
-                    asistenciaAnterior(request,response);
+                    asistenciaAnterior(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "actualizaAsistencia":
                 try {
-                    actualizaAsistencia(request,response);
+                    actualizaAsistencia(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "verificaAsistencia":
                 try {
-                    verificaAsistencia(request,response);
+                    verificaAsistencia(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -418,7 +421,7 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listgrado", listgrado);
             listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listgrupo", listgrupo);
-            listalumno = alumC.getAlumnosMateria(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")),Integer.parseInt(request.getParameter("AREA")),Integer.parseInt(request.getParameter("CPT")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listalumno = alumC.getAlumnosMateria(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")), Integer.parseInt(request.getParameter("AREA")), Integer.parseInt(request.getParameter("CPT")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumno", listalumno);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/asignaalumno.jsp");
             rd.forward(request, response);
@@ -448,10 +451,13 @@ public class SAdminpersonal extends HttpServlet {
         List<TbMateriaPersonal> listmateria = new ArrayList<>();
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
-        List<CtDia> listdia = new  ArrayList<>();
+        List<CtDia> listdia = new ArrayList<>();
         CtSemanaFiscal semana = new CtSemanaFiscal();
         CtPeriodoEscolar periodo = new CtPeriodoEscolar();
         TbPersonal personal = new TbPersonal();
+        Calendar fecha = Calendar.getInstance();
+        String[] strDays = new String[]{"Sunday", "Monday", "Tuesday",
+            "Wednesday", "Thusday", "Friday", "Saturday"};
         try {
             listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")), Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("listmateria", listmateria);
@@ -461,7 +467,25 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listgrupo", listgrupo);
             listdia = adminC.getDias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listdia", listdia);
-            request.setAttribute("diaactual", "Miercoles");
+            String dia = strDays[fecha.get(Calendar.DAY_OF_WEEK) - 1];
+            switch (dia) {
+                case "Monday":
+                    request.setAttribute("diaactual", "Lunes");
+                    break;
+                case "Tuesday":
+                    request.setAttribute("diaactual", "Martes");
+                    break;
+                case "Wednesday":
+                    request.setAttribute("diaactual", "Miercoles");
+                    break;
+                case "Thursday":
+                    request.setAttribute("diaactual", "Jueves");
+                    break;
+                case "Friday":
+                    request.setAttribute("diaactual", "viernes");
+                    break;
+
+            }
             semana = alumC.getSemanaiscalAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("semana", semana);
             periodo = alumC.getPeriodosAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
@@ -483,9 +507,12 @@ public class SAdminpersonal extends HttpServlet {
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
         List<Alumno> listalumno = new ArrayList<>();
-        List<CtDia> listdia = new  ArrayList<>();
+        List<CtDia> listdia = new ArrayList<>();
         CtSemanaFiscal semana = new CtSemanaFiscal();
         CtPeriodoEscolar periodo = new CtPeriodoEscolar();
+        Calendar fecha = Calendar.getInstance();
+        String[] strDays = new String[]{"Sunday", "Monday", "Tuesday",
+            "Wednesday", "Thusday", "Friday", "Saturday"};
         try {
             listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")), Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("listmateria", listmateria);
@@ -495,18 +522,37 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listgrupo", listgrupo);
             listdia = adminC.getDias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listdia", listdia);
-            request.setAttribute("diaactual", "Martes");
+            String dia = strDays[fecha.get(Calendar.DAY_OF_WEEK) - 1];
+            switch (dia) {
+                case "Monday":
+                    request.setAttribute("diaactual", "Lunes");
+                    break;
+                case "Tuesday":
+                    request.setAttribute("diaactual", "Martes");
+                    break;
+                case "Wednesday":
+                    request.setAttribute("diaactual", "Miercoles");
+                    break;
+                case "Thursday":
+                    request.setAttribute("diaactual", "Jueves");
+                    break;
+                case "Friday":
+                    request.setAttribute("diaactual", "viernes");
+                    break;
+
+            }
             semana = alumC.getSemanaiscalAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("semana", semana);
             periodo = alumC.getPeriodosAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("periodo", periodo);
-            listalumno = alumC.getListaAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")),Integer.parseInt(request.getParameter("AREA")),Integer.parseInt(request.getParameter("CPT")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listalumno = alumC.getListaAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")), Integer.parseInt(request.getParameter("AREA")), Integer.parseInt(request.getParameter("CPT")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumno", listalumno);
-            verifica = adminC.verificarAsistencia(Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("IDD")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
-            if(verifica>0)
+            verifica = adminC.verificarAsistencia(Integer.parseInt(request.getParameter("IDP")), Integer.parseInt(request.getParameter("IDS")), Integer.parseInt(request.getParameter("IDD")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            if (verifica > 0) {
                 bandera = 1;
-            else
+            } else {
                 bandera = 0;
+            }
             request.setAttribute("bandera", bandera);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/alumnoslista.jsp");
             rd.forward(request, response);
@@ -515,8 +561,8 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-    
-    private void guardaAsistencia(HttpServletRequest request, HttpServletResponse response)throws Exception {
+
+    private void guardaAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         mapper = new ObjectMapper();
         objectJson = request.getParameter("OBJETO");
@@ -524,12 +570,13 @@ public class SAdminpersonal extends HttpServlet {
         try {
             listasistencia = Arrays.asList(mapper.readValue(objectJson, TbAsistencia[].class));
             adminC.guardaAsistencia(listasistencia, Integer.parseInt(request.getParameter("TIPOESCUELA")));
-            
+
         } catch (Exception e) {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
     }
+
     private void reporteAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -537,7 +584,7 @@ public class SAdminpersonal extends HttpServlet {
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
         List<Alumno> listalumno = new ArrayList<>();
-        List<CtDia> listdia = new  ArrayList<>();
+        List<CtDia> listdia = new ArrayList<>();
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
         TbPersonal personal = new TbPersonal();
@@ -557,6 +604,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
+
     private void getreporteAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -565,7 +613,7 @@ public class SAdminpersonal extends HttpServlet {
         List<CtGrupo> listgrupo = new ArrayList<>();
         List<TbAsistencia> listalumno = new ArrayList<>();
         List<TbAsistencia> listalumnoJ = new ArrayList<>();
-        List<CtDia> listdia = new  ArrayList<>();
+        List<CtDia> listdia = new ArrayList<>();
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
         try {
@@ -575,9 +623,9 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listsemana", listsemana);
             listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);
-            listalumno = alumC.getAlumnosAsistencia(Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listalumno = alumC.getAlumnosAsistencia(Integer.parseInt(request.getParameter("IDP")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("IDS")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumno", listalumno);
-            listalumnoJ = alumC.getAlumnosAsistenciaJ(Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listalumnoJ = alumC.getAlumnosAsistenciaJ(Integer.parseInt(request.getParameter("IDP")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("IDS")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumnoJ", listalumnoJ);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/getreporteasistencia.jsp");
             rd.forward(request, response);
@@ -586,16 +634,17 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-    private void asistenciaAnterior(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+    private void asistenciaAnterior(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
-        alumC = new  AlumnosController();
-        List <TbAsistencia> listasistencia = new ArrayList<>();
+        alumC = new AlumnosController();
+        List<TbAsistencia> listasistencia = new ArrayList<>();
         TbPersonal personal = new TbPersonal();
         try {
-            listasistencia = alumC.asistenciaAnterior(Integer.parseInt(request.getParameter("IDD")),Integer.parseInt(request.getParameter("IDP")),Integer.parseInt(request.getParameter("IDS")),Integer.parseInt(request.getParameter("IDM")),Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listasistencia = alumC.asistenciaAnterior(Integer.parseInt(request.getParameter("IDD")), Integer.parseInt(request.getParameter("IDP")), Integer.parseInt(request.getParameter("IDS")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listasistencia", listasistencia);
-             personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("ID")));
-             request.setAttribute("personal", personal);
+            personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("personal", personal);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/asistenciaanterior.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -603,7 +652,8 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-    private void actualizaAsistencia(HttpServletRequest request, HttpServletResponse response)throws Exception {
+
+    private void actualizaAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         mapper = new ObjectMapper();
         objectJson = request.getParameter("OBJETO");
@@ -617,14 +667,15 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-    private void verificaAsistencia(HttpServletRequest request, HttpServletResponse response)throws Exception {
+
+    private void verificaAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
         List<TbMateriaPersonal> listmateria = new ArrayList<>();
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
         List<Alumno> listalumno = new ArrayList<>();
-        List<CtDia> listdia = new  ArrayList<>();
+        List<CtDia> listdia = new ArrayList<>();
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
         try {
@@ -640,9 +691,9 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listsemana", listsemana);
             listperiodo = alumC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);
-            listalumno = alumC.getListaAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")),Integer.parseInt(request.getParameter("AREA")),Integer.parseInt(request.getParameter("CPT")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            listalumno = alumC.getListaAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")), Integer.parseInt(request.getParameter("AREA")), Integer.parseInt(request.getParameter("CPT")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumno", listalumno);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/alumnoslista.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

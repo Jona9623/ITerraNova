@@ -348,7 +348,7 @@ var Adminpersonal = (function () {
                                 if (error.status != 200)
                                     swal(error.getResponseHeader("ERROR"), "", "warning");
                                 else {
-                                    swal("Hecho!", "Asistencia del dia guardada", "success");
+                                    swal("Hecho!", "Asistencia del dia guardadA (PARA ACTUALIZAR VERIFIQUE BIEN SU MATERIA)", "success");
                                     listasistencia = [];
                                     Adminpersonal.listaAlumnos(idpersonal);
                                 }
