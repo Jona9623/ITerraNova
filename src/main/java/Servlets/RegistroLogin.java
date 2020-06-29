@@ -34,6 +34,7 @@ public class RegistroLogin extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    /*Funcion que se usa al registrar un usuario, tomamos valores de los campos, y enviamos las credenciales al correo del personal asociado a esa cuenta*/
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

@@ -1686,6 +1686,7 @@ public class ConsultasAlumno {
         }
         return listasistencia;
     }
+    /*Consulta para traer el ultimo periodo registrado en la base de datos para la vista de guardar asistencia*/
     public CtPeriodoEscolar getPeriodosAsistencia(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -1723,6 +1724,7 @@ public class ConsultasAlumno {
         }
         return periodo;
     }
+     /*Consulta para traer la ultima semana fiscal registrada en la base de datos para la vista de guardar asistencia*/
     public CtSemanaFiscal getSemanaFiscalAsistencia(int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;

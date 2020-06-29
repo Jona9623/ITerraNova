@@ -46,16 +46,16 @@
         </div>
         <div class="row">
             <div class="col-lg-4 p-t-20">
-                <label >Periodo: ${requestScope.periodo.nombre}</label>
+                <label ><strong>Periodo: ${requestScope.periodo.nombre}</strong></label>
                 <input hidden="true" id="periodoasistencia" name="periodoasistencia" value="${requestScope.periodo.idtbperiodo}">
             </div>
             <div class="col-lg-4 p-t-20">
-                <label >Semana: ${requestScope.semana.nombre}</label>
+                <label ><strong>Semana: ${requestScope.semana.nombre}</strong></label>
                 <input hidden="true" id="semanafiscalasistencia" name="semanafiscalasistencia" value="${requestScope.semana.idtbsemana}">
             </div>
             <div class="col-lg-4 p-t-20">
                     <c:forEach items="${requestScope.listdia}" var="listdia">
-                        <c:if test="${listdia.nombre == requestScope.diaactual}"><label>Dia actual: ${listdia.nombre}</label>
+                        <c:if test="${listdia.nombre == requestScope.diaactual}"><label><strong>Dia actual: ${listdia.nombre}</strong></label>
                             <input hidden="true" id="diaasistencia" name="diaasistencia" value="${listdia.idtbdia}">
                         </c:if>
                     </c:forEach>

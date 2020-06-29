@@ -59,6 +59,7 @@ public class SAdministrador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        /*Aqui vamos a tomar el contenido de ACCION que enviamos desde el js y lo evaluamos para saber que hacer*/
         String accion = request.getParameter("ACCION");
         switch (accion) {
             case "tablaPuesto":
@@ -121,12 +122,12 @@ public class SAdministrador extends HttpServlet {
             case "eliminaCpt":
                 eliminaCpt(request, response);
                 break;
-            case "tablaGradoGrupo":
+            /*case "tablaGradoGrupo":
                 try {
                     tablaGradoGrupo(request, response);
                 } catch (Exception e) {
                 }
-                break;
+                break;*/
             case "tablaTipoCalificacion":
                 try {
                    tablaTipoCalificacion(request, response); 
@@ -246,7 +247,7 @@ public class SAdministrador extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    /*Funcion que mostra´ra la vista de tabla personal, haciendo la consulta necesaria para dicha informacion*/
     private void tablaPuesto(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<CtPuesto> listpuesto = new ArrayList<>();
@@ -260,7 +261,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera ninguna vista, guarda la informacion que procede de presionar el boton guardar*/
     private void guardaPuesto(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CtPuesto puesto = new CtPuesto();
         adminC = new AdministradorController();
@@ -278,7 +279,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera ninguna vista, elimina el registro seleccionado al presionar el boton de eliminar*/
     private void eliminaPuesto(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
@@ -288,7 +289,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*Muestra la vista de la tabla periodo*/
     private void tablaPeriodo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumC = new AlumnosController();
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
@@ -302,7 +303,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, solo guarda registro de nuevo periodo al presionar el boton de gurdar*/
     private void guardaPeriodo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CtPeriodoEscolar periodo = new CtPeriodoEscolar();
         adminC = new AdministradorController();
@@ -320,7 +321,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, elimina el registro al presionar el boton de eliminar*/
     private void eliminaPeriodo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
@@ -330,7 +331,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*Genera la vista de la tabla area*/
     private void tablaArea(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<CtAreaalumno> listarea = new ArrayList<>();
@@ -344,7 +345,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, guarda el registro al presionar el boton de guardar*/
     private void guardaArea(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CtAreaalumno area = new CtAreaalumno();
         adminC = new AdministradorController();
@@ -362,7 +363,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, elimina el registro al presionar el boton de elimianr*/
     private void eliminaArea(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
@@ -372,7 +373,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*Genera la vista de la tabla cpt*/
     private void tablaCpt(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<CtCptalumno> listcpt = new ArrayList<>();
@@ -386,7 +387,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, guarda el registro al presioanr el boton*/
     private void guardaCpt(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CtCptalumno cpt = new CtCptalumno();
         adminC = new AdministradorController();
@@ -404,7 +405,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, elimina el registro al preiosnar el boton*/
     private void eliminaCpt(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
@@ -414,7 +415,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*
     private void tablaGradoGrupo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<GradoGrupo> listgradogrupo = new ArrayList<>();
@@ -427,8 +428,8 @@ public class SAdministrador extends HttpServlet {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
-    }
-
+    }*/
+    /*Genera la vista de la tabla de tipo de calificacion*/
     private void tablaTipoCalificacion(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<CtTipoCalificaicon> listtipocali = new ArrayList<>();
@@ -442,7 +443,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, guarda el registro al presionar el boton*/
     private void guardaTipoCali(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CtTipoCalificaicon tipocali = new CtTipoCalificaicon();
         adminC = new AdministradorController();
@@ -460,7 +461,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, elimina e lregistro al presionar boton de eliminar*/
     private void eliminaTipoCali(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
@@ -470,7 +471,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*Genera la vista de la tabla materia*/
     private void tablaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumC = new AlumnosController();
         adminC = new AdministradorController();
@@ -501,7 +502,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, guarda el registro al presionar el boton guardar*/
     private void guardaGrado(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CtGrado grado = new CtGrado();
         adminC = new AdministradorController();
@@ -515,7 +516,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, guarda el registro al presionar el boton guardar*/
     private void guardaGrupo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CtGrupo grupo = new CtGrupo();
         adminC = new AdministradorController();
@@ -529,7 +530,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, guarda el registro al presionar el boton guardar (aqui solo se guarda el nombre de la materia)*/
     private void guardaNombreMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CtDatosMateria nombremateria = new CtDatosMateria();
         adminC = new AdministradorController();
@@ -543,7 +544,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, guarda el registro al presionar el boton guardar (aqui se asocia las materias con su respectivo grado, grupo, area o cpt)*/
     private void guardaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TbMateria materia = new TbMateria();
         adminC = new AdministradorController();
@@ -557,7 +558,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, se elimina el registro al presionar el boton eliminar*/
     private void eliminaMateria(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
@@ -567,7 +568,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*Genera la vista para el reporte de asistencia general esta vista carga los parametros a considerar para mostrar la informacion*/
     private void reporteGAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -592,7 +593,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*Se genera la vista que va junto a la funcion anterior, esta parte solo carga el listado de los alumnos, materias y las faltas*/
     private void getreporteGAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -628,7 +629,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*Genera la vista para justificar faltas, solo carga los parametros a considerar para mostrar los dias faltados*/
     private void justificarFaltas(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -655,7 +656,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*Muestra la tabla con los dias faltados, esta vista va junto con la funcion anterior*/
     private void getDiasFaltas(HttpServletRequest request, HttpServletResponse response) throws Exception{
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -679,7 +680,7 @@ public class SAdministrador extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*No genera vista, solo acualiza el registro para justificar las faltas*/
     private void updateJustificar(HttpServletRequest request, HttpServletResponse response) throws Exception {
         mapper = new ObjectMapper();
         adminC = new AdministradorController();

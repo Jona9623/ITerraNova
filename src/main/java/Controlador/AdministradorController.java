@@ -684,5 +684,10 @@ public class AdministradorController {
         
     }
 
+    public CtDatosMateria getMateriaAsistenciaA(int idmateria, int tipoescuela) throws Exception {
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        return consulta.getMateriaAsistneciaA(idmateria,tipoescuela);
+    }
+
 
 }

@@ -55,6 +55,7 @@ public class SAdminalumno extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //Aqui tomamos el parametro enviado desde el js con nombre ACCION para saber que funcion ejecutar
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -179,7 +180,7 @@ public class SAdminalumno extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    /*Funcion que mostrará la vista de la tabla de los alumnos*/
     private void MuestraAgregaalumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<TbAlumnos> listalumnos = new ArrayList<>();
@@ -194,6 +195,7 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
+    //Funcion que traerá la vista que muestra toda la info del alumno
     private void infoAlumno(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         TbAlumnos alumno = new TbAlumnos();
@@ -210,7 +212,7 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que traerá toda la informacion del alumno para mostrar la vista del formulario con la informacion para editar
     private void editarAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         TbTutor tutor = new TbTutor();
@@ -240,7 +242,7 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Solo realiza la funcion de eliminar el registro
     private void eliminarAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         try {
@@ -250,7 +252,7 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que uestrá la vista del formulario del alumno para registrar un nuevo alumno
     private void Agregaalumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<CtGrado> listgrado = new ArrayList<>();
@@ -273,7 +275,7 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Guarda los datos del tutor registrados en el form del alumno
     private void GuardaTutor(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TbTutor tutor = new TbTutor();
         adminC = new AdministradorController();
@@ -291,7 +293,9 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Guarda los datos del alumno registrados en el formulalrio
+    /*Este tipo de funcion es diferente ya que al guardar una posible imagen del alumno la forma de tratar la imagen se hizo directamente en e lservlet
+    y no en el js asi como los parametros que vienen desde el form se tratan aqui, esto para poder usar funciones de java que me permiten el tratado de la imagen*/
     private void GuardaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TbAlumnos alumno = new TbAlumnos();
         String ruta = null;
@@ -300,6 +304,8 @@ public class SAdminalumno extends HttpServlet {
         //objectJson = request.getParameter("ALUMNO");
         //mapper = new ObjectMapper();
         try {
+            /*Aqui se usan funciones especiales para el tratado de archivos, basicamente obtenemos el archivo del input file de la vista
+            creamos una ruta y lo guardamos ahi con el nombre del archivo en la ruta*/
             String foto = (String.valueOf(request.getParameter("fotoAlumno")));
             if (foto.equals("null")) {
                 String applicationPath = getServletContext().getRealPath("");
@@ -418,7 +424,7 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion para el tratado de larchivo
     private String extractFileName(Part part) {
         String fileName = "",
                 contentDisposition = part.getHeader("content-disposition");
@@ -430,7 +436,7 @@ public class SAdminalumno extends HttpServlet {
         }
         return fileName;
     }
-
+    //Aqui tomamos el archivo del cual vamos a importar la informacion del alumno
     private void importaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<TbAlumnos> listalumnos = new ArrayList<>();
@@ -458,7 +464,7 @@ public class SAdminalumno extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Aqui tomamos el archivo del cual vamos a importar la informacion del tutor
     private void importaTutor(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<TbTutor> listtutor = new ArrayList<>();

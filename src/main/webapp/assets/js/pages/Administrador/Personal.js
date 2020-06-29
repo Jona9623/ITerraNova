@@ -247,7 +247,10 @@ var Adminpersonal = (function () {
                     area = $('option:selected').attr('area');
                     cpt = $('option:selected').attr('cpt');
                     materiapersonal = $("#materiaLista").val();
-                    Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
+                    idperiodo = $("#periodoasistencia").val();
+                    idsemana = $("#semanafiscalasistencia").val();
+                    iddia = $("#diaasistencia").val();
+                    Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, idperiodo, idsemana, iddia);
                     //$("#materiaLista").change(function () {
                     $("body").find("select[id='materiaLista']").unbind('change').bind('change', function () {
                         grado = $('option:selected').attr('grado');
@@ -255,17 +258,20 @@ var Adminpersonal = (function () {
                         area = $('option:selected').attr('area');
                         cpt = $('option:selected').attr('cpt');
                         materiapersonal = $("#materiaLista").val();
-                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
+                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, idperiodo, idsemana, iddia);
                     });
-                    $("body").find("select[id='periodoasistencia']").unbind('change').bind('change', function () {
-                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
+                   /* $("body").find("select[id='periodoasistencia']").unbind('change').bind('change', function () {
+                        idperiodo = $("#periodoasistencia").val();
+                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, idperiodo, idsemana, iddia);
                     });
                     $("body").find("select[id='semanafiscalasistencia']").unbind('change').bind('change', function () {
-                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
+                        idsemana = $("#semanafiscalasistencia").val();
+                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, idperiodo, idsemana, iddia);
                     });
                     $("body").find("select[id='diaasistencia']").unbind('change').bind('change', function () {
-                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, $("#periodoasistencia").val(), $("#semanafiscalasistencia").val(), $("#diaasistencia").val());
-                    });
+                        iddia = $("#diaasistencia").val();
+                        Adminpersonal.getListaAlumno(grado, grupo, area, cpt, materiapersonal, idpersonal, idperiodo, idsemana, iddia);
+                    });*/
                 }
             });
         },
@@ -278,11 +284,11 @@ var Adminpersonal = (function () {
                 GRUPO: grupo,
                 AREA: area,
                 CPT: cpt,
-                ID: idpersonal,
-                IDM: materiapersonal,
                 IDP: idperiodo,
                 IDS: idsemana,
                 IDD: iddia,
+                ID: idpersonal,
+                IDM: materiapersonal,
                 TIPOESCUELA: tipoescuela
             }).done(function (xhr, status, error) {
                 if (error.status != 200)
@@ -348,7 +354,7 @@ var Adminpersonal = (function () {
                                 if (error.status != 200)
                                     swal(error.getResponseHeader("ERROR"), "", "warning");
                                 else {
-                                    swal("Hecho!", "Asistencia del dia guardadA (PARA ACTUALIZAR VERIFIQUE BIEN SU MATERIA)", "success");
+                                    swal("Hecho!", "Asistencia del dia guardada (PARA ACTUALIZAR VERIFIQUE BIEN SU MATERIA)", "success");
                                     listasistencia = [];
                                     Adminpersonal.listaAlumnos(idpersonal);
                                 }
@@ -381,6 +387,7 @@ var Adminpersonal = (function () {
                                     paging: false,
                                     "scrollX": true
                                 });
+                                //Funcion que guardará los datos de la assitencia tomada
                                 $("body").find("button[id='actualizarasistencia']").unbind('click').bind('click', function () {
                                     let listasistencia = [];
                                     let check = 0;

@@ -39,6 +39,8 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    /*Se ejecuta cuando se inicia sesion, tomamos parametros de los campos de usuario y contraseña, se hace la validacion correspondiente para iniciar sesion o redireccionar a la pagina de 
+    login para que intente de nuevo*/
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -52,6 +54,7 @@ public class Login extends HttpServlet {
             user = usuarios.iniciarSesion(user);
             if (user.getIdtbusuario() > 0) {
                 HttpSession sesion = request.getSession(true);
+                //Definimos los permisos que tendra el usuario que inicio sesion
                 if (user.getR_tipo() == 1) {
                     sesion.setAttribute("id", user.getIdtbusuario());
                 }
@@ -67,7 +70,7 @@ public class Login extends HttpServlet {
                 if (user.getR_tipo() == 5) {
                     sesion.setAttribute("id", user.getIdtbusuario());
                 }
-                //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user.getUsuario());
+                //Se asignan atributos a la variable sesion para su posterior tratado como permisos, etc
                 sesion.setAttribute("user", user.getUsuario());
                 sesion.setAttribute("password", user.getContrasena());
                 sesion.setAttribute("tipo", user.getR_tipo());

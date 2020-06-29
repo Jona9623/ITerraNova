@@ -29,7 +29,6 @@ Modelos\CtPeriodoEscolar.class
 Modelos\CtDia.class
 Servlets\SReportes.class
 Modelos\TipoUsuario.class
-Servlets\SPrincipal.class
 Modelos\TbMateriaPersonal.class
 Modelos\TbReporteAcademico.class
 Modelos\CtSemanaFiscal.class

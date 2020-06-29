@@ -10,7 +10,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
  
 public class AES {
- 
+/*Esta clase es especial para encriptar y desencriptar contraseña del usuario*/ 
     private static SecretKeySpec secretKey;
     private static byte[] key;
  
@@ -31,7 +31,7 @@ public class AES {
             e.printStackTrace();
         }
     }
- 
+    /*Para encriptar*/
     public static String encrypt(String strToEncrypt, String secret)
     {
         try
@@ -47,7 +47,7 @@ public class AES {
         }
         return null;
     }
- 
+    /*Para desencriptar*/
     public static String decrypt(String strToDecrypt, String secret)
     {
         try

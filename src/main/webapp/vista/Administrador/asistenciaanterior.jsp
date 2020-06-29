@@ -23,7 +23,8 @@
     <div class="page-title-breadcrumb">
         <div class=" pull-left">
             <div class="page-title"> <strong>Aqui podrá actualizar alguna asistencia de acuerdo con el reporte generado el dia de hoy</strong> </div><br>
-            <p>Personal: <strong>${requestScope.personal.apellidop} ${requestScope.personal.apellidom} ${requestScope.personal.nombre}</strong></p>
+            <p>Personal: <strong>${requestScope.personal.apellidop} ${requestScope.personal.apellidom} ${requestScope.personal.nombre}</strong></p> <br><br>
+            <p>Materia a actualizar <strong>${requestScope.materia.nombrelargo}</strong></p>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <% if (x == 3 || x == 4 || x == 5) { %>

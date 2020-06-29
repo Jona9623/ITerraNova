@@ -2766,7 +2766,7 @@ public class ConsultasAdministrador {
         }
         return alumno;
     }
-
+    /*Consulta para actualizar registros en la tabla de asistencia*/
     public void actualizarAsistencia(List<TbAsistencia> listasistencia) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -2800,7 +2800,7 @@ public class ConsultasAdministrador {
             }
         }
     }
-
+    /*Consulta para determinar si de acuerdo con los parametros recibidos se ha generado asistencia, si el count es mayor a 0 signofica que s eha generado asistencia*/
     public int verificarAsistencia(int idperiodo, int idsemana, int iddia, int idmateria, int tipoescuela) throws Exception {
         con = new Conexion().conexion();
         PreparedStatement pst = null;
@@ -2840,6 +2840,45 @@ public class ConsultasAdministrador {
             }
         }
         return bandera;
+    }
+    /*  Consulta para ttraer el nombre de la materia en el cual se esta actualizando*/
+    public CtDatosMateria getMateriaAsistneciaA(int idmateria, int tipoescuela) throws Exception {
+        con = new Conexion().conexion();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        CtDatosMateria materia = new CtDatosMateria();
+        try {
+            con.setAutoCommit(false);
+            String consulta = "SELECT ct_datosmateria.nombrelargo FROM tb_materiapersonal inner join tb_materia\n"
+                    + "on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join ct_datosmateria\n"
+                    + "on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
+                    + "where tb_materiapersonal.idTb_MateriaPersonal = ? and tb_materiapersonal.status = 1 and tb_materiapersonal.tipoescuela = ?;";
+            pst = con.prepareStatement(consulta);
+            pst.setInt(1, idmateria);
+            pst.setInt(2, tipoescuela);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                materia.setNombrelargo(rs.getString("ct_datosmateria.nombrelargo"));
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error " + e);
+            }
+        }
+        return materia;
     }
 
 }

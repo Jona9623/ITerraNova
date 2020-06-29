@@ -8,6 +8,7 @@ package Servlets;
 import Controlador.AdministradorController;
 import Controlador.AlumnosController;
 import Modelos.Alumno;
+import Modelos.CtDatosMateria;
 import Modelos.CtDia;
 import Modelos.CtGrado;
 import Modelos.CtGrupo;
@@ -228,7 +229,7 @@ public class SAdminpersonal extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    //Funcion que trae la vista de la tabla que muestra el personal
     private void MuestraAgregaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<TbPersonal> listpersonal = new ArrayList<>();
@@ -243,7 +244,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que muestra la vista con toda la info del personal
     private void infoPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         TbPersonal personal = new TbPersonal();
@@ -257,7 +258,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que trae la informacion del personal pra mostrarla en el formulrio y editarlo
     private void editarPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         TbPersonal personal = new TbPersonal();
@@ -274,7 +275,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion solo para eliminar el registro
     private void eliminarPersonal(HttpServletRequest request, HttpServletResponse response) throws IOException {
         adminC = new AdministradorController();
         try {
@@ -284,7 +285,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion para mostrar la vista del formulario para agregar un perosnal
     private void AgregaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<CtPuesto> listpuesto = new ArrayList<>();
@@ -298,7 +299,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion para guardar la info del personal recogida del formulario
     private void GuardaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         objectJson = request.getParameter("PERSONAL");
         mapper = new ObjectMapper();
@@ -318,7 +319,7 @@ public class SAdminpersonal extends HttpServlet {
         }
 
     }
-
+    //Tomamos el archivo para importar la informacion del personal a agregar
     private void importaPersonal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<TbPersonal> listpersonal = new ArrayList<>();
@@ -346,7 +347,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion para la vista que muestra las materias para agregarlas al profe
     private void agregaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumC = new AlumnosController();
         List<TbMateria> listmateria = new ArrayList<>();
@@ -369,7 +370,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que asigna las materias al profe para su uso posterior
     private void asignaMateria(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         mapper = new ObjectMapper();
@@ -383,7 +384,7 @@ public class SAdminpersonal extends HttpServlet {
         }
 
     }
-
+    //Funcion para la vista que muestra los parametros a tomar en cuenta para los alumnos que se debe nmostrar
     private void agregaAlumnos(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         List<TbMateriaPersonal> listmateria = new ArrayList<>();
@@ -406,7 +407,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que trae los laumnos de acuerdo a la materia seleccionada para mostrarlos e nla vista arriba
     private void getAsignaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -430,7 +431,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que guarda la infomracion del alumno al profe en la base de datos
     private void asignaAlumnos(HttpServletRequest request, HttpServletResponse response) throws Exception {
         mapper = new ObjectMapper();
         adminC = new AdministradorController();
@@ -444,7 +445,8 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    /*Funcion para la vista que muestra los parametros para guardar la lista de sistencia, usamos la clase Calendar
+    para obtener el dia actual y mostrarlo en la toma de lista*/
     private void listaAlumnos(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -467,7 +469,7 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listgrupo", listgrupo);
             listdia = adminC.getDias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listdia", listdia);
-            String dia = strDays[fecha.get(Calendar.DAY_OF_WEEK) - 1];
+            /* String dia = strDays[fecha.get(Calendar.DAY_OF_WEEK) - 1];
             switch (dia) {
                 case "Monday":
                     request.setAttribute("diaactual", "Lunes");
@@ -478,14 +480,17 @@ public class SAdminpersonal extends HttpServlet {
                 case "Wednesday":
                     request.setAttribute("diaactual", "Miercoles");
                     break;
-                case "Thursday":
+                case "Thusday":
                     request.setAttribute("diaactual", "Jueves");
                     break;
                 case "Friday":
-                    request.setAttribute("diaactual", "viernes");
+                    request.setAttribute("diaactual", "Viernes");
                     break;
 
             }
+            System.out.println(dia);*/
+            System.out.println(new Date());
+            request.setAttribute("diaactual", "Viernes");
             semana = alumC.getSemanaiscalAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("semana", semana);
             periodo = alumC.getPeriodosAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
@@ -495,11 +500,12 @@ public class SAdminpersonal extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/listaalumnos.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
+            System.out.println("lista" + e);
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
     }
-
+    //Funcion que trae la lista de los alumnos de aacuerdo a la materia del profe
     private void getListaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -522,7 +528,7 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listgrupo", listgrupo);
             listdia = adminC.getDias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listdia", listdia);
-            String dia = strDays[fecha.get(Calendar.DAY_OF_WEEK) - 1];
+            /* String dia = strDays[fecha.get(Calendar.DAY_OF_WEEK) - 1];
             switch (dia) {
                 case "Monday":
                     request.setAttribute("diaactual", "Lunes");
@@ -533,7 +539,7 @@ public class SAdminpersonal extends HttpServlet {
                 case "Wednesday":
                     request.setAttribute("diaactual", "Miercoles");
                     break;
-                case "Thursday":
+                case "Thusday":
                     request.setAttribute("diaactual", "Jueves");
                     break;
                 case "Friday":
@@ -541,12 +547,16 @@ public class SAdminpersonal extends HttpServlet {
                     break;
 
             }
+            System.out.println(dia);*/
+            //request.setAttribute("diaactual", "Jueves");
             semana = alumC.getSemanaiscalAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("semana", semana);
             periodo = alumC.getPeriodosAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("periodo", periodo);
             listalumno = alumC.getListaAlumnos(Integer.parseInt(request.getParameter("GRADO")), Integer.parseInt(request.getParameter("GRUPO")), Integer.parseInt(request.getParameter("AREA")), Integer.parseInt(request.getParameter("CPT")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listalumno", listalumno);
+            //La funcion verifica trae un entero con la suma de los registros en la tabla de assitencia, si devuelve mayor que 0 significa que se tomó lista de ese dia
+            //por lo tanto el boton de guardar asistencia para esa materia se debe ocultar y se debe mostrar el de actualizar y viceversa
             verifica = adminC.verificarAsistencia(Integer.parseInt(request.getParameter("IDP")), Integer.parseInt(request.getParameter("IDS")), Integer.parseInt(request.getParameter("IDD")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             if (verifica > 0) {
                 bandera = 1;
@@ -557,11 +567,12 @@ public class SAdminpersonal extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/alumnoslista.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
+            System.out.println("getlista" + e);
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
     }
-
+    //Funcion que guarda en la base de datos la lista de los alumnos a los que se les tomó asistencia
     private void guardaAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         mapper = new ObjectMapper();
@@ -576,7 +587,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que trae la vista que muestra los parametros para la tabla de reporte de asistencia que muestra los alumnos que han faltado
     private void reporteAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -604,7 +615,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Trae los alumnos con faltas de acuerdo a los parametros requeridos
     private void getreporteAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -634,17 +645,20 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que trae la vist que muestra la lista con los datos que se hayan guardado en ese dia por cualquier posible correccion
     private void asistenciaAnterior(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
         List<TbAsistencia> listasistencia = new ArrayList<>();
         TbPersonal personal = new TbPersonal();
+        CtDatosMateria materia = new CtDatosMateria();
         try {
             listasistencia = alumC.asistenciaAnterior(Integer.parseInt(request.getParameter("IDD")), Integer.parseInt(request.getParameter("IDP")), Integer.parseInt(request.getParameter("IDS")), Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listasistencia", listasistencia);
             personal = adminC.datosPeronal(Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("personal", personal);
+            materia = adminC.getMateriaAsistenciaA(Integer.parseInt(request.getParameter("IDM")), Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("materia", materia);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Administrador/asistenciaanterior.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -652,7 +666,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion que actualiza los datos de la assitencia
     private void actualizaAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         mapper = new ObjectMapper();
@@ -667,7 +681,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion
     private void verificaAsistencia(HttpServletRequest request, HttpServletResponse response) throws Exception {
         adminC = new AdministradorController();
         alumC = new AlumnosController();
@@ -701,7 +715,7 @@ public class SAdminpersonal extends HttpServlet {
             response.sendError(204);
         }
     }
-
+    //Funcion para tratar los archivos
     private String extractFileName(Part part) {
         String fileName = "",
                 contentDisposition = part.getHeader("content-disposition");
