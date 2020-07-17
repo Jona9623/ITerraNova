@@ -23,6 +23,7 @@ import Modelos.TbReporteDisciplinar;
 import Modelos.TbTareaSemanal;
 import Modelos.ImagenReporteAcademico;
 import Modelos.ImagenReporteAcademicoTarea;
+import Modelos.TbMateriaPersonal;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,6 +56,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -354,11 +356,14 @@ public class SReportes extends HttpServlet {
         List<CtPeriodoEscolar> listperiodo = new ArrayList<>();
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         List<TbPersonal> listpersonal = new ArrayList<>();
-        List<TbMateria> listmateria = new ArrayList<>();
+        //List<TbMateria> listmateria = new ArrayList<>();
+        List <TbMateriaPersonal> listmateria = new ArrayList<>();
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
         List<CtAtencion> listatencion = new ArrayList<>();
         List<CtDia> listdia = new  ArrayList<>();
+        TbPersonal personal = new TbPersonal();
+        int persona = 0;
         try {
             tipoescuelareporte = Integer.parseInt(request.getParameter("TIPOESCUELA"));
             listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
@@ -367,8 +372,8 @@ public class SReportes extends HttpServlet {
             request.setAttribute("listsemana", listsemana);
             listpersonal = adminC.getPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listpersonal", listpersonal);
-            listmateria = alumnoC.getMaterias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
-            request.setAttribute("listmateria", listmateria);
+            /*listmateria = alumnoC.getMaterias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listmateria", listmateria);*/
             listgrado = adminC.getGrado(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listgrado", listgrado);
             listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
@@ -377,6 +382,12 @@ public class SReportes extends HttpServlet {
             request.setAttribute("listatencion", listatencion);
             listdia = adminC.getDias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listdia", listdia);
+            HttpSession objsesion = request.getSession(false);
+            persona = (int) objsesion.getAttribute("personal");
+            personal = adminC.datosPeronal(persona);
+            request.setAttribute("personal", personal);
+            listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")), persona);
+            request.setAttribute("listmateria", listmateria);
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/reporteacademico.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

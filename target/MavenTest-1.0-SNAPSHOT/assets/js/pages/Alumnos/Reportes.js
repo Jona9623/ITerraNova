@@ -515,6 +515,7 @@ var Reportes = (function () {
             var reporteA = {
                 "rpersonal": $("#personalreporteA").val(),
                 "rmateria": $("#materiaA").val(),
+                //Aqui poner r_materiapersonal
                 "rsemana": $("#semanafiscal").val(),
                 "ralumnohonor": $("#alumnohonor").val(),
                 "ralumnoatencion": $("#alumnoatencion").val(),
@@ -544,6 +545,7 @@ var Reportes = (function () {
                 "tarea": $("#actividad").val(),
                 "rdia": $("#diaactividad").val(),
                 "rpersonal": $("#personalactividad").val(),
+                //aqui poner r_materiapersonal
                 "fechaentrega": $("#fechaentrega").val(),
                 "nombreimagen": $("#nombrearchivoa").val()
             }

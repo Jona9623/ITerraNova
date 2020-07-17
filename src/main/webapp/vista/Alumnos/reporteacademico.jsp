@@ -19,7 +19,8 @@
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
         <div class=" pull-left">
-            <div class="page-title">Reporte Academico</div>
+            <div class="page-title">Reporte Academico</div> <br>
+            <p>Personal: <strong>${requestScope.personal.apellidop} ${requestScope.personal.apellidom} ${requestScope.personal.nombre}</strong></p>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="indexpre.jsp">Inicio</a>&nbsp;<i class="fa fa-angle-right"></i>
@@ -80,18 +81,14 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Maestro de materia</label>
-                                                            <select id="personalreporteA" name="Personal" class="custom-select">
-                                                                <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
-                                                                    <option value="${listpersonal.idtbpersonal}">${listpersonal.nombre} </option>
-                                                                </c:forEach>
-                                                            </select>
+                                                            <label >Maestro de materia</label> <br>
+                                                            <strong>${requestScope.personal.apellidop} ${requestScope.personal.apellidom} ${requestScope.personal.nombre}</strong>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
                                                             <label >Materia</label>
                                                             <select id="materiaA" name="MateriaD" class="custom-select">
                                                                 <c:forEach items="${requestScope.listmateria}" var="listmateria">
-                                                                    <option value="${listmateria.idtbmateria}">${listmateria.nombrecorto} </option>
+                                                                    <option value="${listmateria.idtbmateriapersonal}">${listmateria.materia} </option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
