@@ -293,10 +293,13 @@ public class SReportes extends HttpServlet {
         List<TbPersonal> listpersonal = new ArrayList<>();
         List<TbMateria> listmateria = new ArrayList<>();
         List<CtIncidente> listincidente = new ArrayList<>();
+        CtPeriodoEscolar periodo = new CtPeriodoEscolar();
         try {
             tipoescuelareporte = Integer.parseInt(request.getParameter("TIPOESCUELA"));
-            listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
-            request.setAttribute("listperiodo", listperiodo);
+           /* listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);*/
+            periodo = alumnoC.getPeriodosAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("periodo", periodo);
             listgrado = adminC.getGrado(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listgrado", listgrado);
             listgrupo = adminC.getGrupo(Integer.parseInt(request.getParameter("TIPOESCUELA")));
@@ -363,13 +366,19 @@ public class SReportes extends HttpServlet {
         List<CtAtencion> listatencion = new ArrayList<>();
         List<CtDia> listdia = new  ArrayList<>();
         TbPersonal personal = new TbPersonal();
+        CtSemanaFiscal semana = new CtSemanaFiscal();
+        CtPeriodoEscolar periodo = new CtPeriodoEscolar();
         int persona = 0;
         try {
             tipoescuelareporte = Integer.parseInt(request.getParameter("TIPOESCUELA"));
-            listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
-            request.setAttribute("listperiodo", listperiodo);
-            listsemana = alumnoC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
-            request.setAttribute("listsemana", listsemana);
+            /*listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listperiodo", listperiodo);*/
+            periodo = alumnoC.getPeriodosAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("periodo", periodo);
+           /* listsemana = alumnoC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("listsemana", listsemana);*/
+            semana = alumnoC.getSemanaiscalAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            request.setAttribute("semana", semana);
             listpersonal = adminC.getPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listpersonal", listpersonal);
             /*listmateria = alumnoC.getMaterias(Integer.parseInt(request.getParameter("TIPOESCUELA")));

@@ -63,22 +63,14 @@
                                         <div class="col-sm-12">
                                             <div class="">
                                                 <div class="col-lg-4 p-t-20">
-                                                    <label >Seleccione Semana fiscal</label>
-                                                    <select id="semanafiscal" name="semanafiscal" class="custom-select">
-                                                        <c:forEach items="${requestScope.listsemana}" var="listsemana">
-                                                            <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
-                                                        </c:forEach>
-                                                    </select>
+                                                    <label ><strong>Periodo: ${requestScope.periodo.nombre}</strong></label>
+                                                    <input hidden="true" id="periodoA" name="PeriodoA" value="${requestScope.periodo.idtbperiodo}">
                                                 </div>
                                                 <form>
                                                     <div class="card-body row">
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Seleccione periodo escolar</label>
-                                                            <select id="periodoA" class="custom-select" name="PeriodoD">
-                                                                <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
-                                                                    <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
-                                                                </c:forEach>
-                                                            </select>
+                                                            <label ><strong>Semana: ${requestScope.semana.nombre}</strong></label>
+                                                            <input hidden="true" id="semanafiscal" name="semanafiscal" value="${requestScope.semana.idtbsemana}">
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
                                                             <label >Maestro de materia</label> <br>
@@ -181,22 +173,14 @@
                                 <div class="card-body " id="bar-parent2">
                                     <div class="row">
                                         <div class="col-lg-4 p-t-20">
-                                            <label >Seleccione Periodo</label>
-                                            <select id="periodoactividad" name="periodoactividad" class="custom-select">
-                                                <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
-                                                    <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
-                                                </c:forEach>
-                                            </select>
+                                            <label ><strong>Periodo: ${requestScope.periodo.nombre}</strong></label>
+                                            <input hidden="true" id="periodoactividad" name="periodoactividad" value="${requestScope.periodo.idtbperiodo}">
                                         </div>  
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4 p-t-20">
-                                            <label >Seleccione Semana fiscal</label>
-                                            <select id="semanafiscalactividad" name="semanafiscal" class="custom-select">
-                                                <c:forEach items="${requestScope.listsemana}" var="listsemana">
-                                                    <option value="${listsemana.idtbsemana}">${listsemana.nombre} </option>
-                                                </c:forEach>
-                                            </select>
+                                            <label ><strong>Semana: ${requestScope.semana.nombre}</strong></label>
+                                            <input hidden="true" id="semanafiscalactividad" name="semanafiscal" value="${requestScope.semana.idtbsemana}">
                                         </div>
                                         <div class="col-md-12 col-sm-12">
                                             <form>
@@ -216,10 +200,15 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 p-t-20">
-                                                        <label >Maestro que asigna actividad</label>
-                                                        <select id="personalactividad" name="Personal" class="custom-select">
-                                                            <c:forEach items="${requestScope.listpersonal}" var="listpersonal">
-                                                                <option value="${listpersonal.idtbpersonal}">${listpersonal.nombre} </option>
+                                                        <label >Maestro que asigna la actividad</label> <br>
+                                                        <strong>${requestScope.personal.apellidop} ${requestScope.personal.apellidom} ${requestScope.personal.nombre}</strong>
+                                                        <input hidden="true" value="${requestScope.personal.idtbpersonal}">
+                                                    </div>
+                                                    <div class="col-lg-4 p-t-20">
+                                                        <label >Materia</label>
+                                                        <select id="personalactividad" name="personalactividad" class="custom-select">
+                                                            <c:forEach items="${requestScope.listmateria}" var="listmateria">
+                                                                <option value="${listmateria.idtbmateriapersonal}">${listmateria.materia} </option>
                                                             </c:forEach>
                                                         </select>
                                                     </div>

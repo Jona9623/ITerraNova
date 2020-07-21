@@ -32,12 +32,8 @@
             <form>
                 <input id="idtbreporteD" hidden="true" value="${requestScope.reporteD.idtbreporte}">
                 <div class="col-lg-4 p-t-20">
-                    <label >Seleccione periodo escolar</label>
-                    <select id="periodoD" class="custom-select" name="PeriodoD">
-                        <c:forEach items="${requestScope.listperiodo}" var="listperiodo">
-                            <option value="${listperiodo.idtbperiodo}">${listperiodo.nombre} </option>
-                        </c:forEach>
-                    </select>
+                    <label ><strong>Periodo: ${requestScope.periodo.nombre}</strong></label>
+                    <input hidden="true" id="periodoD" name="PeriodoD" value="${requestScope.periodo.idtbperiodo}">
                 </div>
                 <div class="card-body row">
                     <div class="col-lg-4 p-t-20">

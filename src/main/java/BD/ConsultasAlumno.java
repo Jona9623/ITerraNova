@@ -740,7 +740,7 @@ public class ConsultasAlumno {
         PreparedStatement pst = null;
         try {
             con.setAutoCommit(false);
-            String consulta = "insert into tb_tareasemanal (r_semanafiscal,r_periodo,tarea,r_dia,r_personal,fechaentrega,status,tipoescuela) values(?,?,?,?,?,?,?,?)";
+            String consulta = "insert into tb_tareasemanal (r_semanafiscal,r_periodo,tarea,r_dia,r_materiapersonal,fechaentrega,status,tipoescuela) values(?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, tarea.getRsemana());
             pst.setInt(2, tarea.getRperiodo());
@@ -778,10 +778,9 @@ public class ConsultasAlumno {
         PreparedStatement pst = null;
         try {
             con.setAutoCommit(false);
-            String consulta = "insert into tb_reporteacademico (r_personal,r_materia,r_semanafiscal,r_alumnohonor,r_alumnoatencion,r_atencion,r_periodo,status,tipoescuela)"
-                    + " values (?,?,?,?,?,?,?,?,?)";
+            String consulta = "insert into tb_reporteacademico (,r_materiapersonal,r_semanafiscal,r_alumnohonor,r_alumnoatencion,r_atencion,r_periodo,status,tipoescuela)"
+                    + " values (?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(consulta);
-            pst.setInt(1, reporteA.getRpersonal());
             pst.setInt(2, reporteA.getRmateria());
             pst.setInt(3, reporteA.getRsemana());
             pst.setInt(4, reporteA.getRalumnohonor());

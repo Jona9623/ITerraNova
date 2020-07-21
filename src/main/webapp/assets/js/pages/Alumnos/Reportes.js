@@ -513,9 +513,8 @@ var Reportes = (function () {
         /*Se crea el objeto para guardar la info de los inputs del reporte academico y actividad semanal*/
         guardarA: function () {
             var reporteA = {
-                "rpersonal": $("#personalreporteA").val(),
+                //"rpersonal": $("#personalreporteA").val(),
                 "rmateria": $("#materiaA").val(),
-                //Aqui poner r_materiapersonal
                 "rsemana": $("#semanafiscal").val(),
                 "ralumnohonor": $("#alumnohonor").val(),
                 "ralumnoatencion": $("#alumnoatencion").val(),
