@@ -25,6 +25,15 @@ public class TbTareaSemanal {
     private int status;
     private int tipoescuela;
     private String nombreimagen;
+    private String materia;
+
+    public String getMateria() {
+        return materia;
+    }
+
+    public void setMateria(String materia) {
+        this.materia = materia;
+    } 
 
     public String getSemana() {
         return semana;

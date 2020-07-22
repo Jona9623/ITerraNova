@@ -39,6 +39,7 @@
 </div>
 <div class="profile-content">
     <div class="row">
+        <% if (x == 3 || x == 4 || x == 5) { %>  
         <div class="col-md-12 col-sm-12">
             <div style="text-align: right">
                 <a id="mostrarreportesaca" type="button" class="btn btn-terra float-rt">Mostrar cuadro de honor/atencion</a>
@@ -51,6 +52,7 @@
                     </div>  
                 </div>
             </div>
+            <% }%>
             <div class="">
                 <!-- Tab panes -->
                 <div class="tab-content">
