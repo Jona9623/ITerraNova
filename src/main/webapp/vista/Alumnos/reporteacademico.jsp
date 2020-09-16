@@ -29,6 +29,7 @@
         </ol>
     </div>
 </div>
+<% if (x == 1 || x == 2) { %>
 <div class="row">
     <div class="p-rl-20">
         <ul class="nav customtab nav-tabs" role="tablist">
@@ -37,6 +38,7 @@
         </ul>
     </div>
 </div>
+<%}%>
 <div class="profile-content">
     <div class="row">
         <% if (x == 3 || x == 4 || x == 5) { %>  
@@ -53,6 +55,7 @@
                 </div>
             </div>
             <% }%>
+            <% if (x == 1 || x == 2) { %>  
             <div class="">
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -79,12 +82,13 @@
                                                             <strong>${requestScope.personal.apellidop} ${requestScope.personal.apellidom} ${requestScope.personal.nombre}</strong>
                                                         </div>
                                                         <div class="col-lg-4 p-t-20">
-                                                            <label >Materia</label>
-                                                            <select id="materiaA" name="MateriaD" class="custom-select">
-                                                                <c:forEach items="${requestScope.listmateria}" var="listmateria">
-                                                                    <option value="${listmateria.idtbmateriapersonal}">${listmateria.materia} </option>
-                                                                </c:forEach>
-                                                            </select>
+                                                                <label >Materia</label>
+                                                                <select id="materiaA" name="MateriaD" class="custom-select">
+                                                                    <c:forEach items="${requestScope.listmateria}" var="listmateria">
+
+                                                                        <option value="${listmateria.idtbmateriapersonal}">${listmateria.materia} </option>
+                                                                    </c:forEach>
+                                                                </select>
                                                         </div>
                                                     </div>
                                                     <div class="card-head">
@@ -231,6 +235,7 @@
                         </div>
                     </div>                      
                 </div>
+                <%}%>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">

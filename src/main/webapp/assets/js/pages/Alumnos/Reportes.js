@@ -132,6 +132,7 @@ var Reportes = (function () {
         },
         /*Funcion que sirve para msotrar en un select alumnos correspondientes para cuadro de atencion en reporte academico*/
         getAlumnoAcaAtencion: function (gradoatencion, grupoatencion) {
+            
             $.get("SReportes", {
                 ACCION: "alumnoGradoGrupoAcaAtencion",
                 GRADOATENCION: gradoatencion,
@@ -323,12 +324,16 @@ var Reportes = (function () {
                      $("#guardaratencion").on('click', function () {
                      Reportes.guardarAtencion();
                      })*/
-                    gradohonor = $("#gradohonor").val();
+                   /* gradohonor = $("#gradohonor").val();
                     grupohonor = $("#grupohonor").val();
                     gradoatencion = $("#gradoatencion").val();
                     grupoatencion = $("#grupoatencion").val();
-                    Reportes.getAlumnoAca(gradohonor, grupohonor);
-                    Reportes.getAlumnoAcaAtencion(gradoatencion, grupoatencion);
+                    console.log(gradohonor);
+                    console.log(grupohonor);
+                    console.log(gradoatencion);
+                    console.log(grupoatencion);*/
+                    Reportes.getAlumnoAca(1, 1);
+                    Reportes.getAlumnoAcaAtencion(1, 1);
                     //$("#gradohonor").change(function () {
                         $("body").find("select[id='gradohonor']").unbind('change').bind('change', function () {
                         gradohonor = $("#gradohonor").val();

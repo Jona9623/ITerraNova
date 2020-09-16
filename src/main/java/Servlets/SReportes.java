@@ -164,13 +164,13 @@ public class SReportes extends HttpServlet {
                 break;
             case "guardarHonor":
                 try {
-                    guardarHonor(request,response);
+                    guardarHonor(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "guardarAtencion":
                 try {
-                    guardarAtencion(request,response);
+                    guardarAtencion(request, response);
                 } catch (Exception e) {
                 }
                 break;
@@ -215,31 +215,31 @@ public class SReportes extends HttpServlet {
                 break;
             case "mostrarReportesAca":
                 try {
-                    mostrarReportesAca(request,response);
+                    mostrarReportesAca(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "mostrarActividades":
                 try {
-                    mostrarActividades(request,response);
+                    mostrarActividades(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "eliminarTarea":
                 try {
-                    eliminarTarea(request,response);
+                    eliminarTarea(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "eliminarReporteA":
                 try {
-                    eliminarReporteA(request,response);
+                    eliminarReporteA(request, response);
                 } catch (Exception e) {
                 }
                 break;
             case "eliminarReporteD":
                 try {
-                    eliminarReporteD(request,response);
+                    eliminarReporteD(request, response);
                 } catch (Exception e) {
                 }
         }
@@ -296,7 +296,7 @@ public class SReportes extends HttpServlet {
         CtPeriodoEscolar periodo = new CtPeriodoEscolar();
         try {
             tipoescuelareporte = Integer.parseInt(request.getParameter("TIPOESCUELA"));
-           /* listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            /* listperiodo = alumnoC.getPeriodos(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listperiodo", listperiodo);*/
             periodo = alumnoC.getPeriodosAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("periodo", periodo);
@@ -360,11 +360,11 @@ public class SReportes extends HttpServlet {
         List<CtSemanaFiscal> listsemana = new ArrayList<>();
         List<TbPersonal> listpersonal = new ArrayList<>();
         //List<TbMateria> listmateria = new ArrayList<>();
-        List <TbMateriaPersonal> listmateria = new ArrayList<>();
+        List<TbMateriaPersonal> listmateria = new ArrayList<>();
         List<CtGrado> listgrado = new ArrayList<>();
         List<CtGrupo> listgrupo = new ArrayList<>();
         List<CtAtencion> listatencion = new ArrayList<>();
-        List<CtDia> listdia = new  ArrayList<>();
+        List<CtDia> listdia = new ArrayList<>();
         TbPersonal personal = new TbPersonal();
         CtSemanaFiscal semana = new CtSemanaFiscal();
         CtPeriodoEscolar periodo = new CtPeriodoEscolar();
@@ -375,7 +375,7 @@ public class SReportes extends HttpServlet {
             request.setAttribute("listperiodo", listperiodo);*/
             periodo = alumnoC.getPeriodosAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("periodo", periodo);
-           /* listsemana = alumnoC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
+            /* listsemana = alumnoC.getSemanaiscal(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listsemana", listsemana);*/
             semana = alumnoC.getSemanaiscalAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("semana", semana);
@@ -396,7 +396,9 @@ public class SReportes extends HttpServlet {
             personal = adminC.datosPeronal(persona);
             request.setAttribute("personal", personal);
             listmateria = adminC.getMateriasAPersonal(Integer.parseInt(request.getParameter("TIPOESCUELA")), persona);
-            request.setAttribute("listmateria", listmateria);
+            if (!listmateria.isEmpty()) {
+                request.setAttribute("listmateria", listmateria);
+            }
             RequestDispatcher rd = request.getRequestDispatcher("vista/Alumnos/reporteacademico.jsp");
             rd.forward(request, response);
         } catch (Exception e) {
@@ -655,7 +657,7 @@ public class SReportes extends HttpServlet {
             response.sendError(204);
         }
     }
-    
+
     private void guardarHonor(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TbReporteAcademico reporteA = new TbReporteAcademico();
         alumnoC = new AlumnosController();
@@ -669,7 +671,7 @@ public class SReportes extends HttpServlet {
             response.sendError(204);
         }
     }
-    
+
     private void guardarAtencion(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TbReporteAcademico reporteA = new TbReporteAcademico();
         alumnoC = new AlumnosController();
@@ -751,15 +753,15 @@ public class SReportes extends HttpServlet {
             datos = alumnoC.datosGuardaImagen(tipoescuelareporte);
             System.out.println(actual);
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-            String path = "assets/img/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP() + datos.getNombremateria()+".png";
+            String path = "assets/img/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP() + datos.getNombremateria() + ".png";
             path = path.replace(" ", "");
-            String url = "https://sistema.iterra.edu.mx/"+path;
+            String url = "https://sistema.iterra.edu.mx/" + path;
             path = applicationPath + path;
             System.out.println(path);
             File file = new File(path);
             try (OutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
                 output.write(data);
-                alumnoC.correoPersonalImagen(datos.getCorreo(),url);
+                alumnoC.correoPersonalImagen(datos.getCorreo(), url);
             } catch (Exception e) {
                 System.out.println(e);
                 response.addHeader("ERROR", e.toString());
@@ -798,9 +800,9 @@ public class SReportes extends HttpServlet {
             datos = alumnoC.datosGuardaImagenActividad(tipoescuelareporte);
             System.out.println(actual);
             byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-            String path = "assets/img/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP()+".png";
+            String path = "assets/img/" + datos.getPeriodo() + datos.getSemanafiscal() + datos.getNombreP() + datos.getApellidopP() + datos.getApellidomP() + ".png";
             path = path.replace(" ", "");
-            String url = "https://sistema.iterra.edu.mx/"+path;
+            String url = "https://sistema.iterra.edu.mx/" + path;
             path = applicationPath + path;
             System.out.println(path);
             File file = new File(path);
@@ -834,7 +836,7 @@ public class SReportes extends HttpServlet {
             response.addHeader("ERROR", e.toString());
             response.sendError(204);
         }
-        
+
     }
 
     private void mostrarActividades(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -854,7 +856,7 @@ public class SReportes extends HttpServlet {
         }
     }
 
-    private void eliminarTarea(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    private void eliminarTarea(HttpServletRequest request, HttpServletResponse response) throws Exception {
         alumnoC = new AlumnosController();
         try {
             alumnoC.eliminarTarea(Integer.parseInt(request.getParameter("ID")));

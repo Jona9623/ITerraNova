@@ -59,7 +59,7 @@
                     <td class="center">${listalumnos.apellidom}</td>
                     <td class="center">${listalumnos.matricula}</td>
                     <td class="center">${listalumnos.rgrado}  ${listalumnos.grupo}</td>
-                    <td class="center">${listalumnos.tutor}</td>
+                    <td class="center">${listalumnos.tutor} ${listalumnos.apellidotutor}</td>
                     <td class="center">
                         <div class="btn-group">
                             <button class="btn btn-xs btn-terra dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Acciones
@@ -130,7 +130,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="actualizaTablaA" class="btn btn-secondary" data-dismiss="modal">Cerrar y actualizar tabla</button>
             </div>
         </div>
     </div>
@@ -166,7 +165,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="actualizaTablaA" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

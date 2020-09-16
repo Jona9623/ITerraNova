@@ -468,7 +468,7 @@ public class ConsultasAlumno {
             String consulta = " select * from tb_reportedisciplinar left join tb_personal on tb_reportedisciplinar.r_personal = tb_personal.idTb_Personal \n"
                     + " left join tb_materia on tb_reportedisciplinar.r_materia = tb_materia.idTb_Materia\n"
                     + " join tb_alumnos on tb_reportedisciplinar.r_alumno = tb_alumnos.idTb_Alumnos\n"
-                    + " join tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor\n"
+                    + " left join tb_tutor on tb_alumnos.r_tutor = tb_tutor.idTb_Tutor\n"
                     + " join ct_incidente on tb_reportedisciplinar.r_tipoincidente = ct_incidente.idCt_incidente\n"
                     + " join ct_periodoescolar on tb_reportedisciplinar.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar\n"
                     + " left join ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria\n"
@@ -525,7 +525,7 @@ public class ConsultasAlumno {
                 System.err.println("Error " + e);
             }
         }
-        return (datosreporteD);
+        return datosreporteD;
     }
 
     /*Consulta para trer los campos a acualizar del reporte*/
@@ -916,12 +916,13 @@ public class ConsultasAlumno {
         ImagenReporteAcademico datosA = new ImagenReporteAcademico();
         try {
             con.setAutoCommit(false);
-            String consulta = "SELECT tb_personal.correo, tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno, ct_datosmateria.nombrecorto, ct_periodoescolar.nombre, ct_semanafiscal.nombre from tb_reporteacademico inner join tb_personal\n"
-                    + "on tb_reporteacademico.r_personal = tb_personal.idTb_Personal inner join\n"
-                    + "ct_semanafiscal on tb_reporteacademico.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join\n"
-                    + "ct_periodoescolar on tb_reporteacademico.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join\n"
-                    + "tb_materia on tb_reporteacademico.r_materia = tb_materia.idTb_Materia inner join\n"
-                    + "ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where tb_reporteacademico.status = 1 and tb_reporteacademico.tipoescuela = ? order by tb_reporteacademico.idTb_ReporteAcademico desc limit 1";
+            String consulta = "SELECT tb_personal.correo, tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno, ct_datosmateria.nombrecorto, ct_periodoescolar.nombre, ct_semanafiscal.nombre from tb_reporteacademico inner join tb_materiapersonal\n" +
+"                    on tb_reporteacademico.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join\n" +
+"                    tb_personal on tb_materiapersonal.r_personal = tb_personal.idTb_Personal inner join\n" +
+"                    ct_semanafiscal on tb_reporteacademico.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join\n" +
+"                    ct_periodoescolar on tb_reporteacademico.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join\n" +
+"                    tb_materia on tb_materiapersonal.r_materia = tb_materia.idTb_Materia inner join\n" +
+"                    ct_datosmateria on tb_materia.r_datosmateria = ct_datosmateria.idCt_DatosMateria where tb_reporteacademico.status = 1 and tb_reporteacademico.tipoescuela = ? order by tb_reporteacademico.idTb_ReporteAcademico desc limit 1;";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
@@ -965,7 +966,8 @@ public class ConsultasAlumno {
             String consulta = "select tb_tareasemanal.idTb_TareaSemanal, ct_periodoescolar.nombre, ct_semanafiscal.nombre, tb_personal.nombre, tb_personal.apellidopaterno, tb_personal.apellidomaterno, tb_personal.correo from tb_tareasemanal\n"
                     + "inner join ct_periodoescolar on tb_tareasemanal.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join\n"
                     + "ct_semanafiscal on tb_tareasemanal.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal inner join\n"
-                    + "tb_personal on tb_tareasemanal.r_personal = tb_personal.idTb_Personal where tb_tareasemanal.status = 1 and tb_tareasemanal.tipoescuela = ? order by tb_tareasemanal.idTb_TareaSemanal desc limit 1;";
+                    + "tb_materiapersonal on tb_tareasemanal.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join\n"
+                    + "tb_personal on tb_materiapersonal.r_personal = tb_personal.idTb_Personal where tb_tareasemanal.status = 1 and tb_tareasemanal.tipoescuela = ? order by tb_tareasemanal.idTb_TareaSemanal desc limit 1;";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();
@@ -1159,12 +1161,13 @@ public class ConsultasAlumno {
         List<TbTareaSemanal> listtareas = new ArrayList<>();
         try {
             con.setAutoCommit(false);
-            String consulta = "select  tb_tareasemanal.idTb_TareaSemanal,tb_personal.nombre,tb_personal.apellidopaterno,tb_personal.apellidomaterno, ct_periodoescolar.idCt_PeriodoEscolar, "
-                    + "ct_dia.Nombre, tb_tareasemanal.fechaentrega, tb_tareasemanal.tarea, ct_semanafiscal.nombre from\n"
-                    + "tb_tareasemanal inner join tb_personal on tb_tareasemanal.r_personal = tb_personal.idTb_Personal inner join\n"
-                    + "ct_periodoescolar on tb_tareasemanal.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join\n"
-                    + "ct_dia on tb_tareasemanal.r_dia = ct_dia.idCt_Dia inner join\n"
-                    + "ct_semanafiscal on tb_tareasemanal.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal where tb_tareasemanal.status = 1 and tb_tareasemanal.tipoescuela = ?";
+            String consulta = "select  tb_tareasemanal.idTb_TareaSemanal,tb_personal.nombre,tb_personal.apellidopaterno,tb_personal.apellidomaterno, ct_periodoescolar.idCt_PeriodoEscolar, \n" +
+"                    ct_dia.Nombre, tb_tareasemanal.fechaentrega, tb_tareasemanal.tarea, ct_semanafiscal.nombre from\n" +
+"                    tb_tareasemanal inner join tb_materiapersonal on tb_tareasemanal.r_materiapersonal = tb_materiapersonal.idTb_MateriaPersonal inner join\n" +
+"                    tb_personal on tb_materiapersonal.r_personal = tb_personal.idTb_Personal inner join\n" +
+"                    ct_periodoescolar on tb_tareasemanal.r_periodo = ct_periodoescolar.idCt_PeriodoEscolar inner join\n" +
+"                    ct_dia on tb_tareasemanal.r_dia = ct_dia.idCt_Dia inner join\n" +
+"                    ct_semanafiscal on tb_tareasemanal.r_semanafiscal = ct_semanafiscal.idCt_SemanaFiscal where tb_tareasemanal.status = 1 and tb_tareasemanal.tipoescuela = ?;";
             pst = con.prepareStatement(consulta);
             pst.setInt(1, tipoescuela);
             rs = pst.executeQuery();

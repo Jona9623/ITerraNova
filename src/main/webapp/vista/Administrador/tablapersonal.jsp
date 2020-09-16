@@ -6,6 +6,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+    int x = 0;
+    int personal = 0;
+    HttpSession objsesion = request.getSession(false);
+    String usuario = (String) objsesion.getAttribute("user");
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+    } else {
+        x = (int) objsesion.getAttribute("tipo");
+        personal = (int) objsesion.getAttribute("personal");
+    }
+%>
 <!DOCTYPE html>
 <div class="page-bar  card-topline-terra2">
     <div class="page-title-breadcrumb">
@@ -20,6 +32,7 @@
     </div>
 </div>
 <div class="row">
+    <%if(x != 1){%>
     <div class="row p-b-20">
         <div class="col-md-6 col-sm-6 col-6">
             <div class="btn-group">
@@ -30,7 +43,7 @@
             </div>
         </div>
     </div>
-
+    <%}%>
     <table id="tablapersonal" class="table table-bordered" style="width:100%">
         <thead class="thead-light">
             <tr>
@@ -58,6 +71,7 @@
                                 <i class="fa fa-angle-down"></i>
                             </button>
                             <ul class="dropdown-menu pull-left" role="menu">
+                                <% if (x != 1) {%>
                                 <li>
                                     <a href="javascript:;" class="infopersonal">
                                         <i id="infopersonal" class="icon-user"></i>Mas info</a>
@@ -86,6 +100,17 @@
                                     <a href="javascript:;" class="eliminarpe">
                                         <i id="aliminarpe" class="icon-trash"></i> Eliminar </a>
                                 </li>
+                                <%}%>
+                                <%if (x == 1){%>
+                                    <li>
+                                    <a href="javascript:;" class="listaalumnos">
+                                        <i id="listaalumnos" class="icon-book-open"></i>Listas alumnos</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" class="reporteasistencia">
+                                        <i id="reporteasistencia" class="icon-book-open"></i>Reporte de asistencia </a>
+                                </li>
+                                <%}%>
                             </ul>
                         </div>
                     </td>

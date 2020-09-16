@@ -337,29 +337,30 @@ public class AdministradorController {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         return consulta.getAlumnosAsistencia(idgrado, idgrupo, tipoescuela);
     }
-    
-    public List<CtDatosMateria> justificarFaltas(int idalumno,int idsemana,int idperiodo, int tipoescuela) throws Exception {
+
+    public List<CtDatosMateria> justificarFaltas(int idalumno, int idsemana, int idperiodo, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.justificarFaltas(idalumno,idsemana,idperiodo,tipoescuela);
+        return consulta.justificarFaltas(idalumno, idsemana, idperiodo, tipoescuela);
     }
-    
+
     public List<CtDia> getDiasFaltas(int idalumno, int idperiodo, int idsemana, int idmateria, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getDiasFaltas(idalumno,idperiodo,idsemana,idmateria,tipoescuela);
+        return consulta.getDiasFaltas(idalumno, idperiodo, idsemana, idmateria, tipoescuela);
     }
-    
+
     public void updateJustificar(List<TbAsistencia> listasistencia) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
         consulta.updateJustificar(listasistencia);
     }
+
     public void actualizaAsistencia(List<TbAsistencia> listasistencia) throws Exception {
-     ConsultasAdministrador consulta = new ConsultasAdministrador();
-     consulta.actualizarAsistencia(listasistencia);
+        ConsultasAdministrador consulta = new ConsultasAdministrador();
+        consulta.actualizarAsistencia(listasistencia);
     }
-    
+
     public int verificarAsistencia(int idperiodo, int idsemana, int iddia, int idmateria, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.verificarAsistencia(idperiodo,idsemana,iddia,idmateria,tipoescuela);
+        return consulta.verificarAsistencia(idperiodo, idsemana, iddia, idmateria, tipoescuela);
     }
 
     private List<TbAlumnos> readFromCSVA(String ruta, int tipoescuela) throws Exception {
@@ -424,6 +425,12 @@ public class AdministradorController {
             switch (attributes[18]) {
                 case "A":
                     alumno.setRgrupo(1);
+                    break;
+                case "B":
+                    alumno.setRgrupo(6);
+                    break;
+                case "C":
+                    alumno.setRgrupo(7);
                     break;
             }
         }
@@ -634,9 +641,9 @@ public class AdministradorController {
         tutor.setCelular3(attributes[34]);
         tutor.setCorreo3(attributes[35]);
         if (attributes[36].equals("Secundaria")) {
-            tutor.setTipoescuela(1);
-        } else {
             tutor.setTipoescuela(2);
+        } else {
+            tutor.setTipoescuela(1);
         }
         return tutor;
     }
@@ -678,16 +685,15 @@ public class AdministradorController {
         }
     }
 
-    public Alumno getAlumno(int idalumno, int tipoescuela)throws Exception {
+    public Alumno getAlumno(int idalumno, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getAlumno(idalumno,tipoescuela);
-        
+        return consulta.getAlumno(idalumno, tipoescuela);
+
     }
 
     public CtDatosMateria getMateriaAsistenciaA(int idmateria, int tipoescuela) throws Exception {
         ConsultasAdministrador consulta = new ConsultasAdministrador();
-        return consulta.getMateriaAsistneciaA(idmateria,tipoescuela);
+        return consulta.getMateriaAsistneciaA(idmateria, tipoescuela);
     }
-
 
 }

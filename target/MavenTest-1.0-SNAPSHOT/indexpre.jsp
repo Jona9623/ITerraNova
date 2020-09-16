@@ -167,11 +167,13 @@
                                                 <span class="title">Reporte disciplinar</span>
                                             </a>
                                         </li>
+                                        <% if (x == 2 || x == 3 || x == 5) { %>
                                         <li class="nav-item">
                                             <a id="reporteaca" class="nav-link ">
                                                 <span class="title">Reporte académico</span>
                                             </a>
                                         </li>
+                                        <% } %>
                                     </ul>
                                 </li>
                                 <% } %>
@@ -193,6 +195,22 @@
                                             <a id="AsistenciaReporte" class="nav-link ">
                                                 <span class="title">Reporte de asistencias</span>
                                                 <input id="personalReporte" value="<%=personal%>" hidden="true">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <% } %>
+                                <% if (x == 1) {%>
+                                <li class="nav-item start">
+                                    <a href="#" class="nav-link nav-toggle">
+                                        <i class="material-icons">label</i>
+                                        <span id="Alumnos" class="title">Prefectos</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <a id="ampersonal" class="nav-link ">
+                                                <span class="title">Tabla Porfesores/Pase de lista</span>
                                             </a>
                                         </li>
                                     </ul>

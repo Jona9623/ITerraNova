@@ -47,7 +47,17 @@ public class TbAlumnos {
     private String municipioante;
     private int rtutor;
     private String tutor;
+    private String apellidotutor;
     private String foto;
+
+    public String getApellidotutor() {
+        return apellidotutor;
+    }
+
+    public void setApellidotutor(String apellidotutor) {
+        this.apellidotutor = apellidotutor;
+    }
+    
 
     public String getGrado() {
         return grado;

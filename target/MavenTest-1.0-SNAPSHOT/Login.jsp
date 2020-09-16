@@ -44,7 +44,7 @@
             <div class=""><i class=""></i>
             </div>
             <div class="form formLogin">
-                <h2>Inicia Sesión</h2>
+                <h2>Inicia Sesión </h2>
                 <form id="formlogin" name="formlogin" action="Login" method="POST">
                     <input name="user" type="text" placeholder="Usuario" />
                     <input name="password" type="password" placeholder="Contraseña" />
