@@ -115,11 +115,11 @@ public class AlumnosController {
 
     private static void enviarCorreo(String correotutor, String asunto, String cuerpo) throws Exception {
         String usuario = "sistema@iterra.edu.mx";
-        String contrasena = "guanabana2035";
+        String contrasena = "Excelenci0";
 
         try {
             Properties pro = System.getProperties();
-            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
+            pro.put("mail.smtp.host", "smtp.gmail.com");
             // pro.put("mail.smtp.socketFactory.port", "587");
             pro.put("mail.smtp.port", "587");
             pro.put("mail.smtp.auth", "true");
@@ -147,7 +147,7 @@ public class AlumnosController {
     private static void enviacorreoSistema(String usuario, String contrasena, String asunto, String cuerpo) throws Exception {
         try {
             Properties pro = System.getProperties();
-            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
+            pro.put("mail.smtp.host", "smtp.gmail.com");
             pro.put("mail.smtp.socketFactory.port", "587");
             pro.put("mail.smtp.port", "587");
             pro.put("mail.smtp.auth", "true");
@@ -261,14 +261,14 @@ public class AlumnosController {
 
     public void correoPersonalImagen(String correo, String url) throws Exception {
         String usuario = "sistema@iterra.edu.mx";
-        String contrasena = "guanabana2035";
+        String contrasena = "Excelenci0";
         String asunto = "URL Imagen Reporte Academico";
         String cuerpo = "La direccion a continuación debera guardarla y agregarla a la pagina de iterra.edu.mx para que posteriormente se anexe la imagen dentro"
                 + "del portal, el URL es el siguiente:\n";
 
         try {
             Properties pro = System.getProperties();
-            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
+            pro.put("mail.smtp.host", "smtp.gmail.com");
             pro.put("mail.smtp.port", "587");
             pro.put("mail.smtp.auth", "true");
             pro.put("mail.smtp.starttls.enable", "true");
@@ -294,14 +294,14 @@ public class AlumnosController {
 
     public void correoPersonalImagenTarea(String correo, String url) throws Exception {
         String usuario = "sistema@iterra.edu.mx";
-        String contrasena = "guanabana2035";
+        String contrasena = "Excelenci0";
         String asunto = "URL Imagen Tarea Semanal";
         String cuerpo = "La direccion a continuación debera guardarla y agregarla a la pagina de iterra.edu.mx para que posteriormente se anexe la imagen dentro"
                 + "del portal, el URL es el siguiente:\n";
 
         try {
             Properties pro = System.getProperties();
-            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
+            pro.put("mail.smtp.host", "smtp.gmail.com");
             pro.put("mail.smtp.port", "587");
             pro.put("mail.smtp.auth", "true");
             pro.put("mail.smtp.starttls.enable", "true");

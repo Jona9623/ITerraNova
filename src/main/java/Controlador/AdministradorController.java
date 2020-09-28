@@ -472,8 +472,8 @@ public class AdministradorController {
             }
         }
 
-        alumno.setArea(attributes[19]);
-        alumno.setCpt(attributes[20]);
+        alumno.setRarea(Integer.parseInt(attributes[19]));
+        alumno.setRcpt(Integer.parseInt(attributes[20]));
         alumno.setPlantelproce(attributes[21]);
         alumno.setNivelanterior(attributes[22]);
         alumno.setGradoanterior(Integer.parseInt(attributes[23]));
@@ -656,14 +656,14 @@ public class AdministradorController {
 
     private void enviaCorreoUsuario(String usuariocorreo, String contrasenacorreo, String correo) throws Exception {
         String usuario = "sistema@iterra.edu.mx";
-        String contrasena = "guanabana2035";
+        String contrasena = "Excelenci0";
         String asunto = "Datos Inicio de sesion al sistema";
         String cuerpo = "Usted ha sido registrado con éxito, por favor inicie sesión dentro del sistema www.sistema.iterra.edu.mx con los siguientes datos\n\n"
                 + "usuario: " + usuariocorreo + "\ncontraseña: " + contrasenacorreo;
 
         try {
             Properties pro = System.getProperties();
-            pro.put("mail.smtp.host", "mail.iterra.edu.mx");
+            pro.put("mail.smtp.host", "smtp.gmail.com");
             pro.put("mail.smtp.port", "587");
             pro.put("mail.smtp.auth", "true");
             pro.put("mail.smtp.starttls.enable", "true");

@@ -2126,12 +2126,6 @@ public class ConsultasAdministrador {
         int contador = 1;
         try {
             con.setAutoCommit(false);
-            /*String sql = "select count(idTb_Tutor) AS tutoresTotales from tb_tutor";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                tutores = rs.getInt(1);
-            }*/
             for (TbAlumnos item : listalumnos) {
                 String consulta = "insert into tb_alumnos (matricula,nombre,apellidopaterno,apellidomaterno,fechanacimiento,curp,municipionacimiento,estadonacimiento,\n"
                         + "nacionalidad,sexo,calledomicilio,numerodomicilio,coloniadomicilio,codigopostal,telefonocasa,celularalumno,correoalumno,nivelcursa,\n"

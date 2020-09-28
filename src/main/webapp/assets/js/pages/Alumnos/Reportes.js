@@ -603,7 +603,6 @@ var Reportes = (function () {
                     swal(error.getResponseHeader("ERROR"), "", "warning");
                 else {
                     swal("Hecho!", "Datos guardados correctamente", "success");
-                    Reportes.reporteAcademico();
                 }
             });
         },

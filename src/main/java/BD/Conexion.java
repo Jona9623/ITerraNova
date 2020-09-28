@@ -15,8 +15,8 @@ public class Conexion {
     public static Connection conexion(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Terranova"+"?serverTimezone=UTC","root","Terranova");
-            //con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/escape9_TerraNova"+"?serverTimezone=UTC","escape9_admin","Terranova");
+            //con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Terranova"+"?serverTimezone=UTC","root","Terranova");
+            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/escape9_TerraNova"+"?serverTimezone=UTC","escape9_admin","Terranova");
             con.setAutoCommit(false);
         } catch (Exception e) {
             System.out.println(e);

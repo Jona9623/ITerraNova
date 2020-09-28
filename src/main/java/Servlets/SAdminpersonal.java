@@ -469,7 +469,7 @@ public class SAdminpersonal extends HttpServlet {
             request.setAttribute("listgrupo", listgrupo);
             listdia = adminC.getDias(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("listdia", listdia);
-            /* String dia = strDays[fecha.get(Calendar.DAY_OF_WEEK) - 1];
+             String dia = strDays[fecha.get(Calendar.DAY_OF_WEEK) - 1];
             switch (dia) {
                 case "Monday":
                     request.setAttribute("diaactual", "Lunes");
@@ -488,9 +488,9 @@ public class SAdminpersonal extends HttpServlet {
                     break;
 
             }
-            System.out.println(dia);*/
+            System.out.println(dia);
             System.out.println(new Date());
-            request.setAttribute("diaactual", "Viernes");
+            //request.setAttribute("diaactual", "Viernes");
             semana = alumC.getSemanaiscalAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
             request.setAttribute("semana", semana);
             periodo = alumC.getPeriodosAsistencia(Integer.parseInt(request.getParameter("TIPOESCUELA")));
